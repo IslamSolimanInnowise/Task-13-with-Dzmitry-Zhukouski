@@ -10,7 +10,7 @@ import prettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config(
-  { ignores: ['dist'] },
+  { ignores: ['dist', 'src/shared/ui'] },
   {
     extends: [
       js.configs.recommended,
