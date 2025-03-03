@@ -6,7 +6,7 @@ export const GlobalStyles = createGlobalStyle`
 *::after{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box
 }
 
 body{
@@ -14,6 +14,16 @@ body{
     background-color: ${({ theme }) => theme.backgroundColor};
     color: ${({ theme }) => theme.color};
     transition: 0.3s;
-    min-height: 100vh;
+    min-height: 100vh
+}
+
+button{
+    display: block
+}
+
+a {
+    text-decoration: none;
+    color:inherit;
+    display: block;
 }
 `;
