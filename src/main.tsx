@@ -1,8 +1,11 @@
 import { routeTree } from '@app/routeTree.gen';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { GlobalStyles } from '@shared/styles/globalStyles';
+import { lightTheme } from '@shared/styles/theme';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
+import { ThemeProvider } from 'styled-components';
 
 const router = createRouter({ routeTree });
 
@@ -18,7 +21,10 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <ChakraProvider value={defaultSystem}>
-        <RouterProvider router={router} />
+        <ThemeProvider theme={lightTheme}>
+          <GlobalStyles />
+          <RouterProvider router={router} />
+        </ThemeProvider>
       </ChakraProvider>
     </StrictMode>,
   );
