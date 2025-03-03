@@ -1,9 +1,6 @@
+import RegisterPage from '@pages/Register';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_notAuthenticated/register')({
-  component: RouteComponent,
+  component: RegisterPage,
 });
-
-function RouteComponent() {
-  return <div>Hello "/_notAuthenticated/register"!</div>;
-}

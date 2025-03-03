@@ -1,5 +1,6 @@
 import { Input, InputRightElement } from '@chakra-ui/input';
 import { Button, IconButton } from '@chakra-ui/react';
+import { Link } from '@tanstack/react-router';
 import styled from 'styled-components';
 
 export const FormBox = styled.div`
@@ -52,7 +53,7 @@ export const StyledSubmitButton = styled(Button)`
   display: block;
 `;
 
-export const StyledLink = styled.a`
+export const StyledLink = styled(Link)`
   font-weight: 500;
   font-size: 14px;
   line-height: 24.5px;

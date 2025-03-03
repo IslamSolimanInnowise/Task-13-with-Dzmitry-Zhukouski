@@ -15,7 +15,7 @@ import {
   StyledLink,
   StyledP,
   StyledSubmitButton,
-} from './LoginForm.styles';
+} from './RegisterForm.styles';
 
 const schema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -26,7 +26,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-const LoginForm: React.FC = () => {
+const RegisterForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -46,8 +46,8 @@ const LoginForm: React.FC = () => {
 
   return (
     <FormBox>
-      <StyledH1>Welcome back</StyledH1>
-      <StyledP>Hello again! Log in to continue</StyledP>
+      <StyledH1>Register now</StyledH1>
+      <StyledP>Welcome! Sign up to continue</StyledP>
       <form onSubmit={onSubmit}>
         <fieldset style={{ marginBottom: '16px' }}>
           <StyledInput
@@ -81,11 +81,11 @@ const LoginForm: React.FC = () => {
           )}
         </fieldset>
 
-        <StyledSubmitButton type="submit">LOGIN</StyledSubmitButton>
+        <StyledSubmitButton type="submit">CREATE ACCOUNT</StyledSubmitButton>
       </form>
-      <StyledLink href="#">FORGOT PASSWORD</StyledLink>
+      <StyledLink to="/login">I HAVE AN ACCOUNT</StyledLink>
     </FormBox>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
