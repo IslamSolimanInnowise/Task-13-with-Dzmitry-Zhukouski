@@ -11,14 +11,63 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as NotAuthenticatedImport } from './routes/_notAuthenticated'
+import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as IndexImport } from './routes/index'
+import { Route as NotAuthenticatedRegisterImport } from './routes/_notAuthenticated/register'
+import { Route as NotAuthenticatedLoginImport } from './routes/_notAuthenticated/login'
+import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
+import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticated/projects/index'
+import { Route as AuthenticatedCvsIndexImport } from './routes/_authenticated/cvs/index'
 
 // Create/Update Routes
+
+const NotAuthenticatedRoute = NotAuthenticatedImport.update({
+  id: '/_notAuthenticated',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthenticatedRoute = AuthenticatedImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const NotAuthenticatedRegisterRoute = NotAuthenticatedRegisterImport.update({
+  id: '/register',
+  path: '/register',
+  getParentRoute: () => NotAuthenticatedRoute,
+} as any)
+
+const NotAuthenticatedLoginRoute = NotAuthenticatedLoginImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => NotAuthenticatedRoute,
+} as any)
+
+const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
+  id: '/users/',
+  path: '/users/',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedProjectsIndexRoute = AuthenticatedProjectsIndexImport.update(
+  {
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any,
+)
+
+const AuthenticatedCvsIndexRoute = AuthenticatedCvsIndexImport.update({
+  id: '/cvs/',
+  path: '/cvs/',
+  getParentRoute: () => AuthenticatedRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -32,39 +81,149 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthenticatedImport
+      parentRoute: typeof rootRoute
+    }
+    '/_notAuthenticated': {
+      id: '/_notAuthenticated'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof NotAuthenticatedImport
+      parentRoute: typeof rootRoute
+    }
+    '/_notAuthenticated/login': {
+      id: '/_notAuthenticated/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof NotAuthenticatedLoginImport
+      parentRoute: typeof NotAuthenticatedImport
+    }
+    '/_notAuthenticated/register': {
+      id: '/_notAuthenticated/register'
+      path: '/register'
+      fullPath: '/register'
+      preLoaderRoute: typeof NotAuthenticatedRegisterImport
+      parentRoute: typeof NotAuthenticatedImport
+    }
+    '/_authenticated/cvs/': {
+      id: '/_authenticated/cvs/'
+      path: '/cvs'
+      fullPath: '/cvs'
+      preLoaderRoute: typeof AuthenticatedCvsIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/projects/': {
+      id: '/_authenticated/projects/'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof AuthenticatedProjectsIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/users/': {
+      id: '/_authenticated/users/'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof AuthenticatedUsersIndexImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface AuthenticatedRouteChildren {
+  AuthenticatedCvsIndexRoute: typeof AuthenticatedCvsIndexRoute
+  AuthenticatedProjectsIndexRoute: typeof AuthenticatedProjectsIndexRoute
+  AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+}
+
+const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedCvsIndexRoute: AuthenticatedCvsIndexRoute,
+  AuthenticatedProjectsIndexRoute: AuthenticatedProjectsIndexRoute,
+  AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+}
+
+const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
+  AuthenticatedRouteChildren,
+)
+
+interface NotAuthenticatedRouteChildren {
+  NotAuthenticatedLoginRoute: typeof NotAuthenticatedLoginRoute
+  NotAuthenticatedRegisterRoute: typeof NotAuthenticatedRegisterRoute
+}
+
+const NotAuthenticatedRouteChildren: NotAuthenticatedRouteChildren = {
+  NotAuthenticatedLoginRoute: NotAuthenticatedLoginRoute,
+  NotAuthenticatedRegisterRoute: NotAuthenticatedRegisterRoute,
+}
+
+const NotAuthenticatedRouteWithChildren =
+  NotAuthenticatedRoute._addFileChildren(NotAuthenticatedRouteChildren)
+
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '': typeof NotAuthenticatedRouteWithChildren
+  '/login': typeof NotAuthenticatedLoginRoute
+  '/register': typeof NotAuthenticatedRegisterRoute
+  '/cvs': typeof AuthenticatedCvsIndexRoute
+  '/projects': typeof AuthenticatedProjectsIndexRoute
+  '/users': typeof AuthenticatedUsersIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '': typeof NotAuthenticatedRouteWithChildren
+  '/login': typeof NotAuthenticatedLoginRoute
+  '/register': typeof NotAuthenticatedRegisterRoute
+  '/cvs': typeof AuthenticatedCvsIndexRoute
+  '/projects': typeof AuthenticatedProjectsIndexRoute
+  '/users': typeof AuthenticatedUsersIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteWithChildren
+  '/_notAuthenticated': typeof NotAuthenticatedRouteWithChildren
+  '/_notAuthenticated/login': typeof NotAuthenticatedLoginRoute
+  '/_notAuthenticated/register': typeof NotAuthenticatedRegisterRoute
+  '/_authenticated/cvs/': typeof AuthenticatedCvsIndexRoute
+  '/_authenticated/projects/': typeof AuthenticatedProjectsIndexRoute
+  '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '' | '/login' | '/register' | '/cvs' | '/projects' | '/users'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '' | '/login' | '/register' | '/cvs' | '/projects' | '/users'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/_notAuthenticated'
+    | '/_notAuthenticated/login'
+    | '/_notAuthenticated/register'
+    | '/_authenticated/cvs/'
+    | '/_authenticated/projects/'
+    | '/_authenticated/users/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRoute: typeof AuthenticatedRouteWithChildren
+  NotAuthenticatedRoute: typeof NotAuthenticatedRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRoute: AuthenticatedRouteWithChildren,
+  NotAuthenticatedRoute: NotAuthenticatedRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +236,48 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/_authenticated",
+        "/_notAuthenticated"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/_authenticated": {
+      "filePath": "_authenticated.tsx",
+      "children": [
+        "/_authenticated/cvs/",
+        "/_authenticated/projects/",
+        "/_authenticated/users/"
+      ]
+    },
+    "/_notAuthenticated": {
+      "filePath": "_notAuthenticated.tsx",
+      "children": [
+        "/_notAuthenticated/login",
+        "/_notAuthenticated/register"
+      ]
+    },
+    "/_notAuthenticated/login": {
+      "filePath": "_notAuthenticated/login.tsx",
+      "parent": "/_notAuthenticated"
+    },
+    "/_notAuthenticated/register": {
+      "filePath": "_notAuthenticated/register.tsx",
+      "parent": "/_notAuthenticated"
+    },
+    "/_authenticated/cvs/": {
+      "filePath": "_authenticated/cvs/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/projects/": {
+      "filePath": "_authenticated/projects/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/users/": {
+      "filePath": "_authenticated/users/index.tsx",
+      "parent": "/_authenticated"
     }
   }
 }
