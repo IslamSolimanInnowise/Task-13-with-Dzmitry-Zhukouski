@@ -31,5 +31,5 @@
       "@shared/*": ["./src/shared/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/shared/types/styled.d.ts"]
 }
