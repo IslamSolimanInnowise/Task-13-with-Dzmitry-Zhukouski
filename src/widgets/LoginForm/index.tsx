@@ -1,6 +1,17 @@
-import { Box, Button, Flex, Heading, Input, Text } from '@chakra-ui/react';
+import { InputGroup, InputRightElement } from '@chakra-ui/input';
+import {
+  Box,
+  Button,
+  Flex,
+  Heading,
+  IconButton,
+  Input,
+  Text,
+} from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from '@tanstack/react-router';
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -23,6 +34,9 @@ const LoginForm: React.FC = () => {
     mode: 'all',
     defaultValues: { email: '', password: '' },
   });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const onSubmit = handleSubmit((data) => {
     console.log(data);
@@ -57,11 +71,24 @@ const LoginForm: React.FC = () => {
 
           <fieldset style={{ marginBottom: '16px' }}>
             <legend>Password</legend>
-            <Input
-              type="password"
-              {...register('password')}
-              placeholder="Password"
-            />
+            <InputGroup>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                {...register('password')}
+                placeholder="Password"
+              />
+              <InputRightElement>
+                <IconButton
+                  aria-label="Toggle Password Visibility"
+                  variant="ghost"
+                  size="sm"
+                  onClick={togglePasswordVisibility}
+                  tabIndex={-1}
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </IconButton>
+              </InputRightElement>
+            </InputGroup>
             {errors.password && (
               <Text color="red.500" fontSize="sm">
                 {errors.password.message}
