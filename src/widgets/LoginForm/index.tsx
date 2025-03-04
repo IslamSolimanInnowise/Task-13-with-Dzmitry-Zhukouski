@@ -1,4 +1,7 @@
+import { useLazyQuery } from '@apollo/client';
+import { notify } from '@app/Notifications/notify';
 import { InputGroup } from '@chakra-ui/input';
+import { LOGIN_USER } from '@features/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   defaultValues,
@@ -35,8 +38,24 @@ const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const [loginUser, { loading }] = useLazyQuery(LOGIN_USER, {
+    onCompleted: () => {
+      notify({
+        type: 'success',
+        title: 'Login successful',
+      });
+    },
+    onError: (error) => {
+      notify({
+        type: 'error',
+        title: 'Error',
+        message: error.message,
+      });
+    },
+  });
+
+  const onSubmit = handleSubmit((creds) => {
+    loginUser({ variables: { auth: creds } });
   });
 
   return (
@@ -76,7 +95,9 @@ const LoginForm: React.FC = () => {
           )}
         </fieldset>
 
-        <StyledSubmitButton type="submit">LOGIN</StyledSubmitButton>
+        <StyledSubmitButton type="submit" disabled={loading}>
+          LOGIN
+        </StyledSubmitButton>
       </form>
       <StyledLink href="#">FORGOT PASSWORD</StyledLink>
     </FormBox>

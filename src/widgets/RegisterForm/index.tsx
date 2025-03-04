@@ -40,9 +40,8 @@ const RegisterForm: React.FC = () => {
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
   const navigate = useNavigate();
 
-  const [signUpUser, { loading, data }] = useMutation(REGISTER_USER, {
-    onCompleted: (data) => {
-      console.log('Registration successful:', data);
+  const [signUpUser, { loading }] = useMutation(REGISTER_USER, {
+    onCompleted: () => {
       notify({
         type: 'success',
         title: 'Registration successful',
