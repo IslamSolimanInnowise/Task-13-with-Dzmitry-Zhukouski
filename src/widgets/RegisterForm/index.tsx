@@ -44,8 +44,8 @@ const RegisterForm: React.FC = () => {
     onCompleted: (data) => {
       console.log('Registration successful:', data);
       notify({
-        type: 'error',
-        title: 'Registration successful:',
+        type: 'success',
+        title: 'Registration successful',
       });
       navigate({ to: '/login' });
     },

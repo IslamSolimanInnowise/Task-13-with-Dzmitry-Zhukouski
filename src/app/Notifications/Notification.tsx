@@ -1,5 +1,5 @@
-import { Toaster, toaster } from '@shared/ui/toaster';
-import { useEffect } from 'react';
+import { Alert, CloseButton } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 
 export type NotificationProps = {
   notification: {
@@ -11,27 +11,38 @@ export type NotificationProps = {
   onDismiss: (id: string) => void;
 };
 
-export const Notification = ({
+export const Notification: React.FC<NotificationProps> = ({
   notification: { id, type, title, message },
   onDismiss,
 }: NotificationProps) => {
+  const [open, setOpen] = useState(true);
+
   useEffect(() => {
     const timer = setTimeout(() => {
-      setTimeout(() => onDismiss(id), 500);
+      setOpen(false);
+      onDismiss(id);
     }, 5000);
-
     return () => clearTimeout(timer);
   }, [id, onDismiss]);
 
-  toaster.create({
-    title,
-    description: message,
-    type,
-    action: {
-      label: 'X',
-      onClick: () => {},
-    },
-  });
+  const handleClose = () => {
+    setOpen(false);
+    onDismiss(id);
+  };
 
-  return <Toaster />;
+  return (
+    <Alert.Root status={type} display={open ? 'flex' : 'none'} padding={2}>
+      <Alert.Indicator />
+      <Alert.Content>
+        <Alert.Title>{title}</Alert.Title>
+        {message && <Alert.Description>{message}</Alert.Description>}
+      </Alert.Content>
+      <CloseButton
+        pos="relative"
+        top="-2"
+        insetEnd="-2"
+        onClick={handleClose}
+      />
+    </Alert.Root>
+  );
 };

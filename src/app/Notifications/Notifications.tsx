@@ -1,5 +1,5 @@
 import { Notification } from './Notification';
-import { StyledNotificationsBox } from './notifications.styles';
+import { StyledNotificationsBox } from './Notifications.style';
 import { useNotifications } from './notifications-store';
 
 export const Notifications = () => {
