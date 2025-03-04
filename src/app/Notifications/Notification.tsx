@@ -1,8 +1,5 @@
-import { Alert } from '@chakra-ui/react';
-import { Slide } from '@chakra-ui/transition';
-import { useEffect, useState } from 'react';
-
-import { StyledNotification } from './notifications.styles';
+import { Toaster, toaster } from '@shared/ui/toaster';
+import { useEffect } from 'react';
 
 export type NotificationProps = {
   notification: {
@@ -18,28 +15,23 @@ export const Notification = ({
   notification: { id, type, title, message },
   onDismiss,
 }: NotificationProps) => {
-  const [open, setOpen] = useState(true);
-
   useEffect(() => {
     const timer = setTimeout(() => {
-      setOpen(false);
       setTimeout(() => onDismiss(id), 500);
-    }, 50000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [id, onDismiss]);
 
-  return (
-    <Slide direction="bottom" in={open} style={{ zIndex: 10 }}>
-      <StyledNotification>
-        <Alert.Root status={type}>
-          <Alert.Indicator />
-          <Alert.Content>
-            <Alert.Title>{title}</Alert.Title>
-            <Alert.Description>{message}</Alert.Description>
-          </Alert.Content>
-        </Alert.Root>
-      </StyledNotification>
-    </Slide>
-  );
+  toaster.create({
+    title,
+    description: message,
+    type,
+    action: {
+      label: 'X',
+      onClick: () => {},
+    },
+  });
+
+  return <Toaster />;
 };
