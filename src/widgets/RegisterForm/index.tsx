@@ -1,10 +1,13 @@
+import { useMutation } from '@apollo/client';
 import { InputGroup } from '@chakra-ui/input';
+import { REGISTER_USER } from '@features/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   defaultValues,
   FormValues,
   schema,
 } from '@shared/schemas/authFormSchema';
+import { useNavigate } from '@tanstack/react-router';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -34,9 +37,20 @@ const RegisterForm: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
+  const navigate = useNavigate();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const [signUpUser, { loading, data }] = useMutation(REGISTER_USER, {
+    onCompleted: (data) => {
+      console.log('Registration successful:', data);
+      navigate({ to: '/login' });
+    },
+    // onError: (error) => {
+    //   console.log(error);
+    // },
+  });
+
+  const onSubmit = handleSubmit((credentials) => {
+    signUpUser({ variables: { auth: credentials } });
   });
 
   return (
@@ -76,7 +90,9 @@ const RegisterForm: React.FC = () => {
           )}
         </fieldset>
 
-        <StyledSubmitButton type="submit">CREATE ACCOUNT</StyledSubmitButton>
+        <StyledSubmitButton type="submit" disabled={loading}>
+          CREATE ACCOUNT
+        </StyledSubmitButton>
       </form>
       <StyledLink to="/login">I HAVE AN ACCOUNT</StyledLink>
     </FormBox>
