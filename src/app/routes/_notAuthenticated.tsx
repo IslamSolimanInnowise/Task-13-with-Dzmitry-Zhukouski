@@ -1,11 +1,19 @@
-import { createFileRoute, Navigate, Outlet } from '@tanstack/react-router';
+import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
+import { useEffect } from 'react';
 
 const NotAuthenticated = () => {
-  const isAuth = false;
+  const navigate = useNavigate();
 
-  if (isAuth) {
-    return <Navigate to="/" />;
-  }
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+
+    if (token) {
+      navigate({
+        to: '/users/$userId',
+        params: { userId: localStorage.getItem('id')! },
+      });
+    }
+  }, [navigate]);
 
   return <Outlet />;
 };

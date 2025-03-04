@@ -1,4 +1,10 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { Notifications } from '@app/Notifications';
 import { routeTree } from '@app/routeTree.gen';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
@@ -17,8 +23,23 @@ declare module '@tanstack/react-router' {
   }
 }
 
+const httpLink = createHttpLink({
+  uri: import.meta.env.VITE_GRAPHQL_URI,
+});
+
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token');
+
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
 const client = new ApolloClient({
-  uri: 'https://cv-project-js.inno.ws/api/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

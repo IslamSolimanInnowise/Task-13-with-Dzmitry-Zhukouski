@@ -10,7 +10,7 @@ import prettier from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config(
-  { ignores: ['dist', 'src/shared/ui'] },
+  { ignores: ['dist', 'src/shared/ui', 'src/vite-env.d.ts'] },
   {
     extends: [
       js.configs.recommended,

@@ -47,6 +47,9 @@ const LoginForm: React.FC = () => {
         title: 'Login successful',
       });
 
+      localStorage.setItem('token', res.login.access_token);
+      localStorage.setItem('id', res.login.user.id);
+
       navigate({ to: `/users/${res.login.user.id}` });
     },
     onError: (error) => {
