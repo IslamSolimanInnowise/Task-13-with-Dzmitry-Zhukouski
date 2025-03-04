@@ -1,7 +1,7 @@
 import { createFileRoute, Navigate, Outlet } from '@tanstack/react-router';
 
 const Authenticated = () => {
-  const isAuth = true;
+  const isAuth = false;
 
   if (isAuth) {
     return <Navigate to="/" />;

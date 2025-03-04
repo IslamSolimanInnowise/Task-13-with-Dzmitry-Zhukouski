@@ -8,6 +8,7 @@ import {
   FormValues,
   schema,
 } from '@shared/schemas/authFormSchema';
+import { useNavigate } from '@tanstack/react-router';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -37,13 +38,16 @@ const LoginForm: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
+  const navigate = useNavigate();
 
   const [loginUser, { loading }] = useLazyQuery(LOGIN_USER, {
-    onCompleted: () => {
+    onCompleted: (res) => {
       notify({
         type: 'success',
         title: 'Login successful',
       });
+
+      navigate({ to: `/users/${res.login.user.id}` });
     },
     onError: (error) => {
       notify({
