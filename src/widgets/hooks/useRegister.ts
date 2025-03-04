@@ -1,0 +1,27 @@
+import { useMutation } from '@apollo/client';
+import { notify } from '@app/Notifications/notify';
+import { REGISTER_USER } from '@features/auth';
+import { useNavigate } from '@tanstack/react-router';
+
+const useRegister = () => {
+  const navigate = useNavigate();
+
+  return useMutation(REGISTER_USER, {
+    onCompleted: () => {
+      notify({
+        type: 'success',
+        title: 'Registration successful',
+      });
+      navigate({ to: '/login' });
+    },
+    onError: (error) => {
+      notify({
+        type: 'error',
+        title: 'Error',
+        message: error.message,
+      });
+    },
+  });
+};
+
+export default useRegister;

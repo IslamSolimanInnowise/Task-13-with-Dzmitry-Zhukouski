@@ -1,14 +1,11 @@
-import { useMutation } from '@apollo/client';
-import { notify } from '@app/Notifications/notify';
 import { InputGroup } from '@chakra-ui/input';
-import { REGISTER_USER } from '@features/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   defaultValues,
   FormValues,
   schema,
 } from '@shared/schemas/authFormSchema';
-import { useNavigate } from '@tanstack/react-router';
+import useRegister from '@widgets/hooks/useRegister';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -38,24 +35,8 @@ const RegisterForm: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
-  const navigate = useNavigate();
 
-  const [signUpUser, { loading }] = useMutation(REGISTER_USER, {
-    onCompleted: () => {
-      notify({
-        type: 'success',
-        title: 'Registration successful',
-      });
-      navigate({ to: '/login' });
-    },
-    onError: (error) => {
-      notify({
-        type: 'error',
-        title: 'Error',
-        message: error.message,
-      });
-    },
-  });
+  const [signUpUser, { loading }] = useRegister();
 
   const onSubmit = handleSubmit((credentials) => {
     signUpUser({ variables: { auth: credentials } });

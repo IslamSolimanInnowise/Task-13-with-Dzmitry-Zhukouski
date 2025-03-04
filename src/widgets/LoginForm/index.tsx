@@ -1,14 +1,11 @@
-import { useLazyQuery } from '@apollo/client';
-import { notify } from '@app/Notifications/notify';
 import { InputGroup } from '@chakra-ui/input';
-import { LOGIN_USER } from '@features/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   defaultValues,
   FormValues,
   schema,
 } from '@shared/schemas/authFormSchema';
-import { useNavigate } from '@tanstack/react-router';
+import useLogin from '@widgets/hooks/useLogin';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -38,28 +35,8 @@ const LoginForm: React.FC = () => {
 
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
-  const navigate = useNavigate();
 
-  const [loginUser, { loading }] = useLazyQuery(LOGIN_USER, {
-    onCompleted: (res) => {
-      notify({
-        type: 'success',
-        title: 'Login successful',
-      });
-
-      localStorage.setItem('token', res.login.access_token);
-      localStorage.setItem('id', res.login.user.id);
-
-      navigate({ to: `/users/${res.login.user.id}` });
-    },
-    onError: (error) => {
-      notify({
-        type: 'error',
-        title: 'Error',
-        message: error.message,
-      });
-    },
-  });
+  const [loginUser, { loading }] = useLogin();
 
   const onSubmit = handleSubmit((creds) => {
     loginUser({ variables: { auth: creds } });
