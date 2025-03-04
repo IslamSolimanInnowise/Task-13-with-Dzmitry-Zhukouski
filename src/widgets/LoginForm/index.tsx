@@ -1,9 +1,13 @@
 import { InputGroup } from '@chakra-ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
+import {
+  defaultValues,
+  FormValues,
+  schema,
+} from '@shared/schemas/authFormSchema';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as z from 'zod';
 
 import {
   FormBox,
@@ -17,15 +21,6 @@ import {
   StyledSubmitButton,
 } from './LoginForm.styles';
 
-const schema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
-  password: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters' }),
-});
-
-type FormValues = z.infer<typeof schema>;
-
 const LoginForm: React.FC = () => {
   const {
     register,
@@ -34,7 +29,7 @@ const LoginForm: React.FC = () => {
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
     mode: 'all',
-    defaultValues: { email: '', password: '' },
+    defaultValues,
   });
 
   const [showPassword, setShowPassword] = useState(false);

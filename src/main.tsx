@@ -1,3 +1,4 @@
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { routeTree } from '@app/routeTree.gen';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import { GlobalStyles } from '@shared/styles/globalStyles';
@@ -15,17 +16,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
+const client = new ApolloClient({
+  uri: 'https://cv-project-js.inno.ws/api/graphql',
+  cache: new InMemoryCache(),
+});
+
 const rootElement = document.getElementById('root')!;
+
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
+
   root.render(
     <StrictMode>
-      <ChakraProvider value={defaultSystem}>
-        <ThemeProvider theme={lightTheme}>
-          <GlobalStyles />
-          <RouterProvider router={router} />
-        </ThemeProvider>
-      </ChakraProvider>
+      <ApolloProvider client={client}>
+        <ChakraProvider value={defaultSystem}>
+          <ThemeProvider theme={lightTheme}>
+            <GlobalStyles />
+            <RouterProvider router={router} />
+          </ThemeProvider>
+        </ChakraProvider>
+      </ApolloProvider>
     </StrictMode>,
   );
 }
