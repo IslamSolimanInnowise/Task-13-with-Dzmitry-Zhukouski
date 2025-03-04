@@ -1,6 +1,8 @@
-import { Alert, Box } from '@chakra-ui/react';
+import { Alert } from '@chakra-ui/react';
 import { Slide } from '@chakra-ui/transition';
 import { useEffect, useState } from 'react';
+
+import { StyledNotification } from './notifications.styles';
 
 export type NotificationProps = {
   notification: {
@@ -29,7 +31,7 @@ export const Notification = ({
 
   return (
     <Slide direction="bottom" in={open} style={{ zIndex: 10 }}>
-      <Box mb={2} maxW="sm" w="100%">
+      <StyledNotification>
         <Alert.Root status={type}>
           <Alert.Indicator />
           <Alert.Content>
@@ -37,7 +39,7 @@ export const Notification = ({
             <Alert.Description>{message}</Alert.Description>
           </Alert.Content>
         </Alert.Root>
-      </Box>
+      </StyledNotification>
     </Slide>
   );
 };

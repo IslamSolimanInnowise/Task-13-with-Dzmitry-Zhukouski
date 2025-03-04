@@ -1,21 +1,12 @@
-import { Box } from '@chakra-ui/react';
-
 import { Notification } from './Notification';
+import { StyledNotificationsBox } from './notifications.styles';
 import { useNotifications } from './notifications-store';
 
 export const Notifications = () => {
   const { notifications, dismissNotification } = useNotifications();
 
   return (
-    <Box
-      position="fixed"
-      right={4}
-      top={4}
-      zIndex={1300}
-      display="flex"
-      flexDirection="column"
-      gap={2}
-    >
+    <StyledNotificationsBox>
       {notifications.map((notification) => (
         <Notification
           key={notification.id}
@@ -23,6 +14,6 @@ export const Notifications = () => {
           onDismiss={dismissNotification}
         />
       ))}
-    </Box>
+    </StyledNotificationsBox>
   );
 };
