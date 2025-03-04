@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import { notify } from '@app/Notifications/notify';
 import { InputGroup } from '@chakra-ui/input';
 import { REGISTER_USER } from '@features/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -42,11 +43,19 @@ const RegisterForm: React.FC = () => {
   const [signUpUser, { loading, data }] = useMutation(REGISTER_USER, {
     onCompleted: (data) => {
       console.log('Registration successful:', data);
+      notify({
+        type: 'error',
+        title: 'Registration successful:',
+      });
       navigate({ to: '/login' });
     },
-    // onError: (error) => {
-    //   console.log(error);
-    // },
+    onError: (error) => {
+      notify({
+        type: 'error',
+        title: 'Error',
+        message: error.message,
+      });
+    },
   });
 
   const onSubmit = handleSubmit((credentials) => {

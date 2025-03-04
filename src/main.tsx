@@ -1,4 +1,5 @@
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { Notifications } from '@app/Notifications';
 import { routeTree } from '@app/routeTree.gen';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import { GlobalStyles } from '@shared/styles/globalStyles';
@@ -33,6 +34,7 @@ if (!rootElement.innerHTML) {
           <ThemeProvider theme={lightTheme}>
             <GlobalStyles />
             <RouterProvider router={router} />
+            <Notifications />
           </ThemeProvider>
         </ChakraProvider>
       </ApolloProvider>
