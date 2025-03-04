@@ -52,6 +52,7 @@ const RegisterForm: React.FC = () => {
             type="email"
             {...register('email')}
             placeholder="Email"
+            hasError={!!errors.email}
           />
           {errors.email && <StyledErrorP>{errors.email.message}</StyledErrorP>}
         </fieldset>
@@ -62,6 +63,7 @@ const RegisterForm: React.FC = () => {
               type={showPassword ? 'text' : 'password'}
               {...register('password')}
               placeholder="Password"
+              hasError={!!errors.password}
             />
             <StyledInputRightElement>
               <StyledEyeButton

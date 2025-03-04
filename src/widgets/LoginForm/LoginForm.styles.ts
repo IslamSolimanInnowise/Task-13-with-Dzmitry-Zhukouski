@@ -2,6 +2,10 @@ import { Input, InputRightElement } from '@chakra-ui/input';
 import { Button, IconButton } from '@chakra-ui/react';
 import styled from 'styled-components';
 
+interface StyledInputProps {
+  hasError?: boolean;
+}
+
 export const FormBox = styled.div`
   padding: 2rem;
   border-radius: 1rem;
@@ -20,13 +24,14 @@ export const StyledP = styled.p`
   text-align: center;
 `;
 
-export const StyledInput = styled(Input)`
-  padding: 0.25rem;
+export const StyledInput = styled(Input)<StyledInputProps>`
+  padding: 0.75rem;
   background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.color};
+  border: 1px solid
+    ${({ hasError, theme }) => (hasError ? theme.primaryColor : theme.color)};
   width: 100%;
   border-radius: 0.25rem;
-  padding: 0.75rem;
+  transition: border-color 0.2s;
 `;
 
 export const StyledErrorP = styled.p`
