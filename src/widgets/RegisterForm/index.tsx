@@ -52,7 +52,7 @@ const RegisterForm: React.FC = () => {
             type="email"
             {...register('email')}
             placeholder="Email"
-            hasError={!!errors.email}
+            error={errors.email ? 'isError' : undefined}
           />
           {errors.email && <StyledErrorP>{errors.email.message}</StyledErrorP>}
         </fieldset>
@@ -63,7 +63,8 @@ const RegisterForm: React.FC = () => {
               type={showPassword ? 'text' : 'password'}
               {...register('password')}
               placeholder="Password"
-              hasError={!!errors.password}
+              error={errors.password ? 'isError' : undefined}
+              autoComplete="on"
             />
             <StyledInputRightElement>
               <StyledEyeButton

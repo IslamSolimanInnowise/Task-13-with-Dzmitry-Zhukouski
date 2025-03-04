@@ -3,7 +3,7 @@ import { Button, IconButton } from '@chakra-ui/react';
 import styled from 'styled-components';
 
 interface StyledInputProps {
-  hasError?: boolean;
+  error?: 'isError' | undefined;
 }
 
 export const FormBox = styled.div`
@@ -28,7 +28,7 @@ export const StyledInput = styled(Input)<StyledInputProps>`
   padding: 0.75rem;
   background-color: transparent;
   border: 1px solid
-    ${({ hasError, theme }) => (hasError ? theme.primaryColor : theme.color)};
+    ${({ error, theme }) => (error ? theme.primaryColor : theme.color)};
   width: 100%;
   border-radius: 0.25rem;
   transition: border-color 0.2s;
