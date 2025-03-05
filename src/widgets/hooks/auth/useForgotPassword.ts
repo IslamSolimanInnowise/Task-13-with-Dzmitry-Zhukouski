@@ -11,13 +11,6 @@ const useForgotPassword = () => {
         message: 'We sent you a reset password email. Please check your inbox.',
       });
     },
-    onError: (error) => {
-      notify({
-        type: 'error',
-        title: 'Error',
-        message: error.message,
-      });
-    },
   });
 };
 

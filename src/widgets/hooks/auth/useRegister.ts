@@ -14,13 +14,6 @@ const useRegister = () => {
       });
       navigate({ to: '/auth/login' });
     },
-    onError: (error) => {
-      notify({
-        type: 'error',
-        title: 'Error',
-        message: error.message,
-      });
-    },
   });
 };
 

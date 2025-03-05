@@ -1,9 +1,9 @@
 import { onError } from '@apollo/client/link/error';
 import { notify } from '@app/Notifications/notify';
-import useUpdateToken from '@widgets/hooks/auth/useUpdateToken';
+// import useUpdateToken from '@widgets/hooks/auth/useUpdateToken';
 
-export const errorLink = onError(({ graphQLErrors, networkError }) => {
-  const [updateToken] = useUpdateToken();
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  // const [updateToken] = useUpdateToken();
 
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message }) => {
@@ -14,7 +14,8 @@ export const errorLink = onError(({ graphQLErrors, networkError }) => {
       });
 
       if (message === 'Unauthorized') {
-        updateToken();
+        // updateToken();
+        console.log('unauthorized');
       }
     });
   }
@@ -27,3 +28,5 @@ export const errorLink = onError(({ graphQLErrors, networkError }) => {
     });
   }
 });
+
+export default errorLink;

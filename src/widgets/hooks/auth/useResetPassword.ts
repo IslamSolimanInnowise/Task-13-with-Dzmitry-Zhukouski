@@ -27,13 +27,6 @@ const useResetPassword = (token: string | null) => {
         message: 'You changed your password!',
       });
     },
-    onError: (error) => {
-      notify({
-        type: 'error',
-        title: 'Error',
-        message: error.message,
-      });
-    },
   });
 };
 

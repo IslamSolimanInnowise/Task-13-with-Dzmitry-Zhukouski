@@ -24,13 +24,6 @@ const useLogin = () => {
       });
       navigate({ to: '/users/$userId', params: { userId: res.login.user.id } });
     },
-    onError: (error) => {
-      notify({
-        type: 'error',
-        title: 'Error',
-        message: error.message,
-      });
-    },
   });
 };
 

@@ -11,9 +11,6 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
     onCompleted: (res) => {
       console.log(res);
     },
-    onError: (error) => {
-      console.log(error);
-    },
   });
 
   useEffect(() => {

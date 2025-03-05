@@ -10,13 +10,6 @@ const useUpdateToken = () => {
         title: 'Registration successful',
       });
     },
-    onError: (error) => {
-      notify({
-        type: 'error',
-        title: 'Error',
-        message: error.message,
-      });
-    },
   });
 };
 
