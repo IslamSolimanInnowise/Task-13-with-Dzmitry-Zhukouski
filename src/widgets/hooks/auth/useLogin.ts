@@ -14,9 +14,14 @@ const useLogin = () => {
         title: 'Login successful',
       });
 
-      localStorage.setItem('token', res.login.access_token);
+      localStorage.setItem('access-token', res.login.access_token);
+      localStorage.setItem('refresh-token', res.login.refresh_token);
       localStorage.setItem('id', res.login.user.id);
-      authVar({ token: res.login.access_token, id: res.login.user.id });
+      authVar({
+        access_token: res.login.access_token,
+        refresh_token: res.login.refresh_token,
+        id: res.login.user.id,
+      });
       navigate({ to: '/users/$userId', params: { userId: res.login.user.id } });
     },
     onError: (error) => {

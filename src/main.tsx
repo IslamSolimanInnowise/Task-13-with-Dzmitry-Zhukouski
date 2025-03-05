@@ -29,12 +29,12 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const { token } = authVar();
+  const { access_token } = authVar();
 
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: access_token ? `Bearer ${access_token}` : '',
     },
   };
 });
