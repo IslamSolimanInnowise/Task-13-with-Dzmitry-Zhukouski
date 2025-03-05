@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as NotAuthenticatedImport } from './routes/_notAuthenticated'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as IndexImport } from './routes/index'
+import { Route as NotAuthenticatedResetPasswordImport } from './routes/_notAuthenticated/reset-password'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticated/projects/index'
 import { Route as AuthenticatedCvsIndexImport } from './routes/_authenticated/cvs/index'
@@ -39,6 +40,13 @@ const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
 } as any)
+
+const NotAuthenticatedResetPasswordRoute =
+  NotAuthenticatedResetPasswordImport.update({
+    id: '/reset-password',
+    path: '/reset-password',
+    getParentRoute: () => NotAuthenticatedRoute,
+  } as any)
 
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   id: '/users/',
@@ -110,6 +118,13 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof NotAuthenticatedImport
       parentRoute: typeof rootRoute
+    }
+    '/_notAuthenticated/reset-password': {
+      id: '/_notAuthenticated/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof NotAuthenticatedResetPasswordImport
+      parentRoute: typeof NotAuthenticatedImport
     }
     '/_authenticated/users/$userId': {
       id: '/_authenticated/users/$userId'
@@ -184,12 +199,14 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 )
 
 interface NotAuthenticatedRouteChildren {
+  NotAuthenticatedResetPasswordRoute: typeof NotAuthenticatedResetPasswordRoute
   NotAuthenticatedAuthForgotPasswordRoute: typeof NotAuthenticatedAuthForgotPasswordRoute
   NotAuthenticatedAuthLoginRoute: typeof NotAuthenticatedAuthLoginRoute
   NotAuthenticatedAuthRegisterRoute: typeof NotAuthenticatedAuthRegisterRoute
 }
 
 const NotAuthenticatedRouteChildren: NotAuthenticatedRouteChildren = {
+  NotAuthenticatedResetPasswordRoute: NotAuthenticatedResetPasswordRoute,
   NotAuthenticatedAuthForgotPasswordRoute:
     NotAuthenticatedAuthForgotPasswordRoute,
   NotAuthenticatedAuthLoginRoute: NotAuthenticatedAuthLoginRoute,
@@ -202,6 +219,7 @@ const NotAuthenticatedRouteWithChildren =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof NotAuthenticatedRouteWithChildren
+  '/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -214,6 +232,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof NotAuthenticatedRouteWithChildren
+  '/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -228,6 +247,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_notAuthenticated': typeof NotAuthenticatedRouteWithChildren
+  '/_notAuthenticated/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/_authenticated/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/_notAuthenticated/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/_notAuthenticated/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -242,6 +262,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | ''
+    | '/reset-password'
     | '/users/$userId'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -253,6 +274,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
+    | '/reset-password'
     | '/users/$userId'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -265,6 +287,7 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/_notAuthenticated'
+    | '/_notAuthenticated/reset-password'
     | '/_authenticated/users/$userId'
     | '/_notAuthenticated/auth/forgot-password'
     | '/_notAuthenticated/auth/login'
@@ -317,10 +340,15 @@ export const routeTree = rootRoute
     "/_notAuthenticated": {
       "filePath": "_notAuthenticated.tsx",
       "children": [
+        "/_notAuthenticated/reset-password",
         "/_notAuthenticated/auth/forgot-password",
         "/_notAuthenticated/auth/login",
         "/_notAuthenticated/auth/register"
       ]
+    },
+    "/_notAuthenticated/reset-password": {
+      "filePath": "_notAuthenticated/reset-password.tsx",
+      "parent": "/_notAuthenticated"
     },
     "/_authenticated/users/$userId": {
       "filePath": "_authenticated/users/$userId.tsx",
