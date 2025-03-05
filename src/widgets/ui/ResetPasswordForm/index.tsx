@@ -49,7 +49,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ token }) => {
   return (
     <FormBox>
       <StyledH1>Reset password</StyledH1>
-      <StyledP>We will send you an email with further instructions</StyledP>
+      <StyledP>Please enter a new Password</StyledP>
       <form onSubmit={onSubmit}>
         <fieldset style={{ marginBottom: '16px' }}>
           <InputGroup>
@@ -79,7 +79,7 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ token }) => {
           RESET PASSWORD
         </StyledSubmitButton>
       </form>
-      <StyledLink to="/auth/login">CANCEL</StyledLink>
+      <StyledLink to="/auth/login">Back to Login</StyledLink>
     </FormBox>
   );
 };
