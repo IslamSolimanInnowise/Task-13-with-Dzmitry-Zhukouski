@@ -19,6 +19,7 @@ import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticat
 import { Route as AuthenticatedCvsIndexImport } from './routes/_authenticated/cvs/index'
 import { Route as NotAuthenticatedAuthRegisterImport } from './routes/_notAuthenticated/auth/register'
 import { Route as NotAuthenticatedAuthLoginImport } from './routes/_notAuthenticated/auth/login'
+import { Route as NotAuthenticatedAuthForgotPasswordImport } from './routes/_notAuthenticated/auth/forgot-password'
 import { Route as AuthenticatedUsersUserIdImport } from './routes/_authenticated/users/$userId'
 
 // Create/Update Routes
@@ -72,6 +73,13 @@ const NotAuthenticatedAuthLoginRoute = NotAuthenticatedAuthLoginImport.update({
   getParentRoute: () => NotAuthenticatedRoute,
 } as any)
 
+const NotAuthenticatedAuthForgotPasswordRoute =
+  NotAuthenticatedAuthForgotPasswordImport.update({
+    id: '/auth/forgot-password',
+    path: '/auth/forgot-password',
+    getParentRoute: () => NotAuthenticatedRoute,
+  } as any)
+
 const AuthenticatedUsersUserIdRoute = AuthenticatedUsersUserIdImport.update({
   id: '/users/$userId',
   path: '/users/$userId',
@@ -109,6 +117,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/users/$userId'
       preLoaderRoute: typeof AuthenticatedUsersUserIdImport
       parentRoute: typeof AuthenticatedImport
+    }
+    '/_notAuthenticated/auth/forgot-password': {
+      id: '/_notAuthenticated/auth/forgot-password'
+      path: '/auth/forgot-password'
+      fullPath: '/auth/forgot-password'
+      preLoaderRoute: typeof NotAuthenticatedAuthForgotPasswordImport
+      parentRoute: typeof NotAuthenticatedImport
     }
     '/_notAuthenticated/auth/login': {
       id: '/_notAuthenticated/auth/login'
@@ -169,11 +184,14 @@ const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
 )
 
 interface NotAuthenticatedRouteChildren {
+  NotAuthenticatedAuthForgotPasswordRoute: typeof NotAuthenticatedAuthForgotPasswordRoute
   NotAuthenticatedAuthLoginRoute: typeof NotAuthenticatedAuthLoginRoute
   NotAuthenticatedAuthRegisterRoute: typeof NotAuthenticatedAuthRegisterRoute
 }
 
 const NotAuthenticatedRouteChildren: NotAuthenticatedRouteChildren = {
+  NotAuthenticatedAuthForgotPasswordRoute:
+    NotAuthenticatedAuthForgotPasswordRoute,
   NotAuthenticatedAuthLoginRoute: NotAuthenticatedAuthLoginRoute,
   NotAuthenticatedAuthRegisterRoute: NotAuthenticatedAuthRegisterRoute,
 }
@@ -185,6 +203,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof NotAuthenticatedRouteWithChildren
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
+  '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
   '/auth/register': typeof NotAuthenticatedAuthRegisterRoute
   '/cvs': typeof AuthenticatedCvsIndexRoute
@@ -196,6 +215,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof NotAuthenticatedRouteWithChildren
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
+  '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
   '/auth/register': typeof NotAuthenticatedAuthRegisterRoute
   '/cvs': typeof AuthenticatedCvsIndexRoute
@@ -209,6 +229,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_notAuthenticated': typeof NotAuthenticatedRouteWithChildren
   '/_authenticated/users/$userId': typeof AuthenticatedUsersUserIdRoute
+  '/_notAuthenticated/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/_notAuthenticated/auth/login': typeof NotAuthenticatedAuthLoginRoute
   '/_notAuthenticated/auth/register': typeof NotAuthenticatedAuthRegisterRoute
   '/_authenticated/cvs/': typeof AuthenticatedCvsIndexRoute
@@ -222,6 +243,7 @@ export interface FileRouteTypes {
     | '/'
     | ''
     | '/users/$userId'
+    | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
     | '/cvs'
@@ -232,6 +254,7 @@ export interface FileRouteTypes {
     | '/'
     | ''
     | '/users/$userId'
+    | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/register'
     | '/cvs'
@@ -243,6 +266,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/_notAuthenticated'
     | '/_authenticated/users/$userId'
+    | '/_notAuthenticated/auth/forgot-password'
     | '/_notAuthenticated/auth/login'
     | '/_notAuthenticated/auth/register'
     | '/_authenticated/cvs/'
@@ -293,6 +317,7 @@ export const routeTree = rootRoute
     "/_notAuthenticated": {
       "filePath": "_notAuthenticated.tsx",
       "children": [
+        "/_notAuthenticated/auth/forgot-password",
         "/_notAuthenticated/auth/login",
         "/_notAuthenticated/auth/register"
       ]
@@ -300,6 +325,10 @@ export const routeTree = rootRoute
     "/_authenticated/users/$userId": {
       "filePath": "_authenticated/users/$userId.tsx",
       "parent": "/_authenticated"
+    },
+    "/_notAuthenticated/auth/forgot-password": {
+      "filePath": "_notAuthenticated/auth/forgot-password.tsx",
+      "parent": "/_notAuthenticated"
     },
     "/_notAuthenticated/auth/login": {
       "filePath": "_notAuthenticated/auth/login.tsx",

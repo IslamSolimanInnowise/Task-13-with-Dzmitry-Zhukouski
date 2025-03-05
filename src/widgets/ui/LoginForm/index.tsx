@@ -1,11 +1,11 @@
 import { InputGroup } from '@chakra-ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
+  AuthForm,
+  authFormSchema,
   defaultValues,
-  FormValues,
-  schema,
 } from '@shared/schemas/authFormSchema';
-import useLogin from '@widgets/hooks/useLogin';
+import useLogin from '@widgets/hooks/auth/useLogin';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -27,8 +27,8 @@ const LoginForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+  } = useForm<AuthForm>({
+    resolver: zodResolver(authFormSchema),
     mode: 'all',
     defaultValues,
   });
@@ -86,7 +86,7 @@ const LoginForm: React.FC = () => {
           LOGIN
         </StyledSubmitButton>
       </form>
-      <StyledLink href="#">FORGOT PASSWORD</StyledLink>
+      <StyledLink to="/auth/forgot-password">FORGOT PASSWORD</StyledLink>
     </FormBox>
   );
 };

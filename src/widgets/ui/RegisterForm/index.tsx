@@ -1,11 +1,11 @@
 import { InputGroup } from '@chakra-ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
+  AuthForm,
+  authFormSchema,
   defaultValues,
-  FormValues,
-  schema,
 } from '@shared/schemas/authFormSchema';
-import useRegister from '@widgets/hooks/useRegister';
+import useRegister from '@widgets/hooks/auth/useRegister';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -27,8 +27,8 @@ const RegisterForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormValues>({
-    resolver: zodResolver(schema),
+  } = useForm<AuthForm>({
+    resolver: zodResolver(authFormSchema),
     mode: 'all',
     defaultValues,
   });
