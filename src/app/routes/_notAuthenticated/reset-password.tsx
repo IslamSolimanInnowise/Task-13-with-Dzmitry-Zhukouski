@@ -1,6 +1,16 @@
 import ResetPasswordPage from '@pages/ResetPassword';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, useLocation } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_notAuthenticated/reset-password')({
-  component: ResetPasswordPage,
+  component: RouteComponent,
 });
+
+function RouteComponent() {
+  const { search } = useLocation();
+  const searchParams = new URLSearchParams(search);
+  const token = searchParams.get('token');
+
+  console.log(token);
+
+  return <ResetPasswordPage />;
+}
