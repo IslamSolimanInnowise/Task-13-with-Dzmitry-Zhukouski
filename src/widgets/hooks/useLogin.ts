@@ -1,6 +1,7 @@
 import { useLazyQuery } from '@apollo/client';
 import { notify } from '@app/Notifications/notify';
-import { LOGIN_USER } from '@features/auth';
+import { authVar } from '@features/auth/globalAuthState';
+import { LOGIN_USER } from '@features/auth/loginUser';
 import { useNavigate } from '@tanstack/react-router';
 
 const useLogin = () => {
@@ -15,6 +16,7 @@ const useLogin = () => {
 
       localStorage.setItem('token', res.login.access_token);
       localStorage.setItem('id', res.login.user.id);
+      authVar({ token: res.login.access_token, id: res.login.user.id });
       navigate({ to: '/users/$userId', params: { userId: res.login.user.id } });
     },
     onError: (error) => {

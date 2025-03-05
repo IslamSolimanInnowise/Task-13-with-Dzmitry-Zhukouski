@@ -86,7 +86,7 @@ const RegisterForm: React.FC = () => {
           CREATE ACCOUNT
         </StyledSubmitButton>
       </form>
-      <StyledLink to="/login">I HAVE AN ACCOUNT</StyledLink>
+      <StyledLink to="/auth/login">I HAVE AN ACCOUNT</StyledLink>
     </FormBox>
   );
 };

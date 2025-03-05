@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
-import { GET_PROFILE } from '@features/users';
+import { GET_PROFILE } from '@features/users/users';
 import { useEffect } from 'react';
 
 interface ProfilePageProps {

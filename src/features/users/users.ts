@@ -3,12 +3,10 @@ import { gql } from '@apollo/client';
 export const GET_PROFILE = gql`
   query GetProfile($userId: ID!) {
     profile(userId: $userId) {
-      profile {
-        id
-        first_name
-        last_name
-        full_name
-      }
+      id
+      first_name
+      last_name
+      full_name
     }
   }
 `;

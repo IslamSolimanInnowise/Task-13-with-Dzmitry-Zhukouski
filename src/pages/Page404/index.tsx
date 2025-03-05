@@ -19,7 +19,7 @@ export const Page404 = () => {
       {token ? (
         <StyledBackButton to={`/users/${id}`}>Back</StyledBackButton>
       ) : (
-        <StyledBackButton to="/login">Back</StyledBackButton>
+        <StyledBackButton to="/auth/login">Back</StyledBackButton>
       )}
     </Box>
   );

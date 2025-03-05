@@ -8,6 +8,7 @@ import { setContext } from '@apollo/client/link/context';
 import { Notifications } from '@app/Notifications';
 import { routeTree } from '@app/routeTree.gen';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { authVar } from '@features/auth/globalAuthState';
 import { GlobalStyles } from '@shared/styles/globalStyles';
 import { lightTheme } from '@shared/styles/theme';
 import { createRouter, RouterProvider } from '@tanstack/react-router';
@@ -28,7 +29,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('token');
+  const { token } = authVar();
 
   return {
     headers: {
