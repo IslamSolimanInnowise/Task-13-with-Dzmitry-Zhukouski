@@ -10,7 +10,7 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 
-const router = createRouter({ routeTree });
+export const router = createRouter({ routeTree });
 
 declare module '@tanstack/react-router' {
   interface Register {

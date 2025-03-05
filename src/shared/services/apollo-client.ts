@@ -7,21 +7,33 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { notify } from '@app/Notifications/notify';
+import { authVar } from '@features/auth/globalAuthState';
 
 import updateAccessToken from './updateAccessToken';
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(async ({ message }) => {
-      notify({
-        type: 'error',
-        title: 'Error',
-        message,
-      });
-
       if (message === 'Unauthorized') {
-        console.log('unauthorized');
-        // updateAccessToken();
+        if (authVar().refresh_token !== null) {
+          const newToken = await updateAccessToken();
+
+          if (newToken) {
+            localStorage.setItem('access-token', newToken);
+
+            authVar({
+              access_token: newToken,
+              refresh_token: authVar().refresh_token,
+              id: authVar().id,
+            });
+          }
+        }
+      } else {
+        notify({
+          type: 'error',
+          title: 'Error',
+          message,
+        });
       }
     });
   }
