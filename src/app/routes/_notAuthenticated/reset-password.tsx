@@ -10,7 +10,5 @@ function RouteComponent() {
   const searchParams = new URLSearchParams(search);
   const token = searchParams.get('token');
 
-  console.log(token);
-
-  return <ResetPasswordPage />;
+  return <ResetPasswordPage token={token} />;
 }

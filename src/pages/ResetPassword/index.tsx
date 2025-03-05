@@ -2,11 +2,16 @@ import ResetPasswordForm from '@widgets/ui/ResetPasswordForm';
 
 import { ResetPasswordContainer } from './ResetPassword.styles';
 
-const ResetPasswordPage: React.FC = () => {
+type ResetPasswordPageProps = {
+  token: string | null;
+};
+
+const ResetPasswordPage: React.FC<ResetPasswordPageProps> = ({ token }) => {
   return (
     <ResetPasswordContainer>
-      <ResetPasswordForm />
+      <ResetPasswordForm token={token} />
     </ResetPasswordContainer>
   );
 };
+
 export default ResetPasswordPage;

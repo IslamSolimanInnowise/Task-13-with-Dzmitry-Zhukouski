@@ -22,7 +22,11 @@ import {
   StyledSubmitButton,
 } from './ResetPasswordForm.styles';
 
-const ResetPasswordForm: React.FC = () => {
+type ResetPasswordFormProps = {
+  token: string | null;
+};
+
+const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ token }) => {
   const {
     register,
     handleSubmit,
@@ -36,7 +40,7 @@ const ResetPasswordForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
-  const [ResetPassword, { loading }] = useResetPassword();
+  const [ResetPassword, { loading }] = useResetPassword(token);
 
   const onSubmit = handleSubmit((credentials) => {
     ResetPassword({ variables: { auth: credentials } });
