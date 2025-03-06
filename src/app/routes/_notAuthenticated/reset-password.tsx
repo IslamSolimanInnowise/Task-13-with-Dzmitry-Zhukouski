@@ -1,14 +1,19 @@
 import ResetPasswordPage from '@pages/ResetPassword';
-import { createFileRoute, useLocation } from '@tanstack/react-router';
+import { createFileRoute, useSearch } from '@tanstack/react-router';
+import { zodValidator } from '@tanstack/zod-adapter';
+import { z } from 'zod';
+
+const resetPasswordSearchSchema = z.object({
+  token: z.string().min(1, 'Token is required'),
+});
 
 export const Route = createFileRoute('/_notAuthenticated/reset-password')({
   component: RouteComponent,
+  validateSearch: zodValidator(resetPasswordSearchSchema),
 });
 
 function RouteComponent() {
-  const { search } = useLocation();
-  const searchParams = new URLSearchParams(search);
-  const token = searchParams.get('token');
+  const { token } = useSearch({ from: Route.id });
 
   return <ResetPasswordPage token={token} />;
 }
