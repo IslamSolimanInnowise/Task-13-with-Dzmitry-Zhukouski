@@ -1,8 +1,7 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 import { UPDATE_TOKEN } from '@features/auth/updateToken';
+import { router } from '@shared/router';
 import { authVar } from '@shared/store/globalAuthState';
-
-import { router } from '../../main';
 
 const updateAccessToken = async () => {
   const client = new ApolloClient({

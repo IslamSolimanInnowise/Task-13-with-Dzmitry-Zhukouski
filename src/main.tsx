@@ -1,22 +1,14 @@
 import { ApolloProvider } from '@apollo/client';
 import { Notifications } from '@app/Notifications';
-import { routeTree } from '@app/routeTree.gen';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { router } from '@shared/router';
 import client from '@shared/services/apollo-client';
 import { GlobalStyles } from '@shared/styles/globalStyles';
 import { lightTheme } from '@shared/styles/theme';
-import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
-
-export const router = createRouter({ routeTree });
-
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
 
 const rootElement = document.getElementById('root')!;
 
