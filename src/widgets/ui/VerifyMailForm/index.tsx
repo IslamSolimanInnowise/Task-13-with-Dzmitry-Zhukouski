@@ -12,7 +12,6 @@ import {
   StyledErrorP,
   StyledH1,
   StyledInput,
-  StyledLink,
   StyledP,
   StyledSubmitButton,
 } from './VerifyMailForm.styles';
@@ -41,7 +40,8 @@ const VerifyMailForm: React.FC = () => {
       <form onSubmit={onSubmit}>
         <fieldset style={{ marginBottom: '16px' }}>
           <StyledInput
-            type="number"
+            type="text"
+            maxLength={6}
             {...register('otp')}
             placeholder="Verification Code"
             error={errors.otp ? 'isError' : undefined}
@@ -53,7 +53,6 @@ const VerifyMailForm: React.FC = () => {
           VERIFY EMAIL
         </StyledSubmitButton>
       </form>
-      <StyledLink to="/auth/login">Back to Login</StyledLink>
     </FormBox>
   );
 };

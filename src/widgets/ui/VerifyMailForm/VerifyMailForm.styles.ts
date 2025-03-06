@@ -1,6 +1,5 @@
 import { Input, InputRightElement } from '@chakra-ui/input';
 import { Button, IconButton } from '@chakra-ui/react';
-import { Link } from '@tanstack/react-router';
 import styled from 'styled-components';
 
 interface StyledInputProps {
@@ -61,12 +60,4 @@ export const StyledSubmitButton = styled(Button)`
   width: 220px;
   margin: 1rem auto;
   display: block;
-`;
-
-export const StyledLink = styled(Link)`
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24.5px;
-  letter-spacing: 0.4px;
-  text-align: center;
 `;
