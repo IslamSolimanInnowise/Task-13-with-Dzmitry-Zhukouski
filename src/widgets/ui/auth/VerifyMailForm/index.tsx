@@ -4,12 +4,12 @@ import {
   Mail,
   verifyEmailSchema,
 } from '@shared/schemas/verifyMailSchema';
+import { Field } from '@shared/ui/field';
 import useVerifyMail from '@widgets/hooks/auth/useVerifyMail';
 import { useForm } from 'react-hook-form';
 
 import {
   FormBox,
-  StyledErrorP,
   StyledH1,
   StyledInput,
   StyledP,
@@ -38,16 +38,14 @@ const VerifyMailForm: React.FC = () => {
       <StyledH1>Verify Email</StyledH1>
       <StyledP>Please enter the verification code</StyledP>
       <form onSubmit={onSubmit}>
-        <fieldset style={{ marginBottom: '16px' }}>
+        <Field errorText={errors.otp?.message} invalid={Boolean(errors.otp)}>
           <StyledInput
             type="text"
             maxLength={6}
             {...register('otp')}
             placeholder="Verification Code"
-            error={errors.otp ? 'isError' : undefined}
           />
-          {errors.otp && <StyledErrorP>{errors.otp.message}</StyledErrorP>}
-        </fieldset>
+        </Field>
 
         <StyledSubmitButton type="submit" disabled={loading}>
           VERIFY EMAIL

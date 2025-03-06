@@ -1,4 +1,4 @@
-import ForgotPasswordForm from '@widgets/ui/ForgotPasswordForm';
+import ForgotPasswordForm from '@widgets/ui/auth/ForgotPasswordForm';
 
 import { ForgotPasswordContainer } from './ForgotPassword.styles';
 

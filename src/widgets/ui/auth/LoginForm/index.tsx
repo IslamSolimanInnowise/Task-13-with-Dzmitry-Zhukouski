@@ -5,6 +5,7 @@ import {
   authFormSchema,
   defaultValues,
 } from '@shared/schemas/authFormSchema';
+import { Field } from '@shared/ui/field';
 import useLogin from '@widgets/hooks/auth/useLogin';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
@@ -12,7 +13,7 @@ import { useForm } from 'react-hook-form';
 
 import {
   FormBox,
-  StyledErrorP,
+  InputsContainer,
   StyledEyeButton,
   StyledH1,
   StyledInput,
@@ -47,40 +48,42 @@ const LoginForm: React.FC = () => {
       <StyledH1>Welcome back</StyledH1>
       <StyledP>Hello again! Log in to continue</StyledP>
       <form onSubmit={onSubmit}>
-        <fieldset style={{ marginBottom: '16px' }}>
-          <StyledInput
-            type="email"
-            {...register('email')}
-            placeholder="Email"
-            error={errors.email ? 'isError' : undefined}
-          />
-          {errors.email && <StyledErrorP>{errors.email.message}</StyledErrorP>}
-        </fieldset>
-
-        <fieldset style={{ marginBottom: '16px' }}>
-          <InputGroup>
+        <InputsContainer>
+          <Field
+            errorText={errors.email?.message}
+            invalid={Boolean(errors.email)}
+          >
             <StyledInput
-              type={showPassword ? 'text' : 'password'}
-              {...register('password')}
-              placeholder="Password"
-              error={errors.password ? 'isError' : undefined}
-              autoComplete="on"
+              type="email"
+              {...register('email')}
+              placeholder="Email"
             />
-            <StyledInputRightElement>
-              <StyledEyeButton
-                aria-label="Toggle Password Visibility"
-                variant="plain"
-                size="md"
-                onClick={togglePasswordVisibility}
-              >
-                {showPassword ? <EyeOff /> : <Eye />}
-              </StyledEyeButton>
-            </StyledInputRightElement>
-          </InputGroup>
-          {errors.password && (
-            <StyledErrorP>{errors.password.message}</StyledErrorP>
-          )}
-        </fieldset>
+          </Field>
+
+          <Field
+            errorText={errors.password?.message}
+            invalid={Boolean(errors.password)}
+          >
+            <InputGroup>
+              <StyledInput
+                type={showPassword ? 'text' : 'password'}
+                {...register('password')}
+                placeholder="Password"
+                autoComplete="on"
+              />
+              <StyledInputRightElement>
+                <StyledEyeButton
+                  aria-label="Toggle Password Visibility"
+                  variant="plain"
+                  size="md"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </StyledEyeButton>
+              </StyledInputRightElement>
+            </InputGroup>
+          </Field>
+        </InputsContainer>
 
         <StyledSubmitButton type="submit" disabled={loading}>
           LOGIN

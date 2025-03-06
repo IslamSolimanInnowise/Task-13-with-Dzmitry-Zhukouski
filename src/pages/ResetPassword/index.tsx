@@ -1,4 +1,4 @@
-import ResetPasswordForm from '@widgets/ui/ResetPasswordForm';
+import ResetPasswordForm from '@widgets/ui/auth/ResetPasswordForm';
 
 import { ResetPasswordContainer } from './ResetPassword.styles';
 

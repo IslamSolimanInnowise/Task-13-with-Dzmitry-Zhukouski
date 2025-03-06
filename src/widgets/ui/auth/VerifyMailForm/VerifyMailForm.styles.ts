@@ -1,10 +1,6 @@
-import { Input, InputRightElement } from '@chakra-ui/input';
-import { Button, IconButton } from '@chakra-ui/react';
+import { InputRightElement } from '@chakra-ui/input';
+import { Button, IconButton, Input } from '@chakra-ui/react';
 import styled from 'styled-components';
-
-interface StyledInputProps {
-  error?: 'isError' | undefined;
-}
 
 export const FormBox = styled.div`
   padding: 2rem;
@@ -24,25 +20,13 @@ export const StyledP = styled.p`
   text-align: center;
 `;
 
-export const StyledInput = styled(Input)<StyledInputProps>`
+export const StyledInput = styled(Input)`
   padding: 0.75rem;
   background-color: transparent;
-  border: 1px solid
-    ${({ error, theme }) => (error ? theme.primaryColor : theme.color)};
   width: 100%;
+  border-width: 1.5px;
   border-radius: 0.25rem;
   transition: border-color 0.2s;
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-`;
-
-export const StyledErrorP = styled.p`
-  color: ${({ theme }) => theme.primaryColor};
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
 `;
 
 export const StyledInputRightElement = styled(InputRightElement)`

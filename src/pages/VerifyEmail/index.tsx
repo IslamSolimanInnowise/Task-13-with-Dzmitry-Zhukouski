@@ -1,4 +1,4 @@
-import VerifyMailForm from '@widgets/ui/VerifyMailForm';
+import VerifyMailForm from '@widgets/ui/auth/VerifyMailForm';
 
 import { VerifyMailContainer } from './VerifyEmail.styles';
 

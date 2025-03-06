@@ -1,11 +1,11 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { defaultValues, Email, emailSchema } from '@shared/schemas/emailSchema';
+import { Field } from '@shared/ui/field';
 import useForgotPassword from '@widgets/hooks/auth/useForgotPassword';
 import { useForm } from 'react-hook-form';
 
 import {
   FormBox,
-  StyledErrorP,
   StyledH1,
   StyledInput,
   StyledLink,
@@ -35,15 +35,16 @@ const ForgotPasswordForm: React.FC = () => {
       <StyledH1>Forgot password</StyledH1>
       <StyledP>We will send you an email with further instructions</StyledP>
       <form onSubmit={onSubmit}>
-        <fieldset style={{ marginBottom: '16px' }}>
+        <Field
+          errorText={errors.email?.message}
+          invalid={Boolean(errors.email)}
+        >
           <StyledInput
             type="email"
             {...register('email')}
             placeholder="Email"
-            error={errors.email ? 'isError' : undefined}
           />
-          {errors.email && <StyledErrorP>{errors.email.message}</StyledErrorP>}
-        </fieldset>
+        </Field>
         <StyledSubmitButton type="submit" disabled={loading}>
           RESET PASSWORD
         </StyledSubmitButton>
