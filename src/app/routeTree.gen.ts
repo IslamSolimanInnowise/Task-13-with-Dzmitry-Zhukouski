@@ -14,6 +14,7 @@ import { Route as rootRoute } from './routes/__root'
 import { Route as NotAuthenticatedImport } from './routes/_notAuthenticated'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as NotAuthenticatedResetPasswordImport } from './routes/_notAuthenticated/reset-password'
+import { Route as AuthenticatedVerifyEmailImport } from './routes/_authenticated/verify-email'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticated/projects/index'
 import { Route as AuthenticatedCvsIndexImport } from './routes/_authenticated/cvs/index'
@@ -40,6 +41,12 @@ const NotAuthenticatedResetPasswordRoute =
     path: '/reset-password',
     getParentRoute: () => NotAuthenticatedRoute,
   } as any)
+
+const AuthenticatedVerifyEmailRoute = AuthenticatedVerifyEmailImport.update({
+  id: '/verify-email',
+  path: '/verify-email',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
 
 const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   id: '/users/',
@@ -105,6 +112,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotAuthenticatedImport
       parentRoute: typeof rootRoute
     }
+    '/_authenticated/verify-email': {
+      id: '/_authenticated/verify-email'
+      path: '/verify-email'
+      fullPath: '/verify-email'
+      preLoaderRoute: typeof AuthenticatedVerifyEmailImport
+      parentRoute: typeof AuthenticatedImport
+    }
     '/_notAuthenticated/reset-password': {
       id: '/_notAuthenticated/reset-password'
       path: '/reset-password'
@@ -167,6 +181,7 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedVerifyEmailRoute: typeof AuthenticatedVerifyEmailRoute
   AuthenticatedUsersUserIdRoute: typeof AuthenticatedUsersUserIdRoute
   AuthenticatedCvsIndexRoute: typeof AuthenticatedCvsIndexRoute
   AuthenticatedProjectsIndexRoute: typeof AuthenticatedProjectsIndexRoute
@@ -174,6 +189,7 @@ interface AuthenticatedRouteChildren {
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedVerifyEmailRoute: AuthenticatedVerifyEmailRoute,
   AuthenticatedUsersUserIdRoute: AuthenticatedUsersUserIdRoute,
   AuthenticatedCvsIndexRoute: AuthenticatedCvsIndexRoute,
   AuthenticatedProjectsIndexRoute: AuthenticatedProjectsIndexRoute,
@@ -204,6 +220,7 @@ const NotAuthenticatedRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof NotAuthenticatedRouteWithChildren
+  '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
@@ -216,6 +233,7 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '': typeof NotAuthenticatedRouteWithChildren
+  '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
@@ -230,6 +248,7 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_notAuthenticated': typeof NotAuthenticatedRouteWithChildren
+  '/_authenticated/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/_notAuthenticated/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/_authenticated/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/_notAuthenticated/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
@@ -244,6 +263,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/verify-email'
     | '/reset-password'
     | '/users/$userId'
     | '/auth/forgot-password'
@@ -255,6 +275,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
+    | '/verify-email'
     | '/reset-password'
     | '/users/$userId'
     | '/auth/forgot-password'
@@ -267,6 +288,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/_notAuthenticated'
+    | '/_authenticated/verify-email'
     | '/_notAuthenticated/reset-password'
     | '/_authenticated/users/$userId'
     | '/_notAuthenticated/auth/forgot-password'
@@ -305,6 +327,7 @@ export const routeTree = rootRoute
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
+        "/_authenticated/verify-email",
         "/_authenticated/users/$userId",
         "/_authenticated/cvs/",
         "/_authenticated/projects/",
@@ -319,6 +342,10 @@ export const routeTree = rootRoute
         "/_notAuthenticated/auth/login",
         "/_notAuthenticated/auth/register"
       ]
+    },
+    "/_authenticated/verify-email": {
+      "filePath": "_authenticated/verify-email.tsx",
+      "parent": "/_authenticated"
     },
     "/_notAuthenticated/reset-password": {
       "filePath": "_notAuthenticated/reset-password.tsx",

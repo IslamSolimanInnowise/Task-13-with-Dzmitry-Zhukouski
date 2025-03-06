@@ -7,7 +7,7 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { notify } from '@app/Notifications/notify';
-import { authVar } from '@features/auth/globalAuthState';
+import { authVar } from '@shared/store/globalAuthState';
 
 import updateAccessToken from './updateAccessToken';
 

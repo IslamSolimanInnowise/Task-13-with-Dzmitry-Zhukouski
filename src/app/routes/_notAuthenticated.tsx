@@ -1,5 +1,5 @@
 import { useReactiveVar } from '@apollo/client';
-import { authVar } from '@features/auth/globalAuthState';
+import { authVar } from '@shared/store/globalAuthState';
 import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
 
 const NotAuthenticated = () => {
