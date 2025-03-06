@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { _passwordSchema } from './passwordSchema';
+import { passwordFieldSchema } from './passwordSchema';
 
 const newPasswordSchema = z.object({
-  newPassword: _passwordSchema,
+  newPassword: passwordFieldSchema,
 });
 
 type NewPassword = z.infer<typeof newPasswordSchema>;
@@ -12,4 +12,9 @@ const defaultValues: NewPassword = {
   newPassword: '',
 };
 
-export { _passwordSchema, defaultValues, type NewPassword, newPasswordSchema };
+export {
+  defaultValues,
+  type NewPassword,
+  newPasswordSchema,
+  passwordFieldSchema,
+};

@@ -8,7 +8,7 @@ const updateAccessToken = async () => {
     link: new HttpLink({
       uri: import.meta.env.VITE_GRAPHQL_URI,
       headers: {
-        Authorization: `Bearer ${authVar().refresh_token}`,
+        Authorization: `Bearer ${authVar().refreshToken}`,
       },
     }),
     cache: new InMemoryCache(),
@@ -27,8 +27,8 @@ const updateAccessToken = async () => {
       localStorage.removeItem('id');
 
       authVar({
-        access_token: null,
-        refresh_token: null,
+        accessToken: null,
+        refreshToken: null,
         id: null,
       });
 

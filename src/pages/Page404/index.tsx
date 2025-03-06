@@ -3,7 +3,7 @@ import { Box, Text } from '@chakra-ui/react';
 import { StyledBackButton } from './Page404.styles';
 
 export const Page404 = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('access-token');
   const id = localStorage.getItem('id');
   return (
     <Box

@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
-import { _emailSchema } from './emailSchema';
-import { _passwordSchema } from './passwordSchema';
+import { emailFieldSchema } from './emailSchema';
+import { passwordFieldSchema } from './passwordSchema';
 
 const authFormSchema = z.object({
-  email: _emailSchema,
-  password: _passwordSchema,
+  email: emailFieldSchema,
+  password: passwordFieldSchema,
 });
 
 type AuthForm = z.infer<typeof authFormSchema>;

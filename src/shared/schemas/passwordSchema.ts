@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
-const _passwordSchema = z
+const passwordFieldSchema = z
   .string()
   .min(6, { message: 'Password must be at least 6 characters' });
 
 const passwordSchema = z.object({
-  password: _passwordSchema
+  password: passwordFieldSchema,
 });
 
 type Password = z.infer<typeof passwordSchema>;
@@ -14,4 +14,4 @@ const defaultValues: Password = {
   password: '',
 };
 
-export { _passwordSchema,defaultValues, type Password, passwordSchema };
+export { defaultValues, type Password, passwordFieldSchema, passwordSchema };

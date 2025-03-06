@@ -1,20 +1,20 @@
 import { makeVar } from '@apollo/client';
 
 export interface AuthState {
-  access_token: string | null;
-  refresh_token: string | null;
+  accessToken: string | null;
+  refreshToken: string | null;
   id: string | null;
 }
 
 export const authVar = makeVar<AuthState>({
-  access_token: null,
-  refresh_token: null,
+  accessToken: null,
+  refreshToken: null,
   id: null,
 });
 
 const initialAuthState: AuthState = {
-  access_token: localStorage.getItem('access-token'),
-  refresh_token: localStorage.getItem('refresh-token'),
+  accessToken: localStorage.getItem('access-token'),
+  refreshToken: localStorage.getItem('refresh-token'),
   id: localStorage.getItem('id'),
 };
 

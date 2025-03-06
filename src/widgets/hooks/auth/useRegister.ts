@@ -16,8 +16,8 @@ const useRegister = () => {
       localStorage.setItem('id', res.signup.user.id);
 
       authVar({
-        access_token: res.signup.access_token,
-        refresh_token: res.signup.refresh_token,
+        accessToken: res.signup.access_token,
+        refreshToken: res.signup.refresh_token,
         id: res.signup.user.id,
       });
     },

@@ -5,9 +5,9 @@ import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router';
 const Authenticated = () => {
   const navigate = useNavigate();
 
-  const { access_token } = useReactiveVar(authVar);
+  const { accessToken } = useReactiveVar(authVar);
 
-  if (!access_token) {
+  if (!accessToken) {
     navigate({ to: '/auth/login' });
   }
 

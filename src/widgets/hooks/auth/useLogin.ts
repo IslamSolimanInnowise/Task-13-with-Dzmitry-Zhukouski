@@ -16,8 +16,8 @@ const useLogin = () => {
       localStorage.setItem('id', res.login.user.id);
 
       authVar({
-        access_token: res.login.access_token,
-        refresh_token: res.login.refresh_token,
+        accessToken: res.login.access_token,
+        refreshToken: res.login.refresh_token,
         id: res.login.user.id,
       });
     },

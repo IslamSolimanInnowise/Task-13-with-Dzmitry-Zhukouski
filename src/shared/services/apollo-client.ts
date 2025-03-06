@@ -7,23 +7,23 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { notify } from '@app/Notifications/notify';
-import { authVar } from '@shared/store/globalAuthState';
 
 import updateAccessToken from './updateAccessToken';
+import { authVar } from '@shared/store/globalAuthState';
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(async ({ message }) => {
       if (message === 'Unauthorized') {
-        if (authVar().refresh_token !== null) {
+        if (authVar().refreshToken !== null) {
           const newToken = await updateAccessToken();
 
           if (newToken) {
             localStorage.setItem('access-token', newToken);
 
             authVar({
-              access_token: newToken,
-              refresh_token: authVar().refresh_token,
+              accessToken: newToken,
+              refreshToken: authVar().refreshToken,
               id: authVar().id,
             });
           }
@@ -52,12 +52,12 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const access_token = localStorage.getItem('access-token');
+  const accessToken = localStorage.getItem('access-token');
 
   return {
     headers: {
       ...headers,
-      authorization: access_token ? `Bearer ${access_token}` : '',
+      authorization: accessToken ? `Bearer ${accessToken}` : '',
     },
   };
 });
