@@ -33,6 +33,11 @@ export const StyledInput = styled(Input)<StyledInputProps>`
   width: 100%;
   border-radius: 0.25rem;
   transition: border-color 0.2s;
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 export const StyledErrorP = styled.p`

@@ -1,18 +1,25 @@
 import { useMutation } from '@apollo/client';
 import { notify } from '@app/Notifications/notify';
 import { REGISTER_USER } from '@features/auth/registerUser';
-import { useNavigate } from '@tanstack/react-router';
+import { authVar } from '@shared/store/globalAuthState';
 
 const useRegister = () => {
-  const navigate = useNavigate();
-
   return useMutation(REGISTER_USER, {
-    onCompleted: () => {
+    onCompleted: (res) => {
       notify({
         type: 'success',
         title: 'Registration successful',
       });
-      navigate({ to: '/auth/login' });
+
+      localStorage.setItem('access-token', res.signup.access_token);
+      localStorage.setItem('refresh-token', res.signup.refresh_token);
+      localStorage.setItem('id', res.signup.user.id);
+
+      authVar({
+        access_token: res.signup.access_token,
+        refresh_token: res.signup.refresh_token,
+        id: res.signup.user.id,
+      });
     },
   });
 };
