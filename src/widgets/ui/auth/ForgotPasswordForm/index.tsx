@@ -1,7 +1,7 @@
+import useForgotPassword from '@features/hooks/auth/useForgotPassword';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { defaultValues, Email, emailSchema } from '@shared/schemas/emailSchema';
 import { Field } from '@shared/ui/field';
-import useForgotPassword from '@widgets/hooks/auth/useForgotPassword';
 import { useForm } from 'react-hook-form';
 
 import {

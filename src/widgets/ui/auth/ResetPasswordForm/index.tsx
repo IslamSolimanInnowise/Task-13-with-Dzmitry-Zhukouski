@@ -1,4 +1,5 @@
 import { InputGroup } from '@chakra-ui/input';
+import useResetPassword from '@features/hooks/auth/useResetPassword';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   defaultValues,
@@ -6,7 +7,6 @@ import {
   newPasswordSchema,
 } from '@shared/schemas/newPasswordSchema';
 import { Field } from '@shared/ui/field';
-import useResetPassword from '@widgets/hooks/auth/useResetPassword';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';

@@ -1,4 +1,5 @@
 import { InputGroup } from '@chakra-ui/input';
+import useLogin from '@features/hooks/auth/useLogin';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   AuthForm,
@@ -6,7 +7,6 @@ import {
   defaultValues,
 } from '@shared/schemas/authFormSchema';
 import { Field } from '@shared/ui/field';
-import useLogin from '@widgets/hooks/auth/useLogin';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';

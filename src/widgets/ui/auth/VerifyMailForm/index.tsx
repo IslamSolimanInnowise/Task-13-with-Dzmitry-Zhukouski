@@ -1,3 +1,4 @@
+import useVerifyMail from '@features/hooks/auth/useVerifyMail';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   defaultValues,
@@ -5,7 +6,6 @@ import {
   verifyEmailSchema,
 } from '@shared/schemas/verifyMailSchema';
 import { Field } from '@shared/ui/field';
-import useVerifyMail from '@widgets/hooks/auth/useVerifyMail';
 import { useForm } from 'react-hook-form';
 
 import {
