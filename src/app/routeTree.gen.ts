@@ -16,6 +16,7 @@ import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as NotAuthenticatedResetPasswordImport } from './routes/_notAuthenticated/reset-password'
 import { Route as AuthenticatedVerifyEmailImport } from './routes/_authenticated/verify-email'
 import { Route as AuthenticatedSkillsImport } from './routes/_authenticated/skills'
+import { Route as AuthenticatedSettingsImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedLanguagesImport } from './routes/_authenticated/languages'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticated/projects/index'
@@ -53,6 +54,12 @@ const AuthenticatedVerifyEmailRoute = AuthenticatedVerifyEmailImport.update({
 const AuthenticatedSkillsRoute = AuthenticatedSkillsImport.update({
   id: '/skills',
   path: '/skills',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedSettingsRoute = AuthenticatedSettingsImport.update({
+  id: '/settings',
+  path: '/settings',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
@@ -133,6 +140,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedLanguagesImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsImport
+      parentRoute: typeof AuthenticatedImport
+    }
     '/_authenticated/skills': {
       id: '/_authenticated/skills'
       path: '/skills'
@@ -210,6 +224,7 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedRouteChildren {
   AuthenticatedLanguagesRoute: typeof AuthenticatedLanguagesRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedSkillsRoute: typeof AuthenticatedSkillsRoute
   AuthenticatedVerifyEmailRoute: typeof AuthenticatedVerifyEmailRoute
   AuthenticatedUsersUserIdRoute: typeof AuthenticatedUsersUserIdRoute
@@ -220,6 +235,7 @@ interface AuthenticatedRouteChildren {
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedLanguagesRoute: AuthenticatedLanguagesRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedSkillsRoute: AuthenticatedSkillsRoute,
   AuthenticatedVerifyEmailRoute: AuthenticatedVerifyEmailRoute,
   AuthenticatedUsersUserIdRoute: AuthenticatedUsersUserIdRoute,
@@ -253,6 +269,7 @@ const NotAuthenticatedRouteWithChildren =
 export interface FileRoutesByFullPath {
   '': typeof NotAuthenticatedRouteWithChildren
   '/languages': typeof AuthenticatedLanguagesRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/skills': typeof AuthenticatedSkillsRoute
   '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
@@ -268,6 +285,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '': typeof NotAuthenticatedRouteWithChildren
   '/languages': typeof AuthenticatedLanguagesRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/skills': typeof AuthenticatedSkillsRoute
   '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
@@ -285,6 +303,7 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_notAuthenticated': typeof NotAuthenticatedRouteWithChildren
   '/_authenticated/languages': typeof AuthenticatedLanguagesRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/_authenticated/skills': typeof AuthenticatedSkillsRoute
   '/_authenticated/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/_notAuthenticated/reset-password': typeof NotAuthenticatedResetPasswordRoute
@@ -302,6 +321,7 @@ export interface FileRouteTypes {
   fullPaths:
     | ''
     | '/languages'
+    | '/settings'
     | '/skills'
     | '/verify-email'
     | '/reset-password'
@@ -316,6 +336,7 @@ export interface FileRouteTypes {
   to:
     | ''
     | '/languages'
+    | '/settings'
     | '/skills'
     | '/verify-email'
     | '/reset-password'
@@ -331,6 +352,7 @@ export interface FileRouteTypes {
     | '/_authenticated'
     | '/_notAuthenticated'
     | '/_authenticated/languages'
+    | '/_authenticated/settings'
     | '/_authenticated/skills'
     | '/_authenticated/verify-email'
     | '/_notAuthenticated/reset-password'
@@ -372,6 +394,7 @@ export const routeTree = rootRoute
       "filePath": "_authenticated.tsx",
       "children": [
         "/_authenticated/languages",
+        "/_authenticated/settings",
         "/_authenticated/skills",
         "/_authenticated/verify-email",
         "/_authenticated/users/$userId",
@@ -391,6 +414,10 @@ export const routeTree = rootRoute
     },
     "/_authenticated/languages": {
       "filePath": "_authenticated/languages.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/settings": {
+      "filePath": "_authenticated/settings.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/skills": {
