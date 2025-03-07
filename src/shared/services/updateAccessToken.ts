@@ -1,5 +1,5 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
-import { UPDATE_TOKEN } from '@features/auth/updateToken';
+import { UPDATE_TOKEN } from '@shared/queries/auth/updateToken';
 import { router } from '@shared/router';
 import { authVar } from '@shared/store/globalAuthState';
 

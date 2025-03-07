@@ -5,7 +5,7 @@ import {
   useMutation,
 } from '@apollo/client';
 import { notify } from '@app/Notifications/notify';
-import { RESET_PASSWORD } from '@features/auth/resetPassword';
+import { RESET_PASSWORD } from '@shared/queries/auth/resetPassword';
 
 const useResetPassword = (token: string | null) => {
   const client = new ApolloClient({

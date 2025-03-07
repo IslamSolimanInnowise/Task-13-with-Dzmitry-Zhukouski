@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { notify } from '@app/Notifications/notify';
-import { VERIFY_MAIL } from '@features/auth/verifyEmail';
+import { VERIFY_MAIL } from '@shared/queries/auth/verifyEmail';
 import { authVar } from '@shared/store/globalAuthState';
 import { useNavigate } from '@tanstack/react-router';
 

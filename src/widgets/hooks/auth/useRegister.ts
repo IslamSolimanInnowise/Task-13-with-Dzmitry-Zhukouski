@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import { notify } from '@app/Notifications/notify';
-import { REGISTER_USER } from '@features/auth/registerUser';
+import { REGISTER_USER } from '@shared/queries/auth/registerUser';
 import { authVar } from '@shared/store/globalAuthState';
 
 const useRegister = () => {

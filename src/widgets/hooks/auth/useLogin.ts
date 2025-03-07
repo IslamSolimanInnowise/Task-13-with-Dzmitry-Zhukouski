@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import { notify } from '@app/Notifications/notify';
-import { LOGIN_USER } from '@features/auth/loginUser';
+import { LOGIN_USER } from '@shared/queries/auth/loginUser';
 import { authVar } from '@shared/store/globalAuthState';
 
 const useLogin = () => {
