@@ -25,11 +25,13 @@ const updateAccessToken = async () => {
       localStorage.removeItem('access-token');
       localStorage.removeItem('refresh-token');
       localStorage.removeItem('id');
+      localStorage.removeItem('email');
 
       authVar({
         accessToken: null,
         refreshToken: null,
         id: null,
+        email: null,
       });
 
       router.navigate({ to: '/auth/login' });

@@ -15,6 +15,8 @@ import { Route as NotAuthenticatedImport } from './routes/_notAuthenticated'
 import { Route as AuthenticatedImport } from './routes/_authenticated'
 import { Route as NotAuthenticatedResetPasswordImport } from './routes/_notAuthenticated/reset-password'
 import { Route as AuthenticatedVerifyEmailImport } from './routes/_authenticated/verify-email'
+import { Route as AuthenticatedSkillsImport } from './routes/_authenticated/skills'
+import { Route as AuthenticatedLanguagesImport } from './routes/_authenticated/languages'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
 import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticated/projects/index'
 import { Route as AuthenticatedCvsIndexImport } from './routes/_authenticated/cvs/index'
@@ -45,6 +47,18 @@ const NotAuthenticatedResetPasswordRoute =
 const AuthenticatedVerifyEmailRoute = AuthenticatedVerifyEmailImport.update({
   id: '/verify-email',
   path: '/verify-email',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedSkillsRoute = AuthenticatedSkillsImport.update({
+  id: '/skills',
+  path: '/skills',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
+const AuthenticatedLanguagesRoute = AuthenticatedLanguagesImport.update({
+  id: '/languages',
+  path: '/languages',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
@@ -111,6 +125,20 @@ declare module '@tanstack/react-router' {
       fullPath: ''
       preLoaderRoute: typeof NotAuthenticatedImport
       parentRoute: typeof rootRoute
+    }
+    '/_authenticated/languages': {
+      id: '/_authenticated/languages'
+      path: '/languages'
+      fullPath: '/languages'
+      preLoaderRoute: typeof AuthenticatedLanguagesImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/skills': {
+      id: '/_authenticated/skills'
+      path: '/skills'
+      fullPath: '/skills'
+      preLoaderRoute: typeof AuthenticatedSkillsImport
+      parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/verify-email': {
       id: '/_authenticated/verify-email'
@@ -181,6 +209,8 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface AuthenticatedRouteChildren {
+  AuthenticatedLanguagesRoute: typeof AuthenticatedLanguagesRoute
+  AuthenticatedSkillsRoute: typeof AuthenticatedSkillsRoute
   AuthenticatedVerifyEmailRoute: typeof AuthenticatedVerifyEmailRoute
   AuthenticatedUsersUserIdRoute: typeof AuthenticatedUsersUserIdRoute
   AuthenticatedCvsIndexRoute: typeof AuthenticatedCvsIndexRoute
@@ -189,6 +219,8 @@ interface AuthenticatedRouteChildren {
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
+  AuthenticatedLanguagesRoute: AuthenticatedLanguagesRoute,
+  AuthenticatedSkillsRoute: AuthenticatedSkillsRoute,
   AuthenticatedVerifyEmailRoute: AuthenticatedVerifyEmailRoute,
   AuthenticatedUsersUserIdRoute: AuthenticatedUsersUserIdRoute,
   AuthenticatedCvsIndexRoute: AuthenticatedCvsIndexRoute,
@@ -220,6 +252,8 @@ const NotAuthenticatedRouteWithChildren =
 
 export interface FileRoutesByFullPath {
   '': typeof NotAuthenticatedRouteWithChildren
+  '/languages': typeof AuthenticatedLanguagesRoute
+  '/skills': typeof AuthenticatedSkillsRoute
   '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
@@ -233,6 +267,8 @@ export interface FileRoutesByFullPath {
 
 export interface FileRoutesByTo {
   '': typeof NotAuthenticatedRouteWithChildren
+  '/languages': typeof AuthenticatedLanguagesRoute
+  '/skills': typeof AuthenticatedSkillsRoute
   '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
@@ -248,6 +284,8 @@ export interface FileRoutesById {
   __root__: typeof rootRoute
   '/_authenticated': typeof AuthenticatedRouteWithChildren
   '/_notAuthenticated': typeof NotAuthenticatedRouteWithChildren
+  '/_authenticated/languages': typeof AuthenticatedLanguagesRoute
+  '/_authenticated/skills': typeof AuthenticatedSkillsRoute
   '/_authenticated/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/_notAuthenticated/reset-password': typeof NotAuthenticatedResetPasswordRoute
   '/_authenticated/users/$userId': typeof AuthenticatedUsersUserIdRoute
@@ -263,6 +301,8 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | ''
+    | '/languages'
+    | '/skills'
     | '/verify-email'
     | '/reset-password'
     | '/users/$userId'
@@ -275,6 +315,8 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
+    | '/languages'
+    | '/skills'
     | '/verify-email'
     | '/reset-password'
     | '/users/$userId'
@@ -288,6 +330,8 @@ export interface FileRouteTypes {
     | '__root__'
     | '/_authenticated'
     | '/_notAuthenticated'
+    | '/_authenticated/languages'
+    | '/_authenticated/skills'
     | '/_authenticated/verify-email'
     | '/_notAuthenticated/reset-password'
     | '/_authenticated/users/$userId'
@@ -327,6 +371,8 @@ export const routeTree = rootRoute
     "/_authenticated": {
       "filePath": "_authenticated.tsx",
       "children": [
+        "/_authenticated/languages",
+        "/_authenticated/skills",
         "/_authenticated/verify-email",
         "/_authenticated/users/$userId",
         "/_authenticated/cvs/",
@@ -342,6 +388,14 @@ export const routeTree = rootRoute
         "/_notAuthenticated/auth/login",
         "/_notAuthenticated/auth/register"
       ]
+    },
+    "/_authenticated/languages": {
+      "filePath": "_authenticated/languages.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/skills": {
+      "filePath": "_authenticated/skills.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/verify-email": {
       "filePath": "_authenticated/verify-email.tsx",

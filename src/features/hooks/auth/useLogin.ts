@@ -14,11 +14,13 @@ const useLogin = () => {
       localStorage.setItem('access-token', res.login.access_token);
       localStorage.setItem('refresh-token', res.login.refresh_token);
       localStorage.setItem('id', res.login.user.id);
+      localStorage.setItem('email', res.login.user.email);
 
       authVar({
         accessToken: res.login.access_token,
         refreshToken: res.login.refresh_token,
         id: res.login.user.id,
+        email: res.login.user.email,
       });
     },
   });

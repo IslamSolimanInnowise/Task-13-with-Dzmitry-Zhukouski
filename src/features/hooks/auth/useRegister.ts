@@ -14,11 +14,13 @@ const useRegister = () => {
       localStorage.setItem('access-token', res.signup.access_token);
       localStorage.setItem('refresh-token', res.signup.refresh_token);
       localStorage.setItem('id', res.signup.user.id);
+      localStorage.setItem('email', res.signup.user.email);
 
       authVar({
         accessToken: res.signup.access_token,
         refreshToken: res.signup.refresh_token,
         id: res.signup.user.id,
+        email: res.signup.user.email,
       });
     },
   });

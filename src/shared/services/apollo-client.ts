@@ -22,6 +22,7 @@ const handleUnauthorizedError = async () => {
         accessToken: newToken,
         refreshToken: authVar().refreshToken,
         id: authVar().id,
+        email: authVar().email,
       });
     }
   }
