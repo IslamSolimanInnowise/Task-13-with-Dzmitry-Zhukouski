@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { notify } from '@app/Notifications/notify';
+import { notify } from '@shared/Notifications/notify';
 import { FORGOT_PASSWORD } from '@shared/queries/auth/forgotPassword';
 
 const useForgotPassword = () => {

@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
-import { notify } from '@app/Notifications/notify';
+import { notify } from '@shared/Notifications/notify';
 import { LOGIN_USER } from '@shared/queries/auth/loginUser';
 import { authVar } from '@shared/store/globalAuthState';
 

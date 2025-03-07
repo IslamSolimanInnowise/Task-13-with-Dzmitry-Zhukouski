@@ -1,6 +1,6 @@
 import { ApolloProvider } from '@apollo/client';
-import { Notifications } from '@app/Notifications';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { Notifications } from '@shared/Notifications';
 import { router } from '@shared/router';
 import client from '@shared/services/apollo-client';
 import { GlobalStyles } from '@shared/styles/globalStyles';

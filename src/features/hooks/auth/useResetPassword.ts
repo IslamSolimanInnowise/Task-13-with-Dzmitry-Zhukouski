@@ -4,7 +4,7 @@ import {
   InMemoryCache,
   useMutation,
 } from '@apollo/client';
-import { notify } from '@app/Notifications/notify';
+import { notify } from '@shared/Notifications/notify';
 import { RESET_PASSWORD } from '@shared/queries/auth/resetPassword';
 
 const useResetPassword = (token: string | null) => {

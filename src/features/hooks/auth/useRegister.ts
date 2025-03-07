@@ -1,5 +1,5 @@
 import { useMutation } from '@apollo/client';
-import { notify } from '@app/Notifications/notify';
+import { notify } from '@shared/Notifications/notify';
 import { REGISTER_USER } from '@shared/queries/auth/registerUser';
 import { authVar } from '@shared/store/globalAuthState';
 
