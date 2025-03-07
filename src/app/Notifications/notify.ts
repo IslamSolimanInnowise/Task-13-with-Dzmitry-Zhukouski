@@ -1,3 +1,3 @@
-import { useNotifications } from './notifications-store';
+import { addNotification } from './notifications-var';
 
-export const notify = useNotifications.getState().addNotification;
+export const notify = addNotification;

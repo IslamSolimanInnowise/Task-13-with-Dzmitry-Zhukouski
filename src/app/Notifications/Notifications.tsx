@@ -1,9 +1,11 @@
+import { useReactiveVar } from '@apollo/client';
+
 import { Notification } from './Notification';
 import { StyledNotificationsBox } from './Notifications.style';
-import { useNotifications } from './notifications-store';
+import { dismissNotification, notificationsVar } from './notifications-var';
 
 export const Notifications = () => {
-  const { notifications, dismissNotification } = useNotifications();
+  const notifications = useReactiveVar(notificationsVar);
 
   return (
     <StyledNotificationsBox>
