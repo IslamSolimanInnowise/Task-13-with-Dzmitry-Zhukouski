@@ -1,10 +1,10 @@
 import { Box, Text } from '@chakra-ui/react';
+import { authVar } from '@shared/store/globalAuthState';
 
 import { StyledBackButton } from './Page404.styles';
 
 export const Page404 = () => {
-  const token = localStorage.getItem('access-token');
-  const id = localStorage.getItem('id');
+  const { accessToken, id } = authVar();
   return (
     <Box
       display="flex"
@@ -16,7 +16,7 @@ export const Page404 = () => {
       <Text fontSize="xl" fontWeight="bold" mb={2}>
         Page not found
       </Text>
-      {token ? (
+      {accessToken ? (
         <StyledBackButton to={`/users/${id}`}>Back</StyledBackButton>
       ) : (
         <StyledBackButton to="/auth/login">Back</StyledBackButton>

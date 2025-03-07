@@ -52,7 +52,7 @@ const httpLink = createHttpLink({
 });
 
 const authLink = setContext((_, { headers }) => {
-  const accessToken = localStorage.getItem('access-token');
+  const { accessToken } = authVar();
 
   return {
     headers: {
