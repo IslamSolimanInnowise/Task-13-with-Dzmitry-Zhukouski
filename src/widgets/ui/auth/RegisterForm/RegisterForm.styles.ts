@@ -1,4 +1,5 @@
-import { Input, InputRightElement } from '@chakra-ui/input';
+import { InputRightElement } from '@chakra-ui/input';
+import { Input } from '@chakra-ui/react';
 import { Button, IconButton } from '@chakra-ui/react';
 import { Link } from '@tanstack/react-router';
 import styled from 'styled-components';
@@ -21,19 +22,19 @@ export const StyledP = styled.p`
   text-align: center;
 `;
 
-export const StyledInput = styled(Input)`
-  padding: 0.25rem;
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.color};
-  width: 100%;
-  border-radius: 0.25rem;
-  padding: 0.75rem;
+export const InputsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
-export const StyledErrorP = styled.p`
-  color: ${({ theme }) => theme.primaryColor};
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
+export const StyledInput = styled(Input)`
+  padding: 0.75rem;
+  background-color: transparent;
+  width: 100%;
+  border-width: 1.5px;
+  border-radius: 0.25rem;
+  transition: border-color 0.2s;
 `;
 
 export const StyledInputRightElement = styled(InputRightElement)`

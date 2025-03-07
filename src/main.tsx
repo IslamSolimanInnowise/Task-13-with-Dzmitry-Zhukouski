@@ -1,25 +1,14 @@
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import { routeTree } from '@app/routeTree.gen';
+import { ApolloProvider } from '@apollo/client';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { Notifications } from '@shared/Notifications';
+import { router } from '@shared/router';
+import client from '@shared/services/apollo-client';
 import { GlobalStyles } from '@shared/styles/globalStyles';
 import { lightTheme } from '@shared/styles/theme';
-import { createRouter, RouterProvider } from '@tanstack/react-router';
+import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
-
-const router = createRouter({ routeTree });
-
-declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-const client = new ApolloClient({
-  uri: 'https://cv-project-js.inno.ws/api/graphql',
-  cache: new InMemoryCache(),
-});
 
 const rootElement = document.getElementById('root')!;
 
@@ -33,6 +22,7 @@ if (!rootElement.innerHTML) {
           <ThemeProvider theme={lightTheme}>
             <GlobalStyles />
             <RouterProvider router={router} />
+            <Notifications />
           </ThemeProvider>
         </ChakraProvider>
       </ApolloProvider>

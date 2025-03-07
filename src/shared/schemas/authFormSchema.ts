@@ -1,16 +1,18 @@
 import { z } from 'zod';
 
-const schema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }),
-  password: z
-    .string()
-    .min(6, { message: 'Password must be at least 6 characters' }),
+import { emailFieldSchema } from './emailSchema';
+import { passwordFieldSchema } from './passwordSchema';
+
+const authFormSchema = z.object({
+  email: emailFieldSchema,
+  password: passwordFieldSchema,
 });
 
-type FormValues = z.infer<typeof schema>;
+type AuthForm = z.infer<typeof authFormSchema>;
 
-const defaultValues: FormValues = {
+const defaultValues: AuthForm = {
   email: '',
   password: '',
 };
-export { defaultValues, type FormValues, schema };
+
+export { type AuthForm, authFormSchema, defaultValues };

@@ -4,7 +4,7 @@ const AuthHeader: React.FC = () => {
   return (
     <StyledAuthHeader>
       <StyledLink
-        to="/login"
+        to="/auth/login"
         activeProps={{
           style: { color: '#C63031', borderColor: '#C63031' },
         }}
@@ -12,7 +12,7 @@ const AuthHeader: React.FC = () => {
         Login
       </StyledLink>
       <StyledLink
-        to="/register"
+        to="/auth/register"
         activeProps={{
           style: { color: '#C63031', borderColor: '#C63031' },
         }}

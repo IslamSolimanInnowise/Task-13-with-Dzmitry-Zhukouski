@@ -1,10 +1,12 @@
+import { useReactiveVar } from '@apollo/client';
+import { authVar } from '@shared/store/globalAuthState';
 import { createFileRoute, Navigate, Outlet } from '@tanstack/react-router';
 
 const NotAuthenticated = () => {
-  const isAuth = false;
+  const { accessToken, id } = useReactiveVar(authVar);
 
-  if (isAuth) {
-    return <Navigate to="/" />;
+  if (accessToken && id) {
+    return <Navigate to="/users/$userId" params={{ userId: id }} />;
   }
 
   return <Outlet />;
