@@ -1,9 +1,6 @@
-import { createFileRoute } from '@tanstack/react-router'
+import CVsPage from '@pages/CVs';
+import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_authenticated/cvs/')({
-  component: RouteComponent,
-})
-
-function RouteComponent() {
-  return <div>Hello "/_authenticated/cvs/"!</div>
-}
+  component: CVsPage,
+});

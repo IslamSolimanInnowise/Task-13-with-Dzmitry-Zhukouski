@@ -1,9 +1,6 @@
+import SkillsPage from '@pages/Skills';
 import { createFileRoute } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/_authenticated/skills')({
-  component: RouteComponent,
+  component: SkillsPage,
 });
-
-function RouteComponent() {
-  return <div>Hello "/_authenticated/skills/"!</div>;
-}
