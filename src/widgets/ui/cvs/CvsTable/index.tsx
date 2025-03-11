@@ -89,7 +89,7 @@ const CvsTable: React.FC = () => {
 
   const rowVirtualizer = useVirtualizer({
     count: table.getRowModel().rows.length,
-    estimateSize: () => 48,
+    estimateSize: () => 96,
     getScrollElement: () => tableContainerRef.current,
     overscan: 10,
   });
@@ -167,7 +167,7 @@ const CvsTable: React.FC = () => {
               return (
                 <React.Fragment key={row.id}>
                   <StyledTableBodyRow
-                    transform={`translateY(${virtualRow.start * 2}px)`}
+                    transform={`translateY(${virtualRow.start}px)`}
                   >
                     {row.getVisibleCells().map((cell, index) => (
                       <StyledTableContentCell
@@ -183,7 +183,7 @@ const CvsTable: React.FC = () => {
                     ))}
                   </StyledTableBodyRow>
                   <StyledTableBodyRow
-                    transform={`translateY(${virtualRow.start * 2 + 48}px)`}
+                    transform={`translateY(${virtualRow.start + 48}px)`}
                   >
                     <StyledTableContentDescriptionCell colSpan={4}>
                       <StyledTableContentDescriptionText>
