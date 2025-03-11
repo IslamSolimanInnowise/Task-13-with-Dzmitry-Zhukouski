@@ -156,10 +156,11 @@ const CvsTable: React.FC = () => {
                       py="8px"
                       borderBottom="1px solid #F5F5F7"
                       whiteSpace="nowrap"
-                      onClick={header.column.getToggleSortingHandler()}
                     >
-                      {header.id === 'actions' ? null : (
-                        <StyledSortButton>
+                      {header.id !== 'actions' && (
+                        <StyledSortButton
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
                           {flexRender(
                             header.column.columnDef.header,
                             header.getContext(),
