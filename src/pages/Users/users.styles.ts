@@ -77,15 +77,6 @@ export const TableBodyCell = styled(Box)`
   height: 100%;
 `;
 
-export const StyledAvatar = styled.img`
-  width: 2rem;
-  height: 2rem;
-  object-fit: cover;
-  border-radius: 50%;
-  display: block;
-  margin: auto;
-`;
-
 export const StyledChvronRight = styled(ChevronRight)`
   cursor: pointer;
   border-radius: 50%;

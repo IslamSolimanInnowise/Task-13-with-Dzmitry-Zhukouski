@@ -1,10 +1,10 @@
-import { Avatar } from '@chakra-ui/react';
 import { router } from '@shared/router';
 import { authVar } from '@shared/store/globalAuthState';
 import { createColumnHelper } from '@tanstack/react-table';
+import UserAvatar from '@widgets/ui/users/UserAvatar';
 import UsersMenu from '@widgets/ui/users/UsersMenu';
 
-import { StyledAvatar, StyledChvronRight } from './users.styles';
+import { StyledChvronRight } from './users.styles';
 
 interface Profile {
   id: string;
@@ -30,18 +30,7 @@ export const columns = [
   columnHelper.display({
     id: 'profile_avatar',
     header: '',
-    cell: ({ row }) =>
-      row.original.profile.avatar ? (
-        <StyledAvatar src={row.original.profile.avatar} alt="Avatar" />
-      ) : row.original.profile.first_name ? (
-        <Avatar.Root>
-          <Avatar.Fallback name={row.original.profile.first_name} />
-        </Avatar.Root>
-      ) : (
-        <Avatar.Root>
-          <Avatar.Fallback name={row.original.email} />
-        </Avatar.Root>
-      ),
+    cell: ({ row }) => <UserAvatar row={row} />,
     enableSorting: false,
   }),
   columnHelper.accessor('profile.first_name', {
