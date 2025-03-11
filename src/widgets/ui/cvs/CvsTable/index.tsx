@@ -1,7 +1,6 @@
-import { Icon, Table, Text } from '@chakra-ui/react';
+import { Table } from '@chakra-ui/react';
 import SearchInput from '@entities/ui/SearchInput';
 import CustomSpinner from '@entities/ui/Spinner';
-import { MenuItem, MenuRoot, MenuTrigger } from '@shared/ui/menu';
 import {
   ColumnDef,
   flexRender,
@@ -11,14 +10,9 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import { EllipsisVertical, Plus } from 'lucide-react';
 import React, { useMemo, useRef, useState, useTransition } from 'react';
 
 import {
-  StyledAddCvButton,
-  StyledMenuButton,
-  StyledMenuContent,
-  StyledMoreButton,
   StyledSortButton,
   StyledSortIcon,
   StyledTableBodyRow,
@@ -28,6 +22,8 @@ import {
   StyledTableHeaderCell,
   StyledTableHeaderRow,
 } from './cvsTable.styles';
+import CvTableAddCvButton from './CvTableAddCvButton';
+import CvTableMoreButton from './CvTableMoreButton';
 
 type Person = {
   name: string;
@@ -62,27 +58,7 @@ const CvsTable: React.FC = () => {
       {
         id: 'actions',
         header: '',
-        cell: () => (
-          <MenuRoot>
-            <MenuTrigger asChild>
-              <StyledMoreButton>
-                <Icon as={EllipsisVertical} />
-              </StyledMoreButton>
-            </MenuTrigger>
-            <StyledMenuContent>
-              <MenuItem asChild value="cv">
-                <StyledMenuButton>
-                  <Text>Details</Text>
-                </StyledMenuButton>
-              </MenuItem>
-              <MenuItem asChild value="delete-cv">
-                <StyledMenuButton>
-                  <Text>Delete CV</Text>
-                </StyledMenuButton>
-              </MenuItem>
-            </StyledMenuContent>
-          </MenuRoot>
-        ),
+        cell: () => <CvTableMoreButton />,
         size: 50,
         minSize: 50,
         maxSize: 50,
@@ -142,10 +118,7 @@ const CvsTable: React.FC = () => {
               />
             </StyledTableHeaderCell>
             <StyledTableHeaderCell>
-              <StyledAddCvButton variant="ghost" onClick={() => {}}>
-                <Icon as={Plus} w={5} h={5} />
-                Create CV
-              </StyledAddCvButton>
+              <CvTableAddCvButton />
             </StyledTableHeaderCell>
           </StyledTableHeaderRow>
           <StyledTableHeaderRow>

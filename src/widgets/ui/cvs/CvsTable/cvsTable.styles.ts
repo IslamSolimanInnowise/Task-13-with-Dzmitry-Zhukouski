@@ -36,7 +36,6 @@ export const StyledTableContentCell = styled(Table.Cell)<{
 }>`
   padding: ${(props) => (props.$isFirst ? '8px 8px 8px 20px' : '8px')};
   flex: ${(props) => (props.$isActions ? '0 0 50px' : '1')};
-  border-bottom: ${({ theme }) => `1px solid ${theme.backgroundColor}`};
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
@@ -48,7 +47,7 @@ export const StyledTableBodyRow = styled(Table.Row)`
   top: 0;
   width: 100%;
   display: flex;
-  background-color: #f5f5f7;
+  background-color: ${({ theme }) => theme.backgroundColor};
 `;
 
 export const StyledAddCvButton = styled(Button)`
@@ -68,6 +67,7 @@ export const StyledAddCvButton = styled(Button)`
   outline: 0;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
   color: ${({ theme }) => theme.primaryColor};
+  border-radius: 40px;
 
   &:hover {
     background-color: rgba(198, 48, 49, 0.04);
@@ -105,12 +105,13 @@ export const StyledMoreButton = styled(Button)`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 6px;
   cursor: pointer;
   border-radius: 100%;
+  transition: 0.3s;
 
   &:hover {
-    background-color: #f2f2f2;
+    background-color: ${({ theme }) => theme.lightGrey};
   }
 `;
 
@@ -131,8 +132,9 @@ export const StyledMenuButton = styled(Button)`
   justify-content: flex-start;
   gap: 12px;
   cursor: pointer;
+  transition: 0.3s;
 
   &:hover {
-    background-color: #f2f2f2;
+    background-color: ${({ theme }) => theme.lightGrey};
   }
 `;
