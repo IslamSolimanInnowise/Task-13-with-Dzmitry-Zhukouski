@@ -1,5 +1,6 @@
 import { ApolloProvider } from '@apollo/client';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
+import { DialogsContainer } from '@shared/Dialogs';
 import { Notifications } from '@shared/Notifications';
 import { router } from '@shared/router';
 import client from '@shared/services/apollo-client';
@@ -22,6 +23,7 @@ if (!rootElement.innerHTML) {
           <ThemeProvider theme={lightTheme}>
             <GlobalStyles />
             <RouterProvider router={router} />
+            <DialogsContainer />
             <Notifications />
           </ThemeProvider>
         </ChakraProvider>
