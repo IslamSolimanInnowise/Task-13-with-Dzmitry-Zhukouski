@@ -1,25 +1,9 @@
 import { authVar } from '@shared/store/globalAuthState';
 import { createColumnHelper } from '@tanstack/react-table';
 import StyledChevronRight from '@widgets/ui/users/StyledChevronRight';
+import { User } from '@widgets/ui/users/types';
 import UserAvatar from '@widgets/ui/users/UserAvatar';
 import UsersMenu from '@widgets/ui/users/UsersMenu';
-
-interface Profile {
-  id: string;
-  first_name: string;
-  last_name: string;
-  avatar: string;
-}
-
-interface User {
-  id: string;
-  email: string;
-  department_name: string;
-  position_name: string;
-  profile: Profile;
-  icon: string;
-  role: 'Employee' | 'Admin';
-}
 
 const columnHelper = createColumnHelper<User>();
 const { email: authEmail } = authVar();
