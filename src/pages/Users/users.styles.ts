@@ -1,4 +1,6 @@
 import { Box } from '@chakra-ui/react';
+import { MenuContent, MenuItem, MenuTrigger } from '@shared/ui/menu';
+import { ArrowUp, ChevronRight } from 'lucide-react';
 import styled from 'styled-components';
 
 export const StyledPageContainer = styled.div`
@@ -51,12 +53,25 @@ export const TableHeadCell = styled(Box)`
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  cursor: pointer;
+`;
+
+export const StyledSortIcon = styled(ArrowUp)<{
+  $isSorted: false | 'asc' | 'desc';
+}>`
+  opacity: ${(props) => (props.$isSorted ? 1 : 0.3)};
+  transform: ${(props) => {
+    if (!props.$isSorted) return 'rotate(90deg)';
+    if (props.$isSorted === 'asc') return 'rotate(180deg)';
+    return '';
+  }};
+  transition: 0.3s;
 `;
 
 export const TableBodyRow = styled(Box)`
   border-bottom: 1px solid lightgrey;
   padding: 1rem;
-  height: 5rem;
+  min-height: 5rem;
   display: grid;
   grid-template-columns: 3rem 7rem 7rem 8rem 7rem 7rem 3rem;
   justify-content: space-between;
@@ -73,4 +88,39 @@ export const StyledAvatar = styled.img`
   border-radius: 50%;
   display: block;
   margin: auto;
+`;
+
+export const StyledChvronRight = styled(ChevronRight)`
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+`;
+
+export const StyledProfileMenuTrigger = styled(MenuTrigger)`
+  cursor: pointer;
+  border-radius: 50%;
+  transition: 0.3s;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+
+  &:hover {
+    background-color: lightgrey;
+  }
+`;
+
+export const StyledProfileMenuContent = styled(MenuContent)`
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+export const StyledProfileMenuItem = styled(MenuItem)`
+  cursor: pointer;
 `;

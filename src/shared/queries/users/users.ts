@@ -7,6 +7,7 @@ export const GET_USERS = gql`
       email
       department_name
       position_name
+      role
       profile {
         id
         first_name

@@ -23,8 +23,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
     <StyledInputGroup
       startElement={<StyledSearchIcon size="24" />}
       endElement={
-        <StyledEndElementContainer visibility={value ? 'visible' : 'hidden'}>
-          {value && (
+        <StyledEndElementContainer
+          visibility={value.length ? 'visible' : 'hidden'}
+        >
+          {value.length && (
             <StyledXIconBox as="button" onClick={handleClear}>
               <X size="24" />
             </StyledXIconBox>

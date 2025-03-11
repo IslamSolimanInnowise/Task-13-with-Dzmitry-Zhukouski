@@ -1,9 +1,17 @@
 import { Avatar } from '@chakra-ui/react';
+import { router } from '@shared/router';
 import { authVar } from '@shared/store/globalAuthState';
+import { MenuRoot } from '@shared/ui/menu';
 import { createColumnHelper } from '@tanstack/react-table';
-import { ChevronRight, EllipsisVertical } from 'lucide-react';
+import { EllipsisVertical } from 'lucide-react';
 
-import { StyledAvatar } from './users.styles';
+import {
+  StyledAvatar,
+  StyledChvronRight,
+  StyledProfileMenuContent,
+  StyledProfileMenuItem,
+  StyledProfileMenuTrigger,
+} from './users.styles';
 
 interface Profile {
   id: string;
@@ -19,6 +27,7 @@ interface User {
   position_name: string;
   profile: Profile;
   icon: string;
+  role: 'Employee' | 'Admin';
 }
 
 const columnHelper = createColumnHelper<User>();
@@ -69,9 +78,42 @@ export const columns = [
     header: '',
     cell: ({ row }) =>
       authEmail === row.original.email ? (
-        <EllipsisVertical />
+        <MenuRoot>
+          <StyledProfileMenuTrigger asChild>
+            <EllipsisVertical />
+          </StyledProfileMenuTrigger>
+          <StyledProfileMenuContent>
+            <StyledProfileMenuItem
+              value="profile"
+              onClick={() => {
+                router.navigate({
+                  to: '/users/$userId',
+                  params: { userId: row.original.id },
+                });
+              }}
+            >
+              Profile
+            </StyledProfileMenuItem>
+            <StyledProfileMenuItem value="update">
+              Update user
+            </StyledProfileMenuItem>
+            <StyledProfileMenuItem
+              value="delete"
+              disabled={row.original.role === 'Employee'}
+            >
+              Delete user
+            </StyledProfileMenuItem>
+          </StyledProfileMenuContent>
+        </MenuRoot>
       ) : (
-        <ChevronRight />
+        <StyledChvronRight
+          onClick={() => {
+            router.navigate({
+              to: '/users/$userId',
+              params: { userId: row.original.id },
+            });
+          }}
+        />
       ),
     enableSorting: false,
   }),

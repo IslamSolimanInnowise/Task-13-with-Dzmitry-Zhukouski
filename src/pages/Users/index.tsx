@@ -10,7 +10,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { ArrowDownUp } from 'lucide-react';
 import { useState, useTransition } from 'react';
 
 import { columns } from './table';
@@ -18,6 +17,7 @@ import {
   Styledh2,
   StyledPageContainer,
   StyledPageContent,
+  StyledSortIcon,
   StyledTable,
   TableBodyCell,
   TableBodyRow,
@@ -93,8 +93,9 @@ const UsersPage: React.FC = () => {
                             header.getContext(),
                           )}
                           {header.column.getCanSort() && (
-                            <ArrowDownUp
-                              onClick={header.column.getToggleSortingHandler()}
+                            <StyledSortIcon
+                              size={16}
+                              $isSorted={header.column.getIsSorted()}
                             />
                           )}
                         </TableHeadCell>
