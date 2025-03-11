@@ -5,6 +5,7 @@ export const lightTheme: DefaultTheme = {
   color: '#353535',
   primaryColor: '#C63031',
   lightGrey: '#0000000a',
+  grey: '#919191',
 };
 
 export const darkTheme: DefaultTheme = {
@@ -12,4 +13,5 @@ export const darkTheme: DefaultTheme = {
   color: '#F5F5F7',
   primaryColor: '#C63031',
   lightGrey: '#0000000a',
+  grey: '#919191',
 };

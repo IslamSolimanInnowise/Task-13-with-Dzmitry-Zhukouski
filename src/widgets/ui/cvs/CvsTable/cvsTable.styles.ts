@@ -1,4 +1,4 @@
-import { Button, Table } from '@chakra-ui/react';
+import { Button, Table, Text } from '@chakra-ui/react';
 import { MenuContent } from '@shared/ui/menu';
 import { ArrowUp } from 'lucide-react';
 import styled from 'styled-components';
@@ -25,9 +25,22 @@ export const StyledTableHeaderRow = styled(Table.Row)`
   }
 `;
 
-export const StyledTableHeaderCell = styled(Table.Cell)`
+export const StyledTableTopHeaderCell = styled(Table.Cell)`
   flex: 1;
   border-width: 0;
+`;
+
+export const StyledTableBottomHeaderCell = styled(Table.Cell)<{
+  $isFirst: boolean;
+  $isActions: boolean;
+}>`
+  padding: ${(props) => (props.$isFirst ? '8px 8px 8px 20px' : '8px')};
+  flex: ${(props) => (props.$isActions ? '0 0 50px' : '1')};
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  min-width: 100px;
 `;
 
 export const StyledTableContentCell = styled(Table.Cell)<{
@@ -41,7 +54,24 @@ export const StyledTableContentCell = styled(Table.Cell)<{
   overflow: hidden;
   display: flex;
   min-width: 100px;
+  border-width: 0;
 `;
+
+export const StyledTableContentDescriptionCell = styled(Table.Cell)`
+  padding: 13.6px 8px 13.6px 20px;
+  flex: 1;
+  display: flex;
+  min-width: 100px;
+  color: ${({ theme }) => theme.grey};
+`;
+
+export const StyledTableContentDescriptionText = styled(Text)`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: ${({ theme }) => theme.grey};
+`;
+
 export const StyledTableBodyRow = styled(Table.Row)`
   position: absolute;
   top: 0;

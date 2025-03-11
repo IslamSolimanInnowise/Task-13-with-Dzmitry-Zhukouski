@@ -16,11 +16,14 @@ import {
   StyledSortButton,
   StyledSortIcon,
   StyledTableBodyRow,
+  StyledTableBottomHeaderCell,
   StyledTableContainer,
   StyledTableContentCell,
+  StyledTableContentDescriptionCell,
+  StyledTableContentDescriptionText,
   StyledTableHeader,
-  StyledTableHeaderCell,
   StyledTableHeaderRow,
+  StyledTableTopHeaderCell,
 } from './cvsTable.styles';
 import CvTableAddCvButton from './CvTableAddCvButton';
 import CvTableMoreButton from './CvTableMoreButton';
@@ -29,6 +32,7 @@ type Person = {
   name: string;
   education: string;
   employee: string;
+  description: string;
 };
 
 const generateRandomString = (length: number) =>
@@ -43,6 +47,7 @@ const data = Array.from({ length: 100 }, () => ({
   name: generateRandomString(10),
   education: generateRandomString(10),
   employee: `${generateRandomString(5)}@example.com`,
+  description: generateRandomString(150),
 }));
 
 const CvsTable: React.FC = () => {
@@ -84,7 +89,7 @@ const CvsTable: React.FC = () => {
 
   const rowVirtualizer = useVirtualizer({
     count: table.getRowModel().rows.length,
-    estimateSize: () => 50,
+    estimateSize: () => 48,
     getScrollElement: () => tableContainerRef.current,
     overscan: 10,
   });
@@ -110,21 +115,21 @@ const CvsTable: React.FC = () => {
       <Table.Root>
         <StyledTableHeader>
           <StyledTableHeaderRow>
-            <StyledTableHeaderCell>
+            <StyledTableTopHeaderCell>
               <SearchInput
                 value={globalFilter}
                 handleChange={handleInputChange}
                 handleClear={handleClear}
               />
-            </StyledTableHeaderCell>
-            <StyledTableHeaderCell>
+            </StyledTableTopHeaderCell>
+            <StyledTableTopHeaderCell>
               <CvTableAddCvButton />
-            </StyledTableHeaderCell>
+            </StyledTableTopHeaderCell>
           </StyledTableHeaderRow>
           <StyledTableHeaderRow>
             {table.getHeaderGroups().map((headerGroup) =>
               headerGroup.headers.map((header, index) => (
-                <StyledTableContentCell
+                <StyledTableBottomHeaderCell
                   key={header.id}
                   $isFirst={index === 0}
                   $isActions={header.id === 'actions'}
@@ -145,7 +150,7 @@ const CvsTable: React.FC = () => {
                       )}
                     </StyledSortButton>
                   )}
-                </StyledTableContentCell>
+                </StyledTableBottomHeaderCell>
               )),
             )}
           </StyledTableHeaderRow>
@@ -160,23 +165,33 @@ const CvsTable: React.FC = () => {
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const row = table.getRowModel().rows[virtualRow.index];
               return (
-                <StyledTableBodyRow
-                  key={row.id}
-                  transform={`translateY(${virtualRow.start}px)`}
-                >
-                  {row.getVisibleCells().map((cell, index) => (
-                    <StyledTableContentCell
-                      key={cell.id}
-                      $isFirst={index === 0}
-                      $isActions={cell.column.id === 'actions'}
-                    >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </StyledTableContentCell>
-                  ))}
-                </StyledTableBodyRow>
+                <React.Fragment key={row.id}>
+                  <StyledTableBodyRow
+                    transform={`translateY(${virtualRow.start * 2}px)`}
+                  >
+                    {row.getVisibleCells().map((cell, index) => (
+                      <StyledTableContentCell
+                        key={cell.id}
+                        $isFirst={index === 0}
+                        $isActions={cell.column.id === 'actions'}
+                      >
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </StyledTableContentCell>
+                    ))}
+                  </StyledTableBodyRow>
+                  <StyledTableBodyRow
+                    transform={`translateY(${virtualRow.start * 2 + 48}px)`}
+                  >
+                    <StyledTableContentDescriptionCell colSpan={4}>
+                      <StyledTableContentDescriptionText>
+                        {row.original.description}
+                      </StyledTableContentDescriptionText>
+                    </StyledTableContentDescriptionCell>
+                  </StyledTableBodyRow>
+                </React.Fragment>
               );
             })}
           </Table.Body>
