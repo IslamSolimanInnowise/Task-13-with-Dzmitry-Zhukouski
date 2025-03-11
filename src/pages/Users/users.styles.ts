@@ -1,5 +1,4 @@
 import { Box } from '@chakra-ui/react';
-import { MenuContent, MenuItem, MenuTrigger } from '@shared/ui/menu';
 import { ArrowUp, ChevronRight } from 'lucide-react';
 import styled from 'styled-components';
 
@@ -44,9 +43,6 @@ export const TableHeadRow = styled(Box)`
   grid-template-columns: 3rem 7rem 7rem 8rem 7rem 7rem 3rem;
   justify-content: space-between;
   height: 100%;
-  position: sticky;
-  top: 1rem;
-  left: 0;
 `;
 
 export const TableHeadCell = styled(Box)`
@@ -100,27 +96,4 @@ export const StyledChvronRight = styled(ChevronRight)`
   &:hover {
     background-color: lightgrey;
   }
-`;
-
-export const StyledProfileMenuTrigger = styled(MenuTrigger)`
-  cursor: pointer;
-  border-radius: 50%;
-  transition: 0.3s;
-  padding: 0.25rem;
-  margin-top: 0.5rem;
-
-  &:hover {
-    background-color: lightgrey;
-  }
-`;
-
-export const StyledProfileMenuContent = styled(MenuContent)`
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-export const StyledProfileMenuItem = styled(MenuItem)`
-  cursor: pointer;
 `;
