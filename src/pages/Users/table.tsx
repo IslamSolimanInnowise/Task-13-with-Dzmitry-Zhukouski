@@ -1,10 +1,8 @@
-import { router } from '@shared/router';
 import { authVar } from '@shared/store/globalAuthState';
 import { createColumnHelper } from '@tanstack/react-table';
+import StyledChevronRight from '@widgets/ui/users/StyledChevronRight';
 import UserAvatar from '@widgets/ui/users/UserAvatar';
 import UsersMenu from '@widgets/ui/users/UsersMenu';
-
-import { StyledChvronRight } from './users.styles';
 
 interface Profile {
   id: string;
@@ -62,14 +60,7 @@ export const columns = [
       authEmail === row.original.email ? (
         <UsersMenu row={row} />
       ) : (
-        <StyledChvronRight
-          onClick={() => {
-            router.navigate({
-              to: '/users/$userId',
-              params: { userId: row.original.id },
-            });
-          }}
-        />
+        <StyledChevronRight row={row} />
       ),
     enableSorting: false,
   }),

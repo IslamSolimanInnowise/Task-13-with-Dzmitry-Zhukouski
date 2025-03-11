@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import { ArrowUp, ChevronRight } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import styled from 'styled-components';
 
 export const StyledPageContainer = styled.div`
@@ -75,16 +75,4 @@ export const TableBodyRow = styled(Box)`
 
 export const TableBodyCell = styled(Box)`
   height: 100%;
-`;
-
-export const StyledChvronRight = styled(ChevronRight)`
-  cursor: pointer;
-  border-radius: 50%;
-  transition: 0.3s;
-  padding: 0.25rem;
-  margin-top: 0.5rem;
-
-  &:hover {
-    background-color: lightgrey;
-  }
 `;

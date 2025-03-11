@@ -9,7 +9,7 @@ export const StyledProfileMenuTrigger = styled(MenuTrigger)`
   margin-top: 0.5rem;
 
   &:hover {
-    background-color: lightgrey;
+    background-color: ${({ theme }) => theme.lightGrey};
   }
 `;
 
