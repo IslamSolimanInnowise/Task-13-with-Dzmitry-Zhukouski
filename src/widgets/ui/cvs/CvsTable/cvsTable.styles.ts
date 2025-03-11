@@ -1,7 +1,78 @@
-import { Button } from '@chakra-ui/react';
+import { Button, Table } from '@chakra-ui/react';
 import { MenuContent } from '@shared/ui/menu';
 import { ArrowUp } from 'lucide-react';
 import styled from 'styled-components';
+
+export const StyledTableContainer = styled(Table.ScrollArea)`
+  grid-area: page;
+  height: 100vh;
+  overflow: auto;
+  padding-left: 24px;
+`;
+
+export const StyledTableHeader = styled(Table.Header)`
+  z-index: 5;
+  position: sticky;
+  top: 0;
+`;
+
+export const StyledTableHeaderRow = styled(Table.Row)`
+  background-color: ${({ theme }) => theme.backgroundColor};
+  display: flex;
+
+  &:nth-child(1) {
+    padding: 8px 20px;
+  }
+`;
+
+export const StyledTableHeaderCell = styled(Table.Cell)`
+  flex: 1;
+  border-width: 0;
+`;
+
+export const StyledTableContentCell = styled(Table.Cell)<{
+  $isFirst: boolean;
+  $isActions: boolean;
+}>`
+  padding: ${(props) => (props.$isFirst ? '8px 8px 8px 20px' : '8px')};
+  flex: ${(props) => (props.$isActions ? '0 0 50px' : '1')};
+  border-bottom: ${({ theme }) => `1px solid ${theme.backgroundColor}`};
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: flex;
+  min-width: 100px;
+`;
+export const StyledTableBodyRow = styled(Table.Row)`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  background-color: #f5f5f7;
+`;
+
+export const StyledAddCvButton = styled(Button)`
+  padding: 6px 8px;
+  text-decoration: none;
+  float: right;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  appearance: none;
+  text-transform: uppercase;
+  color: ${({ theme }) => theme.primaryColor};
+  min-width: 220px;
+  height: 40px;
+  outline: 0;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  color: ${({ theme }) => theme.primaryColor};
+
+  &:hover {
+    background-color: rgba(198, 48, 49, 0.04);
+  }
+`;
 
 export const StyledSortIcon = styled(ArrowUp)<{
   $isSorted: false | 'asc' | 'desc';
@@ -15,53 +86,31 @@ export const StyledSortIcon = styled(ArrowUp)<{
   transition: 0.3s;
 `;
 
-export const StyledAddCvButton = styled(Button)`
-  padding: 6px 8px;
-  text-decoration: none;
-  float: right;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  user-select: none;
-  vertical-align: middle;
-  appearance: none;
-  text-transform: uppercase;
-  color: ${({ theme }) => theme.primaryColor};
-  min-width: 220px;
-  height: 40px;
-  outline: 0;
-  transition:
-    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 40px;
-
-  &:hover {
-    background-color: rgba(198, 48, 49, 0.04);
-  }
-`;
 export const StyledSortButton = styled(Button)`
   width: fit-content;
   display: flex;
   align-items: center;
   gap: 4px;
   cursor: pointer;
-  color: #000000;
+  color: inherit;
   background-color: transparent;
-  &:hover {
-    background-color: transparent;
-  }
-  &:active {
-    background-color: transparent;
-  }
-  &:focus {
-    background-color: transparent;
-  }
 
   &:hover ${StyledSortIcon} {
     opacity: 1;
+  }
+`;
+
+export const StyledMoreButton = styled(Button)`
+  all: unset;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 100%;
+
+  &:hover {
+    background-color: #f2f2f2;
   }
 `;
 
@@ -80,24 +129,10 @@ export const StyledMenuButton = styled(Button)`
   color: inherit;
   display: flex;
   justify-content: flex-start;
-  gap: 0.75rem;
+  gap: 12px;
   cursor: pointer;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
-  }
-`;
-
-export const StyledMoreButton = styled(Button)`
-  all: unset;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-  cursor: pointer;
-  border-radius: 100%;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: #f2f2f2;
   }
 `;

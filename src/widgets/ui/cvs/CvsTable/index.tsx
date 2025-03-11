@@ -1,4 +1,4 @@
-import { Box, Icon, Table, Text } from '@chakra-ui/react';
+import { Icon, Table, Text } from '@chakra-ui/react';
 import SearchInput from '@entities/ui/SearchInput';
 import CustomSpinner from '@entities/ui/Spinner';
 import { MenuItem, MenuRoot, MenuTrigger } from '@shared/ui/menu';
@@ -21,6 +21,12 @@ import {
   StyledMoreButton,
   StyledSortButton,
   StyledSortIcon,
+  StyledTableBodyRow,
+  StyledTableContainer,
+  StyledTableContentCell,
+  StyledTableHeader,
+  StyledTableHeaderCell,
+  StyledTableHeaderRow,
 } from './cvsTable.styles';
 
 type Person = {
@@ -45,6 +51,7 @@ const data = Array.from({ length: 100 }, () => ({
 
 const CvsTable: React.FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
+
   const [isPending, startTransition] = useTransition();
 
   const columns = useMemo<ColumnDef<Person>[]>(
@@ -123,107 +130,86 @@ const CvsTable: React.FC = () => {
   };
 
   return (
-    <Box gridArea="page" h="100vh" overflow="auto" pl="24px">
-      <Table.ScrollArea height="100%" ref={tableContainerRef}>
-        <Table.Root size="md">
-          <Table.Header zIndex={5} position="sticky" top="0" border="none">
-            <Table.Row bg="#F5F5F7">
-              <Box h="56px" p="8px 20px">
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
+    <StyledTableContainer ref={tableContainerRef}>
+      <Table.Root>
+        <StyledTableHeader>
+          <StyledTableHeaderRow>
+            <StyledTableHeaderCell>
+              <SearchInput
+                value={globalFilter}
+                handleChange={handleInputChange}
+                handleClear={handleClear}
+              />
+            </StyledTableHeaderCell>
+            <StyledTableHeaderCell>
+              <StyledAddCvButton variant="ghost" onClick={() => {}}>
+                <Icon as={Plus} w={5} h={5} />
+                Create CV
+              </StyledAddCvButton>
+            </StyledTableHeaderCell>
+          </StyledTableHeaderRow>
+          <StyledTableHeaderRow>
+            {table.getHeaderGroups().map((headerGroup) =>
+              headerGroup.headers.map((header, index) => (
+                <StyledTableContentCell
+                  key={header.id}
+                  $isFirst={index === 0}
+                  $isActions={header.id === 'actions'}
                 >
-                  <SearchInput
-                    value={globalFilter}
-                    handleChange={handleInputChange}
-                    handleClear={handleClear}
-                  />
-                  <StyledAddCvButton variant="ghost" onClick={() => {}}>
-                    <Icon as={Plus} w={5} h={5} />
-                    Create CV
-                  </StyledAddCvButton>
-                </Box>
-              </Box>
-              <Box style={{ display: 'flex' }}>
-                {table.getHeaderGroups().map((headerGroup) =>
-                  headerGroup.headers.map((header, index) => (
-                    <Table.ColumnHeader
-                      key={header.id}
-                      textAlign="left"
-                      flex={header.id === 'actions' ? '0 0 50px' : '1'}
-                      px={index === 0 ? '20px' : '8px'}
-                      py="8px"
-                      borderBottom="1px solid #F5F5F7"
-                      whiteSpace="nowrap"
+                  {header.id !== 'actions' && (
+                    <StyledSortButton
+                      onClick={header.column.getToggleSortingHandler()}
                     >
-                      {header.id !== 'actions' && (
-                        <StyledSortButton
-                          onClick={header.column.getToggleSortingHandler()}
-                        >
-                          {flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                          {header.column.getCanSort() && (
-                            <StyledSortIcon
-                              size={16}
-                              $isSorted={header.column.getIsSorted()}
-                            />
-                          )}
-                        </StyledSortButton>
+                      {flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
                       )}
-                    </Table.ColumnHeader>
-                  )),
-                )}
-              </Box>
-            </Table.Row>
-          </Table.Header>
-          {isPending ? (
-            <CustomSpinner />
-          ) : (
-            <Table.Body
-              h={`${rowVirtualizer.getTotalSize()}px`}
-              position="relative"
-            >
-              {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-                const row = table.getRowModel().rows[virtualRow.index];
-                return (
-                  <Table.Row
-                    key={row.id}
-                    position="absolute"
-                    top={0}
-                    transform={`translateY(${virtualRow.start}px)`}
-                    w="100%"
-                    display="flex"
-                    bg="#F5F5F7"
-                  >
-                    {row.getVisibleCells().map((cell, index) => (
-                      <Table.Cell
-                        key={cell.id}
-                        px={index === 0 ? '20px' : '8px'}
-                        py="8px"
-                        borderBottom="1px solid #F5F5F7"
-                        flex={cell.column.id === 'actions' ? '0 0 50px' : '1'}
-                        whiteSpace="nowrap"
-                        textOverflow="ellipsis"
-                        overflow="hidden"
-                        display="flex"
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </Table.Cell>
-                    ))}
-                  </Table.Row>
-                );
-              })}
-            </Table.Body>
-          )}
-        </Table.Root>
-      </Table.ScrollArea>
-    </Box>
+                      {header.column.getCanSort() && (
+                        <StyledSortIcon
+                          size={16}
+                          $isSorted={header.column.getIsSorted()}
+                        />
+                      )}
+                    </StyledSortButton>
+                  )}
+                </StyledTableContentCell>
+              )),
+            )}
+          </StyledTableHeaderRow>
+        </StyledTableHeader>
+        {isPending ? (
+          <CustomSpinner />
+        ) : (
+          <Table.Body
+            h={`${rowVirtualizer.getTotalSize()}px`}
+            position="relative"
+          >
+            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+              const row = table.getRowModel().rows[virtualRow.index];
+              return (
+                <StyledTableBodyRow
+                  key={row.id}
+                  transform={`translateY(${virtualRow.start}px)`}
+                >
+                  {row.getVisibleCells().map((cell, index) => (
+                    <StyledTableContentCell
+                      key={cell.id}
+                      $isFirst={index === 0}
+                      $isActions={cell.column.id === 'actions'}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </StyledTableContentCell>
+                  ))}
+                </StyledTableBodyRow>
+              );
+            })}
+          </Table.Body>
+        )}
+      </Table.Root>
+    </StyledTableContainer>
   );
 };
 
