@@ -42,6 +42,14 @@ export const StyledTableBottomHeaderCell = styled(Table.Cell)<{
   min-width: 100px;
 `;
 
+export const StyledTableNoContentCell = styled(Table.Cell)`
+  padding: 128px 8px 8px 20px;
+  flex: 1;
+  border-width: 0;
+  font-size: 1.5rem;
+  text-align: center;
+`;
+
 export const StyledTableContentCell = styled(Table.Cell)<{
   $isFirst: boolean;
   $isActions: boolean;

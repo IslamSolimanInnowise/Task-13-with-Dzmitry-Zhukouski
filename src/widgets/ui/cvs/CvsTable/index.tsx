@@ -25,9 +25,21 @@ import {
   StyledTableContentDescriptionText,
   StyledTableHeader,
   StyledTableHeaderRow,
+  StyledTableNoContentCell,
   StyledTableTopHeaderCell,
 } from './cvsTable.styles';
 import MoreButton from './MoreButton';
+
+type CV = {
+  id: string;
+  name: string;
+  education: string;
+  description: string;
+  user: {
+    email: string;
+    id: string;
+  };
+};
 
 type TableCV = {
   id: string;
@@ -37,23 +49,13 @@ type TableCV = {
   description: string;
 };
 
-type CV = {
-  description: string;
-  education: string;
-  id: string;
-  name: string;
-  user: {
-    email: string;
-    id: string;
-  };
-};
-
 const CvsTable: React.FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
 
   const [isPending, startTransition] = useTransition();
 
   const { data: cvData, loading } = useGetCvs();
+
   const handledCvData = useMemo(() => {
     return cvData?.cvs.map((cv: CV) => ({
       id: cv.id,
@@ -149,17 +151,9 @@ const CvsTable: React.FC = () => {
     bodyContent = (
       <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
         <StyledTableBodyRow>
-          <StyledTableContentCell
-            $isFirst
-            $isActions={false}
-            colSpan={columns.length}
-            display="flex"
-            justifyContent="center"
-            paddingTop="128px"
-            fontSize="1.5rem"
-          >
+          <StyledTableNoContentCell colSpan={columns.length}>
             No results found
-          </StyledTableContentCell>
+          </StyledTableNoContentCell>
         </StyledTableBodyRow>
       </Table.Body>
     );
