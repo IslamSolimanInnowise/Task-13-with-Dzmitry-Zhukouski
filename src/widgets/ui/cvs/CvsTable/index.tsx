@@ -29,32 +29,14 @@ import {
   StyledTableTopHeaderCell,
 } from './cvsTable.styles';
 import MoreButton from './MoreButton';
-
-type CV = {
-  id: string;
-  name: string;
-  education: string;
-  description: string;
-  user: {
-    email: string;
-    id: string;
-  };
-};
-
-type TableCV = {
-  id: string;
-  name: string;
-  education: string;
-  employee: string;
-  description: string;
-};
+import { CV, TableCV } from './types';
 
 const CvsTable: React.FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
 
   const [, startTransition] = useTransition();
 
-  const { data: cvData, loading } = useGetCvs();
+  const { data: cvData, loading: isCvsLoading } = useGetCvs();
 
   const handledCvData = useMemo(() => {
     return cvData?.cvs.map((cv: CV) => ({
@@ -119,79 +101,69 @@ const CvsTable: React.FC = () => {
     });
   };
 
-  if (loading) return <CustomSpinner />;
+  if (isCvsLoading) return <CustomSpinner />;
 
-  let headerSection;
-  if (table.getHeaderGroups().length > 0) {
-    headerSection = table.getHeaderGroups().map((headerGroup) =>
-      headerGroup.headers.map((header, index) => (
-        <StyledTableBottomHeaderCell
-          key={header.id}
-          $isFirst={index === 0}
-          $isActions={header.id === 'actions'}
-        >
-          {header.id !== 'actions' && (
-            <StyledSortButton onClick={header.column.getToggleSortingHandler()}>
-              {flexRender(header.column.columnDef.header, header.getContext())}
-              {header.column.getCanSort() && (
-                <StyledSortIcon
-                  size={16}
-                  $isSorted={header.column.getIsSorted()}
-                />
-              )}
-            </StyledSortButton>
-          )}
-        </StyledTableBottomHeaderCell>
-      )),
-    );
-  }
+  const tableColumns = table.getHeaderGroups().map((headerGroup) =>
+    headerGroup.headers.map((header, index) => (
+      <StyledTableBottomHeaderCell
+        key={header.id}
+        $isFirst={index === 0}
+        $isActions={header.id === 'actions'}
+      >
+        {header.id !== 'actions' && (
+          <StyledSortButton onClick={header.column.getToggleSortingHandler()}>
+            {flexRender(header.column.columnDef.header, header.getContext())}
+            {header.column.getCanSort() && (
+              <StyledSortIcon
+                size={16}
+                $isSorted={header.column.getIsSorted()}
+              />
+            )}
+          </StyledSortButton>
+        )}
+      </StyledTableBottomHeaderCell>
+    )),
+  );
 
-  let bodyContent;
-  if (rowVirtualizer.getVirtualItems().length === 0) {
-    bodyContent = (
-      <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
-        <StyledTableBodyRow>
-          <StyledTableNoContentCell colSpan={columns.length}>
-            No results found
-          </StyledTableNoContentCell>
-        </StyledTableBodyRow>
-      </Table.Body>
-    );
-  } else {
-    bodyContent = (
-      <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
-        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-          const row = table.getRowModel().rows[virtualRow.index];
-          return (
-            <React.Fragment key={row.id}>
-              <StyledTableBodyRow
-                transform={`translateY(${virtualRow.start}px)`}
-              >
-                {row.getVisibleCells().map((cell, index) => (
-                  <StyledTableContentCell
-                    key={cell.id}
-                    $isFirst={index === 0}
-                    $isActions={cell.column.id === 'actions'}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </StyledTableContentCell>
-                ))}
-              </StyledTableBodyRow>
-              <StyledTableBodyRow
-                transform={`translateY(${virtualRow.start + 48}px)`}
-              >
-                <StyledTableContentDescriptionCell colSpan={4}>
-                  <StyledTableContentDescriptionText>
-                    {row.original.description}
-                  </StyledTableContentDescriptionText>
-                </StyledTableContentDescriptionCell>
-              </StyledTableBodyRow>
-            </React.Fragment>
-          );
-        })}
-      </Table.Body>
-    );
-  }
+  const tableBody = rowVirtualizer.getVirtualItems().length ? (
+    <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
+      {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+        const row = table.getRowModel().rows[virtualRow.index];
+        return (
+          <React.Fragment key={row.id}>
+            <StyledTableBodyRow transform={`translateY(${virtualRow.start}px)`}>
+              {row.getVisibleCells().map((cell, index) => (
+                <StyledTableContentCell
+                  key={cell.id}
+                  $isFirst={index === 0}
+                  $isActions={cell.column.id === 'actions'}
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </StyledTableContentCell>
+              ))}
+            </StyledTableBodyRow>
+            <StyledTableBodyRow
+              transform={`translateY(${virtualRow.start + 48}px)`}
+            >
+              <StyledTableContentDescriptionCell colSpan={4}>
+                <StyledTableContentDescriptionText>
+                  {row.original.description}
+                </StyledTableContentDescriptionText>
+              </StyledTableContentDescriptionCell>
+            </StyledTableBodyRow>
+          </React.Fragment>
+        );
+      })}
+    </Table.Body>
+  ) : (
+    <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
+      <StyledTableBodyRow>
+        <StyledTableNoContentCell colSpan={columns.length}>
+          No results found
+        </StyledTableNoContentCell>
+      </StyledTableBodyRow>
+    </Table.Body>
+  );
 
   return (
     <StyledTableContainer ref={tableContainerRef}>
@@ -209,9 +181,9 @@ const CvsTable: React.FC = () => {
               <AddCvButton />
             </StyledTableTopHeaderCell>
           </StyledTableHeaderRow>
-          <StyledTableHeaderRow>{headerSection}</StyledTableHeaderRow>
+          <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>
         </StyledTableHeader>
-        {bodyContent}
+        {tableBody}
       </Table.Root>
     </StyledTableContainer>
   );
