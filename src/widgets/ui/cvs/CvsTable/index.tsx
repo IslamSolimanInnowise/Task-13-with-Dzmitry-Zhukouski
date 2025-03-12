@@ -92,9 +92,7 @@ const CvsTable: React.FC = () => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
-    state: {
-      globalFilter,
-    },
+    state: { globalFilter },
     onGlobalFilterChange: setGlobalFilter,
   });
 
@@ -107,7 +105,6 @@ const CvsTable: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGlobalFilter([e.target.value]);
-
     startTransition(() => {
       table.setGlobalFilter(String(e.target.value));
     });
@@ -115,11 +112,92 @@ const CvsTable: React.FC = () => {
 
   const handleClear = () => {
     setGlobalFilter(['']);
-
     startTransition(() => {
       table.setGlobalFilter('');
     });
   };
+
+  let headerSection;
+  if (table.getHeaderGroups().length > 0) {
+    headerSection = table.getHeaderGroups().map((headerGroup) =>
+      headerGroup.headers.map((header, index) => (
+        <StyledTableBottomHeaderCell
+          key={header.id}
+          $isFirst={index === 0}
+          $isActions={header.id === 'actions'}
+        >
+          {header.id !== 'actions' && (
+            <StyledSortButton onClick={header.column.getToggleSortingHandler()}>
+              {flexRender(header.column.columnDef.header, header.getContext())}
+              {header.column.getCanSort() && (
+                <StyledSortIcon
+                  size={16}
+                  $isSorted={header.column.getIsSorted()}
+                />
+              )}
+            </StyledSortButton>
+          )}
+        </StyledTableBottomHeaderCell>
+      )),
+    );
+  }
+
+  let bodyContent;
+  if (isPending || loading) {
+    bodyContent = <CustomSpinner />;
+  } else if (handledCvData?.length === 0) {
+    bodyContent = (
+      <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
+        <StyledTableBodyRow>
+          <StyledTableContentCell
+            $isFirst
+            $isActions={false}
+            colSpan={columns.length}
+            display="flex"
+            justifyContent="center"
+            paddingTop="128px"
+            fontSize="1.5rem"
+          >
+            No results found
+          </StyledTableContentCell>
+        </StyledTableBodyRow>
+      </Table.Body>
+    );
+  } else {
+    bodyContent = (
+      <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
+        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+          const row = table.getRowModel().rows[virtualRow.index];
+          return (
+            <React.Fragment key={row.id}>
+              <StyledTableBodyRow
+                transform={`translateY(${virtualRow.start}px)`}
+              >
+                {row.getVisibleCells().map((cell, index) => (
+                  <StyledTableContentCell
+                    key={cell.id}
+                    $isFirst={index === 0}
+                    $isActions={cell.column.id === 'actions'}
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </StyledTableContentCell>
+                ))}
+              </StyledTableBodyRow>
+              <StyledTableBodyRow
+                transform={`translateY(${virtualRow.start + 48}px)`}
+              >
+                <StyledTableContentDescriptionCell colSpan={4}>
+                  <StyledTableContentDescriptionText>
+                    {row.original.description}
+                  </StyledTableContentDescriptionText>
+                </StyledTableContentDescriptionCell>
+              </StyledTableBodyRow>
+            </React.Fragment>
+          );
+        })}
+      </Table.Body>
+    );
+  }
 
   return (
     <StyledTableContainer ref={tableContainerRef}>
@@ -137,92 +215,9 @@ const CvsTable: React.FC = () => {
               <AddCvButton />
             </StyledTableTopHeaderCell>
           </StyledTableHeaderRow>
-          <StyledTableHeaderRow>
-            {table.getHeaderGroups().map((headerGroup) =>
-              headerGroup.headers.map((header, index) => (
-                <StyledTableBottomHeaderCell
-                  key={header.id}
-                  $isFirst={index === 0}
-                  $isActions={header.id === 'actions'}
-                >
-                  {header.id !== 'actions' && (
-                    <StyledSortButton
-                      onClick={header.column.getToggleSortingHandler()}
-                    >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                      {header.column.getCanSort() && (
-                        <StyledSortIcon
-                          size={16}
-                          $isSorted={header.column.getIsSorted()}
-                        />
-                      )}
-                    </StyledSortButton>
-                  )}
-                </StyledTableBottomHeaderCell>
-              )),
-            )}
-          </StyledTableHeaderRow>
+          <StyledTableHeaderRow>{headerSection}</StyledTableHeaderRow>
         </StyledTableHeader>
-        {isPending || loading ? (
-          <CustomSpinner />
-        ) : (
-          <Table.Body
-            h={`${rowVirtualizer.getTotalSize()}px`}
-            position="relative"
-          >
-            {handledCvData?.length === 0 ? (
-              <StyledTableBodyRow>
-                <StyledTableContentCell
-                  $isFirst
-                  $isActions={false}
-                  colSpan={columns.length}
-                  display="flex"
-                  justifyContent="center"
-                  paddingTop="128px"
-                  fontSize="1.5rem"
-                >
-                  No results found
-                </StyledTableContentCell>
-              </StyledTableBodyRow>
-            ) : (
-              rowVirtualizer.getVirtualItems().map((virtualRow) => {
-                const row = table.getRowModel().rows[virtualRow.index];
-                return (
-                  <React.Fragment key={row.id}>
-                    <StyledTableBodyRow
-                      transform={`translateY(${virtualRow.start}px)`}
-                    >
-                      {row.getVisibleCells().map((cell, index) => (
-                        <StyledTableContentCell
-                          key={cell.id}
-                          $isFirst={index === 0}
-                          $isActions={cell.column.id === 'actions'}
-                        >
-                          {flexRender(
-                            cell.column.columnDef.cell,
-                            cell.getContext(),
-                          )}
-                        </StyledTableContentCell>
-                      ))}
-                    </StyledTableBodyRow>
-                    <StyledTableBodyRow
-                      transform={`translateY(${virtualRow.start + 48}px)`}
-                    >
-                      <StyledTableContentDescriptionCell colSpan={4}>
-                        <StyledTableContentDescriptionText>
-                          {row.original.description}
-                        </StyledTableContentDescriptionText>
-                      </StyledTableContentDescriptionCell>
-                    </StyledTableBodyRow>
-                  </React.Fragment>
-                );
-              })
-            )}
-          </Table.Body>
-        )}
+        {bodyContent}
       </Table.Root>
     </StyledTableContainer>
   );
