@@ -7,14 +7,8 @@ import useCreateCvDialog from './CreateCvDialog';
 const AddCvButton = () => {
   const [openCreateCvDialog] = useCreateCvDialog();
 
-  const handleCreateCvClick = () => {
-    openCreateCvDialog({
-      onConfirm: () => {},
-    });
-  };
-
   return (
-    <StyledAddCvButton variant="ghost" onClick={handleCreateCvClick}>
+    <StyledAddCvButton variant="ghost" onClick={() => openCreateCvDialog()}>
       <Icon as={Plus} w={5} h={5} />
       Create CV
     </StyledAddCvButton>

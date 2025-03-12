@@ -9,18 +9,18 @@ import {
 } from './moreButton.styles';
 
 type MoreButtonProps = {
+  id: string;
   name: string;
 };
 
-const MoreButton = ({ name }: MoreButtonProps) => {
+const MoreButton = ({ id, name }: MoreButtonProps) => {
   const [openDeleteCvDialog] = useDeleteCvDialog();
 
   const handleDeleteCvClick = () => {
     openDeleteCvDialog({
+      id,
       name,
-      onConfirm: () => {
-        alert('Deleted CV');
-      },
+      onConfirm: () => {},
     });
   };
 

@@ -1,4 +1,5 @@
 import { Dialog, Portal } from '@chakra-ui/react';
+import useDeleteCv from '@features/hooks/cvs/useDeleteCv';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
 
 import {
@@ -11,16 +12,25 @@ import {
 } from './deleteCvDialog.styled';
 
 type ConfirmationDialogProps = {
+  id: string;
   name: string;
   onClose: () => void;
   onConfirm: () => void;
 };
 
 const DeleteCvDialog = ({
+  id,
   name,
   onClose,
   onConfirm,
 }: ConfirmationDialogProps) => {
+  const [deleteCv, { loading }] = useDeleteCv(onClose);
+
+  const onSubmit = () => {
+    deleteCv({ variables: { cv: { cvId: id } } });
+    onConfirm();
+  };
+
   return (
     <Portal>
       <Dialog.Root
@@ -51,12 +61,7 @@ const DeleteCvDialog = ({
 
             <ModalFooter>
               <CancelButton onClick={onClose}>Cancel</CancelButton>
-              <ConfirmButton
-                onClick={() => {
-                  onConfirm();
-                  onClose();
-                }}
-              >
+              <ConfirmButton onClick={onSubmit} disabled={loading}>
                 Delete
               </ConfirmButton>
             </ModalFooter>

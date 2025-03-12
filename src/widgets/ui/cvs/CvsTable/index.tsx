@@ -30,6 +30,7 @@ import {
 import MoreButton from './MoreButton';
 
 type TableCV = {
+  id: string;
   name: string;
   education: string;
   employee: string;
@@ -55,13 +56,13 @@ const CvsTable: React.FC = () => {
   const { data: cvData, loading } = useGetCvs();
   const handledCvData = useMemo(() => {
     return cvData?.cvs.map((cv: CV) => ({
+      id: cv.id,
       name: cv.name,
       education: cv.education,
       employee: cv.user.email,
       description: cv.description,
     }));
   }, [cvData]);
-  console.log(handledCvData);
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
@@ -71,7 +72,9 @@ const CvsTable: React.FC = () => {
       {
         id: 'actions',
         header: '',
-        cell: ({ row }) => <MoreButton name={row.original.name} />,
+        cell: ({ row }) => (
+          <MoreButton id={row.original.id} name={row.original.name} />
+        ),
         size: 50,
         minSize: 50,
         maxSize: 50,
@@ -170,38 +173,54 @@ const CvsTable: React.FC = () => {
             h={`${rowVirtualizer.getTotalSize()}px`}
             position="relative"
           >
-            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-              const row = table.getRowModel().rows[virtualRow.index];
-              return (
-                <React.Fragment key={row.id}>
-                  <StyledTableBodyRow
-                    transform={`translateY(${virtualRow.start}px)`}
-                  >
-                    {row.getVisibleCells().map((cell, index) => (
-                      <StyledTableContentCell
-                        key={cell.id}
-                        $isFirst={index === 0}
-                        $isActions={cell.column.id === 'actions'}
-                      >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </StyledTableContentCell>
-                    ))}
-                  </StyledTableBodyRow>
-                  <StyledTableBodyRow
-                    transform={`translateY(${virtualRow.start + 48}px)`}
-                  >
-                    <StyledTableContentDescriptionCell colSpan={4}>
-                      <StyledTableContentDescriptionText>
-                        {row.original.description}
-                      </StyledTableContentDescriptionText>
-                    </StyledTableContentDescriptionCell>
-                  </StyledTableBodyRow>
-                </React.Fragment>
-              );
-            })}
+            {handledCvData?.length === 0 ? (
+              <StyledTableBodyRow>
+                <StyledTableContentCell
+                  $isFirst
+                  $isActions={false}
+                  colSpan={columns.length}
+                  display="flex"
+                  justifyContent="center"
+                  paddingTop="128px"
+                  fontSize="1.5rem"
+                >
+                  No results found
+                </StyledTableContentCell>
+              </StyledTableBodyRow>
+            ) : (
+              rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                const row = table.getRowModel().rows[virtualRow.index];
+                return (
+                  <React.Fragment key={row.id}>
+                    <StyledTableBodyRow
+                      transform={`translateY(${virtualRow.start}px)`}
+                    >
+                      {row.getVisibleCells().map((cell, index) => (
+                        <StyledTableContentCell
+                          key={cell.id}
+                          $isFirst={index === 0}
+                          $isActions={cell.column.id === 'actions'}
+                        >
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </StyledTableContentCell>
+                      ))}
+                    </StyledTableBodyRow>
+                    <StyledTableBodyRow
+                      transform={`translateY(${virtualRow.start + 48}px)`}
+                    >
+                      <StyledTableContentDescriptionCell colSpan={4}>
+                        <StyledTableContentDescriptionText>
+                          {row.original.description}
+                        </StyledTableContentDescriptionText>
+                      </StyledTableContentDescriptionCell>
+                    </StyledTableBodyRow>
+                  </React.Fragment>
+                );
+              })
+            )}
           </Table.Body>
         )}
       </Table.Root>
