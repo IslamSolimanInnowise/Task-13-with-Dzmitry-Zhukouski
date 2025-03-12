@@ -52,7 +52,7 @@ type TableCV = {
 const CvsTable: React.FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
 
-  const [isPending, startTransition] = useTransition();
+  const [, startTransition] = useTransition();
 
   const { data: cvData, loading } = useGetCvs();
 
@@ -119,6 +119,8 @@ const CvsTable: React.FC = () => {
     });
   };
 
+  if (loading) return <CustomSpinner />;
+
   let headerSection;
   if (table.getHeaderGroups().length > 0) {
     headerSection = table.getHeaderGroups().map((headerGroup) =>
@@ -145,9 +147,7 @@ const CvsTable: React.FC = () => {
   }
 
   let bodyContent;
-  if (isPending || loading) {
-    bodyContent = <CustomSpinner />;
-  } else if (rowVirtualizer.getVirtualItems().length === 0) {
+  if (rowVirtualizer.getVirtualItems().length === 0) {
     bodyContent = (
       <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
         <StyledTableBodyRow>
