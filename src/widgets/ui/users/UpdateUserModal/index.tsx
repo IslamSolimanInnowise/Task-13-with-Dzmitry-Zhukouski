@@ -1,8 +1,12 @@
 import { Field, NativeSelect } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
+import useGetDepartments from '@features/hooks/users/useGetDepartments';
+import useGetPositions from '@features/hooks/users/useGetPositions';
+import useUpdateDepartment from '@features/hooks/users/useUpdateDepartment';
 import useUpdatePosition from '@features/hooks/users/useUpdatePosition';
 import useUpdateProfile from '@features/hooks/users/useUpdateProfile';
 import { zodResolver } from '@hookform/resolvers/zod';
+import useUpdateUser from '@shared/queries/users/useUpdateUser';
 import {
   defaultValues,
   UpdateUserForm,
@@ -12,8 +16,13 @@ import { useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 
 import { User } from '../types';
-import { departments, positions, roles } from './selectInputData';
+import { roles } from './selectInputData';
 import { StyledForm, StyledInput } from './updateUserModal.styles';
+
+interface GetData {
+  id: string;
+  name: string;
+}
 
 interface UpdateUserModalProps {
   isModalOpen: boolean;
@@ -37,25 +46,56 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
   });
 
   const navigate = useNavigate();
+  const [updateUser] = useUpdateUser();
   const [updateProfile] = useUpdateProfile();
   const [updatePosition] = useUpdatePosition();
+  const [updateDepartment] = useUpdateDepartment();
+  const { data: deps } = useGetDepartments();
+  const { data: pos } = useGetPositions();
 
   const onSubmit = handleSubmit((data) => {
     updateProfile({
       variables: {
         profile: {
           userId: user.id,
-          first_name: data.profile.first_name,
-          last_name: data.profile.last_name,
+          first_name: data.firstName || user.profile.first_name,
+          last_name: data.lastName || user.profile.last_name,
         },
       },
     });
 
+    const position = pos.positions.find(
+      (p: GetData) => p.name === data.positionName,
+    );
+
     updatePosition({
       variables: {
         position: {
-          positionId: user.id,
-          name: data.position_name,
+          positionId: position.id,
+          name: position.name,
+        },
+      },
+    });
+
+    const department = deps.departments.find(
+      (d: GetData) => d.name === data.departmentName,
+    );
+
+    updateDepartment({
+      variables: {
+        department: {
+          departmentId: department.id,
+          name: department.name,
+        },
+      },
+    });
+
+    updateUser({
+      variables: {
+        user: {
+          userId: user.id,
+          departmentId: department?.id,
+          positionId: position?.id,
         },
       },
     });
@@ -85,53 +125,53 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
         </Field.Root>
         <Field.Root>
           <Field.Label>First Name</Field.Label>
-          <StyledInput type="text" {...register('profile.first_name')} />
+          <StyledInput type="text" {...register('firstName')} />
         </Field.Root>
         <Field.Root>
           <Field.Label>Last Name</Field.Label>
-          <StyledInput type="text" {...register('profile.last_name')} />
+          <StyledInput type="text" {...register('lastName')} />
         </Field.Root>
 
-        <Field.Root invalid={!!errors.department_name}>
+        <Field.Root invalid={!!errors.departmentName}>
           <Field.Label>Department</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               placeholder={user.department_name}
               value={user.department_name}
-              {...register('department_name')}
+              {...register('departmentName')}
             >
-              {departments.map((dep) => {
+              {deps?.departments.map((dep: GetData) => {
                 return (
-                  <option value={dep.value} key={dep.label}>
-                    {dep.label}
+                  <option value={dep.name} key={dep.id}>
+                    {dep.name}
                   </option>
                 );
               })}
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.department_name?.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.departmentName?.message}</Field.ErrorText>
         </Field.Root>
 
-        <Field.Root invalid={!!errors.position_name}>
+        <Field.Root invalid={!!errors.positionName}>
           <Field.Label>Position</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               placeholder={user.position_name && ''}
               value={user.position_name}
-              {...register('position_name')}
+              {...register('positionName')}
             >
-              {positions.map((pos) => {
+              {pos?.positions.map((pos: GetData) => {
                 return (
-                  <option value={pos.value} key={pos.label}>
-                    {pos.label}
+                  <option value={pos.name} key={pos.id}>
+                    {pos.name}
                   </option>
                 );
               })}
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.position_name?.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.positionName?.message}</Field.ErrorText>
         </Field.Root>
 
         <Field.Root invalid={!!errors.role} disabled>

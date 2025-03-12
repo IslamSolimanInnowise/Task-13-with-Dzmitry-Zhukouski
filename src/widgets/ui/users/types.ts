@@ -13,4 +13,12 @@ export interface User {
   profile: Profile;
   icon: string;
   role: 'Employee' | 'Admin';
+  position: {
+    id: string;
+    name: string;
+  };
+  department: {
+    id: string;
+    name: string;
+  };
 }
