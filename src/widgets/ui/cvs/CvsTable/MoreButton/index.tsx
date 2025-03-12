@@ -1,4 +1,5 @@
 import { Icon, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
+import { Link } from '@tanstack/react-router';
 import { EllipsisVertical } from 'lucide-react';
 
 import useDeleteCvDialog from './DeleteCvDialog';
@@ -33,7 +34,7 @@ const MoreButton = ({ id, name }: MoreButtonProps) => {
       </MenuTrigger>
       <StyledMenuContent>
         <MenuItem asChild value="cv">
-          <StyledMenuButton>
+          <StyledMenuButton as={Link} to="/cvs/$cvId" params={{ cvId: id }}>
             <Text>Details</Text>
           </StyledMenuButton>
         </MenuItem>
