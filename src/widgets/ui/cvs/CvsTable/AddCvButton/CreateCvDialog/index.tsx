@@ -28,7 +28,7 @@ type FormData = z.infer<typeof schema>;
 
 type ConfirmationDialogProps = {
   onClose: () => void;
-  onConfirm: (data: FormData) => void;
+  onConfirm: () => void;
 };
 
 type CV = {
@@ -61,7 +61,7 @@ const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
       userId: id,
     };
     createCv({ variables: { cv: cvData } });
-    onConfirm(data);
+    onConfirm();
   });
 
   return (
