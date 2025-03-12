@@ -25,6 +25,7 @@ import { Route as NotAuthenticatedAuthRegisterImport } from './routes/_notAuthen
 import { Route as NotAuthenticatedAuthLoginImport } from './routes/_notAuthenticated/auth/login'
 import { Route as NotAuthenticatedAuthForgotPasswordImport } from './routes/_notAuthenticated/auth/forgot-password'
 import { Route as AuthenticatedUsersUserIdImport } from './routes/_authenticated/users/$userId'
+import { Route as AuthenticatedCvsCvIdImport } from './routes/_authenticated/cvs/$cvId'
 
 // Create/Update Routes
 
@@ -115,6 +116,12 @@ const AuthenticatedUsersUserIdRoute = AuthenticatedUsersUserIdImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
+const AuthenticatedCvsCvIdRoute = AuthenticatedCvsCvIdImport.update({
+  id: '/cvs/$cvId',
+  path: '/cvs/$cvId',
+  getParentRoute: () => AuthenticatedRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -167,6 +174,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/reset-password'
       preLoaderRoute: typeof NotAuthenticatedResetPasswordImport
       parentRoute: typeof NotAuthenticatedImport
+    }
+    '/_authenticated/cvs/$cvId': {
+      id: '/_authenticated/cvs/$cvId'
+      path: '/cvs/$cvId'
+      fullPath: '/cvs/$cvId'
+      preLoaderRoute: typeof AuthenticatedCvsCvIdImport
+      parentRoute: typeof AuthenticatedImport
     }
     '/_authenticated/users/$userId': {
       id: '/_authenticated/users/$userId'
@@ -227,6 +241,7 @@ interface AuthenticatedRouteChildren {
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedSkillsRoute: typeof AuthenticatedSkillsRoute
   AuthenticatedVerifyEmailRoute: typeof AuthenticatedVerifyEmailRoute
+  AuthenticatedCvsCvIdRoute: typeof AuthenticatedCvsCvIdRoute
   AuthenticatedUsersUserIdRoute: typeof AuthenticatedUsersUserIdRoute
   AuthenticatedCvsIndexRoute: typeof AuthenticatedCvsIndexRoute
   AuthenticatedProjectsIndexRoute: typeof AuthenticatedProjectsIndexRoute
@@ -238,6 +253,7 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedSkillsRoute: AuthenticatedSkillsRoute,
   AuthenticatedVerifyEmailRoute: AuthenticatedVerifyEmailRoute,
+  AuthenticatedCvsCvIdRoute: AuthenticatedCvsCvIdRoute,
   AuthenticatedUsersUserIdRoute: AuthenticatedUsersUserIdRoute,
   AuthenticatedCvsIndexRoute: AuthenticatedCvsIndexRoute,
   AuthenticatedProjectsIndexRoute: AuthenticatedProjectsIndexRoute,
@@ -273,6 +289,7 @@ export interface FileRoutesByFullPath {
   '/skills': typeof AuthenticatedSkillsRoute
   '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
+  '/cvs/$cvId': typeof AuthenticatedCvsCvIdRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -289,6 +306,7 @@ export interface FileRoutesByTo {
   '/skills': typeof AuthenticatedSkillsRoute
   '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
+  '/cvs/$cvId': typeof AuthenticatedCvsCvIdRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -307,6 +325,7 @@ export interface FileRoutesById {
   '/_authenticated/skills': typeof AuthenticatedSkillsRoute
   '/_authenticated/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/_notAuthenticated/reset-password': typeof NotAuthenticatedResetPasswordRoute
+  '/_authenticated/cvs/$cvId': typeof AuthenticatedCvsCvIdRoute
   '/_authenticated/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/_notAuthenticated/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/_notAuthenticated/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -325,6 +344,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/verify-email'
     | '/reset-password'
+    | '/cvs/$cvId'
     | '/users/$userId'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -340,6 +360,7 @@ export interface FileRouteTypes {
     | '/skills'
     | '/verify-email'
     | '/reset-password'
+    | '/cvs/$cvId'
     | '/users/$userId'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -356,6 +377,7 @@ export interface FileRouteTypes {
     | '/_authenticated/skills'
     | '/_authenticated/verify-email'
     | '/_notAuthenticated/reset-password'
+    | '/_authenticated/cvs/$cvId'
     | '/_authenticated/users/$userId'
     | '/_notAuthenticated/auth/forgot-password'
     | '/_notAuthenticated/auth/login'
@@ -397,6 +419,7 @@ export const routeTree = rootRoute
         "/_authenticated/settings",
         "/_authenticated/skills",
         "/_authenticated/verify-email",
+        "/_authenticated/cvs/$cvId",
         "/_authenticated/users/$userId",
         "/_authenticated/cvs/",
         "/_authenticated/projects/",
@@ -431,6 +454,10 @@ export const routeTree = rootRoute
     "/_notAuthenticated/reset-password": {
       "filePath": "_notAuthenticated/reset-password.tsx",
       "parent": "/_notAuthenticated"
+    },
+    "/_authenticated/cvs/$cvId": {
+      "filePath": "_authenticated/cvs/$cvId.tsx",
+      "parent": "/_authenticated"
     },
     "/_authenticated/users/$userId": {
       "filePath": "_authenticated/users/$userId.tsx",

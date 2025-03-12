@@ -1,6 +1,8 @@
 import { Dialog, Portal, VStack } from '@chakra-ui/react';
+import useCreateCv from '@features/hooks/cvs/useCreateCv';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { authVar } from '@shared/store/globalAuthState';
 import { Field } from '@shared/ui/field';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
@@ -29,6 +31,13 @@ type ConfirmationDialogProps = {
   onConfirm: (data: FormData) => void;
 };
 
+type CV = {
+  name: string;
+  description: string;
+  education?: string | undefined;
+  userId: string | null;
+};
+
 const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
   const {
     register,
@@ -42,9 +51,18 @@ const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
   const watchFields = watch();
   const isDisabled = !Object.values(watchFields).some((value) => value?.trim());
 
-  const onSubmit = (data: FormData) => {
+  const [createCv, { loading }] = useCreateCv(onClose);
+
+  const { id } = authVar();
+
+  const onSubmit = handleSubmit((data) => {
+    const cvData: CV = {
+      ...data,
+      userId: id,
+    };
+    createCv({ variables: { cv: cvData } });
     onConfirm(data);
-  };
+  });
 
   return (
     <Portal>
@@ -71,7 +89,7 @@ const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
             </ModalHeader>
 
             <Dialog.Body py={4}>
-              <VStack as="form" gap={8} onSubmit={handleSubmit(onSubmit)}>
+              <VStack as="form" gap={8}>
                 <Field errorText={errors.name?.message} invalid={!!errors.name}>
                   <StyledInput {...register('name')} placeholder="Name" />
                 </Field>
@@ -96,8 +114,8 @@ const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
             <ModalFooter>
               <CancelButton onClick={onClose}>Cancel</CancelButton>
               <ConfirmButton
-                onClick={handleSubmit(onConfirm)}
-                disabled={isDisabled || isSubmitting}
+                onClick={onSubmit}
+                disabled={isDisabled || isSubmitting || loading}
               >
                 Create
               </ConfirmButton>

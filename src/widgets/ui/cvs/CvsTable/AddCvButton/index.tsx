@@ -9,9 +9,7 @@ const AddCvButton = () => {
 
   const handleCreateCvClick = () => {
     openCreateCvDialog({
-      onConfirm: () => {
-        alert('Created CV');
-      },
+      onConfirm: () => {},
     });
   };
 
