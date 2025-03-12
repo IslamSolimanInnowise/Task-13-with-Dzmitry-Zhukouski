@@ -122,25 +122,22 @@ const CvsTable: React.FC = () => {
     )),
   );
 
-  const tableHeader = useMemo(
-    () => (
-      <StyledTableHeader>
-        <StyledTableHeaderRow>
-          <StyledTableTopHeaderCell>
-            <SearchInput
-              value={globalFilter}
-              handleChange={handleInputChange}
-              handleClear={handleClear}
-            />
-          </StyledTableTopHeaderCell>
-          <StyledTableTopHeaderCell>
-            <AddCvButton />
-          </StyledTableTopHeaderCell>
-        </StyledTableHeaderRow>
-        <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>
-      </StyledTableHeader>
-    ),
-    [globalFilter],
+  const tableHeader = (
+    <StyledTableHeader>
+      <StyledTableHeaderRow>
+        <StyledTableTopHeaderCell>
+          <SearchInput
+            value={globalFilter}
+            handleChange={handleInputChange}
+            handleClear={handleClear}
+          />
+        </StyledTableTopHeaderCell>
+        <StyledTableTopHeaderCell>
+          <AddCvButton />
+        </StyledTableTopHeaderCell>
+      </StyledTableHeaderRow>
+      <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>
+    </StyledTableHeader>
   );
 
   const tableBody = rowVirtualizer.getVirtualItems().length ? (
