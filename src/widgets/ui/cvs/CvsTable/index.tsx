@@ -1,6 +1,7 @@
 import { Table } from '@chakra-ui/react';
 import SearchInput from '@entities/ui/SearchInput';
 import CustomSpinner from '@entities/ui/Spinner';
+import useGetCvs from '@features/hooks/cvs/useGetCvs';
 import {
   ColumnDef,
   flexRender,
@@ -28,34 +29,41 @@ import {
 } from './cvsTable.styles';
 import MoreButton from './MoreButton';
 
-type Person = {
+type TableCV = {
   name: string;
   education: string;
   employee: string;
   description: string;
 };
 
-const generateRandomString = (length: number) =>
-  Array(length)
-    .fill('')
-    .map(() =>
-      String.fromCharCode(Math.floor(Math.random() * (90 - 65 + 1)) + 65),
-    )
-    .join('');
-
-const data = Array.from({ length: 100 }, () => ({
-  name: generateRandomString(10),
-  education: generateRandomString(10),
-  employee: `${generateRandomString(5)}@example.com`,
-  description: 'some description...',
-}));
+type CV = {
+  description: string;
+  education: string;
+  id: string;
+  name: string;
+  user: {
+    email: string;
+    id: string;
+  };
+};
 
 const CvsTable: React.FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
 
   const [isPending, startTransition] = useTransition();
 
-  const columns = useMemo<ColumnDef<Person>[]>(
+  const { data: cvData, loading } = useGetCvs();
+  const handledCvData = useMemo(() => {
+    return cvData?.cvs.map((cv: CV) => ({
+      name: cv.name,
+      education: cv.education,
+      employee: cv.user.email,
+      description: cv.description,
+    }));
+  }, [cvData]);
+  console.log(handledCvData);
+
+  const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
       { accessorKey: 'name', header: 'Name' },
       { accessorKey: 'education', header: 'Education' },
@@ -76,7 +84,7 @@ const CvsTable: React.FC = () => {
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
   const table = useReactTable({
-    data,
+    data: handledCvData ?? [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -155,7 +163,7 @@ const CvsTable: React.FC = () => {
             )}
           </StyledTableHeaderRow>
         </StyledTableHeader>
-        {isPending ? (
+        {isPending || loading ? (
           <CustomSpinner />
         ) : (
           <Table.Body
