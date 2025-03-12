@@ -3,6 +3,7 @@ import { useNavigate } from '@tanstack/react-router';
 import { EllipsisVertical } from 'lucide-react';
 import { useState } from 'react';
 
+import { User } from '../types';
 import UpdateUserModal from '../UpdateUserModal';
 import {
   StyledProfileMenuContent,
@@ -12,10 +13,7 @@ import {
 
 interface UsersMenuProps {
   row: {
-    original: {
-      id: string;
-      role: 'Admin' | 'Employee';
-    };
+    original: User;
   };
 }
 
@@ -53,6 +51,7 @@ const UsersMenu: React.FC<UsersMenuProps> = ({ row }) => {
       <UpdateUserModal
         isModalOpen={isModalOpen}
         setIsModalOpen={setIsModalOpen}
+        user={row.original}
       />
     </>
   );
