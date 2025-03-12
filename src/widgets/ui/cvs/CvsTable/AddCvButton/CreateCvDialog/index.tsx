@@ -1,6 +1,7 @@
 import { Dialog, Portal, VStack } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { Field } from '@shared/ui/field';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
@@ -16,9 +17,9 @@ import {
 } from './createCvDialog.styled';
 
 const schema = z.object({
-  name: z.string().optional(),
+  name: z.string().min(1, { message: 'Required field' }),
   education: z.string().optional(),
-  description: z.string().optional(),
+  description: z.string().min(1, { message: 'Required field' }),
 });
 
 type FormData = z.infer<typeof schema>;
@@ -33,13 +34,17 @@ const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
     register,
     handleSubmit,
     watch,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
   });
 
   const watchFields = watch();
   const isDisabled = !Object.values(watchFields).some((value) => value?.trim());
+
+  const onSubmit = (data: FormData) => {
+    onConfirm(data);
+  };
 
   return (
     <Portal>
@@ -66,18 +71,25 @@ const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
             </ModalHeader>
 
             <Dialog.Body py={4}>
-              <VStack as="form" gap={8} onSubmit={handleSubmit(onConfirm)}>
-                <StyledInput {...register('name')} placeholder="Name" />
+              <VStack as="form" gap={8} onSubmit={handleSubmit(onSubmit)}>
+                <Field errorText={errors.name?.message} invalid={!!errors.name}>
+                  <StyledInput {...register('name')} placeholder="Name" />
+                </Field>
                 <StyledInput
                   {...register('education')}
                   placeholder="Education"
                 />
-                <StyledTextArea
-                  {...register('description')}
-                  placeholder="Description"
-                  rows={4}
-                  resize="none"
-                />
+                <Field
+                  errorText={errors.description?.message}
+                  invalid={!!errors.description}
+                >
+                  <StyledTextArea
+                    {...register('description')}
+                    placeholder="Description"
+                    rows={4}
+                    resize="none"
+                  />
+                </Field>
               </VStack>
             </Dialog.Body>
 
