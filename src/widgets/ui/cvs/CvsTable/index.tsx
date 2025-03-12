@@ -145,7 +145,7 @@ const CvsTable: React.FC = () => {
   let bodyContent;
   if (isPending || loading) {
     bodyContent = <CustomSpinner />;
-  } else if (handledCvData?.length === 0) {
+  } else if (rowVirtualizer.getVirtualItems().length === 0) {
     bodyContent = (
       <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
         <StyledTableBodyRow>
