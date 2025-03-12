@@ -33,9 +33,7 @@ import { CV, TableCV } from './types';
 
 const CvsTable: React.FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
-
   const [, startTransition] = useTransition();
-
   const { data: cvData, loading: isCvsLoading } = useGetCvs();
 
   const handledCvData = useMemo(() => {
@@ -102,8 +100,6 @@ const CvsTable: React.FC = () => {
     });
   };
 
-  if (isCvsLoading) return <CustomSpinner />;
-
   const tableColumns = table.getHeaderGroups().map((headerGroup) =>
     headerGroup.headers.map((header, index) => (
       <StyledTableBottomHeaderCell
@@ -124,6 +120,27 @@ const CvsTable: React.FC = () => {
         )}
       </StyledTableBottomHeaderCell>
     )),
+  );
+
+  const tableHeader = useMemo(
+    () => (
+      <StyledTableHeader>
+        <StyledTableHeaderRow>
+          <StyledTableTopHeaderCell>
+            <SearchInput
+              value={globalFilter}
+              handleChange={handleInputChange}
+              handleClear={handleClear}
+            />
+          </StyledTableTopHeaderCell>
+          <StyledTableTopHeaderCell>
+            <AddCvButton />
+          </StyledTableTopHeaderCell>
+        </StyledTableHeaderRow>
+        <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>
+      </StyledTableHeader>
+    ),
+    [globalFilter],
   );
 
   const tableBody = rowVirtualizer.getVirtualItems().length ? (
@@ -166,24 +183,12 @@ const CvsTable: React.FC = () => {
     </Table.Body>
   );
 
+  if (isCvsLoading) return <CustomSpinner />;
+
   return (
     <StyledTableContainer ref={tableContainerRef}>
       <Table.Root>
-        <StyledTableHeader>
-          <StyledTableHeaderRow>
-            <StyledTableTopHeaderCell>
-              <SearchInput
-                value={globalFilter}
-                handleChange={handleInputChange}
-                handleClear={handleClear}
-              />
-            </StyledTableTopHeaderCell>
-            <StyledTableTopHeaderCell>
-              <AddCvButton />
-            </StyledTableTopHeaderCell>
-          </StyledTableHeaderRow>
-          <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>
-        </StyledTableHeader>
+        {tableHeader}
         {tableBody}
       </Table.Root>
     </StyledTableContainer>
