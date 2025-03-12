@@ -1,7 +1,9 @@
 import { MenuRoot } from '@shared/ui/menu';
 import { useNavigate } from '@tanstack/react-router';
 import { EllipsisVertical } from 'lucide-react';
+import { useState } from 'react';
 
+import UpdateUserModal from '../UpdateUserModal';
 import {
   StyledProfileMenuContent,
   StyledProfileMenuItem,
@@ -19,6 +21,7 @@ interface UsersMenuProps {
 
 const UsersMenu: React.FC<UsersMenuProps> = ({ row }) => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = () =>
     navigate({
@@ -27,25 +30,31 @@ const UsersMenu: React.FC<UsersMenuProps> = ({ row }) => {
     });
 
   return (
-    <MenuRoot>
-      <StyledProfileMenuTrigger asChild>
-        <EllipsisVertical />
-      </StyledProfileMenuTrigger>
-      <StyledProfileMenuContent>
-        <StyledProfileMenuItem value="profile" onClick={handleClick}>
-          Profile
-        </StyledProfileMenuItem>
-        <StyledProfileMenuItem value="update">
-          Update user
-        </StyledProfileMenuItem>
-        <StyledProfileMenuItem
-          value="delete"
-          disabled={row.original.role === 'Employee'}
-        >
-          Delete user
-        </StyledProfileMenuItem>
-      </StyledProfileMenuContent>
-    </MenuRoot>
+    <>
+      <MenuRoot>
+        <StyledProfileMenuTrigger asChild>
+          <EllipsisVertical />
+        </StyledProfileMenuTrigger>
+        <StyledProfileMenuContent>
+          <StyledProfileMenuItem value="profile" onClick={handleClick}>
+            Profile
+          </StyledProfileMenuItem>
+          <StyledProfileMenuItem value="update">
+            <button onClick={() => setIsModalOpen(true)}>Update user</button>
+          </StyledProfileMenuItem>
+          <StyledProfileMenuItem
+            value="delete"
+            disabled={row.original.role === 'Employee'}
+          >
+            Delete user
+          </StyledProfileMenuItem>
+        </StyledProfileMenuContent>
+      </MenuRoot>
+      <UpdateUserModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      />
+    </>
   );
 };
 export default UsersMenu;
