@@ -39,6 +39,7 @@ const CvsTable: React.FC = () => {
   const { data: cvData, loading: isCvsLoading } = useGetCvs();
 
   const handledCvData = useMemo(() => {
+    if (!cvData || !cvData.cvs) return [];
     return cvData?.cvs.map((cv: CV) => ({
       id: cv.id,
       name: cv.name,
