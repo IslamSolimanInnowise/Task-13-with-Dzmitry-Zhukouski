@@ -1,13 +1,29 @@
 import { Icon, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
 import { EllipsisVertical } from 'lucide-react';
 
+import useDeleteCvDialog from './DeleteCvDialog';
 import {
   StyledMenuButton,
   StyledMenuContent,
   StyledMoreButton,
-} from './cvsTable.styles';
+} from './moreButton.styles';
 
-const CvTableMoreButton = () => {
+type MoreButtonProps = {
+  name: string;
+};
+
+const MoreButton = ({ name }: MoreButtonProps) => {
+  const [openDeleteCvDialog] = useDeleteCvDialog();
+
+  const handleDeleteCvClick = () => {
+    openDeleteCvDialog({
+      name,
+      onConfirm: () => {
+        alert('Deleted CV');
+      },
+    });
+  };
+
   return (
     <MenuRoot>
       <MenuTrigger asChild>
@@ -22,7 +38,7 @@ const CvTableMoreButton = () => {
           </StyledMenuButton>
         </MenuItem>
         <MenuItem asChild value="delete-cv">
-          <StyledMenuButton>
+          <StyledMenuButton onClick={handleDeleteCvClick}>
             <Text>Delete CV</Text>
           </StyledMenuButton>
         </MenuItem>
@@ -31,4 +47,4 @@ const CvTableMoreButton = () => {
   );
 };
 
-export default CvTableMoreButton;
+export default MoreButton;

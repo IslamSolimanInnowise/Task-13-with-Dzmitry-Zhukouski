@@ -12,6 +12,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual';
 import React, { useMemo, useRef, useState, useTransition } from 'react';
 
+import AddCvButton from './AddCvButton';
 import {
   StyledSortButton,
   StyledSortIcon,
@@ -25,8 +26,7 @@ import {
   StyledTableHeaderRow,
   StyledTableTopHeaderCell,
 } from './cvsTable.styles';
-import CvTableAddCvButton from './CvTableAddCvButton';
-import CvTableMoreButton from './CvTableMoreButton';
+import MoreButton from './MoreButton';
 
 type Person = {
   name: string;
@@ -47,7 +47,7 @@ const data = Array.from({ length: 100 }, () => ({
   name: generateRandomString(10),
   education: generateRandomString(10),
   employee: `${generateRandomString(5)}@example.com`,
-  description: generateRandomString(150),
+  description: 'some description...',
 }));
 
 const CvsTable: React.FC = () => {
@@ -63,7 +63,7 @@ const CvsTable: React.FC = () => {
       {
         id: 'actions',
         header: '',
-        cell: () => <CvTableMoreButton />,
+        cell: ({ row }) => <MoreButton name={row.original.name} />,
         size: 50,
         minSize: 50,
         maxSize: 50,
@@ -123,7 +123,7 @@ const CvsTable: React.FC = () => {
               />
             </StyledTableTopHeaderCell>
             <StyledTableTopHeaderCell>
-              <CvTableAddCvButton />
+              <AddCvButton />
             </StyledTableTopHeaderCell>
           </StyledTableHeaderRow>
           <StyledTableHeaderRow>
