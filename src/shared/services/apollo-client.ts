@@ -45,6 +45,8 @@ const handleUnauthorizedError = async (): Promise<string | null> => {
 };
 
 const errorLink = onError(
+  // eslint-disable-next-line no-comments/disallowComments
+  // @ts-expect-error TODO: fix types
   ({ graphQLErrors, networkError, operation, forward }) => {
     if (graphQLErrors) {
       const firstError = graphQLErrors[0];
