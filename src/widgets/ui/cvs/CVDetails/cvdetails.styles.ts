@@ -1,5 +1,16 @@
-import { Button, Input, Textarea } from '@chakra-ui/react';
+import { Box, Button, Input, Textarea } from '@chakra-ui/react';
 import styled from 'styled-components';
+
+export const StyledForm = styled(Box)`
+  padding: 2rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+`;
 
 export const StyledInput = styled(Input)`
   padding: 0.75rem;

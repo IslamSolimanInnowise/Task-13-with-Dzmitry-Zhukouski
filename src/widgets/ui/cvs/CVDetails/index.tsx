@@ -1,4 +1,3 @@
-import { VStack } from '@chakra-ui/react';
 import CustomSpinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import useUpdateCv from '@features/hooks/cvs/useUpdateCv';
@@ -9,7 +8,12 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import { StyledInput, StyledTextArea, UpdateButton } from './cvdetails.styles';
+import {
+  StyledForm,
+  StyledInput,
+  StyledTextArea,
+  UpdateButton,
+} from './cvdetails.styles';
 
 const schema = z
   .object({
@@ -71,7 +75,7 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
   if (loading) return <CustomSpinner />;
 
   return (
-    <VStack as="form" gap={8} p="2rem 1.5rem" maxW="900px" margin="0 auto">
+    <StyledForm as="form">
       <Field errorText={errors.name?.message} invalid={!!errors.name}>
         <StyledInput
           {...register('name')}
@@ -104,7 +108,7 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
           Update
         </UpdateButton>
       )}
-    </VStack>
+    </StyledForm>
   );
 };
 
