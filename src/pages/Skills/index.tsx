@@ -1,6 +1,7 @@
-import { Button } from '@chakra-ui/react';
 import Aside from '@entities/ui/Aside';
-import Modal from '@entities/ui/Modal/Modal';
+import useGetUser from '@features/hooks/users/useGetUser';
+import { authVar } from '@shared/store/globalAuthState';
+import AddSkillModal from '@widgets/ui/users/AddSkillModal';
 
 import {
   Styledh2,
@@ -9,22 +10,17 @@ import {
 } from './skills.styles';
 
 const SkillsPage: React.FC = () => {
+  const { id } = authVar();
+  const { data } = useGetUser(id!);
+  console.log(data);
+  const userSkills = data?.user.profile.skills;
+
   return (
     <StyledPageContainer>
       <Aside />
       <StyledPageContent>
         <Styledh2>Skills</Styledh2>
-        <Modal
-          confirmText="Confirm"
-          onConfirm={() => {}}
-          trigger={
-            <Button w="full" mt="8">
-              + ADD SKILL
-            </Button>
-          }
-        >
-          Children
-        </Modal>
+        <AddSkillModal userId={id!} />
       </StyledPageContent>
     </StyledPageContainer>
   );

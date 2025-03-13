@@ -1,8 +1,8 @@
 import { useMutation } from '@apollo/client';
 import { notify } from '@shared/Notifications/notify';
 
-import { UPDATE_USER } from './updateUser';
-import { GET_USERS } from './users';
+import { UPDATE_USER } from '../../../shared/queries/users/updateUser';
+import { GET_USERS } from '../../../shared/queries/users/users';
 
 const useUpdateUser = () => {
   return useMutation(UPDATE_USER, {

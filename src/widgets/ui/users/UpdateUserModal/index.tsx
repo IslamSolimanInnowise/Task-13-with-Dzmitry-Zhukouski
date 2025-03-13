@@ -4,7 +4,7 @@ import useGetDepartments from '@features/hooks/users/useGetDepartments';
 import useGetPositions from '@features/hooks/users/useGetPositions';
 import useUpdateProfile from '@features/hooks/users/useUpdateProfile';
 import { zodResolver } from '@hookform/resolvers/zod';
-import useUpdateUser from '@shared/queries/users/useUpdateUser';
+import useUpdateUser from '@features/hooks/users/useUpdateUser';
 import {
   defaultValues,
   UpdateUserForm,
