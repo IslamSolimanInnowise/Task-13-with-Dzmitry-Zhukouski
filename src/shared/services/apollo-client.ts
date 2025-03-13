@@ -25,7 +25,7 @@ const handleUnauthorizedError = async (): Promise<string | null> => {
   try {
     if (!authVar().refreshToken) throw new Error('No refresh token');
 
-    const newToken = await updateAccessToken();
+    const newToken: string = await updateAccessToken();
     if (!newToken) throw new Error('Token refresh failed');
 
     localStorage.setItem('access-token', newToken);
@@ -61,7 +61,7 @@ const errorLink = onError(
               resolvePendingRequests(newToken!);
               return forward(operation);
             }),
-            catchError((error) => {
+            catchError((error: unknown) => {
               pendingRequests.length = 0;
               return throwError(error);
             }),
