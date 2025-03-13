@@ -11,7 +11,7 @@ import {
   StyledCloseButton,
 } from './deleteCvDialog.styled';
 
-type ConfirmationDialogProps = {
+type DeleteCvDialogProps = {
   id: string;
   name: string;
   onClose: () => void;
@@ -23,7 +23,7 @@ const DeleteCvDialog = ({
   name,
   onClose,
   onConfirm,
-}: ConfirmationDialogProps) => {
+}: DeleteCvDialogProps) => {
   const [deleteCv, { loading }] = useDeleteCv(onClose);
 
   const onSubmit = () => {
@@ -72,7 +72,7 @@ const DeleteCvDialog = ({
   );
 };
 
-const useDeleteCvDialog = createDialogHook<ConfirmationDialogProps>((props) => (
+const useDeleteCvDialog = createDialogHook<DeleteCvDialogProps>((props) => (
   <DeleteCvDialog {...props} />
 ));
 

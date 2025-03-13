@@ -26,7 +26,7 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-type ConfirmationDialogProps = {
+type CreateCvDialogProps = {
   onClose: () => void;
   onConfirm: () => void;
 };
@@ -38,7 +38,7 @@ type CV = {
   userId: string | null;
 };
 
-const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
+const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
   const {
     register,
     handleSubmit,
@@ -127,7 +127,7 @@ const CreateCvDialog = ({ onClose, onConfirm }: ConfirmationDialogProps) => {
   );
 };
 
-const useCreateCvDialog = createDialogHook<ConfirmationDialogProps>((props) => (
+const useCreateCvDialog = createDialogHook<CreateCvDialogProps>((props) => (
   <CreateCvDialog {...props} />
 ));
 
