@@ -2,10 +2,12 @@ import Aside from '@entities/ui/Aside';
 import SearchInput from '@entities/ui/SearchInput';
 import CustomSpinner from '@entities/ui/Spinner';
 import useGetUsers from '@features/hooks/users/useGetUsers';
+import { authVar } from '@shared/store/globalAuthState';
 import {
   getCoreRowModel,
   getFilteredRowModel,
   getSortedRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
 import UsersTable from '@widgets/ui/users/Table';
@@ -17,11 +19,13 @@ import {
   StyledPageContainer,
   StyledPageContent,
 } from './users.styles';
-import { authVar } from '@shared/store/globalAuthState';
+
+type SortingFunction = (oldState: SortingState) => SortingState;
 
 const UsersPage: React.FC = () => {
   const { data, loading } = useGetUsers();
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
+  const [sorting, setSorting] = useState<SortingState>([]);
   const [isPending, startTransition] = useTransition();
   const { email: authEmail } = authVar();
 
@@ -35,6 +39,12 @@ const UsersPage: React.FC = () => {
     });
   }, [data?.users, authEmail]);
 
+  const handleSortingChange = (param: SortingState | SortingFunction) => {
+    startTransition(() => {
+      setSorting(param);
+    });
+  };
+
   const usersTable = useReactTable({
     data: sortedUsers,
     columns,
@@ -42,7 +52,9 @@ const UsersPage: React.FC = () => {
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       globalFilter,
+      sorting,
     },
+    onSortingChange: handleSortingChange,
     onGlobalFilterChange: setGlobalFilter,
     getSortedRowModel: getSortedRowModel(),
   });
