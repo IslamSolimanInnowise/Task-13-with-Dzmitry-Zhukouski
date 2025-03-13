@@ -10,10 +10,11 @@ import {
 } from './modal.styles';
 
 interface ModalProps {
-  open: boolean;
+  open?: boolean;
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'xs' | 'cover' | 'full';
-  onOpenChange: (e: { open: boolean }) => void;
+  onOpenChange?: (e: { open: boolean }) => void;
   titleText?: string;
+  trigger?: React.ReactNode;
   children?: React.ReactNode;
   confirmText: string;
   onConfirm: () => void;
@@ -23,6 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   open,
   onOpenChange,
   titleText,
+  trigger,
   children,
   confirmText,
   onConfirm,
@@ -35,6 +37,7 @@ const Modal: React.FC<ModalProps> = ({
       placement="center"
       size={size}
     >
+      {trigger && <Dialog.Trigger asChild>{trigger}</Dialog.Trigger>}
       <Portal>
         <Dialog.Backdrop />
         <Dialog.Positioner>
