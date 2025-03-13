@@ -9,7 +9,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import UsersTable from '@widgets/ui/users/Table';
-import { useState, useTransition } from 'react';
+import { useMemo, useState, useTransition } from 'react';
 
 import { columns } from './table';
 import {
@@ -17,14 +17,26 @@ import {
   StyledPageContainer,
   StyledPageContent,
 } from './users.styles';
+import { authVar } from '@shared/store/globalAuthState';
 
 const UsersPage: React.FC = () => {
   const { data, loading } = useGetUsers();
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [isPending, startTransition] = useTransition();
+  const { email: authEmail } = authVar();
+
+  const sortedUsers = useMemo(() => {
+    if (!data?.users) return [];
+
+    return [...data.users].sort((a, b) => {
+      if (a.email === authEmail) return -1;
+      if (b.email === authEmail) return 1;
+      return 0;
+    });
+  }, [data?.users, authEmail]);
 
   const usersTable = useReactTable({
-    data: data?.users || [],
+    data: sortedUsers,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),

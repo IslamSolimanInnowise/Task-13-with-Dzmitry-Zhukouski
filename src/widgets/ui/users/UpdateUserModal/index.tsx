@@ -66,12 +66,15 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
       (d: GetData) => d.name === data.department,
     );
 
+    const currentDepartmentId = user?.department?.id;
+    const currentPositionId = user?.position?.id;
+
     updateUser({
       variables: {
         user: {
           userId: user.id,
-          departmentId: department?.id,
-          positionId: position?.id,
+          departmentId: department?.id || currentDepartmentId,
+          positionId: position?.id || currentPositionId,
         },
       },
     });
@@ -112,6 +115,7 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
             <NativeSelect.Field
               placeholder={user.department_name}
               {...register('department')}
+              defaultValue={user.department_name}
             >
               {deps?.departments.map((dep: GetData) => {
                 return (
@@ -132,6 +136,7 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
             <NativeSelect.Field
               placeholder={user.position_name && ''}
               {...register('position')}
+              defaultValue={user.position_name}
             >
               {pos?.positions.map((pos: GetData) => {
                 return (
