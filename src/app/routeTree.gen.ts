@@ -25,7 +25,10 @@ import { Route as NotAuthenticatedAuthRegisterImport } from './routes/_notAuthen
 import { Route as NotAuthenticatedAuthLoginImport } from './routes/_notAuthenticated/auth/login'
 import { Route as NotAuthenticatedAuthForgotPasswordImport } from './routes/_notAuthenticated/auth/forgot-password'
 import { Route as AuthenticatedUsersUserIdImport } from './routes/_authenticated/users/$userId'
-import { Route as AuthenticatedCvsCvIdImport } from './routes/_authenticated/cvs/$cvId'
+import { Route as AuthenticatedCvsCvIdSkillsImport } from './routes/_authenticated/cvs/$cvId/skills'
+import { Route as AuthenticatedCvsCvIdProjectsImport } from './routes/_authenticated/cvs/$cvId/projects'
+import { Route as AuthenticatedCvsCvIdPreviewImport } from './routes/_authenticated/cvs/$cvId/preview'
+import { Route as AuthenticatedCvsCvIdDetailsImport } from './routes/_authenticated/cvs/$cvId/details'
 
 // Create/Update Routes
 
@@ -116,11 +119,34 @@ const AuthenticatedUsersUserIdRoute = AuthenticatedUsersUserIdImport.update({
   getParentRoute: () => AuthenticatedRoute,
 } as any)
 
-const AuthenticatedCvsCvIdRoute = AuthenticatedCvsCvIdImport.update({
-  id: '/cvs/$cvId',
-  path: '/cvs/$cvId',
-  getParentRoute: () => AuthenticatedRoute,
-} as any)
+const AuthenticatedCvsCvIdSkillsRoute = AuthenticatedCvsCvIdSkillsImport.update(
+  {
+    id: '/cvs/$cvId/skills',
+    path: '/cvs/$cvId/skills',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any,
+)
+
+const AuthenticatedCvsCvIdProjectsRoute =
+  AuthenticatedCvsCvIdProjectsImport.update({
+    id: '/cvs/$cvId/projects',
+    path: '/cvs/$cvId/projects',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedCvsCvIdPreviewRoute =
+  AuthenticatedCvsCvIdPreviewImport.update({
+    id: '/cvs/$cvId/preview',
+    path: '/cvs/$cvId/preview',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
+
+const AuthenticatedCvsCvIdDetailsRoute =
+  AuthenticatedCvsCvIdDetailsImport.update({
+    id: '/cvs/$cvId/details',
+    path: '/cvs/$cvId/details',
+    getParentRoute: () => AuthenticatedRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -175,13 +201,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NotAuthenticatedResetPasswordImport
       parentRoute: typeof NotAuthenticatedImport
     }
-    '/_authenticated/cvs/$cvId': {
-      id: '/_authenticated/cvs/$cvId'
-      path: '/cvs/$cvId'
-      fullPath: '/cvs/$cvId'
-      preLoaderRoute: typeof AuthenticatedCvsCvIdImport
-      parentRoute: typeof AuthenticatedImport
-    }
     '/_authenticated/users/$userId': {
       id: '/_authenticated/users/$userId'
       path: '/users/$userId'
@@ -231,6 +250,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedUsersIndexImport
       parentRoute: typeof AuthenticatedImport
     }
+    '/_authenticated/cvs/$cvId/details': {
+      id: '/_authenticated/cvs/$cvId/details'
+      path: '/cvs/$cvId/details'
+      fullPath: '/cvs/$cvId/details'
+      preLoaderRoute: typeof AuthenticatedCvsCvIdDetailsImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/cvs/$cvId/preview': {
+      id: '/_authenticated/cvs/$cvId/preview'
+      path: '/cvs/$cvId/preview'
+      fullPath: '/cvs/$cvId/preview'
+      preLoaderRoute: typeof AuthenticatedCvsCvIdPreviewImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/cvs/$cvId/projects': {
+      id: '/_authenticated/cvs/$cvId/projects'
+      path: '/cvs/$cvId/projects'
+      fullPath: '/cvs/$cvId/projects'
+      preLoaderRoute: typeof AuthenticatedCvsCvIdProjectsImport
+      parentRoute: typeof AuthenticatedImport
+    }
+    '/_authenticated/cvs/$cvId/skills': {
+      id: '/_authenticated/cvs/$cvId/skills'
+      path: '/cvs/$cvId/skills'
+      fullPath: '/cvs/$cvId/skills'
+      preLoaderRoute: typeof AuthenticatedCvsCvIdSkillsImport
+      parentRoute: typeof AuthenticatedImport
+    }
   }
 }
 
@@ -241,11 +288,14 @@ interface AuthenticatedRouteChildren {
   AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
   AuthenticatedSkillsRoute: typeof AuthenticatedSkillsRoute
   AuthenticatedVerifyEmailRoute: typeof AuthenticatedVerifyEmailRoute
-  AuthenticatedCvsCvIdRoute: typeof AuthenticatedCvsCvIdRoute
   AuthenticatedUsersUserIdRoute: typeof AuthenticatedUsersUserIdRoute
   AuthenticatedCvsIndexRoute: typeof AuthenticatedCvsIndexRoute
   AuthenticatedProjectsIndexRoute: typeof AuthenticatedProjectsIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
+  AuthenticatedCvsCvIdDetailsRoute: typeof AuthenticatedCvsCvIdDetailsRoute
+  AuthenticatedCvsCvIdPreviewRoute: typeof AuthenticatedCvsCvIdPreviewRoute
+  AuthenticatedCvsCvIdProjectsRoute: typeof AuthenticatedCvsCvIdProjectsRoute
+  AuthenticatedCvsCvIdSkillsRoute: typeof AuthenticatedCvsCvIdSkillsRoute
 }
 
 const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
@@ -253,11 +303,14 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
   AuthenticatedSkillsRoute: AuthenticatedSkillsRoute,
   AuthenticatedVerifyEmailRoute: AuthenticatedVerifyEmailRoute,
-  AuthenticatedCvsCvIdRoute: AuthenticatedCvsCvIdRoute,
   AuthenticatedUsersUserIdRoute: AuthenticatedUsersUserIdRoute,
   AuthenticatedCvsIndexRoute: AuthenticatedCvsIndexRoute,
   AuthenticatedProjectsIndexRoute: AuthenticatedProjectsIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
+  AuthenticatedCvsCvIdDetailsRoute: AuthenticatedCvsCvIdDetailsRoute,
+  AuthenticatedCvsCvIdPreviewRoute: AuthenticatedCvsCvIdPreviewRoute,
+  AuthenticatedCvsCvIdProjectsRoute: AuthenticatedCvsCvIdProjectsRoute,
+  AuthenticatedCvsCvIdSkillsRoute: AuthenticatedCvsCvIdSkillsRoute,
 }
 
 const AuthenticatedRouteWithChildren = AuthenticatedRoute._addFileChildren(
@@ -289,7 +342,6 @@ export interface FileRoutesByFullPath {
   '/skills': typeof AuthenticatedSkillsRoute
   '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
-  '/cvs/$cvId': typeof AuthenticatedCvsCvIdRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -297,6 +349,10 @@ export interface FileRoutesByFullPath {
   '/cvs': typeof AuthenticatedCvsIndexRoute
   '/projects': typeof AuthenticatedProjectsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/cvs/$cvId/details': typeof AuthenticatedCvsCvIdDetailsRoute
+  '/cvs/$cvId/preview': typeof AuthenticatedCvsCvIdPreviewRoute
+  '/cvs/$cvId/projects': typeof AuthenticatedCvsCvIdProjectsRoute
+  '/cvs/$cvId/skills': typeof AuthenticatedCvsCvIdSkillsRoute
 }
 
 export interface FileRoutesByTo {
@@ -306,7 +362,6 @@ export interface FileRoutesByTo {
   '/skills': typeof AuthenticatedSkillsRoute
   '/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/reset-password': typeof NotAuthenticatedResetPasswordRoute
-  '/cvs/$cvId': typeof AuthenticatedCvsCvIdRoute
   '/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -314,6 +369,10 @@ export interface FileRoutesByTo {
   '/cvs': typeof AuthenticatedCvsIndexRoute
   '/projects': typeof AuthenticatedProjectsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
+  '/cvs/$cvId/details': typeof AuthenticatedCvsCvIdDetailsRoute
+  '/cvs/$cvId/preview': typeof AuthenticatedCvsCvIdPreviewRoute
+  '/cvs/$cvId/projects': typeof AuthenticatedCvsCvIdProjectsRoute
+  '/cvs/$cvId/skills': typeof AuthenticatedCvsCvIdSkillsRoute
 }
 
 export interface FileRoutesById {
@@ -325,7 +384,6 @@ export interface FileRoutesById {
   '/_authenticated/skills': typeof AuthenticatedSkillsRoute
   '/_authenticated/verify-email': typeof AuthenticatedVerifyEmailRoute
   '/_notAuthenticated/reset-password': typeof NotAuthenticatedResetPasswordRoute
-  '/_authenticated/cvs/$cvId': typeof AuthenticatedCvsCvIdRoute
   '/_authenticated/users/$userId': typeof AuthenticatedUsersUserIdRoute
   '/_notAuthenticated/auth/forgot-password': typeof NotAuthenticatedAuthForgotPasswordRoute
   '/_notAuthenticated/auth/login': typeof NotAuthenticatedAuthLoginRoute
@@ -333,6 +391,10 @@ export interface FileRoutesById {
   '/_authenticated/cvs/': typeof AuthenticatedCvsIndexRoute
   '/_authenticated/projects/': typeof AuthenticatedProjectsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
+  '/_authenticated/cvs/$cvId/details': typeof AuthenticatedCvsCvIdDetailsRoute
+  '/_authenticated/cvs/$cvId/preview': typeof AuthenticatedCvsCvIdPreviewRoute
+  '/_authenticated/cvs/$cvId/projects': typeof AuthenticatedCvsCvIdProjectsRoute
+  '/_authenticated/cvs/$cvId/skills': typeof AuthenticatedCvsCvIdSkillsRoute
 }
 
 export interface FileRouteTypes {
@@ -344,7 +406,6 @@ export interface FileRouteTypes {
     | '/skills'
     | '/verify-email'
     | '/reset-password'
-    | '/cvs/$cvId'
     | '/users/$userId'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -352,6 +413,10 @@ export interface FileRouteTypes {
     | '/cvs'
     | '/projects'
     | '/users'
+    | '/cvs/$cvId/details'
+    | '/cvs/$cvId/preview'
+    | '/cvs/$cvId/projects'
+    | '/cvs/$cvId/skills'
   fileRoutesByTo: FileRoutesByTo
   to:
     | ''
@@ -360,7 +425,6 @@ export interface FileRouteTypes {
     | '/skills'
     | '/verify-email'
     | '/reset-password'
-    | '/cvs/$cvId'
     | '/users/$userId'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -368,6 +432,10 @@ export interface FileRouteTypes {
     | '/cvs'
     | '/projects'
     | '/users'
+    | '/cvs/$cvId/details'
+    | '/cvs/$cvId/preview'
+    | '/cvs/$cvId/projects'
+    | '/cvs/$cvId/skills'
   id:
     | '__root__'
     | '/_authenticated'
@@ -377,7 +445,6 @@ export interface FileRouteTypes {
     | '/_authenticated/skills'
     | '/_authenticated/verify-email'
     | '/_notAuthenticated/reset-password'
-    | '/_authenticated/cvs/$cvId'
     | '/_authenticated/users/$userId'
     | '/_notAuthenticated/auth/forgot-password'
     | '/_notAuthenticated/auth/login'
@@ -385,6 +452,10 @@ export interface FileRouteTypes {
     | '/_authenticated/cvs/'
     | '/_authenticated/projects/'
     | '/_authenticated/users/'
+    | '/_authenticated/cvs/$cvId/details'
+    | '/_authenticated/cvs/$cvId/preview'
+    | '/_authenticated/cvs/$cvId/projects'
+    | '/_authenticated/cvs/$cvId/skills'
   fileRoutesById: FileRoutesById
 }
 
@@ -419,11 +490,14 @@ export const routeTree = rootRoute
         "/_authenticated/settings",
         "/_authenticated/skills",
         "/_authenticated/verify-email",
-        "/_authenticated/cvs/$cvId",
         "/_authenticated/users/$userId",
         "/_authenticated/cvs/",
         "/_authenticated/projects/",
-        "/_authenticated/users/"
+        "/_authenticated/users/",
+        "/_authenticated/cvs/$cvId/details",
+        "/_authenticated/cvs/$cvId/preview",
+        "/_authenticated/cvs/$cvId/projects",
+        "/_authenticated/cvs/$cvId/skills"
       ]
     },
     "/_notAuthenticated": {
@@ -455,10 +529,6 @@ export const routeTree = rootRoute
       "filePath": "_notAuthenticated/reset-password.tsx",
       "parent": "/_notAuthenticated"
     },
-    "/_authenticated/cvs/$cvId": {
-      "filePath": "_authenticated/cvs/$cvId.tsx",
-      "parent": "/_authenticated"
-    },
     "/_authenticated/users/$userId": {
       "filePath": "_authenticated/users/$userId.tsx",
       "parent": "/_authenticated"
@@ -485,6 +555,22 @@ export const routeTree = rootRoute
     },
     "/_authenticated/users/": {
       "filePath": "_authenticated/users/index.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/cvs/$cvId/details": {
+      "filePath": "_authenticated/cvs/$cvId/details.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/cvs/$cvId/preview": {
+      "filePath": "_authenticated/cvs/$cvId/preview.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/cvs/$cvId/projects": {
+      "filePath": "_authenticated/cvs/$cvId/projects.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/cvs/$cvId/skills": {
+      "filePath": "_authenticated/cvs/$cvId/skills.tsx",
       "parent": "/_authenticated"
     }
   }

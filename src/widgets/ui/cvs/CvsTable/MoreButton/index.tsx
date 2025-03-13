@@ -34,7 +34,11 @@ const MoreButton = ({ id, name }: MoreButtonProps) => {
       </MenuTrigger>
       <StyledMenuContent>
         <MenuItem asChild value="cv">
-          <StyledMenuButton as={Link} to="/cvs/$cvId" params={{ cvId: id }}>
+          <StyledMenuButton
+            as={Link}
+            to="/cvs/$cvId/details"
+            params={{ cvId: id }}
+          >
             <Text>Details</Text>
           </StyledMenuButton>
         </MenuItem>

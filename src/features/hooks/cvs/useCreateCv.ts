@@ -15,7 +15,7 @@ const useCreateCv = (onClose: () => void) => {
         });
         onClose();
         router.navigate({
-          to: '/cvs/$cvId',
+          to: '/cvs/$cvId/details',
           params: { cvId: data.createCv.id },
         });
       }
