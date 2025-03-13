@@ -1,6 +1,10 @@
 import { VStack } from '@chakra-ui/react';
+import CustomSpinner from '@entities/ui/Spinner';
+import useGetCvById from '@features/hooks/cvs/useGetCvById';
+import useUpdateCv from '@features/hooks/cvs/useUpdateCv';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Field } from '@shared/ui/field';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -24,18 +28,43 @@ type CVDetailsProps = {
 };
 
 const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
+  const { data: CVdata, loading } = useGetCvById(cvId);
+  const [updateCv, { loading: updateLoading }] = useUpdateCv();
+
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors, isValid },
+    formState: { isSubmitting, errors, isValid, isDirty },
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
     mode: 'onChange',
+    defaultValues: {
+      name: '',
+      education: '',
+      description: '',
+    },
   });
 
+  useEffect(() => {
+    if (CVdata) {
+      reset({
+        name: CVdata.cv.name || '',
+        education: CVdata.cv.education || '',
+        description: CVdata.cv.description || '',
+      });
+    }
+  }, [CVdata, reset]);
+
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    const cv = {
+      cvId,
+      ...data,
+    };
+    updateCv({ variables: { cv } });
   });
+
+  if (loading) return <CustomSpinner />;
 
   return (
     <VStack as="form" gap={8} p="2rem 1.5rem" maxW="900px" margin="0 auto">
@@ -54,7 +83,10 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
           resize="none"
         />
       </Field>
-      <UpdateButton onClick={onSubmit} disabled={!isValid || isSubmitting}>
+      <UpdateButton
+        onClick={onSubmit}
+        disabled={!isValid || isSubmitting || !isDirty || updateLoading}
+      >
         Update
       </UpdateButton>
     </VStack>
