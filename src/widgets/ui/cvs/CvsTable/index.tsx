@@ -11,6 +11,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
+import type { Cv, User } from 'cv-graphql';
 import React, { useMemo, useRef, useState, useTransition } from 'react';
 
 import AddCvButton from './AddCvButton';
@@ -29,7 +30,6 @@ import {
   StyledTableTopHeaderCell,
 } from './cvsTable.styles';
 import MoreButton from './MoreButton';
-import { CV, TableCV } from './types';
 
 const CvsTable: React.FC = () => {
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
@@ -38,14 +38,17 @@ const CvsTable: React.FC = () => {
 
   const handledCvData = useMemo(() => {
     if (!cvData || !cvData.cvs) return [];
-    return cvData?.cvs.map((cv: CV) => ({
+    return cvData?.cvs.map((cv: Cv) => ({
       id: cv.id,
       name: cv.name,
       education: cv.education,
-      employee: cv.user.email,
+      employee: cv.user?.email,
       description: cv.description,
     }));
   }, [cvData]);
+
+  type TableCV = Pick<Cv, 'id' | 'name' | 'education' | 'description'> &
+    Pick<User, 'email'>;
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
