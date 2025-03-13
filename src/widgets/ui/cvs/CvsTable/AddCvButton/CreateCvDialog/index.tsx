@@ -18,11 +18,16 @@ import {
   StyledTextArea,
 } from './createCvDialog.styled';
 
-const schema = z.object({
-  name: z.string().min(1, { message: 'Required field' }),
-  education: z.string().optional(),
-  description: z.string().min(1, { message: 'Required field' }),
-});
+const schema = z
+  .object({
+    name: z.string().min(1, { message: 'Required field' }),
+    education: z.string().optional(),
+    description: z.string().min(1, { message: 'Required field' }),
+  })
+  .refine((data) => Object.values(data).some((value) => value?.trim()), {
+    message: 'At least one field must be filled',
+    path: ['name'],
+  });
 
 type FormData = z.infer<typeof schema>;
 
@@ -42,14 +47,11 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
   const {
     register,
     handleSubmit,
-    watch,
-    formState: { isSubmitting, errors },
+    formState: { isSubmitting, errors, isValid },
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    mode: 'onChange',
   });
-
-  const watchFields = watch();
-  const isDisabled = !Object.values(watchFields).some((value) => value?.trim());
 
   const [createCv, { loading }] = useCreateCv(onClose);
 
@@ -115,7 +117,7 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
               <CancelButton onClick={onClose}>Cancel</CancelButton>
               <ConfirmButton
                 onClick={onSubmit}
-                disabled={isDisabled || isSubmitting || loading}
+                disabled={!isValid || isSubmitting || loading}
               >
                 Create
               </ConfirmButton>
