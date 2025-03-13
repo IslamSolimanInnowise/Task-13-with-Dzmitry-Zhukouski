@@ -7,6 +7,9 @@ export const GET_CV_BY_ID = gql`
       name
       education
       description
+      user {
+        id
+      }
     }
   }
 `;
