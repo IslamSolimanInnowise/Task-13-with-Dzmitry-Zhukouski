@@ -2,8 +2,6 @@ import { Field, NativeSelect } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
 import useGetDepartments from '@features/hooks/users/useGetDepartments';
 import useGetPositions from '@features/hooks/users/useGetPositions';
-import useUpdateDepartment from '@features/hooks/users/useUpdateDepartment';
-import useUpdatePosition from '@features/hooks/users/useUpdatePosition';
 import useUpdateProfile from '@features/hooks/users/useUpdateProfile';
 import { zodResolver } from '@hookform/resolvers/zod';
 import useUpdateUser from '@shared/queries/users/useUpdateUser';
@@ -12,7 +10,6 @@ import {
   UpdateUserForm,
   updateUserFormSchema,
 } from '@shared/schemas/updateUserFormSchema';
-import { useNavigate } from '@tanstack/react-router';
 import { useForm } from 'react-hook-form';
 
 import { User } from '../types';
@@ -45,11 +42,8 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
     defaultValues,
   });
 
-  const navigate = useNavigate();
   const [updateUser] = useUpdateUser();
   const [updateProfile] = useUpdateProfile();
-  const [updatePosition] = useUpdatePosition();
-  const [updateDepartment] = useUpdateDepartment();
   const { data: deps } = useGetDepartments();
   const { data: pos } = useGetPositions();
 
@@ -65,30 +59,12 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
     });
 
     const position = pos.positions.find(
-      (p: GetData) => p.name === data.positionName,
+      (p: GetData) => p.name === data.position,
     );
-
-    updatePosition({
-      variables: {
-        position: {
-          positionId: position.id,
-          name: position.name,
-        },
-      },
-    });
 
     const department = deps.departments.find(
-      (d: GetData) => d.name === data.departmentName,
+      (d: GetData) => d.name === data.department,
     );
-
-    updateDepartment({
-      variables: {
-        department: {
-          departmentId: department.id,
-          name: department.name,
-        },
-      },
-    });
 
     updateUser({
       variables: {
@@ -101,8 +77,6 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
     });
 
     setIsModalOpen(false);
-
-    navigate({ to: '/users' });
   });
 
   return (
@@ -132,13 +106,12 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
           <StyledInput type="text" {...register('lastName')} />
         </Field.Root>
 
-        <Field.Root invalid={!!errors.departmentName}>
+        <Field.Root invalid={!!errors.department}>
           <Field.Label>Department</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               placeholder={user.department_name}
-              value={user.department_name}
-              {...register('departmentName')}
+              {...register('department')}
             >
               {deps?.departments.map((dep: GetData) => {
                 return (
@@ -150,16 +123,15 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.departmentName?.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.department?.message}</Field.ErrorText>
         </Field.Root>
 
-        <Field.Root invalid={!!errors.positionName}>
+        <Field.Root invalid={!!errors.position}>
           <Field.Label>Position</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               placeholder={user.position_name && ''}
-              value={user.position_name}
-              {...register('positionName')}
+              {...register('position')}
             >
               {pos?.positions.map((pos: GetData) => {
                 return (
@@ -171,7 +143,7 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.positionName?.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.position?.message}</Field.ErrorText>
         </Field.Root>
 
         <Field.Root invalid={!!errors.role} disabled>

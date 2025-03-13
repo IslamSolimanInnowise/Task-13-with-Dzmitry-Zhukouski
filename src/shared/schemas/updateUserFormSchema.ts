@@ -3,8 +3,8 @@ import { z } from 'zod';
 const updateUserFormSchema = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
-  departmentName: z.string().optional(),
-  positionName: z.string().optional(),
+  department: z.string().optional(),
+  position: z.string().optional(),
   role: z.string().optional(),
 });
 
@@ -13,8 +13,8 @@ type UpdateUserForm = z.infer<typeof updateUserFormSchema>;
 const defaultValues: UpdateUserForm = {
   firstName: '',
   lastName: '',
-  departmentName: '',
-  positionName: '',
+  department: '',
+  position: '',
   role: 'Employee',
 };
 

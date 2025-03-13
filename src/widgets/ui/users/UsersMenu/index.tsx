@@ -37,8 +37,11 @@ const UsersMenu: React.FC<UsersMenuProps> = ({ row }) => {
           <StyledProfileMenuItem value="profile" onClick={handleClick}>
             Profile
           </StyledProfileMenuItem>
-          <StyledProfileMenuItem value="update">
-            <button onClick={() => setIsModalOpen(true)}>Update user</button>
+          <StyledProfileMenuItem
+            value="update"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Update user
           </StyledProfileMenuItem>
           <StyledProfileMenuItem
             value="delete"

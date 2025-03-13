@@ -7,10 +7,15 @@ export const UPDATE_USER = gql`
       created_at
       email
       is_verified
-      cvs
-      department
+      department {
+        id
+        name
+      }
       department_name
-      position
+      position {
+        id
+        name
+      }
       position_name
       role
     }
