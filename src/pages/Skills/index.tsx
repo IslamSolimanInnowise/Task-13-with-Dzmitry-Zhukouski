@@ -55,8 +55,6 @@ const SkillsPage: React.FC = () => {
     {},
   );
 
-  console.log(skills?.skills);
-
   return (
     <StyledPageContainer>
       <Aside />
@@ -80,6 +78,7 @@ const SkillsPage: React.FC = () => {
                     key={i}
                     userId={id!}
                     masteryOptions={masteryOptions}
+                    categories={categories}
                   />
                 );
               })}

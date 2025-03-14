@@ -1,7 +1,7 @@
 import { Button, NativeSelect } from '@chakra-ui/react';
 import { Field } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
-import useAddSkill from '@features/hooks/users/useAddSkill';
+import useUpdateProfileSkill from '@features/hooks/users/useUpdateProfileSkill';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   defaultValues,
@@ -10,15 +10,19 @@ import {
 } from '@shared/schemas/AddSkillFormSchema';
 import { useForm } from 'react-hook-form';
 
-import { Skill } from '../types';
-
 interface UpdateSkillModalProps {
   userId: string;
+  name: string;
+  oldMastery: string;
+  categoryId: string;
   masteryOptions: string[];
 }
 
 const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
   userId,
+  name,
+  oldMastery,
+  categoryId,
   masteryOptions,
 }) => {
   const {
@@ -27,11 +31,23 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
     formState: { errors },
   } = useForm<MasterySchema>({
     resolver: zodResolver(masterySchema),
-    mode: 'all',
     defaultValues,
   });
 
-  const onSubmit = handleSubmit((data) => {});
+  const [updateSkill] = useUpdateProfileSkill();
+
+  const onSubmit = handleSubmit((data) => {
+    updateSkill({
+      variables: {
+        skill: {
+          userId,
+          name,
+          categoryId,
+          mastery: data.mastery || oldMastery,
+        },
+      },
+    });
+  });
 
   return (
     <Modal
@@ -45,7 +61,7 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
           <Field.Label>Skill</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field>
-              <option value=""></option>
+              <option value={name}>{name}</option>
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
@@ -54,7 +70,10 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
         <Field.Root invalid={!!errors.mastery}>
           <Field.Label>Skill Mastery</Field.Label>
           <NativeSelect.Root size="md">
-            <NativeSelect.Field {...register('mastery')}>
+            <NativeSelect.Field
+              {...register('mastery')}
+              defaultValue={oldMastery}
+            >
               {masteryOptions.map((option) => (
                 <option value={option} key={option}>
                   {option}
