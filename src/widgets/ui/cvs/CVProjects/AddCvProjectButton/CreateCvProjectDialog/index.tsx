@@ -49,10 +49,18 @@ const CreateCvProjectDialog = ({
     handleSubmit,
     watch,
     setValue,
+    trigger,
     formState: { isValid },
   } = useForm({
     resolver: zodResolver(schema),
     mode: 'onChange',
+    defaultValues: {
+      id: '',
+      start_date: '',
+      end_date: '',
+      description: '',
+      responsibilities: '',
+    },
   });
 
   const selectedProjectId = watch('id');
@@ -66,8 +74,9 @@ const CreateCvProjectDialog = ({
       setValue('end_date', selectedProject.end_date || '');
       setValue('description', selectedProject.description || '');
       setValue('responsibilities', selectedProject.responsibilities || '');
+      trigger();
     }
-  }, [selectedProject, setValue]);
+  }, [selectedProject, setValue, trigger]);
 
   const onSubmit = handleSubmit((data) => {
     const cvProjectData = {
@@ -109,6 +118,7 @@ const CreateCvProjectDialog = ({
                   <Controller
                     control={control}
                     name="id"
+                    defaultValue=""
                     render={({ field }) => (
                       <CustomSelect
                         placeholderText="Project"
@@ -134,6 +144,7 @@ const CreateCvProjectDialog = ({
                   <Controller
                     control={control}
                     name="start_date"
+                    defaultValue=""
                     render={({ field }) => (
                       <StyledInput
                         type="date"
@@ -145,6 +156,7 @@ const CreateCvProjectDialog = ({
                   <Controller
                     control={control}
                     name="end_date"
+                    defaultValue=""
                     render={({ field }) => (
                       <StyledInput
                         type="date"
@@ -164,6 +176,7 @@ const CreateCvProjectDialog = ({
                 <Controller
                   control={control}
                   name="responsibilities"
+                  defaultValue=""
                   render={({ field }) => (
                     <StyledInput placeholder="Responsibilities" {...field} />
                   )}
