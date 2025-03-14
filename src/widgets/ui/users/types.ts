@@ -28,4 +28,8 @@ export interface Skill {
   name: string;
   category_name: string;
   category_parent_name: string;
+  category: {
+    id: string;
+    name: string;
+  };
 }

@@ -1,13 +1,21 @@
 import { Button, HStack, Progress } from '@chakra-ui/react';
 import useDeleteSkill from '@features/hooks/users/useDeleteSkill';
 
+import UpdateSkillModal from '../UpdateSkillModal';
+
 interface SkillProps {
   name: string;
   mastery: string;
   userId: string;
+  masteryOptions: string[];
 }
 
-const Skill: React.FC<SkillProps> = ({ name, mastery, userId }) => {
+const Skill: React.FC<SkillProps> = ({
+  name,
+  mastery,
+  userId,
+  masteryOptions,
+}) => {
   const [deleteSkill] = useDeleteSkill();
 
   const masteryIndex = masteryOptions.findIndex((option) => option === mastery);
@@ -41,18 +49,13 @@ const Skill: React.FC<SkillProps> = ({ name, mastery, userId }) => {
         <Progress.Track flex="1">
           <Progress.Range />
         </Progress.Track>
-        <Button onClick={handleDeleteSkill}>Delete</Button>
+        <UpdateSkillModal userId={userId} masteryOptions={masteryOptions} />
+        <Button onClick={handleDeleteSkill} px="2">
+          Delete
+        </Button>
       </HStack>
     </Progress.Root>
   );
 };
-
-const masteryOptions = [
-  'Novice',
-  'Advanced',
-  'Competent',
-  'Proficient',
-  'Expert',
-];
 
 export default Skill;

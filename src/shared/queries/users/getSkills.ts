@@ -7,6 +7,10 @@ export const GET_SKILLS = gql`
       name
       category_name
       category_parent_name
+      category {
+        id
+        name
+      }
     }
   }
 `;

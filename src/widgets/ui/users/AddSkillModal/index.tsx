@@ -18,12 +18,14 @@ interface AddSkillModalProps {
     skillCategories: Skill[];
   };
   skillsObj: Record<string, Skill[]>;
+  masteryOptions: string[];
 }
 
 const AddSkillModal: React.FC<AddSkillModalProps> = ({
   userId,
   categories,
   skillsObj,
+  masteryOptions,
 }) => {
   const {
     register,
@@ -103,19 +105,11 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.skill?.message}</Field.ErrorText>
+          <Field.ErrorText>{errors.mastery?.message}</Field.ErrorText>
         </Field.Root>
       </form>
     </Modal>
   );
 };
-
-const masteryOptions = [
-  'Novice',
-  'Advanced',
-  'Competent',
-  'Proficient',
-  'Expert',
-];
 
 export default AddSkillModal;

@@ -20,6 +20,14 @@ interface SkillResponse {
   name: string;
 }
 
+const masteryOptions = [
+  'Novice',
+  'Advanced',
+  'Competent',
+  'Proficient',
+  'Expert',
+];
+
 const SkillsPage: React.FC = () => {
   const { id } = authVar();
   const { data } = useGetUser(id!);
@@ -47,7 +55,7 @@ const SkillsPage: React.FC = () => {
     {},
   );
 
-  console.log(userSkills, skills?.skills, skillsObj);
+  console.log(skills?.skills);
 
   return (
     <StyledPageContainer>
@@ -61,11 +69,19 @@ const SkillsPage: React.FC = () => {
             userId={id!}
             categories={categories}
             skillsObj={skillsObj}
+            masteryOptions={masteryOptions}
           />
-          {userSkills.length !== 0 && (
+          {userSkills?.length !== 0 && (
             <SkillsContainer>
               {userSkills?.map((skill: SkillResponse, i: number) => {
-                return <Skill {...skill} key={i} userId={id!} />;
+                return (
+                  <Skill
+                    {...skill}
+                    key={i}
+                    userId={id!}
+                    masteryOptions={masteryOptions}
+                  />
+                );
               })}
             </SkillsContainer>
           )}

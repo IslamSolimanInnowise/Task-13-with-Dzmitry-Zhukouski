@@ -6,6 +6,7 @@ Status of Last Deployment:
 
 todo:
 
-- getUserSkills and render them
-- updateSkill
-- deleteSkill
+- updateSkill modal with disabled skill and possible to choose from mastery
+- updateProfileSkill mutation
+- useUpdateProfileSkill hook
+- update the skill eventually in the skill component (still need to pass the skillsArr to get the categoryID)
