@@ -161,7 +161,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
           />
         </StyledTableTopHeaderCell>
         <StyledTableTopHeaderCell>
-          <AddCvProjectButton />
+          <AddCvProjectButton cvId={cvId} />
         </StyledTableTopHeaderCell>
       </StyledTableHeaderRow>
       <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>
