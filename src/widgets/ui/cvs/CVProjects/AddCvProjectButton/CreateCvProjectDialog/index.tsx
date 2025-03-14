@@ -22,8 +22,9 @@ import CustomSelect from './CustomSelect';
 
 const schema = z.object({
   id: z.string().min(1, 'Project is required'),
-  start_date: z.string().optional(),
+  start_date: z.string(),
   end_date: z.string().optional(),
+  description: z.string(),
   responsibilities: z.string().optional(),
 });
 
@@ -61,11 +62,12 @@ const CreateCvProjectDialog = ({
     if (selectedProject) {
       setValue('start_date', selectedProject.start_date || '');
       setValue('end_date', selectedProject.end_date || '');
-      setValue('responsibilities', selectedProject.description || '');
+      setValue('description', selectedProject.description || '');
+      setValue('responsibilities', selectedProject.responsibilities || '');
     }
   }, [selectedProject, setValue]);
 
-  const onSubmit = (data) => {
+  const onSubmit = handleSubmit((data) => {
     const cvProjectData = {
       cvId,
       projectId: data.id,
@@ -76,7 +78,7 @@ const CreateCvProjectDialog = ({
     };
     addCvProject({ variables: { project: cvProjectData } });
     onConfirm();
-  };
+  });
 
   return (
     <Portal>
@@ -86,6 +88,7 @@ const CreateCvProjectDialog = ({
         trapFocus={true}
         motionPreset="scale"
         placement="center"
+        size="xl"
       >
         <Dialog.Backdrop />
         <Dialog.Positioner>
@@ -99,7 +102,7 @@ const CreateCvProjectDialog = ({
               </Dialog.CloseTrigger>
             </ModalHeader>
             <Dialog.Body py={4}>
-              <VStack as="form" gap={8} onSubmit={handleSubmit(onSubmit)}>
+              <VStack as="form" gap={8}>
                 <Container display="flex" gap={8}>
                   <Controller
                     control={control}
@@ -147,17 +150,18 @@ const CreateCvProjectDialog = ({
                     )}
                   />
                 </Container>
+                <StyledTextArea
+                  placeholder="description"
+                  rows={4}
+                  resize="none"
+                  readOnly
+                  value={selectedProject?.description || ''}
+                />
                 <Controller
                   control={control}
                   name="responsibilities"
                   render={({ field }) => (
-                    <StyledTextArea
-                      placeholder="Responsibilities"
-                      rows={4}
-                      resize="none"
-                      disabled={!selectedProject}
-                      {...field}
-                    />
+                    <StyledInput placeholder="Responsibilities" {...field} />
                   )}
                 />
                 <Container display="flex" flexWrap="wrap" gap={2}>
@@ -174,7 +178,7 @@ const CreateCvProjectDialog = ({
             <ModalFooter>
               <CancelButton onClick={onClose}>Cancel</CancelButton>
               <ConfirmButton
-                type="submit"
+                onClick={onSubmit}
                 disabled={!isValid || !selectedProject || loading}
               >
                 Add
