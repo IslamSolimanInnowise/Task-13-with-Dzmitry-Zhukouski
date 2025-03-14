@@ -11,6 +11,10 @@ import {
   StyledPageContent,
 } from './languages.styles';
 
+interface Language {
+  name: string;
+}
+
 const proficiencyLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Native'];
 
 const LanguagesPage: React.FC = () => {
@@ -21,8 +25,10 @@ const LanguagesPage: React.FC = () => {
   const { data: languages, loading: languageLoading } = useGetLanguages();
 
   const filteredLanguages = languages?.languages.filter(
-    (language: { name: string }) => {
-      return !userLanguages?.includes(language.name);
+    (language: Language) => {
+      return !userLanguages?.some((userLanguage: Language) => {
+        return userLanguage.name === language.name;
+      });
     },
   );
 
