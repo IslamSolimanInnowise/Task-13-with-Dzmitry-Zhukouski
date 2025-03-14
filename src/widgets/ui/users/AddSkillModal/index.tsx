@@ -8,10 +8,10 @@ import {
   AddSkillSchema,
   defaultValues,
 } from '@shared/schemas/AddSkillFormSchema';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Skill } from '../types';
-import { useState } from 'react';
 
 interface AddSkillModalProps {
   userId: string;
