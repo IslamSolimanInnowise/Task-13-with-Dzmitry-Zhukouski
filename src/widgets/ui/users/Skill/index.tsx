@@ -1,11 +1,15 @@
 import { Button, HStack, Progress } from '@chakra-ui/react';
+import useDeleteSkill from '@features/hooks/users/useDeleteSkill';
 
 interface SkillProps {
   name: string;
   mastery: string;
+  userId: string;
 }
 
-const Skill: React.FC<SkillProps> = ({ name, mastery }) => {
+const Skill: React.FC<SkillProps> = ({ name, mastery, userId }) => {
+  const [deleteSkill] = useDeleteSkill();
+
   const masteryIndex = masteryOptions.findIndex((option) => option === mastery);
   const masteryValue = (masteryIndex + 1) * 20;
   const colorPalette =
@@ -19,6 +23,17 @@ const Skill: React.FC<SkillProps> = ({ name, mastery }) => {
             ? 'yellow'
             : 'red';
 
+  const handleDeleteSkill = () => {
+    deleteSkill({
+      variables: {
+        skill: {
+          userId,
+          name,
+        },
+      },
+    });
+  };
+
   return (
     <Progress.Root value={masteryValue} colorPalette={colorPalette}>
       <HStack gap="8">
@@ -26,7 +41,7 @@ const Skill: React.FC<SkillProps> = ({ name, mastery }) => {
         <Progress.Track flex="1">
           <Progress.Range />
         </Progress.Track>
-        <Button>Delete</Button>
+        <Button onClick={handleDeleteSkill}>Delete</Button>
       </HStack>
     </Progress.Root>
   );

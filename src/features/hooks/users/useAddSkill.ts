@@ -4,12 +4,11 @@ import { ADD_SKILL } from '@shared/queries/users/addProfileSkill';
 
 const useAddSkill = () => {
   return useMutation(ADD_SKILL, {
-    onCompleted: (res) => {
+    onCompleted: () => {
       notify({
         type: 'success',
         title: 'Your Data has been updated!',
       });
-      console.log(res);
     },
   });
 };

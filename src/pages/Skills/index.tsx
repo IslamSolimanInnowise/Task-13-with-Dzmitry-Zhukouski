@@ -30,7 +30,7 @@ const SkillsPage: React.FC = () => {
         <AddSkillModal userId={id!} />
         <SkillsContainer>
           {userSkills?.map((skill: SkillResponse, i: number) => {
-            return <Skill {...skill} key={i} />;
+            return <Skill {...skill} key={i} userId={id!} />;
           })}
         </SkillsContainer>
       </StyledPageContent>
