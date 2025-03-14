@@ -11,7 +11,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import type { CvProject } from 'cv-graphql';
+import type { CvProject, Project } from 'cv-graphql';
 import React, { useMemo, useRef, useState, useTransition } from 'react';
 
 import AddCvProjectButton from './AddCvProjectButton';
@@ -51,6 +51,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
       endDate: project.end_date,
       description: project.description,
       responsibilities: project.responsibilities,
+      projectId: project.project.id,
     }));
   }, [cvProjectsData]);
 
@@ -63,7 +64,9 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
     | 'end_date'
     | 'description'
     | 'responsibilities'
-  >;
+  > & {
+    projectId: Project['id'];
+  };
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
@@ -74,14 +77,22 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
       {
         id: 'actions',
         header: '',
-        cell: ({ row }) => <MoreButton id={row.original.id} />,
+        cell: ({ row }) => {
+          return (
+            <MoreButton
+              cvId={cvId}
+              projectId={row.original.projectId}
+              projectName={row.original.name}
+            />
+          );
+        },
         size: 50,
         minSize: 50,
         maxSize: 50,
         enableSorting: false,
       },
     ],
-    [],
+    [cvId],
   );
 
   const tableContainerRef = useRef<HTMLDivElement>(null);

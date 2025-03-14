@@ -1,7 +1,7 @@
 import { Icon, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
 import { EllipsisVertical } from 'lucide-react';
 
-// import useDeleteCvDialog from './DeleteCvDialog';
+import useDeleteCvProjectDialog from './DeleteCvProjectDialog';
 import {
   StyledMenuButton,
   StyledMenuContent,
@@ -9,18 +9,21 @@ import {
 } from './moreButton.styles';
 
 type MoreButtonProps = {
-  id: string;
+  cvId: string;
+  projectId: string;
+  projectName: string;
 };
 
-const MoreButton = ({ id }: MoreButtonProps) => {
-  // const [openDeleteCvDialog] = useDeleteCvDialog();
+const MoreButton = ({ cvId, projectId, projectName }: MoreButtonProps) => {
+  const [openRemoveCvProjectDialog] = useDeleteCvProjectDialog();
 
   const handleDeleteCvClick = () => {
-    // openDeleteCvDialog({
-    //   id,
-    //   name,
-    //   onConfirm: () => {},
-    // });
+    openRemoveCvProjectDialog({
+      cvId,
+      projectId,
+      projectName,
+      onConfirm: () => {},
+    });
   };
 
   return (

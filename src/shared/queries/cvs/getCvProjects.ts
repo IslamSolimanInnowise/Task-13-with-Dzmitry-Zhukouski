@@ -12,6 +12,9 @@ export const GET_CV_PROJECTS = gql`
         end_date
         environment
         responsibilities
+        project {
+          id
+        }
       }
     }
   }
