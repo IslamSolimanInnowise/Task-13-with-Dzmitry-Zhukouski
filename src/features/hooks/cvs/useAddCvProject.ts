@@ -8,8 +8,8 @@ const useAddCvProject = (onClose: () => void, cvId: string) => {
     refetchQueries: [{ query: GET_CV_PROJECTS, variables: { cvId } }],
     onCompleted: () => {
       notify({
-        type: 'info',
-        title: 'CV project was removed',
+        type: 'success',
+        title: 'CV project was added',
       });
       onClose();
     },

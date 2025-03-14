@@ -30,12 +30,14 @@ const schema = z.object({
 
 type CreateCvProjectDialogProps = {
   cvId: string;
+  cvProjectIds: string[];
   onClose: () => void;
   onConfirm: () => void;
 };
 
 const CreateCvProjectDialog = ({
   cvId,
+  cvProjectIds,
   onClose,
   onConfirm,
 }: CreateCvProjectDialogProps) => {
@@ -72,7 +74,7 @@ const CreateCvProjectDialog = ({
       cvId,
       projectId: data.id,
       start_date: data.start_date,
-      end_date: data.end_date,
+      end_date: data.end_date ? data.end_date : null,
       roles: selectedProject?.roles || [],
       responsibilities: data.responsibilities,
     };
@@ -110,10 +112,12 @@ const CreateCvProjectDialog = ({
                     render={({ field }) => (
                       <CustomSelect
                         placeholderText="Project"
-                        itemsList={projects?.projects.map((p: Project) => ({
-                          id: p.id,
-                          name: p.name,
-                        }))}
+                        itemsList={projects?.projects
+                          .filter((p: Project) => !cvProjectIds.includes(p.id))
+                          .map((p: Project) => ({
+                            id: p.id,
+                            name: p.name,
+                          }))}
                         isReadOnly={projectsLoading}
                         value={field.value}
                         onChange={field.onChange}

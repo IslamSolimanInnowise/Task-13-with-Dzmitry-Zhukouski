@@ -6,16 +6,19 @@ import useCreateCvProjectDialog from './CreateCvProjectDialog';
 
 type AddCvProjectButtonProps = {
   cvId: string;
+  cvProjectIds: string[];
 };
 
-const AddCvProjectButton = ({ cvId }: AddCvProjectButtonProps) => {
-  const [openCreateCvProjectDialog] = useCreateCvProjectDialog(cvId);
+const AddCvProjectButton = ({ cvId, cvProjectIds }: AddCvProjectButtonProps) => {
+  const [openCreateCvProjectDialog] = useCreateCvProjectDialog();
 
   return (
     <StyledAddCvProjectButton
       variant="ghost"
       onClick={() =>
         openCreateCvProjectDialog({
+          cvId,
+          cvProjectIds,
           onConfirm: () => {},
         })
       }

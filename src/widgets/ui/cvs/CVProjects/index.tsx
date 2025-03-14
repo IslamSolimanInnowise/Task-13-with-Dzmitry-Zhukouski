@@ -48,7 +48,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
       name: project.name,
       domain: project.domain,
       startDate: project.start_date,
-      endDate: project.end_date,
+      endDate: project.end_date ?? 'Till now',
       description: project.description,
       responsibilities: project.responsibilities,
       projectId: project.project.id,
@@ -161,7 +161,12 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
           />
         </StyledTableTopHeaderCell>
         <StyledTableTopHeaderCell>
-          <AddCvProjectButton cvId={cvId} />
+          <AddCvProjectButton
+            cvId={cvId}
+            cvProjectIds={handledCvProjectsData.map(
+              (project: typeof handledCvProjectsData) => project.projectId,
+            )}
+          />
         </StyledTableTopHeaderCell>
       </StyledTableHeaderRow>
       <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>
