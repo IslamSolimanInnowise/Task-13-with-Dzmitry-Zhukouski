@@ -11,13 +11,7 @@ import {
   defaultValues,
 } from '@shared/schemas/AddSkillFormSchema';
 import { useForm } from 'react-hook-form';
-
-interface Skill {
-  id: string;
-  name: string;
-  category_name: string;
-  category_parent_name: string;
-}
+import { Skill } from '../types';
 
 interface AddSkillModalProps {
   userId: string;
