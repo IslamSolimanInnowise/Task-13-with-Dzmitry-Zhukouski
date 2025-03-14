@@ -1,11 +1,11 @@
 import { z } from 'zod';
 
 const masterySchema = z.object({
-  mastery: z.string().optional(),
+  mastery: z.string().min(1, 'Please add your skill level'),
 });
 
 const addSkillFormSchema = masterySchema.extend({
-  skill: z.string().optional(),
+  skill: z.string().min(1, 'Please add a new skill'),
 });
 
 type AddSkillSchema = z.infer<typeof addSkillFormSchema>;

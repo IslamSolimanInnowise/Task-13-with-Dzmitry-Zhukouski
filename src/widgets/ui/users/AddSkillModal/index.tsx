@@ -1,4 +1,4 @@
-import { Button, NativeSelect } from '@chakra-ui/react';
+import { Button, NativeSelect, VStack } from '@chakra-ui/react';
 import { Field } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
 import useAddSkill from '@features/hooks/users/useAddSkill';
@@ -74,45 +74,50 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
       onOpenChange={(e) => setIsModalOpen(e.open)}
     >
       <form onSubmit={onSubmit}>
-        <Field.Root invalid={!!errors.skill}>
-          <Field.Label>Skill</Field.Label>
-          <NativeSelect.Root size="md">
-            <NativeSelect.Field {...register('skill')}>
-              {Object.entries(skillsObj as Record<string, Skill[]>).map(
-                ([key, value]) => {
-                  return (
-                    <optgroup label={key} key={key}>
-                      {value?.map((skill) => {
-                        return (
-                          <option value={skill.name} key={skill.id}>
-                            {skill.name}
-                          </option>
-                        );
-                      })}
-                    </optgroup>
-                  );
-                },
-              )}
-            </NativeSelect.Field>
-            <NativeSelect.Indicator />
-          </NativeSelect.Root>
-          <Field.ErrorText>{errors.skill?.message}</Field.ErrorText>
-        </Field.Root>
+        <VStack gap="8">
+          <Field.Root invalid={!!errors.skill}>
+            <Field.Label>Skill</Field.Label>
+            <NativeSelect.Root size="md">
+              <NativeSelect.Field {...register('skill')}>
+                {Object.entries(skillsObj as Record<string, Skill[]>).map(
+                  ([key, value]) => {
+                    return (
+                      <optgroup label={key} key={key}>
+                        {value?.map((skill) => {
+                          return (
+                            <option value={skill.name} key={skill.id}>
+                              {skill.name}
+                            </option>
+                          );
+                        })}
+                      </optgroup>
+                    );
+                  },
+                )}
+              </NativeSelect.Field>
+              <NativeSelect.Indicator />
+            </NativeSelect.Root>
+            <Field.ErrorText>{errors.skill?.message}</Field.ErrorText>
+          </Field.Root>
 
-        <Field.Root invalid={!!errors.mastery}>
-          <Field.Label>Skill Mastery</Field.Label>
-          <NativeSelect.Root size="md">
-            <NativeSelect.Field {...register('mastery')} defaultValue="Novice">
-              {masteryOptions.map((option) => (
-                <option value={option} key={option}>
-                  {option}
-                </option>
-              ))}
-            </NativeSelect.Field>
-            <NativeSelect.Indicator />
-          </NativeSelect.Root>
-          <Field.ErrorText>{errors.mastery?.message}</Field.ErrorText>
-        </Field.Root>
+          <Field.Root invalid={!!errors.mastery}>
+            <Field.Label>Skill Mastery</Field.Label>
+            <NativeSelect.Root size="md">
+              <NativeSelect.Field
+                {...register('mastery')}
+                defaultValue="Novice"
+              >
+                {masteryOptions.map((option) => (
+                  <option value={option} key={option}>
+                    {option}
+                  </option>
+                ))}
+              </NativeSelect.Field>
+              <NativeSelect.Indicator />
+            </NativeSelect.Root>
+            <Field.ErrorText>{errors.mastery?.message}</Field.ErrorText>
+          </Field.Root>
+        </VStack>
       </form>
     </Modal>
   );

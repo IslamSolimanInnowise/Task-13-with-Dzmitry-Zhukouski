@@ -1,4 +1,5 @@
 import { Field, NativeSelect } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import { Button } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
 import useAddLanguage from '@features/hooks/users/useAddLanguage';
@@ -72,35 +73,40 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
       onOpenChange={(e) => setIsModalOpen(e.open)}
     >
       <form onSubmit={onSubmit}>
-        <Field.Root invalid={!!errors.name}>
-          <Field.Label>Language</Field.Label>
-          <NativeSelect.Root size="md">
-            <NativeSelect.Field {...register('name')} defaultValue="English">
-              {languages.map((language) => (
-                <option value={language.name} key={language.id}>
-                  {language.name}
-                </option>
-              ))}
-            </NativeSelect.Field>
-            <NativeSelect.Indicator />
-          </NativeSelect.Root>
-          <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
-        </Field.Root>
+        <VStack gap="8">
+          <Field.Root invalid={!!errors.name}>
+            <Field.Label>Language</Field.Label>
+            <NativeSelect.Root size="md">
+              <NativeSelect.Field {...register('name')} defaultValue="English">
+                {languages.map((language) => (
+                  <option value={language.name} key={language.id}>
+                    {language.name}
+                  </option>
+                ))}
+              </NativeSelect.Field>
+              <NativeSelect.Indicator />
+            </NativeSelect.Root>
+            <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
+          </Field.Root>
 
-        <Field.Root invalid={!!errors.proficiency}>
-          <Field.Label>Language Proficiency</Field.Label>
-          <NativeSelect.Root size="md">
-            <NativeSelect.Field {...register('proficiency')} defaultValue="A1">
-              {proficiencyLevels.map((level) => (
-                <option value={level} key={level}>
-                  {level}
-                </option>
-              ))}
-            </NativeSelect.Field>
-            <NativeSelect.Indicator />
-          </NativeSelect.Root>
-          <Field.ErrorText>{errors.proficiency?.message}</Field.ErrorText>
-        </Field.Root>
+          <Field.Root invalid={!!errors.proficiency}>
+            <Field.Label>Language Proficiency</Field.Label>
+            <NativeSelect.Root size="md">
+              <NativeSelect.Field
+                {...register('proficiency')}
+                defaultValue="A1"
+              >
+                {proficiencyLevels.map((level) => (
+                  <option value={level} key={level}>
+                    {level}
+                  </option>
+                ))}
+              </NativeSelect.Field>
+              <NativeSelect.Indicator />
+            </NativeSelect.Root>
+            <Field.ErrorText>{errors.proficiency?.message}</Field.ErrorText>
+          </Field.Root>
+        </VStack>
       </form>
     </Modal>
   );
