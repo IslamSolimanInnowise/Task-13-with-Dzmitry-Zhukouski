@@ -1,0 +1,25 @@
+import { z } from 'zod';
+
+const proficiencySchema = z.object({
+  proficiency: z.string().min(1, 'Proficiency level is required'),
+});
+
+const addLanguageFormSchema = proficiencySchema.extend({
+  name: z.string().min(1, 'Language name is required'),
+});
+
+type AddLanguageForm = z.infer<typeof addLanguageFormSchema>;
+type ProficiencySchema = z.infer<typeof proficiencySchema>;
+
+const defaultValues: AddLanguageForm = {
+  name: '',
+  proficiency: '',
+};
+
+export {
+  type AddLanguageForm,
+  addLanguageFormSchema,
+  defaultValues,
+  type ProficiencySchema,
+  proficiencySchema,
+};

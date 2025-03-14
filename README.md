@@ -6,7 +6,18 @@ Status of Last Deployment:
 
 todo:
 
-- updateSkill modal with disabled skill and possible to choose from mastery
-- updateProfileSkill mutation
-- useUpdateProfileSkill hook
-- update the skill eventually in the skill component (still need to pass the skillsArr to get the categoryID)
+- add language schema => done
+- add react-hook-form setup => done
+- add form fields to add a language => done
+- add a language mutation => done
+- useAddLanguage hook => done
+- submit the form and finish the query => done
+- handle Closing the modal => done
+
+## rendering the languages
+
+- similar to the Skill Component, will need a language one
+
+## delete language mutation
+
+## update language mutation
