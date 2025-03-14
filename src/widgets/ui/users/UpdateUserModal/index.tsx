@@ -3,8 +3,8 @@ import Modal from '@entities/ui/Modal/Modal';
 import useGetDepartments from '@features/hooks/users/useGetDepartments';
 import useGetPositions from '@features/hooks/users/useGetPositions';
 import useUpdateProfile from '@features/hooks/users/useUpdateProfile';
-import { zodResolver } from '@hookform/resolvers/zod';
 import useUpdateUser from '@features/hooks/users/useUpdateUser';
+import { zodResolver } from '@hookform/resolvers/zod';
 import {
   defaultValues,
   UpdateUserForm,
