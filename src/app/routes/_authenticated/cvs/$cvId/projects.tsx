@@ -7,5 +7,6 @@ export const Route = createFileRoute('/_authenticated/cvs/$cvId/projects')({
 
 function RouteComponent() {
   const { cvId } = Route.useParams();
+  
   return <CVProjectsPage cvId={cvId} />;
 }

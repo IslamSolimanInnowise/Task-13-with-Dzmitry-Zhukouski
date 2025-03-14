@@ -7,5 +7,6 @@ export const Route = createFileRoute('/_authenticated/cvs/$cvId/preview')({
 
 function RouteComponent() {
   const { cvId } = Route.useParams();
+  
   return <CVPreviewPage cvId={cvId} />;
 }

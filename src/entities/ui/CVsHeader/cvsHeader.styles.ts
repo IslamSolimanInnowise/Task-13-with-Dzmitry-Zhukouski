@@ -12,4 +12,5 @@ export const StyledLink = styled(Link)`
   border-bottom: 1px solid transparent;
   color: ${({ theme }) => theme.color};
   padding: 1rem 2rem;
+  text-transform: uppercase;
 `;
