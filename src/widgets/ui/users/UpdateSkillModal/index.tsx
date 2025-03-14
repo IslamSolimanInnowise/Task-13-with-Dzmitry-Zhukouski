@@ -8,6 +8,7 @@ import {
   type MasterySchema,
   masterySchema,
 } from '@shared/schemas/AddSkillFormSchema';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 interface UpdateSkillModalProps {
@@ -34,6 +35,7 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
     defaultValues,
   });
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [updateSkill] = useUpdateProfileSkill();
 
   const onSubmit = handleSubmit((data) => {
@@ -47,6 +49,8 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
         },
       },
     });
+
+    setIsModalOpen(false);
   });
 
   return (
@@ -54,7 +58,13 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
       titleText="Update Skill"
       confirmText="Update"
       onConfirm={onSubmit}
-      trigger={<Button px="2">Update</Button>}
+      trigger={
+        <Button px="2" onClick={() => setIsModalOpen(true)}>
+          Update
+        </Button>
+      }
+      open={isModalOpen}
+      onOpenChange={(e) => setIsModalOpen(e.open)}
     >
       <form onSubmit={onSubmit}>
         <Field.Root disabled>

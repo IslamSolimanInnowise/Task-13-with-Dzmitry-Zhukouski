@@ -11,6 +11,7 @@ import {
 import { useForm } from 'react-hook-form';
 
 import { Skill } from '../types';
+import { useState } from 'react';
 
 interface AddSkillModalProps {
   userId: string;
@@ -36,6 +37,7 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
     mode: 'all',
     defaultValues,
   });
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const [addSkill] = useAddSkill();
 
@@ -54,6 +56,8 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
         },
       },
     });
+
+    setIsModalOpen(false);
   });
 
   return (
@@ -62,10 +66,12 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
       confirmText="Confirm"
       onConfirm={onSubmit}
       trigger={
-        <Button w="full" mt="8">
+        <Button w="full" mt="8" onClick={() => setIsModalOpen(true)}>
           + ADD SKILL
         </Button>
       }
+      open={isModalOpen}
+      onOpenChange={(e) => setIsModalOpen(e.open)}
     >
       <form onSubmit={onSubmit}>
         <Field.Root invalid={!!errors.skill}>
