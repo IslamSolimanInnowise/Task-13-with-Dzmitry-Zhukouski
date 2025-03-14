@@ -1,6 +1,7 @@
 import {
   ApolloClient,
   createHttpLink,
+  FetchResult,
   from,
   InMemoryCache,
 } from '@apollo/client';
@@ -8,8 +9,9 @@ import { setContext } from '@apollo/client/link/context';
 import { onError } from '@apollo/client/link/error';
 import { notify } from '@shared/Notifications/notify';
 import { authVar } from '@shared/store/globalAuthState';
-import { from as fromPromise, Observable, throwError } from 'rxjs';
+import { from as fromPromise, throwError } from 'rxjs';
 import { catchError, filter, switchMap } from 'rxjs/operators';
+import { Observable } from 'zen-observable-ts';
 
 import updateAccessToken from './updateAccessToken';
 
@@ -45,27 +47,32 @@ const handleUnauthorizedError = async (): Promise<string | null> => {
 };
 
 const errorLink = onError(
-  // eslint-disable-next-line no-comments/disallowComments
-  // @ts-expect-error TODO: fix types
   ({ graphQLErrors, networkError, operation, forward }) => {
     if (graphQLErrors) {
       const firstError = graphQLErrors[0];
+
       if (firstError.message === 'Unauthorized') {
-        let request$: Observable<unknown>;
+        let request$: Observable<FetchResult>;
 
         if (!isRefreshing) {
           isRefreshing = true;
-          request$ = fromPromise(handleUnauthorizedError()).pipe(
-            filter((newToken) => !!newToken),
-            switchMap((newToken) => {
-              resolvePendingRequests(newToken!);
-              return forward(operation);
-            }),
-            catchError((error: unknown) => {
-              pendingRequests.length = 0;
-              return throwError(error);
-            }),
-          );
+
+          request$ = new Observable<FetchResult>((observer) => {
+            fromPromise(handleUnauthorizedError())
+              .pipe(
+                filter((newToken): newToken is string => !!newToken),
+                switchMap((newToken) => {
+                  resolvePendingRequests(newToken);
+                  return forward(operation);
+                }),
+                catchError((error) => throwError(() => error)),
+              )
+              .subscribe({
+                next: (value: unknown) => observer.next(value as FetchResult),
+                error: (err) => observer.error(err),
+                complete: () => observer.complete(),
+              });
+          });
         } else {
           request$ = new Observable((observer) => {
             pendingRequests.push((newToken: string) => {
