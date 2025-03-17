@@ -47,8 +47,8 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
       id: project.id,
       name: project.name,
       domain: project.domain,
-      startDate: project.start_date,
-      endDate: project.end_date ?? 'Till now',
+      start_date: project.start_date,
+      end_date: project.end_date ?? 'Till now',
       description: project.description,
       responsibilities: project.responsibilities,
       projectId: project.project.id,
@@ -72,8 +72,8 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
     () => [
       { accessorKey: 'name', header: 'Name' },
       { accessorKey: 'domain', header: 'Domain' },
-      { accessorKey: 'startDate', header: 'Start Date' },
-      { accessorKey: 'endDate', header: 'End Date' },
+      { accessorKey: 'start_date', header: 'Start Date' },
+      { accessorKey: 'end_date', header: 'End Date' },
       {
         id: 'actions',
         header: '',
@@ -82,6 +82,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
             <MoreButton
               cvId={cvId}
               projectId={row.original.projectId}
+              cvProjects={handledCvProjectsData}
               projectName={row.original.name}
             />
           );
@@ -92,7 +93,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
         enableSorting: false,
       },
     ],
-    [cvId],
+    [cvId, handledCvProjectsData],
   );
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -161,12 +162,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
           />
         </StyledTableTopHeaderCell>
         <StyledTableTopHeaderCell>
-          <AddCvProjectButton
-            cvId={cvId}
-            cvProjectIds={handledCvProjectsData.map(
-              (project: typeof handledCvProjectsData) => project.projectId,
-            )}
-          />
+          <AddCvProjectButton cvId={cvId} cvProjects={handledCvProjectsData} />
         </StyledTableTopHeaderCell>
       </StyledTableHeaderRow>
       <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>

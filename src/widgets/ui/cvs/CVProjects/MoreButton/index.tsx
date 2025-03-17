@@ -1,6 +1,8 @@
 import { Icon, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
+import { CvProject } from 'cv-graphql';
 import { EllipsisVertical } from 'lucide-react';
 
+import useCvProjectDialog from '../CvProjectDialog';
 import useDeleteCvProjectDialog from './DeleteCvProjectDialog';
 import {
   StyledMenuButton,
@@ -11,11 +13,27 @@ import {
 type MoreButtonProps = {
   cvId: string;
   projectId: string;
+  cvProjects: CvProject[];
   projectName: string;
 };
 
-const MoreButton = ({ cvId, projectId, projectName }: MoreButtonProps) => {
+const MoreButton = ({
+  cvId,
+  projectId,
+  cvProjects,
+  projectName,
+}: MoreButtonProps) => {
+  const [openUpdatevProjectDialog] = useCvProjectDialog();
   const [openRemoveCvProjectDialog] = useDeleteCvProjectDialog();
+
+  const handleUpdateCvClick = () => {
+    openUpdatevProjectDialog({
+      cvId,
+      selectedProjectName: projectName,
+      cvProjects,
+      onConfirm: () => {},
+    });
+  };
 
   const handleDeleteCvClick = () => {
     openRemoveCvProjectDialog({
@@ -35,7 +53,7 @@ const MoreButton = ({ cvId, projectId, projectName }: MoreButtonProps) => {
       </MenuTrigger>
       <StyledMenuContent>
         <MenuItem asChild value="cv">
-          <StyledMenuButton>
+          <StyledMenuButton onClick={handleUpdateCvClick}>
             <Text>Update Project</Text>
           </StyledMenuButton>
         </MenuItem>

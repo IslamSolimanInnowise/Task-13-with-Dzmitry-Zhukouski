@@ -1,13 +1,16 @@
 import { Container, Dialog, Portal, Tag, VStack } from '@chakra-ui/react';
 import useAddCvProject from '@features/hooks/cvs/useAddCvProject';
 import useGetProjects from '@features/hooks/cvs/useGetProjects';
+import useUpdateCvProject from '@features/hooks/cvs/useUpdateCvProject';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
 import { Project } from 'cv-graphql';
+import { CvProject } from 'cv-graphql';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import CustomSelect from './CustomSelect';
 import {
   CancelButton,
   ConfirmButton,
@@ -17,32 +20,42 @@ import {
   StyledCloseButton,
   StyledInput,
   StyledTextArea,
-} from './createCvProjectDialog.styled';
-import CustomSelect from './CustomSelect';
+} from './cvProjectDialog.styled';
 
 const schema = z.object({
   id: z.string().min(1, 'Project is required'),
+  domain: z.string(),
   start_date: z.string(),
   end_date: z.string().optional(),
   description: z.string(),
   responsibilities: z.string().optional(),
 });
 
-type CreateCvProjectDialogProps = {
+type CvProjectDialogProps = {
   cvId: string;
-  cvProjectIds: string[];
+  selectedProjectName?: string | null;
+  cvProjects: CvProject[];
   onClose: () => void;
   onConfirm: () => void;
 };
 
-const CreateCvProjectDialog = ({
+const CvProjectDialog = ({
   cvId,
-  cvProjectIds,
+  selectedProjectName = null,
+  cvProjects,
   onClose,
   onConfirm,
-}: CreateCvProjectDialogProps) => {
+}: CvProjectDialogProps) => {
   const { data: projects, loading: projectsLoading } = useGetProjects();
-  const [addCvProject, { loading }] = useAddCvProject(onClose, cvId);
+  const [addCvProject, { loading: addCvProjectLoading }] = useAddCvProject(
+    onClose,
+    cvId,
+  );
+  const [updateCvProject, { loading: updateCvProjectLoading }] =
+    useUpdateCvProject(onClose, cvId);
+
+  const loadings =
+    projectsLoading || addCvProjectLoading || updateCvProjectLoading;
 
   const {
     control,
@@ -56,6 +69,7 @@ const CreateCvProjectDialog = ({
     mode: 'onChange',
     defaultValues: {
       id: '',
+      domain: '',
       start_date: '',
       end_date: '',
       description: '',
@@ -68,15 +82,50 @@ const CreateCvProjectDialog = ({
     (p: Project) => p.id === selectedProjectId,
   );
 
+  const itemsList = selectedProjectName
+    ? cvProjects
+        .filter((p: CvProject) => p.name === selectedProjectName)
+        .map((p: CvProject) => ({
+          id: p.id,
+          name: p.name,
+        }))
+    : projects?.projects
+        ?.filter(
+          (p: Project) =>
+            !cvProjects?.some((cvProject) => cvProject.name === p.name),
+        )
+        .map((p: Project) => ({
+          id: p.id,
+          name: p.name,
+        }));
+
   useEffect(() => {
-    if (selectedProject) {
+    if (selectedProjectName) {
+      const selectedCvProject = cvProjects?.find(
+        (p: CvProject) => p.name === selectedProjectName,
+      );
+
+      if (selectedCvProject) {
+        setValue('id', selectedCvProject.id);
+        setValue('domain', selectedCvProject.domain || '');
+        setValue('start_date', selectedCvProject.start_date || '');
+        setValue('end_date', selectedCvProject.end_date || '');
+        setValue('description', selectedCvProject.description || '');
+        setValue(
+          'responsibilities',
+          selectedCvProject.responsibilities?.join(', ') ?? '',
+        );
+        trigger();
+      }
+    } else if (selectedProject) {
+      setValue('id', selectedProject.id);
+      setValue('domain', selectedProject.domain || '');
       setValue('start_date', selectedProject.start_date || '');
       setValue('end_date', selectedProject.end_date || '');
       setValue('description', selectedProject.description || '');
-      setValue('responsibilities', selectedProject.responsibilities || '');
       trigger();
     }
-  }, [selectedProject, setValue, trigger]);
+  }, [cvProjects, selectedProjectName, selectedProject, setValue, trigger]);
 
   const onSubmit = handleSubmit((data) => {
     const cvProjectData = {
@@ -85,9 +134,14 @@ const CreateCvProjectDialog = ({
       start_date: data.start_date,
       end_date: data.end_date ? data.end_date : null,
       roles: selectedProject?.roles || [],
-      responsibilities: data.responsibilities,
+      responsibilities: [data.responsibilities],
     };
-    addCvProject({ variables: { project: cvProjectData } });
+
+    if (selectedProjectName) {
+      updateCvProject({ variables: { project: cvProjectData } });
+    } else {
+      addCvProject({ variables: { project: cvProjectData } });
+    }
     onConfirm();
   });
 
@@ -106,7 +160,7 @@ const CreateCvProjectDialog = ({
           <ModalContent>
             <ModalHeader>
               <Dialog.Title fontSize="lg" fontWeight="600">
-                Add project
+                {selectedProjectName ? 'Update project' : 'Add project'}
               </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <StyledCloseButton />
@@ -122,22 +176,25 @@ const CreateCvProjectDialog = ({
                     render={({ field }) => (
                       <CustomSelect
                         placeholderText="Project"
-                        itemsList={projects?.projects
-                          .filter((p: Project) => !cvProjectIds.includes(p.id))
-                          .map((p: Project) => ({
-                            id: p.id,
-                            name: p.name,
-                          }))}
-                        isReadOnly={projectsLoading}
+                        itemsList={itemsList}
+                        isReadOnly={loadings || !!selectedProjectName}
                         value={field.value}
                         onChange={field.onChange}
                       />
                     )}
                   />
-                  <StyledInput
-                    placeholder="Domain"
-                    value={selectedProject?.domain || ''}
-                    readOnly
+                  <Controller
+                    control={control}
+                    name="domain"
+                    defaultValue=""
+                    render={({ field }) => (
+                      <StyledInput
+                        {...field}
+                        disabled={!!selectedProjectName}
+                        placeholder="Domain"
+                        readOnly
+                      />
+                    )}
                   />
                 </Container>
                 <Container display="flex" gap={8}>
@@ -148,7 +205,7 @@ const CreateCvProjectDialog = ({
                     render={({ field }) => (
                       <StyledInput
                         type="date"
-                        disabled={!selectedProject}
+                        disabled={!selectedProject && !selectedProjectName}
                         {...field}
                       />
                     )}
@@ -160,18 +217,26 @@ const CreateCvProjectDialog = ({
                     render={({ field }) => (
                       <StyledInput
                         type="date"
-                        disabled={!selectedProject}
+                        disabled={!selectedProject && !selectedProjectName}
                         {...field}
                       />
                     )}
                   />
                 </Container>
-                <StyledTextArea
-                  placeholder="description"
-                  rows={4}
-                  resize="none"
-                  readOnly
-                  value={selectedProject?.description || ''}
+                <Controller
+                  control={control}
+                  name="description"
+                  defaultValue=""
+                  render={({ field }) => (
+                    <StyledTextArea
+                      {...field}
+                      disabled={!!selectedProjectName}
+                      placeholder="Description"
+                      rows={4}
+                      resize="none"
+                      readOnly
+                    />
+                  )}
                 />
                 <Controller
                   control={control}
@@ -196,9 +261,13 @@ const CreateCvProjectDialog = ({
               <CancelButton onClick={onClose}>Cancel</CancelButton>
               <ConfirmButton
                 onClick={onSubmit}
-                disabled={!isValid || !selectedProject || loading}
+                disabled={
+                  !isValid ||
+                  (!selectedProject && !selectedProjectName) ||
+                  loadings
+                }
               >
-                Add
+                {selectedProjectName ? 'Update' : 'Create & Add'}
               </ConfirmButton>
             </ModalFooter>
           </ModalContent>
@@ -208,7 +277,7 @@ const CreateCvProjectDialog = ({
   );
 };
 
-const useCreateCvProjectDialog = createDialogHook<CreateCvProjectDialogProps>(
-  (props) => <CreateCvProjectDialog {...props} />,
-);
-export default useCreateCvProjectDialog;
+const useCvProjectDialog = createDialogHook<CvProjectDialogProps>((props) => (
+  <CvProjectDialog {...props} />
+));
+export default useCvProjectDialog;

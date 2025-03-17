@@ -1,16 +1,17 @@
 import { Icon } from '@chakra-ui/react';
+import { CvProject } from 'cv-graphql';
 import { Plus } from 'lucide-react';
 
+import useCvProjectDialog from '../CvProjectDialog';
 import { StyledAddCvProjectButton } from './addCvProjectButton';
-import useCreateCvProjectDialog from './CreateCvProjectDialog';
 
 type AddCvProjectButtonProps = {
   cvId: string;
-  cvProjectIds: string[];
+  cvProjects: CvProject[];
 };
 
-const AddCvProjectButton = ({ cvId, cvProjectIds }: AddCvProjectButtonProps) => {
-  const [openCreateCvProjectDialog] = useCreateCvProjectDialog();
+const AddCvProjectButton = ({ cvId, cvProjects }: AddCvProjectButtonProps) => {
+  const [openCreateCvProjectDialog] = useCvProjectDialog();
 
   return (
     <StyledAddCvProjectButton
@@ -18,7 +19,7 @@ const AddCvProjectButton = ({ cvId, cvProjectIds }: AddCvProjectButtonProps) => 
       onClick={() =>
         openCreateCvProjectDialog({
           cvId,
-          cvProjectIds,
+          cvProjects,
           onConfirm: () => {},
         })
       }
