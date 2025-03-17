@@ -1,5 +1,13 @@
 import { createListCollection, Portal, Select } from '@chakra-ui/react';
 
+import {
+  StyledIndicator,
+  StyledItem,
+  StyledPositioner,
+  StyledTrigger,
+  StyledValueText,
+} from './customSelect.styles';
+
 type CustomSelectProps = {
   placeholderText: string;
   itemsList?: { id: string; name: string }[];
@@ -32,33 +40,26 @@ const CustomSelect = ({
     >
       <Select.HiddenSelect />
       <Select.Control>
-        <Select.Trigger style={{ cursor: 'pointer' }}>
-          <Select.ValueText
-            placeholder={placeholderText}
-            style={{ paddingLeft: '1rem' }}
-          >
+        <StyledTrigger>
+          <StyledValueText placeholder={placeholderText}>
             {selectedItem ? selectedItem.label : placeholderText}
-          </Select.ValueText>
-        </Select.Trigger>
+          </StyledValueText>
+        </StyledTrigger>
         <Select.IndicatorGroup>
-          <Select.Indicator style={{ paddingRight: '0.5rem' }} />
+          <StyledIndicator />
         </Select.IndicatorGroup>
       </Select.Control>
       <Portal>
-        <Select.Positioner style={{ zIndex: 9999 }}>
+        <StyledPositioner style={{ zIndex: 9999 }}>
           <Select.Content>
             {list.items.map((someItem) => (
-              <Select.Item
-                item={someItem}
-                key={someItem.value}
-                style={{ cursor: 'pointer', padding: '0.5rem 1rem' }}
-              >
+              <StyledItem item={someItem} key={someItem.value}>
                 {someItem.label}
                 <Select.ItemIndicator />
-              </Select.Item>
+              </StyledItem>
             ))}
           </Select.Content>
-        </Select.Positioner>
+        </StyledPositioner>
       </Portal>
     </Select.Root>
   );
