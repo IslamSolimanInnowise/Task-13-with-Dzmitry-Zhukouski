@@ -1,14 +1,11 @@
-import { Container, Dialog, Portal, Tag, VStack } from '@chakra-ui/react';
-import CustomSelect from '@entities/ui/CustomSelect';
+import { Dialog, Portal } from '@chakra-ui/react';
 import useAddCvProject from '@features/hooks/cvs/useAddCvProject';
 import useGetProjects from '@features/hooks/cvs/useGetProjects';
 import useUpdateCvProject from '@features/hooks/cvs/useUpdateCvProject';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
-import { Field } from '@shared/ui/field';
-import { Project } from 'cv-graphql';
 import { useEffect } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { TableCV } from '../index.d';
 import {
@@ -18,9 +15,9 @@ import {
   ModalFooter,
   ModalHeader,
   StyledCloseButton,
-  StyledInput,
-  StyledTextArea,
 } from './cvProjectDialog.styled';
+import CvProjectForm from './CvProjectForm';
+import type { FormValues } from './index.d';
 import { schema } from './schema';
 
 type CvProjectDialogProps = {
@@ -56,7 +53,7 @@ const CvProjectDialog = ({
     reset,
     trigger,
     formState: { isValid, isDirty, errors },
-  } = useForm({
+  } = useForm<FormValues>({
     resolver: zodResolver(schema),
     mode: 'onChange',
     defaultValues: {
@@ -169,105 +166,14 @@ const CvProjectDialog = ({
               </Dialog.CloseTrigger>
             </ModalHeader>
             <Dialog.Body py={4}>
-              <VStack as="form" gap={8}>
-                <Container display="flex" gap={8}>
-                  <Controller
-                    control={control}
-                    name="id"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <CustomSelect
-                        placeholderText="Project"
-                        itemsList={itemsList}
-                        isReadOnly={loadings || !!selectedProjectName}
-                        value={field.value}
-                        onChange={field.onChange}
-                      />
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name="domain"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <StyledInput
-                        {...field}
-                        disabled={!!selectedProjectName}
-                        placeholder="Domain"
-                        readOnly
-                      />
-                    )}
-                  />
-                </Container>
-                <Container display="flex" gap={8}>
-                  <Controller
-                    control={control}
-                    name="start_date"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <Field
-                        errorText={errors.start_date?.message}
-                        invalid={Boolean(errors.start_date)}
-                      >
-                        <StyledInput
-                          type="date"
-                          disabled={!selectedProject && !selectedProjectName}
-                          {...field}
-                        />
-                      </Field>
-                    )}
-                  />
-                  <Controller
-                    control={control}
-                    name="end_date"
-                    defaultValue=""
-                    render={({ field }) => (
-                      <Field
-                        errorText={errors.end_date?.message}
-                        invalid={Boolean(errors.end_date)}
-                      >
-                        <StyledInput
-                          type="date"
-                          disabled={!selectedProject && !selectedProjectName}
-                          {...field}
-                        />
-                      </Field>
-                    )}
-                  />
-                </Container>
-                <Controller
-                  control={control}
-                  name="description"
-                  defaultValue=""
-                  render={({ field }) => (
-                    <StyledTextArea
-                      {...field}
-                      disabled={!!selectedProjectName}
-                      placeholder="Description"
-                      rows={4}
-                      resize="none"
-                      readOnly
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name="responsibilities"
-                  defaultValue=""
-                  render={({ field }) => (
-                    <StyledInput placeholder="Responsibilities" {...field} />
-                  )}
-                />
-                <Container display="flex" flexWrap="wrap" gap={2}>
-                  {selectedProject?.environment?.map(
-                    (env: Project['environment'], index: number) => (
-                      <Tag.Root key={index}>
-                        <Tag.Label>{env}</Tag.Label>
-                      </Tag.Root>
-                    ),
-                  )}
-                </Container>
-              </VStack>
+              <CvProjectForm
+                control={control}
+                errors={errors}
+                selectedProject={selectedProject}
+                selectedProjectName={selectedProjectName}
+                itemsList={itemsList}
+                loadings={loadings}
+              />
             </Dialog.Body>
             <ModalFooter>
               <CancelButton onClick={onClose}>Cancel</CancelButton>
