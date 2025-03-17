@@ -147,7 +147,10 @@ const CvProjectDialog = ({
             id: selectedCvProject.projectId || '',
             domain: selectedCvProject.domain || '',
             start_date: selectedCvProject.start_date || '',
-            end_date: selectedCvProject.end_date || '',
+            end_date:
+              selectedCvProject.end_date === 'Till now'
+                ? new Date().toISOString().split('T')[0]
+                : selectedCvProject.end_date || '',
             description: selectedCvProject.description || '',
             responsibilities:
               selectedCvProject.responsibilities?.join(', ') ?? '',
@@ -318,7 +321,7 @@ const CvProjectDialog = ({
                   !isValid ||
                   (!selectedProject && !selectedProjectName) ||
                   loadings ||
-                  (selectedProjectName && !isDirty)
+                  (!!selectedProjectName && !isDirty)
                 }
               >
                 {selectedProjectName ? 'Update' : 'Create & Add'}

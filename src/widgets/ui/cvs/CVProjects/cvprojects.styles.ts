@@ -65,7 +65,7 @@ export const StyledTableContentCell = styled(Table.Cell)<{
 `;
 
 export const StyledTableContentDescriptionCell = styled(Table.Cell)`
-  padding: 8px 20px;
+  padding: 8px 20px 20px;
   flex: 1;
   display: flex;
   flex-direction: column;
