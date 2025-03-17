@@ -31,8 +31,6 @@ const LanguagesPage: React.FC = () => {
     },
   );
 
-  console.log(userLanguages, filteredLanguages);
-
   return (
     <StyledPageContainer>
       <Aside />

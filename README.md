@@ -20,8 +20,8 @@ todo:
 
 ## delete language mutation
 
-- write the mutation
-- write the hook
-- add the delete button function in the Language Component
+- write the mutation => done
+- write the hook => done
+- add the delete button function in the Language Component => done
 
-## update language mutation
+## update language mutation => done

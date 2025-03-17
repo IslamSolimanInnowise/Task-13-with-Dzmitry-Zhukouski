@@ -1,6 +1,7 @@
 import { Button, HStack } from '@chakra-ui/react';
 import { Progress } from '@chakra-ui/react';
 import useDeleteLanguage from '@features/hooks/users/useDeleteLanguage';
+import UpdateLanguageModal from '@widgets/ui/UpdateLanguageModal';
 
 import { Language as LanguageInterface } from '../types';
 
@@ -52,6 +53,12 @@ const Language: React.FC<LanguageProps> = ({
         <Progress.Track flex="1">
           <Progress.Range />
         </Progress.Track>
+        <UpdateLanguageModal
+          name={name}
+          proficiency={proficiency}
+          userId={userId}
+          proficiencyLevels={proficiencyLevels}
+        />
         <Button px="2" onClick={handleDeleteLanguage}>
           Delete
         </Button>
