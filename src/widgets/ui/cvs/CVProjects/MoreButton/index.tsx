@@ -1,7 +1,7 @@
 import { Icon, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
-import { CvProject } from 'cv-graphql';
 import { EllipsisVertical } from 'lucide-react';
 
+import { TableCV } from '..';
 import useCvProjectDialog from '../CvProjectDialog';
 import useDeleteCvProjectDialog from './DeleteCvProjectDialog';
 import {
@@ -13,7 +13,7 @@ import {
 type MoreButtonProps = {
   cvId: string;
   projectId: string;
-  cvProjects: CvProject[];
+  cvProjects: TableCV[];
   projectName: string;
 };
 

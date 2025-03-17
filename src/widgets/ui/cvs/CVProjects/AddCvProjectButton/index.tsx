@@ -1,13 +1,13 @@
 import { Icon } from '@chakra-ui/react';
-import { CvProject } from 'cv-graphql';
 import { Plus } from 'lucide-react';
 
+import { TableCV } from '..';
 import useCvProjectDialog from '../CvProjectDialog';
 import { StyledAddCvProjectButton } from './addCvProjectButton';
 
 type AddCvProjectButtonProps = {
   cvId: string;
-  cvProjects: CvProject[];
+  cvProjects: TableCV[];
 };
 
 const AddCvProjectButton = ({ cvId, cvProjects }: AddCvProjectButtonProps) => {

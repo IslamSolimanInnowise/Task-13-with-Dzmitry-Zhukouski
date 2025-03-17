@@ -5,11 +5,11 @@ import useUpdateCvProject from '@features/hooks/cvs/useUpdateCvProject';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
 import { Project } from 'cv-graphql';
-import { CvProject } from 'cv-graphql';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import { TableCV } from '..';
 import CustomSelect from './CustomSelect';
 import {
   CancelButton,
@@ -22,6 +22,14 @@ import {
   StyledTextArea,
 } from './cvProjectDialog.styled';
 
+type CvProjectDialogProps = {
+  cvId: string;
+  selectedProjectName?: string | null;
+  cvProjects: TableCV[];
+  onClose: () => void;
+  onConfirm: () => void;
+};
+
 const schema = z.object({
   id: z.string().min(1, 'Project is required'),
   domain: z.string(),
@@ -30,14 +38,6 @@ const schema = z.object({
   description: z.string(),
   responsibilities: z.string().optional(),
 });
-
-type CvProjectDialogProps = {
-  cvId: string;
-  selectedProjectName?: string | null;
-  cvProjects: CvProject[];
-  onClose: () => void;
-  onConfirm: () => void;
-};
 
 const CvProjectDialog = ({
   cvId,
@@ -63,7 +63,7 @@ const CvProjectDialog = ({
     watch,
     setValue,
     trigger,
-    formState: { isValid },
+    formState: { isValid, isDirty },
   } = useForm({
     resolver: zodResolver(schema),
     mode: 'onChange',
@@ -79,22 +79,22 @@ const CvProjectDialog = ({
 
   const selectedProjectId = watch('id');
   const selectedProject = projects?.projects.find(
-    (p: Project) => p.id === selectedProjectId,
+    (p: TableCV) => p.id === selectedProjectId,
   );
 
   const itemsList = selectedProjectName
     ? cvProjects
-        .filter((p: CvProject) => p.name === selectedProjectName)
-        .map((p: CvProject) => ({
+        .filter((p: TableCV) => p.name === selectedProjectName)
+        .map((p: TableCV) => ({
           id: p.id,
           name: p.name,
         }))
     : projects?.projects
         ?.filter(
-          (p: Project) =>
+          (p: TableCV) =>
             !cvProjects?.some((cvProject) => cvProject.name === p.name),
         )
-        .map((p: Project) => ({
+        .map((p: TableCV) => ({
           id: p.id,
           name: p.name,
         }));
@@ -102,11 +102,11 @@ const CvProjectDialog = ({
   useEffect(() => {
     if (selectedProjectName) {
       const selectedCvProject = cvProjects?.find(
-        (p: CvProject) => p.name === selectedProjectName,
+        (p: TableCV) => p.name === selectedProjectName,
       );
 
       if (selectedCvProject) {
-        setValue('id', selectedCvProject.id);
+        setValue('id', selectedCvProject.projectId || '');
         setValue('domain', selectedCvProject.domain || '');
         setValue('start_date', selectedCvProject.start_date || '');
         setValue('end_date', selectedCvProject.end_date || '');
@@ -264,7 +264,8 @@ const CvProjectDialog = ({
                 disabled={
                   !isValid ||
                   (!selectedProject && !selectedProjectName) ||
-                  loadings
+                  loadings ||
+                  !isDirty
                 }
               >
                 {selectedProjectName ? 'Update' : 'Create & Add'}

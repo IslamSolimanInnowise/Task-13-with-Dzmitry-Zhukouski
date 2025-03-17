@@ -31,6 +31,19 @@ import {
 } from './cvprojects.styles';
 import MoreButton from './MoreButton';
 
+export type TableCV = Pick<
+  CvProject,
+  | 'id'
+  | 'name'
+  | 'domain'
+  | 'start_date'
+  | 'end_date'
+  | 'description'
+  | 'responsibilities'
+> & {
+  projectId: Project['id'];
+};
+
 type CVProjectsProps = {
   cvId: string;
 };
@@ -41,7 +54,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
   const { data: cvProjectsData, loading: isCvProjectsLoading } =
     useGetCvProjects(cvId);
 
-  const handledCvProjectsData = useMemo(() => {
+  const handledCvProjectsData: TableCV[] = useMemo(() => {
     if (!cvProjectsData || !cvProjectsData.cv) return [];
     return cvProjectsData?.cv.projects.map((project: CvProject) => ({
       id: project.id,
@@ -50,23 +63,10 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
       start_date: project.start_date,
       end_date: project.end_date ?? 'Till now',
       description: project.description,
-      responsibilities: project.responsibilities,
+      responsibilities: project.responsibilities ?? [],
       projectId: project.project.id,
     }));
   }, [cvProjectsData]);
-
-  type TableCV = Pick<
-    CvProject,
-    | 'id'
-    | 'name'
-    | 'domain'
-    | 'start_date'
-    | 'end_date'
-    | 'description'
-    | 'responsibilities'
-  > & {
-    projectId: Project['id'];
-  };
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
