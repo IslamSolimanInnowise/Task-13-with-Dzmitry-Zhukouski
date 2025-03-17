@@ -12,7 +12,13 @@ import {
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import type { CvProject, Project } from 'cv-graphql';
-import React, { useMemo, useRef, useState, useTransition } from 'react';
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition,
+} from 'react';
 
 import AddCvProjectButton from './AddCvProjectButton';
 import {
@@ -53,6 +59,8 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
   const [, startTransition] = useTransition();
   const { data: cvProjectsData, loading: isCvProjectsLoading } =
     useGetCvProjects(cvId);
+
+  const rowHeights = useRef<{ [key: string]: number }>({});
 
   const handledCvProjectsData: TableCV[] = useMemo(() => {
     if (!cvProjectsData || !cvProjectsData.cv) return [];
@@ -109,11 +117,31 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
   });
 
   const rowVirtualizer = useVirtualizer({
-    count: table.getRowModel().rows.length,
-    estimateSize: () => 96,
+    count: table.getRowModel().rows.length * 2,
+    estimateSize: (index: number) => {
+      const rowIndex = Math.floor(index / 2);
+      const isDescriptionRow = index % 2 === 1;
+      const row = table.getRowModel().rows[rowIndex];
+      const key = isDescriptionRow ? `${row.id}-desc` : row.id;
+      return rowHeights.current[key] ?? (isDescriptionRow ? 48 : 56);
+    },
     getScrollElement: () => tableContainerRef.current,
     overscan: 10,
   });
+
+  const onRowRender = (rowId: string, el: HTMLDivElement | null) => {
+    if (el) {
+      const newHeight = el.getBoundingClientRect().height;
+      if (rowHeights.current[rowId] !== newHeight) {
+        rowHeights.current[rowId] = newHeight;
+        rowVirtualizer.measure();
+      }
+    }
+  };
+
+  useEffect(() => {
+    rowVirtualizer.measure();
+  }, [handledCvProjectsData, rowVirtualizer]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGlobalFilter([e.target.value]);
@@ -172,37 +200,49 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
   const tableBody = rowVirtualizer.getVirtualItems().length ? (
     <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
       {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-        const row = table.getRowModel().rows[virtualRow.index];
-        return (
-          <React.Fragment key={row.id}>
-            <StyledTableBodyRow transform={`translateY(${virtualRow.start}px)`}>
-              {row.getVisibleCells().map((cell, index) => (
-                <StyledTableContentCell
-                  key={cell.id}
-                  $isFirst={index === 0}
-                  $isActions={cell.column.id === 'actions'}
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </StyledTableContentCell>
-              ))}
-            </StyledTableBodyRow>
+        const rowIndex = Math.floor(virtualRow.index / 2);
+        const isDescriptionRow = virtualRow.index % 2 === 1;
+        const row = table.getRowModel().rows[rowIndex];
+
+        if (isDescriptionRow) {
+          return (
             <StyledTableBodyRow
-              transform={`translateY(${virtualRow.start + 48}px)`}
+              key={`${row.id}-desc`}
+              ref={(el) => onRowRender(`${row.id}-desc`, el)}
+              transform={`translateY(${virtualRow.start}px)`}
             >
-              <StyledTableContentDescriptionCell colSpan={4}>
+              <StyledTableContentDescriptionCell colSpan={5}>
                 <StyledTableContentDescriptionText>
                   {row.original.description}
                 </StyledTableContentDescriptionText>
               </StyledTableContentDescriptionCell>
             </StyledTableBodyRow>
-          </React.Fragment>
+          );
+        }
+
+        return (
+          <StyledTableBodyRow
+            key={row.id}
+            ref={(el) => onRowRender(row.id, el)}
+            transform={`translateY(${virtualRow.start}px)`}
+          >
+            {row.getVisibleCells().map((cell, index) => (
+              <StyledTableContentCell
+                key={cell.id}
+                $isFirst={index === 0}
+                $isActions={cell.column.id === 'actions'}
+              >
+                {flexRender(cell.column.columnDef.cell, cell.getContext())}
+              </StyledTableContentCell>
+            ))}
+          </StyledTableBodyRow>
         );
       })}
     </Table.Body>
   ) : (
     <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
       <StyledTableBodyRow>
-        <StyledTableNoContentCell colSpan={columns.length}>
+        <StyledTableNoContentCell colSpan={5}>
           No results found
         </StyledTableNoContentCell>
       </StyledTableBodyRow>

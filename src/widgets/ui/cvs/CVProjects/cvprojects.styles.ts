@@ -65,7 +65,7 @@ export const StyledTableContentCell = styled(Table.Cell)<{
 `;
 
 export const StyledTableContentDescriptionCell = styled(Table.Cell)`
-  padding: 13.6px 8px 13.6px 20px;
+  padding: 8px 20px;
   flex: 1;
   display: flex;
   min-width: 100px;
@@ -73,10 +73,15 @@ export const StyledTableContentDescriptionCell = styled(Table.Cell)`
 `;
 
 export const StyledTableContentDescriptionText = styled(Text)`
-  white-space: nowrap;
-  text-overflow: ellipsis;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+  word-wrap: break-word;
   color: ${({ theme }) => theme.grey};
+  white-space: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 export const StyledTableBodyRow = styled(Table.Row)`

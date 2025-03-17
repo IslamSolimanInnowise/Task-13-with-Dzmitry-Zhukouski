@@ -318,7 +318,7 @@ const CvProjectDialog = ({
                   !isValid ||
                   (!selectedProject && !selectedProjectName) ||
                   loadings ||
-                  !isDirty
+                  (selectedProjectName && !isDirty)
                 }
               >
                 {selectedProjectName ? 'Update' : 'Create & Add'}
