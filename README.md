@@ -16,8 +16,12 @@ todo:
 
 ## rendering the languages
 
-- similar to the Skill Component, will need a language one
+- similar to the Skill Component, will need a language one => done
 
 ## delete language mutation
+
+- write the mutation
+- write the hook
+- add the delete button function in the Language Component
 
 ## update language mutation
