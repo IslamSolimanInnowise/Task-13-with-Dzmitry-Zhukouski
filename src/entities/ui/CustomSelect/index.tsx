@@ -3,7 +3,6 @@ import { createListCollection, Portal, Select } from '@chakra-ui/react';
 import {
   StyledIndicator,
   StyledItem,
-  StyledPositioner,
   StyledTrigger,
   StyledValueText,
 } from './customSelect.styles';
@@ -50,7 +49,7 @@ const CustomSelect = ({
         </Select.IndicatorGroup>
       </Select.Control>
       <Portal>
-        <StyledPositioner style={{ zIndex: 9999 }}>
+        <Select.Positioner style={{ zIndex: 9999 }}>
           <Select.Content>
             {list.items.map((someItem) => (
               <StyledItem item={someItem} key={someItem.value}>
@@ -59,7 +58,7 @@ const CustomSelect = ({
               </StyledItem>
             ))}
           </Select.Content>
-        </StyledPositioner>
+        </Select.Positioner>
       </Portal>
     </Select.Root>
   );
