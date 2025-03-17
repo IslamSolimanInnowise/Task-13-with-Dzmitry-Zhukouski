@@ -4,6 +4,7 @@ import useGetProjects from '@features/hooks/cvs/useGetProjects';
 import useUpdateCvProject from '@features/hooks/cvs/useUpdateCvProject';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { Field } from '@shared/ui/field';
 import { Project } from 'cv-graphql';
 import { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -30,14 +31,49 @@ type CvProjectDialogProps = {
   onConfirm: () => void;
 };
 
-const schema = z.object({
-  id: z.string().min(1, 'Project is required'),
-  domain: z.string(),
-  start_date: z.string(),
-  end_date: z.string().optional(),
-  description: z.string(),
-  responsibilities: z.string().optional(),
-});
+const schema = z
+  .object({
+    id: z.string().min(1, 'Project is required'),
+    domain: z.string(),
+    start_date: z
+      .string()
+      .min(1, 'Start date is required')
+      .refine((value) => /^\d{4}-\d{2}-\d{2}$/.test(value), {
+        message: 'Invalid date format',
+      })
+      .refine(
+        (value) => {
+          const year = new Date(value).getFullYear();
+          return year >= 2000 && year <= 2100;
+        },
+        { message: 'Year must be between 2000-2100' },
+      ),
+    end_date: z
+      .string()
+      .optional()
+      .refine((value) => !value || /^\d{4}-\d{2}-\d{2}$/.test(value), {
+        message: 'Invalid date format',
+      })
+      .refine(
+        (value) => {
+          if (!value) return true;
+          const year = new Date(value).getFullYear();
+          return year >= 2000 && year <= 2100;
+        },
+        { message: 'Year must be between 2000-2100' },
+      ),
+    description: z.string(),
+    responsibilities: z.string().optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (data.end_date && new Date(data.end_date) < new Date(data.start_date)) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ['end_date'],
+        message: 'End date cannot be earlier than start date',
+      });
+    }
+  });
 
 const CvProjectDialog = ({
   cvId,
@@ -63,7 +99,7 @@ const CvProjectDialog = ({
     watch,
     reset,
     trigger,
-    formState: { isValid, isDirty },
+    formState: { isValid, isDirty, errors },
   } = useForm({
     resolver: zodResolver(schema),
     mode: 'onChange',
@@ -210,11 +246,16 @@ const CvProjectDialog = ({
                     name="start_date"
                     defaultValue=""
                     render={({ field }) => (
-                      <StyledInput
-                        type="date"
-                        disabled={!selectedProject && !selectedProjectName}
-                        {...field}
-                      />
+                      <Field
+                        errorText={errors.start_date?.message}
+                        invalid={Boolean(errors.start_date)}
+                      >
+                        <StyledInput
+                          type="date"
+                          disabled={!selectedProject && !selectedProjectName}
+                          {...field}
+                        />
+                      </Field>
                     )}
                   />
                   <Controller
@@ -222,11 +263,16 @@ const CvProjectDialog = ({
                     name="end_date"
                     defaultValue=""
                     render={({ field }) => (
-                      <StyledInput
-                        type="date"
-                        disabled={!selectedProject && !selectedProjectName}
-                        {...field}
-                      />
+                      <Field
+                        errorText={errors.end_date?.message}
+                        invalid={Boolean(errors.end_date)}
+                      >
+                        <StyledInput
+                          type="date"
+                          disabled={!selectedProject && !selectedProjectName}
+                          {...field}
+                        />
+                      </Field>
                     )}
                   />
                 </Container>
