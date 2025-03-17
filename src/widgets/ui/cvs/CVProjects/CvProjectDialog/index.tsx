@@ -1,4 +1,5 @@
 import { Container, Dialog, Portal, Tag, VStack } from '@chakra-ui/react';
+import CustomSelect from '@entities/ui/CustomSelect';
 import useAddCvProject from '@features/hooks/cvs/useAddCvProject';
 import useGetProjects from '@features/hooks/cvs/useGetProjects';
 import useUpdateCvProject from '@features/hooks/cvs/useUpdateCvProject';
@@ -11,7 +12,6 @@ import { Controller, useForm } from 'react-hook-form';
 import * as z from 'zod';
 
 import { TableCV } from '..';
-import CustomSelect from './CustomSelect';
 import {
   CancelButton,
   ConfirmButton,
