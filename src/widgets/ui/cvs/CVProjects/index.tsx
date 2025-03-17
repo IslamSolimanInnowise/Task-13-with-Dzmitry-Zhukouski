@@ -11,7 +11,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useVirtualizer } from '@tanstack/react-virtual';
-import type { CvProject, Project } from 'cv-graphql';
+import type { CvProject } from 'cv-graphql';
 import React, {
   useEffect,
   useMemo,
@@ -37,20 +37,8 @@ import {
   StyledTableNoContentCell,
   StyledTableTopHeaderCell,
 } from './cvprojects.styles';
+import { TableCV } from './index.d';
 import MoreButton from './MoreButton';
-
-export type TableCV = Pick<
-  CvProject,
-  | 'id'
-  | 'name'
-  | 'domain'
-  | 'start_date'
-  | 'end_date'
-  | 'description'
-  | 'responsibilities'
-> & {
-  projectId: Project['id'];
-};
 
 type CVProjectsProps = {
   cvId: string;

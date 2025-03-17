@@ -1,8 +1,8 @@
 import { Icon, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
 import { EllipsisVertical } from 'lucide-react';
 
-import { TableCV } from '..';
 import useCvProjectDialog from '../CvProjectDialog';
+import { TableCV } from '../index.d';
 import useDeleteCvProjectDialog from './DeleteCvProjectDialog';
 import {
   StyledMenuButton,
