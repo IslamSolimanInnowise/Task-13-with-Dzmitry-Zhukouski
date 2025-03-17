@@ -61,7 +61,7 @@ const CvProjectDialog = ({
     control,
     handleSubmit,
     watch,
-    setValue,
+    reset,
     trigger,
     formState: { isValid, isDirty },
   } = useForm({
@@ -100,32 +100,39 @@ const CvProjectDialog = ({
         }));
 
   useEffect(() => {
-    if (selectedProjectName) {
-      const selectedCvProject = cvProjects?.find(
-        (p: TableCV) => p.name === selectedProjectName,
-      );
-
-      if (selectedCvProject) {
-        setValue('id', selectedCvProject.projectId || '');
-        setValue('domain', selectedCvProject.domain || '');
-        setValue('start_date', selectedCvProject.start_date || '');
-        setValue('end_date', selectedCvProject.end_date || '');
-        setValue('description', selectedCvProject.description || '');
-        setValue(
-          'responsibilities',
-          selectedCvProject.responsibilities?.join(', ') ?? '',
+    const initializeForm = () => {
+      if (selectedProjectName) {
+        const selectedCvProject = cvProjects?.find(
+          (p: TableCV) => p.name === selectedProjectName,
         );
-        trigger();
+
+        if (selectedCvProject) {
+          const formValues = {
+            id: selectedCvProject.projectId || '',
+            domain: selectedCvProject.domain || '',
+            start_date: selectedCvProject.start_date || '',
+            end_date: selectedCvProject.end_date || '',
+            description: selectedCvProject.description || '',
+            responsibilities:
+              selectedCvProject.responsibilities?.join(', ') ?? '',
+          };
+          reset(formValues);
+        }
+      } else if (selectedProject) {
+        const formValues = {
+          id: selectedProject.id,
+          domain: selectedProject.domain || '',
+          start_date: selectedProject.start_date || '',
+          end_date: selectedProject.end_date || '',
+          description: selectedProject.description || '',
+          responsibilities: '',
+        };
+        reset(formValues);
       }
-    } else if (selectedProject) {
-      setValue('id', selectedProject.id);
-      setValue('domain', selectedProject.domain || '');
-      setValue('start_date', selectedProject.start_date || '');
-      setValue('end_date', selectedProject.end_date || '');
-      setValue('description', selectedProject.description || '');
-      trigger();
-    }
-  }, [cvProjects, selectedProjectName, selectedProject, setValue, trigger]);
+    };
+
+    initializeForm();
+  }, [cvProjects, selectedProjectName, selectedProject, trigger, reset]);
 
   const onSubmit = handleSubmit((data) => {
     const cvProjectData = {
