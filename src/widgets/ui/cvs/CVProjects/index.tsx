@@ -30,6 +30,8 @@ import {
   StyledTableContentCell,
   StyledTableContentDescriptionCell,
   StyledTableContentDescriptionText,
+  StyledTableContentResponsibilitiesText,
+  StyledTableContentResponsibilitiesTextContainer,
   StyledTableHeader,
   StyledTableHeaderRow,
   StyledTableNoContentCell,
@@ -215,6 +217,13 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
                 <StyledTableContentDescriptionText>
                   {row.original.description}
                 </StyledTableContentDescriptionText>
+                {row.original.responsibilities.join(', ') && (
+                  <StyledTableContentResponsibilitiesTextContainer>
+                    <StyledTableContentResponsibilitiesText>
+                      {row.original.responsibilities.join(', ')}
+                    </StyledTableContentResponsibilitiesText>
+                  </StyledTableContentResponsibilitiesTextContainer>
+                )}
               </StyledTableContentDescriptionCell>
             </StyledTableBodyRow>
           );

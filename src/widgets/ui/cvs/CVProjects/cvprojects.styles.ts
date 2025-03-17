@@ -1,4 +1,4 @@
-import { Button, Table, Text } from '@chakra-ui/react';
+import { Box, Button, Span, Table, Text } from '@chakra-ui/react';
 import { ArrowUp } from 'lucide-react';
 import styled from 'styled-components';
 
@@ -68,6 +68,9 @@ export const StyledTableContentDescriptionCell = styled(Table.Cell)`
   padding: 8px 20px;
   flex: 1;
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
   min-width: 100px;
   color: ${({ theme }) => theme.grey};
 `;
@@ -82,6 +85,40 @@ export const StyledTableContentDescriptionText = styled(Text)`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+`;
+
+export const StyledTableContentResponsibilitiesTextContainer = styled(Box)`
+  max-width: 300px;
+  font-size: 0.8125rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  color: rgb(46, 46, 46);
+  background-color: rgba(0, 0, 0, 0.08);
+  cursor: unset;
+  vertical-align: middle;
+  box-sizing: border-box;
+  border-radius: 16px;
+  white-space: nowrap;
+  transition:
+    background-color 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  outline: 0px;
+  text-decoration: none;
+  border-width: 0px;
+  border-style: initial;
+  border-color: initial;
+  border-image: initial;
+  padding: 0px;
+`;
+
+export const StyledTableContentResponsibilitiesText = styled(Span)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 8px;
+  padding-right: 8px;
+  white-space: nowrap;
 `;
 
 export const StyledTableBodyRow = styled(Table.Row)`
