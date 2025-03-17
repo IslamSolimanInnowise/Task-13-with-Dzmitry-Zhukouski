@@ -46,11 +46,11 @@ const LanguagesPage: React.FC = () => {
           />
           {userLanguages?.length !== 0 && (
             <LanguagesContainer>
-              {userLanguages?.map((language: LanguageInterface, i: number) => {
+              {userLanguages?.map((language: LanguageInterface) => {
                 return (
                   <Language
                     {...language}
-                    key={i}
+                    key={language.name}
                     proficiencyLevels={proficiencyLevels}
                     userId={id!}
                   />

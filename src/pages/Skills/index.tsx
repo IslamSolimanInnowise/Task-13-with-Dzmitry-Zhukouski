@@ -71,11 +71,11 @@ const SkillsPage: React.FC = () => {
           />
           {userSkills?.length !== 0 && (
             <SkillsContainer>
-              {userSkills?.map((skill: SkillResponse, i: number) => {
+              {userSkills?.map((skill: SkillResponse) => {
                 return (
                   <Skill
                     {...skill}
-                    key={i}
+                    key={skill.name}
                     userId={id!}
                     masteryOptions={masteryOptions}
                     categories={categories}
