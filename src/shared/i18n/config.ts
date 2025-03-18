@@ -10,7 +10,14 @@ i18n
   .init({
     supportedLngs: ['en', 'ru'],
     fallbackLng: 'en',
-    ns: ['auth', 'languages'],
+    ns: [
+      'auth',
+      'languages',
+      'CVsTable',
+      'CVDetails',
+      'CVProjects',
+      'cvsNotifications',
+    ],
     interpolation: {
       escapeValue: false,
     },

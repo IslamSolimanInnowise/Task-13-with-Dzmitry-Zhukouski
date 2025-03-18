@@ -4,6 +4,9 @@
     "education": "Образование",
     "employee": "Работник"
   },
+  "tableBody": {
+    "noContent": "Результатов не найдено"
+  },
   "createCvButtonText": "Создать CV",
   "createCvDialog": {
     "title": "Создать CV",

@@ -1,5 +1,6 @@
 import { Icon } from '@chakra-ui/react';
 import { Plus } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import useCvProjectDialog from '../CvProjectDialog';
 import { TableCV } from '../index.d';
@@ -11,6 +12,7 @@ type AddCvProjectButtonProps = {
 };
 
 const AddCvProjectButton = ({ cvId, cvProjects }: AddCvProjectButtonProps) => {
+  const { t } = useTranslation('CVProjects');
   const [openCreateCvProjectDialog] = useCvProjectDialog();
 
   return (
@@ -20,14 +22,14 @@ const AddCvProjectButton = ({ cvId, cvProjects }: AddCvProjectButtonProps) => {
         openCreateCvProjectDialog({
           cvId,
           cvProjects,
-          title: 'Add project',
-          submitText: 'Create & Add',
+          title: t('cvProjectDialog.title'),
+          submitText: t('cvProjectDialog.confirmButtonText'),
           onConfirm: () => {},
         })
       }
     >
       <Icon as={Plus} w={5} h={5} />
-      Add Project
+      {t('addCvProjectButtonText')}
     </StyledAddCvProjectButton>
   );
 };

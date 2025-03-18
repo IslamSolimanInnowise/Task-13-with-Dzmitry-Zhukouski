@@ -1,5 +1,6 @@
 import { Icon, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
 import { EllipsisVertical } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import useCvProjectDialog from '../CvProjectDialog';
 import { TableCV } from '../index.d';
@@ -23,6 +24,7 @@ const MoreButton = ({
   cvProjects,
   projectName,
 }: MoreButtonProps) => {
+  const { t } = useTranslation('CVProjects');
   const [openUpdatevProjectDialog] = useCvProjectDialog();
   const [openRemoveCvProjectDialog] = useDeleteCvProjectDialog();
 
@@ -34,10 +36,9 @@ const MoreButton = ({
     id: updatingCvProject?.projectId || '',
     domain: updatingCvProject?.domain || '',
     start_date: updatingCvProject?.start_date || '',
-    end_date:
-      updatingCvProject?.end_date === 'Till now'
-        ? new Date().toISOString().split('T')[0]
-        : updatingCvProject?.end_date || '',
+    end_date: updatingCvProject?.end_date
+      ? new Date().toISOString().split('T')[0]
+      : updatingCvProject?.end_date || '',
     description: updatingCvProject?.description || '',
     responsibilities: updatingCvProject?.responsibilities?.join(', ') || '',
   };
@@ -46,8 +47,12 @@ const MoreButton = ({
     openUpdatevProjectDialog({
       cvId,
       cvProjects,
-      title: 'Update project',
-      submitText: 'Update',
+      title: t('cvProjectDialog.title', {
+        context: 'updatingMode',
+      }),
+      submitText: t('cvProjectDialog.confirmButtonText', {
+        context: 'updatingMode',
+      }),
       updatingMode: true,
       updatingCvProject,
       updatingFormValues,
@@ -74,12 +79,12 @@ const MoreButton = ({
       <StyledMenuContent>
         <MenuItem asChild value="cv">
           <StyledMenuButton onClick={handleUpdateCvClick}>
-            <Text>Update Project</Text>
+            <Text>{t('moreButton.updateButtonText')}</Text>
           </StyledMenuButton>
         </MenuItem>
         <MenuItem asChild value="delete-cv">
           <StyledMenuButton onClick={handleDeleteCvClick}>
-            <Text>Remove Project</Text>
+            <Text>{t('moreButton.deleteButtonText')}</Text>
           </StyledMenuButton>
         </MenuItem>
       </StyledMenuContent>

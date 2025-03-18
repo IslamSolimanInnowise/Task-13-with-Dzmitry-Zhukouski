@@ -1,0 +1,20 @@
+{
+  "useCreateCv": {
+    "success": "CV был создан"
+  },
+  "useUpdateCv": {
+    "success": "CV был обновлен"
+  },
+  "useDeleteCv": {
+    "success": "CV был удален"
+  },
+  "useAddCvProject": {
+    "success": "CV проект был добавлен"
+  },
+  "useUpdateCvProject": {
+    "success": "CV проект был обновлен"
+  },
+  "useRemoveCvProject": {
+    "success": "CV проект был удален"
+  }
+}

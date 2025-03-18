@@ -4,6 +4,9 @@
     "education": "Education",
     "employee": "Employee"
   },
+  "tableBody": {
+    "noContent": "No results found"
+  },
   "createCvButtonText": "Create CV",
   "createCvDialog": {
     "title": "Create CV",

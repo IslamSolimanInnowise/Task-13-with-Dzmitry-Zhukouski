@@ -68,7 +68,6 @@ export const ConfirmButton = styled(Button)`
   border-radius: 1.5rem;
   padding: 0.5rem 1rem;
   transition: 0.3s;
-  width: 7rem;
 
   &:hover {
     background-color: ${({ theme }) => theme.darkPrimaryColor};

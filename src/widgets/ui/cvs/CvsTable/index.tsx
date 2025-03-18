@@ -179,7 +179,7 @@ const CVsTable: React.FC = () => {
     <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
       <StyledTableBodyRow>
         <StyledTableNoContentCell colSpan={columns.length}>
-          No results found
+          {t('tableBody.noContent')}
         </StyledTableNoContentCell>
       </StyledTableBodyRow>
     </Table.Body>
