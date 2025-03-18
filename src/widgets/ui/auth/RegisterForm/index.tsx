@@ -10,6 +10,7 @@ import { Field } from '@shared/ui/field';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import {
   FormBox,
@@ -24,6 +25,8 @@ import {
 } from './RegisterForm.styles';
 
 const RegisterForm: React.FC = () => {
+  const { t } = useTranslation('auth');
+
   const {
     register,
     handleSubmit,
@@ -45,30 +48,30 @@ const RegisterForm: React.FC = () => {
 
   return (
     <FormBox>
-      <StyledH1>Register now</StyledH1>
-      <StyledP>Welcome! Sign up to continue</StyledP>
+      <StyledH1>{t('register.title')}</StyledH1>
+      <StyledP>{t('register.subTitle')}</StyledP>
       <form onSubmit={onSubmit}>
         <InputsContainer>
           <Field
-            errorText={errors.email?.message}
+            errorText={t('register.emailError')}
             invalid={Boolean(errors.email)}
           >
             <StyledInput
               type="email"
               {...register('email')}
-              placeholder="Email"
+              placeholder={t('register.emailPlaceholder')}
             />
           </Field>
 
           <Field
-            errorText={errors.password?.message}
+            errorText={t('register.passwordError')}
             invalid={Boolean(errors.password)}
           >
             <InputGroup>
               <StyledInput
                 type={showPassword ? 'text' : 'password'}
                 {...register('password')}
-                placeholder="Password"
+                placeholder={t('register.passwordPlaceholder')}
                 autoComplete="on"
               />
               <StyledInputRightElement>
@@ -86,10 +89,12 @@ const RegisterForm: React.FC = () => {
         </InputsContainer>
 
         <StyledSubmitButton type="submit" disabled={loading}>
-          CREATE ACCOUNT
+          {t('register.confirmText')}
         </StyledSubmitButton>
       </form>
-      <StyledLink to="/auth/login">I HAVE AN ACCOUNT</StyledLink>
+      <StyledLink to="/auth/login">
+        {t('register.iHaveAnAccountLink')}
+      </StyledLink>
     </FormBox>
   );
 };
