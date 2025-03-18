@@ -28,6 +28,8 @@ const MoreButton = ({
 
   const handleUpdateCvClick = () => {
     openUpdatevProjectDialog({
+      title: 'Update project',
+      submitText: 'Update',
       cvId,
       selectedProjectName: projectName,
       cvProjects,

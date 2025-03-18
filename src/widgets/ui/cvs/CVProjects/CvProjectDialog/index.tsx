@@ -25,6 +25,8 @@ type CvProjectDialogProps = {
   cvId: Cv['id'];
   selectedProjectName?: string | null;
   cvProjects: TableCV[];
+  title: string;
+  submitText: string;
   onClose: () => void;
   onConfirm: () => void;
 };
@@ -33,6 +35,8 @@ const CvProjectDialog = ({
   cvId,
   selectedProjectName = null,
   cvProjects,
+  title,
+  submitText,
   onClose,
   onConfirm,
 }: CvProjectDialogProps) => {
@@ -160,7 +164,7 @@ const CvProjectDialog = ({
           <ModalContent>
             <ModalHeader>
               <Dialog.Title fontSize="lg" fontWeight="600">
-                {selectedProjectName ? 'Update project' : 'Add project'}
+                {title}
               </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <StyledCloseButton />
@@ -187,7 +191,7 @@ const CvProjectDialog = ({
                   (!!selectedProjectName && !isDirty)
                 }
               >
-                {selectedProjectName ? 'Update' : 'Create & Add'}
+                {submitText}
               </ConfirmButton>
             </ModalFooter>
           </ModalContent>
