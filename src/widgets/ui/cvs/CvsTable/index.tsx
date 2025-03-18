@@ -32,7 +32,7 @@ import {
 } from './cvsTable.styles';
 import MoreButton from './MoreButton';
 
-const CvsTable: React.FC = () => {
+const CVsTable: React.FC = () => {
   const { t } = useTranslation('CVsTable');
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [, startTransition] = useTransition();
@@ -69,7 +69,7 @@ const CvsTable: React.FC = () => {
         enableSorting: false,
       },
     ],
-    [],
+    [t],
   );
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -197,4 +197,4 @@ const CvsTable: React.FC = () => {
   );
 };
 
-export default CvsTable;
+export default CVsTable;
