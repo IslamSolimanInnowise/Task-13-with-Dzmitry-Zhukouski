@@ -1,6 +1,5 @@
 import { Field, NativeSelect } from '@chakra-ui/react';
 import { VStack } from '@chakra-ui/react';
-import { Button } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
 import useAddLanguage from '@features/hooks/users/useAddLanguage';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -11,6 +10,8 @@ import {
 } from '@shared/schemas/addLanguageSchema';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { StyledButton } from './addLanguageModal.styles';
 
 interface AddLanguageModalProps {
   userId?: string;
@@ -54,6 +55,8 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
     setIsModalOpen(false);
   });
 
+  const handleOpenModal = () => setIsModalOpen(true);
+
   return (
     <Modal
       titleText="Add Language"
@@ -61,14 +64,12 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
       cancelText="Cancel"
       onConfirm={onSubmit}
       trigger={
-        <Button
-          w="full"
-          mt="8"
+        <StyledButton
           disabled={languages.length === 0}
-          onClick={() => setIsModalOpen(true)}
+          onClick={handleOpenModal}
         >
           + ADD Language
-        </Button>
+        </StyledButton>
       }
       open={isModalOpen}
       onOpenChange={(e) => setIsModalOpen(e.open)}

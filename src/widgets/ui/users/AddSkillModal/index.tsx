@@ -1,4 +1,4 @@
-import { Button, NativeSelect, VStack } from '@chakra-ui/react';
+import { NativeSelect, VStack } from '@chakra-ui/react';
 import { Field } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
 import useAddSkill from '@features/hooks/users/useAddSkill';
@@ -12,6 +12,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Skill } from '../types';
+import { StyledButton } from './addSkillModal.styles';
 
 interface AddSkillModalProps {
   userId: string;
@@ -60,6 +61,8 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
     setIsModalOpen(false);
   });
 
+  const handleOpenModal = () => setIsModalOpen(true);
+
   return (
     <Modal
       titleText="Add Skill"
@@ -67,9 +70,7 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
       cancelText="Cancel"
       onConfirm={onSubmit}
       trigger={
-        <Button w="full" mt="8" onClick={() => setIsModalOpen(true)}>
-          + ADD SKILL
-        </Button>
+        <StyledButton onClick={handleOpenModal}>+ ADD SKILL</StyledButton>
       }
       open={isModalOpen}
       onOpenChange={(e) => setIsModalOpen(e.open)}

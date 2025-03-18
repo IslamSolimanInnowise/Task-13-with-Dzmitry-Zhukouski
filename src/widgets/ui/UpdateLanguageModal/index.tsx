@@ -1,4 +1,4 @@
-import { Button, Field, NativeSelect } from '@chakra-ui/react';
+import { Field, NativeSelect } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
 import useUpdateProfileLanguage from '@features/hooks/users/useUpdateProfileLanguage';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,6 +10,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Language } from '../users/types';
+import { StyledButton } from './updateLanguageModal.styles';
 
 interface UpdateLanguageModalProps extends Language {
   proficiencyLevels: string[];
@@ -49,17 +50,15 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
     setIsModalOpen(false);
   });
 
+  const handleOpenModal = () => setIsModalOpen(true);
+
   return (
     <Modal
       titleText="Update Language"
       confirmText="Update"
       cancelText="Cancel"
       onConfirm={onSubmit}
-      trigger={
-        <Button px="2" onClick={() => setIsModalOpen(true)}>
-          Update
-        </Button>
-      }
+      trigger={<StyledButton onClick={handleOpenModal}>Update</StyledButton>}
       open={isModalOpen}
       onOpenChange={(e) => setIsModalOpen(e.open)}
     >

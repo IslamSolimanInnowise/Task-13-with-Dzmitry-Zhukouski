@@ -1,4 +1,4 @@
-import { Button, NativeSelect } from '@chakra-ui/react';
+import { NativeSelect } from '@chakra-ui/react';
 import { Field } from '@chakra-ui/react';
 import Modal from '@entities/ui/Modal/Modal';
 import useUpdateProfileSkill from '@features/hooks/users/useUpdateProfileSkill';
@@ -10,6 +10,8 @@ import {
 } from '@shared/schemas/AddSkillFormSchema';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { StyledButton } from './updateSkillModal.styles';
 
 interface UpdateSkillModalProps {
   userId: string;
@@ -53,17 +55,15 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
     setIsModalOpen(false);
   });
 
+  const handleOpenModal = () => setIsModalOpen(true);
+
   return (
     <Modal
       titleText="Update Skill"
       confirmText="Update"
       cancelText="Cancel"
       onConfirm={onSubmit}
-      trigger={
-        <Button px="2" onClick={() => setIsModalOpen(true)}>
-          Update
-        </Button>
-      }
+      trigger={<StyledButton onClick={handleOpenModal}>Update</StyledButton>}
       open={isModalOpen}
       onOpenChange={(e) => setIsModalOpen(e.open)}
     >
