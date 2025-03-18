@@ -12,7 +12,7 @@ export interface User {
   position_name: string;
   profile: Profile;
   icon: string;
-  role: 'Employee' | 'Admin';
+  role: AuthRoles;
   position: {
     id: string;
     name: string;
@@ -37,4 +37,9 @@ export interface Skill {
 export interface Language {
   proficiency: string;
   name: string;
+}
+
+export enum AuthRoles {
+  Employee = 'Employee',
+  Admin = 'Admin',
 }
