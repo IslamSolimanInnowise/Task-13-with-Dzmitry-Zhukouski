@@ -36,7 +36,12 @@ const SearchInput: React.FC<SearchInputProps> = ({
         </StyledEndElementContainer>
       }
     >
-      <StyledInput {...props} placeholder="Search" value={value} onChange={handleChange} />
+      <StyledInput
+        {...props}
+        placeholder="Search"
+        value={value}
+        onChange={handleChange}
+      />
     </StyledInputGroup>
   );
 };

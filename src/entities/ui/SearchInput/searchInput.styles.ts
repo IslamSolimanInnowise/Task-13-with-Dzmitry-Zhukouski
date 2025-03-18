@@ -17,7 +17,7 @@ export const StyledXIconBox = styled(Box)`
   border-radius: 100%;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.04);
+    background-color: ${({ theme }) => theme.lightGrey};
   }
 `;
 

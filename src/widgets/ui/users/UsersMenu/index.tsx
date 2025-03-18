@@ -1,0 +1,62 @@
+import { MenuRoot } from '@shared/ui/menu';
+import { useNavigate } from '@tanstack/react-router';
+import { EllipsisVertical } from 'lucide-react';
+import { useState } from 'react';
+
+import { User } from '../types';
+import UpdateUserModal from '../UpdateUserModal';
+import {
+  StyledProfileMenuContent,
+  StyledProfileMenuItem,
+  StyledProfileMenuTrigger,
+} from './usersMenu.styles';
+
+interface UsersMenuProps {
+  row: {
+    original: User;
+  };
+}
+
+const UsersMenu: React.FC<UsersMenuProps> = ({ row }) => {
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleClick = () =>
+    navigate({
+      to: '/users/$userId',
+      params: { userId: row.original.id },
+    });
+
+  return (
+    <>
+      <MenuRoot>
+        <StyledProfileMenuTrigger asChild>
+          <EllipsisVertical />
+        </StyledProfileMenuTrigger>
+        <StyledProfileMenuContent>
+          <StyledProfileMenuItem value="profile" onClick={handleClick}>
+            Profile
+          </StyledProfileMenuItem>
+          <StyledProfileMenuItem
+            value="update"
+            onClick={() => setIsModalOpen(true)}
+          >
+            Update user
+          </StyledProfileMenuItem>
+          <StyledProfileMenuItem
+            value="delete"
+            disabled={row.original.role === 'Employee'}
+          >
+            Delete user
+          </StyledProfileMenuItem>
+        </StyledProfileMenuContent>
+      </MenuRoot>
+      <UpdateUserModal
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        user={row.original}
+      />
+    </>
+  );
+};
+export default UsersMenu;
