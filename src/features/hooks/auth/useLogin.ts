@@ -1,4 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { LOGIN_USER } from '@shared/queries/auth/loginUser';
 import { authVar } from '@shared/store/globalAuthState';
@@ -8,7 +9,7 @@ const useLogin = () => {
     onCompleted: (res) => {
       notify({
         type: 'success',
-        title: 'Login successful',
+        title: i18n.t('login.notifyOnSuccess'),
       });
 
       localStorage.setItem('access-token', res.login.access_token);

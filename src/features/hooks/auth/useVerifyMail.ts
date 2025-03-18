@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { VERIFY_MAIL } from '@shared/queries/auth/verifyEmail';
 import { authVar } from '@shared/store/globalAuthState';
@@ -16,8 +17,8 @@ const useVerifyMail = () => {
 
       notify({
         type: 'success',
-        title: 'Success',
-        message: 'Your email is successfully verified.',
+        title: i18n.t('verifyEmail.notifyOnSuccess'),
+        message: i18n.t('verifyEmail.notifyOnSuccessMessage'),
       });
     },
   });
