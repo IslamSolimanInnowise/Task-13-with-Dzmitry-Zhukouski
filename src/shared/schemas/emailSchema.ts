@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const emailFieldSchema = z.string().email({ message: 'Invalid email address' });
+const emailFieldSchema = z.string().email();
 
 const emailSchema = z.object({
   email: emailFieldSchema,

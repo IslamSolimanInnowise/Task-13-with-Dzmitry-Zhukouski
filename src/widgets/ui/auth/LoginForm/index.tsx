@@ -10,6 +10,7 @@ import { Field } from '@shared/ui/field';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import {
   FormBox,
@@ -24,6 +25,8 @@ import {
 } from './LoginForm.styles';
 
 const LoginForm: React.FC = () => {
+  const { t } = useTranslation('auth');
+
   const {
     register,
     handleSubmit,
@@ -45,30 +48,30 @@ const LoginForm: React.FC = () => {
 
   return (
     <FormBox>
-      <StyledH1>Welcome back</StyledH1>
-      <StyledP>Hello again! Log in to continue</StyledP>
+      <StyledH1>{t('login.title')}</StyledH1>
+      <StyledP>{t('login.subTitle')}</StyledP>
       <form onSubmit={onSubmit}>
         <InputsContainer>
           <Field
-            errorText={errors.email?.message}
+            errorText={t('login.emailError')}
             invalid={Boolean(errors.email)}
           >
             <StyledInput
               type="email"
               {...register('email')}
-              placeholder="Email"
+              placeholder={t('login.emailPlaceholder')}
             />
           </Field>
 
           <Field
-            errorText={errors.password?.message}
+            errorText={t('login.passwordError')}
             invalid={Boolean(errors.password)}
           >
             <InputGroup>
               <StyledInput
                 type={showPassword ? 'text' : 'password'}
                 {...register('password')}
-                placeholder="Password"
+                placeholder={t('login.passwordPlaceholder')}
                 autoComplete="on"
               />
               <StyledInputRightElement>
@@ -86,10 +89,12 @@ const LoginForm: React.FC = () => {
         </InputsContainer>
 
         <StyledSubmitButton type="submit" disabled={loading}>
-          LOGIN
+          {t('login.confirmText')}
         </StyledSubmitButton>
       </form>
-      <StyledLink to="/auth/forgot-password">FORGOT PASSWORD</StyledLink>
+      <StyledLink to="/auth/forgot-password">
+        {t('login.forgotPasswordLink')}
+      </StyledLink>
     </FormBox>
   );
 };

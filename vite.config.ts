@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => {
         '@features': path.resolve(__dirname, './src/features'),
         '@entities': path.resolve(__dirname, './src/entities'),
         '@shared': path.resolve(__dirname, './src/shared'),
+        '@public': path.resolve(__dirname, './public'),
       },
     },
   };
