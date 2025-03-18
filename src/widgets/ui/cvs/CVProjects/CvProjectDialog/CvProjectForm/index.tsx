@@ -1,5 +1,5 @@
 import { Container, Tag, VStack } from '@chakra-ui/react';
-import CustomSelect from '@entities/ui/CustomSelect';
+import Select from '@entities/ui/Select';
 import { Field } from '@shared/ui/field';
 import { Project } from 'cv-graphql';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
@@ -32,7 +32,7 @@ const CvProjectForm = ({
           name="id"
           defaultValue=""
           render={({ field }) => (
-            <CustomSelect
+            <Select
               placeholderText="Project"
               itemsList={itemsList}
               isReadOnly={loadings || !!selectedProjectName}
