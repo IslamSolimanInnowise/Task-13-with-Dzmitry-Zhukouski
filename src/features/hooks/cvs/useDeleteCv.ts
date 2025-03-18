@@ -3,7 +3,7 @@ import { notify } from '@shared/Notifications/notify';
 import { DELETE_CV } from '@shared/queries/cvs/deleteCv';
 import { GET_CVS } from '@shared/queries/cvs/getCvs';
 
-const useDeleteCv = (onClose: () => void) => {
+const useDeleteCv = (onCloseDialog: () => void) => {
   return useMutation(DELETE_CV, {
     refetchQueries: [{ query: GET_CVS }],
     onCompleted: (data) => {
@@ -12,11 +12,11 @@ const useDeleteCv = (onClose: () => void) => {
           type: 'info',
           title: 'CV was deleted',
         });
-        onClose();
+        onCloseDialog();
       }
     },
     onError: () => {
-      onClose();
+      onCloseDialog();
     },
   });
 };

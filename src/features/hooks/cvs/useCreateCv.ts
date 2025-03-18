@@ -4,7 +4,7 @@ import { CREATE_CV } from '@shared/queries/cvs/createCv';
 import { GET_CVS } from '@shared/queries/cvs/getCvs';
 import { router } from '@shared/router';
 
-const useCreateCv = (onClose: () => void) => {
+const useCreateCv = (onCloseDialog: () => void) => {
   return useMutation(CREATE_CV, {
     refetchQueries: [{ query: GET_CVS }],
     onCompleted: (data) => {
@@ -13,7 +13,7 @@ const useCreateCv = (onClose: () => void) => {
           type: 'success',
           title: 'CV was created',
         });
-        onClose();
+        onCloseDialog();
         router.navigate({
           to: '/cvs/$cvId/details',
           params: { cvId: data.createCv.id },
@@ -21,7 +21,7 @@ const useCreateCv = (onClose: () => void) => {
       }
     },
     onError: () => {
-      onClose();
+      onCloseDialog();
     },
   });
 };
