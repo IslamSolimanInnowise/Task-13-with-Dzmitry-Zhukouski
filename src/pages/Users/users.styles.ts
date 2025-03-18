@@ -14,7 +14,7 @@ export const StyledPageContent = styled.main`
 `;
 
 export const Styledh2 = styled.h2`
-  color: rgba(0, 0, 0, 0.6);
+  color: ${({ theme }) => theme.grey};
   font-size: 16px;
   font-weight: 400;
   line-height: 24px;
