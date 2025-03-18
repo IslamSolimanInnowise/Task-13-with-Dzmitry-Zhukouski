@@ -13,10 +13,12 @@ import {
   StyledPageContainer,
   StyledPageContent,
 } from './languages.styles';
+import { useTranslation } from 'react-i18next';
 
 const proficiencyLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Native'];
 
 const LanguagesPage: React.FC = () => {
+  const { t } = useTranslation('languages');
   const { id } = authVar();
   const { data, loading: userLoading } = useGetUser(id!);
   const userLanguages = data?.user.profile.languages;
@@ -38,7 +40,7 @@ const LanguagesPage: React.FC = () => {
         <SpinnerContainer />
       ) : (
         <StyledPageContent>
-          <Styledh2>Languages</Styledh2>
+          <Styledh2>{t('pageHeading')}</Styledh2>
           <AddLanguageModal
             languages={filteredLanguages}
             userId={id!}

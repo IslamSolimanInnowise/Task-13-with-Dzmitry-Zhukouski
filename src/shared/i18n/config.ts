@@ -10,7 +10,7 @@ i18n
   .init({
     supportedLngs: ['en', 'ru'],
     fallbackLng: 'en',
-    ns: ['auth'],
+    ns: ['auth', 'languages'],
     interpolation: {
       escapeValue: false,
     },
