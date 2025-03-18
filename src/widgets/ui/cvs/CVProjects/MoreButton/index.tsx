@@ -26,13 +26,17 @@ const MoreButton = ({
   const [openUpdatevProjectDialog] = useCvProjectDialog();
   const [openRemoveCvProjectDialog] = useDeleteCvProjectDialog();
 
+  const updatingCvProject = cvProjects.find(
+    (p: TableCV) => p.name === projectName,
+  );
   const handleUpdateCvClick = () => {
     openUpdatevProjectDialog({
+      cvId,
+      cvProjects,
       title: 'Update project',
       submitText: 'Update',
-      cvId,
-      selectedProjectName: projectName,
-      cvProjects,
+      updatingMode: true,
+      updatingCvProject,
       onConfirm: () => {},
     });
   };

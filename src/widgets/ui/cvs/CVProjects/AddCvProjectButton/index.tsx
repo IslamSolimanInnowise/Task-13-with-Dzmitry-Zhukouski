@@ -18,10 +18,10 @@ const AddCvProjectButton = ({ cvId, cvProjects }: AddCvProjectButtonProps) => {
       variant="ghost"
       onClick={() =>
         openCreateCvProjectDialog({
-          title: 'Add project',
-          submitText: 'Create & Add',
           cvId,
           cvProjects,
+          title: 'Add project',
+          submitText: 'Create & Add',
           onConfirm: () => {},
         })
       }

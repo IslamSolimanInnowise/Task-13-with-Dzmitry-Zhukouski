@@ -11,7 +11,7 @@ type CvProjectFormProps = {
   control: Control<FormValues>;
   errors: FieldErrors<FormValues>;
   selectedProject: Project | undefined;
-  selectedProjectName: string | null;
+  updatingMode: boolean;
   itemsList: Array<{ id: string; name: string }>;
   loadings: boolean;
 };
@@ -20,7 +20,7 @@ const CvProjectForm = ({
   control,
   errors,
   selectedProject,
-  selectedProjectName,
+  updatingMode = false,
   itemsList,
   loadings,
 }: CvProjectFormProps) => {
@@ -35,7 +35,7 @@ const CvProjectForm = ({
             <Select
               placeholderText="Project"
               itemsList={itemsList}
-              isReadOnly={loadings || !!selectedProjectName}
+              isReadOnly={loadings || updatingMode}
               value={field.value}
               onChange={field.onChange}
             />
@@ -48,7 +48,7 @@ const CvProjectForm = ({
           render={({ field }) => (
             <StyledInput
               {...field}
-              disabled={!!selectedProjectName}
+              disabled={updatingMode}
               placeholder="Domain"
               readOnly
             />
@@ -67,7 +67,7 @@ const CvProjectForm = ({
             >
               <StyledInput
                 type="date"
-                disabled={!selectedProject && !selectedProjectName}
+                disabled={!selectedProject && !updatingMode}
                 {...field}
               />
             </Field>
@@ -84,7 +84,7 @@ const CvProjectForm = ({
             >
               <StyledInput
                 type="date"
-                disabled={!selectedProject && !selectedProjectName}
+                disabled={!selectedProject && !updatingMode}
                 {...field}
               />
             </Field>
@@ -98,7 +98,7 @@ const CvProjectForm = ({
         render={({ field }) => (
           <StyledTextArea
             {...field}
-            disabled={!!selectedProjectName}
+            disabled={updatingMode}
             placeholder="Description"
             rows={4}
             resize="none"

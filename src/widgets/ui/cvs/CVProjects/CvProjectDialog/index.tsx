@@ -23,20 +23,22 @@ import { schema } from './schema';
 
 type CvProjectDialogProps = {
   cvId: Cv['id'];
-  selectedProjectName?: string | null;
   cvProjects: TableCV[];
   title: string;
   submitText: string;
+  updatingMode?: boolean;
+  updatingCvProject?: TableCV;
   onClose: () => void;
   onConfirm: () => void;
 };
 
 const CvProjectDialog = ({
   cvId,
-  selectedProjectName = null,
   cvProjects,
   title,
   submitText,
+  updatingMode = false,
+  updatingCvProject,
   onClose,
   onConfirm,
 }: CvProjectDialogProps) => {
@@ -76,13 +78,8 @@ const CvProjectDialog = ({
     (p: TableCV) => p.id === selectedProjectId,
   );
 
-  const itemsList = selectedProjectName
-    ? cvProjects
-        .filter((p: TableCV) => p.name === selectedProjectName)
-        .map((p: TableCV) => ({
-          id: p.id,
-          name: p.name,
-        }))
+  const itemsList = updatingMode
+    ? [{ id: updatingCvProject?.id, name: updatingCvProject?.name }]
     : projects?.projects
         ?.filter(
           (p: TableCV) =>
@@ -95,23 +92,19 @@ const CvProjectDialog = ({
 
   useEffect(() => {
     const initializeForm = () => {
-      if (selectedProjectName) {
-        const selectedCvProject = cvProjects?.find(
-          (p: TableCV) => p.name === selectedProjectName,
-        );
-
-        if (selectedCvProject) {
+      if (updatingMode) {
+        if (updatingCvProject) {
           const formValues = {
-            id: selectedCvProject.projectId || '',
-            domain: selectedCvProject.domain || '',
-            start_date: selectedCvProject.start_date || '',
+            id: updatingCvProject.projectId || '',
+            domain: updatingCvProject.domain || '',
+            start_date: updatingCvProject.start_date || '',
             end_date:
-              selectedCvProject.end_date === 'Till now'
+              updatingCvProject.end_date === 'Till now'
                 ? new Date().toISOString().split('T')[0]
-                : selectedCvProject.end_date || '',
-            description: selectedCvProject.description || '',
+                : updatingCvProject.end_date || '',
+            description: updatingCvProject.description || '',
             responsibilities:
-              selectedCvProject.responsibilities?.join(', ') ?? '',
+              updatingCvProject.responsibilities?.join(', ') ?? '',
           };
           reset(formValues);
         }
@@ -129,7 +122,14 @@ const CvProjectDialog = ({
     };
 
     initializeForm();
-  }, [cvProjects, selectedProjectName, selectedProject, trigger, reset]);
+  }, [
+    cvProjects,
+    selectedProject,
+    trigger,
+    reset,
+    updatingCvProject,
+    updatingMode,
+  ]);
 
   const onSubmit = handleSubmit((data) => {
     const cvProjectData = {
@@ -141,7 +141,7 @@ const CvProjectDialog = ({
       responsibilities: [data.responsibilities],
     };
 
-    if (selectedProjectName) {
+    if (updatingMode) {
       updateCvProject({ variables: { project: cvProjectData } });
     } else {
       addCvProject({ variables: { project: cvProjectData } });
@@ -175,7 +175,7 @@ const CvProjectDialog = ({
                 control={control}
                 errors={errors}
                 selectedProject={selectedProject}
-                selectedProjectName={selectedProjectName}
+                updatingMode={updatingMode}
                 itemsList={itemsList}
                 loadings={loadings}
               />
@@ -186,9 +186,9 @@ const CvProjectDialog = ({
                 onClick={onSubmit}
                 disabled={
                   !isValid ||
-                  (!selectedProject && !selectedProjectName) ||
+                  (!selectedProject && !updatingMode) ||
                   loadings ||
-                  (!!selectedProjectName && !isDirty)
+                  (updatingMode && !isDirty)
                 }
               >
                 {submitText}
