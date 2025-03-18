@@ -1,10 +1,12 @@
+import i18n from '@shared/i18n/config';
+
 import { StyledCVsHeader, StyledLink } from './cvsHeader.styles';
 
 const links = [
-  { label: 'Details', to: '/cvs/$cvId/details' },
-  { label: 'Skills', to: '/cvs/$cvId/skills' },
-  { label: 'Projects', to: '/cvs/$cvId/projects' },
-  { label: 'Preview', to: '/cvs/$cvId/preview' },
+  { label: i18n.t('CVsHeader:Details'), to: '/cvs/$cvId/details' },
+  { label: i18n.t('CVsHeader:Skills'), to: '/cvs/$cvId/skills' },
+  { label: i18n.t('CVsHeader:Projects'), to: '/cvs/$cvId/projects' },
+  { label: i18n.t('CVsHeader:Preview'), to: '/cvs/$cvId/preview' },
 ];
 
 const CVsHeader: React.FC = () => {

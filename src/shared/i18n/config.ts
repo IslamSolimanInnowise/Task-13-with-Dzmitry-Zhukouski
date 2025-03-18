@@ -14,6 +14,7 @@ i18n
       'auth',
       'languages',
       'CVsTable',
+      'CVsHeader',
       'CVDetails',
       'CVProjects',
       'cvsNotifications',
