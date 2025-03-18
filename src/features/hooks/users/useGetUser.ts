@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client';
-import { notify } from '@shared/Notifications/notify';
 import { GET_USER } from '@shared/queries/users/getUser';
 
 const useGetUser = (userId: string) => {
