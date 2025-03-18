@@ -58,6 +58,7 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
     <Modal
       titleText="Add Language"
       confirmText="Confirm"
+      cancelText="Cancel"
       onConfirm={onSubmit}
       trigger={
         <Button

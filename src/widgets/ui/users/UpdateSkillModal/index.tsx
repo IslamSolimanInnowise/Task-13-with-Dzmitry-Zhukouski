@@ -57,6 +57,7 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
     <Modal
       titleText="Update Skill"
       confirmText="Update"
+      cancelText="Cancel"
       onConfirm={onSubmit}
       trigger={
         <Button px="2" onClick={() => setIsModalOpen(true)}>

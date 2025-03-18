@@ -88,6 +88,7 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
       onOpenChange={(e) => setIsModalOpen(e.open)}
       titleText="Update User"
       confirmText="Update"
+      cancelText="Cancel"
       onConfirm={onSubmit}
       size="lg"
     >

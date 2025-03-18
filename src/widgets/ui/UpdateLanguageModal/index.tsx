@@ -53,6 +53,7 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
     <Modal
       titleText="Update Language"
       confirmText="Update"
+      cancelText="Cancel"
       onConfirm={onSubmit}
       trigger={
         <Button px="2" onClick={() => setIsModalOpen(true)}>

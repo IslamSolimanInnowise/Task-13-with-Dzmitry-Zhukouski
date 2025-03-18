@@ -64,6 +64,7 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
     <Modal
       titleText="Add Skill"
       confirmText="Confirm"
+      cancelText="Cancel"
       onConfirm={onSubmit}
       trigger={
         <Button w="full" mt="8" onClick={() => setIsModalOpen(true)}>

@@ -1,4 +1,4 @@
-import { Dialog, Portal } from '@chakra-ui/react';
+import { Dialog, DialogRootProps, Portal } from '@chakra-ui/react';
 
 import {
   CancelButton,
@@ -9,14 +9,11 @@ import {
   StyledCloseButton,
 } from './modal.styles';
 
-interface ModalProps {
-  open?: boolean;
-  size?: 'sm' | 'md' | 'lg' | 'xl' | 'xs' | 'cover' | 'full';
-  onOpenChange?: (e: { open: boolean }) => void;
+interface ModalProps extends DialogRootProps {
   titleText?: string;
   trigger?: React.ReactNode;
-  children?: React.ReactNode;
   confirmText: string;
+  cancelText: string;
   onConfirm: () => void;
 }
 
@@ -27,6 +24,7 @@ const Modal: React.FC<ModalProps> = ({
   trigger,
   children,
   confirmText,
+  cancelText,
   onConfirm,
   size,
 }) => {
@@ -54,7 +52,7 @@ const Modal: React.FC<ModalProps> = ({
             <Dialog.Body>{children}</Dialog.Body>
             <ModalFooter>
               <Dialog.ActionTrigger asChild>
-                <CancelButton variant="outline">Cancel</CancelButton>
+                <CancelButton variant="outline">{cancelText}</CancelButton>
               </Dialog.ActionTrigger>
               <ConfirmButton onClick={onConfirm}>{confirmText}</ConfirmButton>
             </ModalFooter>
