@@ -29,6 +29,19 @@ const MoreButton = ({
   const updatingCvProject = cvProjects.find(
     (p: TableCV) => p.name === projectName,
   );
+
+  const updatingFormValues = {
+    id: updatingCvProject?.projectId || '',
+    domain: updatingCvProject?.domain || '',
+    start_date: updatingCvProject?.start_date || '',
+    end_date:
+      updatingCvProject?.end_date === 'Till now'
+        ? new Date().toISOString().split('T')[0]
+        : updatingCvProject?.end_date || '',
+    description: updatingCvProject?.description || '',
+    responsibilities: updatingCvProject?.responsibilities?.join(', ') || '',
+  };
+
   const handleUpdateCvClick = () => {
     openUpdatevProjectDialog({
       cvId,
@@ -37,6 +50,7 @@ const MoreButton = ({
       submitText: 'Update',
       updatingMode: true,
       updatingCvProject,
+      updatingFormValues,
       onConfirm: () => {},
     });
   };

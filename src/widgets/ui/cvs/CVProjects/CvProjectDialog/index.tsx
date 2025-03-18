@@ -4,7 +4,7 @@ import useGetProjects from '@features/hooks/cvs/useGetProjects';
 import useUpdateCvProject from '@features/hooks/cvs/useUpdateCvProject';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
-import { Cv } from 'cv-graphql';
+import { Cv, CvProject } from 'cv-graphql';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -28,6 +28,10 @@ type CvProjectDialogProps = {
   submitText: string;
   updatingMode?: boolean;
   updatingCvProject?: TableCV;
+  updatingFormValues?: Pick<
+    CvProject,
+    'id' | 'domain' | 'start_date' | 'end_date' | 'description'
+  > & { responsibilities?: string };
   onClose: () => void;
   onConfirm: () => void;
 };
@@ -39,6 +43,7 @@ const CvProjectDialog = ({
   submitText,
   updatingMode = false,
   updatingCvProject,
+  updatingFormValues,
   onClose,
   onConfirm,
 }: CvProjectDialogProps) => {
@@ -93,21 +98,10 @@ const CvProjectDialog = ({
   useEffect(() => {
     const initializeForm = () => {
       if (updatingMode) {
-        if (updatingCvProject) {
-          const formValues = {
-            id: updatingCvProject.projectId || '',
-            domain: updatingCvProject.domain || '',
-            start_date: updatingCvProject.start_date || '',
-            end_date:
-              updatingCvProject.end_date === 'Till now'
-                ? new Date().toISOString().split('T')[0]
-                : updatingCvProject.end_date || '',
-            description: updatingCvProject.description || '',
-            responsibilities:
-              updatingCvProject.responsibilities?.join(', ') ?? '',
-          };
-          reset(formValues);
-        }
+        reset({
+          ...updatingFormValues,
+          end_date: updatingFormValues?.end_date ?? '',
+        });
       } else if (selectedProject) {
         const formValues = {
           id: selectedProject.id,
@@ -129,6 +123,7 @@ const CvProjectDialog = ({
     reset,
     updatingCvProject,
     updatingMode,
+    updatingFormValues,
   ]);
 
   const onSubmit = handleSubmit((data) => {
