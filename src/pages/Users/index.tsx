@@ -1,6 +1,6 @@
 import Aside from '@entities/ui/Aside';
 import SearchInput from '@entities/ui/SearchInput';
-import CustomSpinner from '@entities/ui/Spinner';
+import Spinner from '@entities/ui/Spinner';
 import useGetUsers from '@features/hooks/users/useGetUsers';
 import { authVar } from '@shared/store/globalAuthState';
 import {
@@ -60,7 +60,7 @@ const UsersPage: React.FC = () => {
   });
 
   if (loading) {
-    return <CustomSpinner />;
+    return <Spinner />;
   }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,7 +88,7 @@ const UsersPage: React.FC = () => {
           handleChange={handleInputChange}
           handleClear={handleClear}
         />
-        {isPending ? <CustomSpinner /> : <UsersTable usersTable={usersTable} />}
+        {isPending ? <Spinner /> : <UsersTable usersTable={usersTable} />}
       </StyledPageContent>
     </StyledPageContainer>
   );

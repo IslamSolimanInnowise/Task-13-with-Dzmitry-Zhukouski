@@ -1,8 +1,8 @@
-import { Spinner } from '@chakra-ui/react';
+import { Spinner as ChakraSpinner } from '@chakra-ui/react';
 
 import { SpinnerContainer } from './spinner.styles';
 
-const CustomSpinner = () => {
+const Spinner = () => {
   return (
     <SpinnerContainer
       display="flex"
@@ -10,8 +10,8 @@ const CustomSpinner = () => {
       justifyContent="center"
       height="100vh"
     >
-      <Spinner size="xl" />
+      <ChakraSpinner size="xl" />
     </SpinnerContainer>
   );
 };
-export default CustomSpinner;
+export default Spinner;

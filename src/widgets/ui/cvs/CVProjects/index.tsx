@@ -1,6 +1,6 @@
 import { Table } from '@chakra-ui/react';
 import SearchInput from '@entities/ui/SearchInput';
-import CustomSpinner from '@entities/ui/Spinner';
+import Spinner from '@entities/ui/Spinner';
 import useGetCvProjects from '@features/hooks/cvs/useGetCvProjects';
 import {
   ColumnDef,
@@ -246,7 +246,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
     </Table.Body>
   );
 
-  if (isCvProjectsLoading) return <CustomSpinner />;
+  if (isCvProjectsLoading) return <Spinner />;
 
   return (
     <StyledTableContainer ref={tableContainerRef}>

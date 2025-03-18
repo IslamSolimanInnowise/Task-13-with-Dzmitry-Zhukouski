@@ -1,4 +1,4 @@
-import CustomSpinner from '@entities/ui/Spinner';
+import Spinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import useUpdateCv from '@features/hooks/cvs/useUpdateCv';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -72,7 +72,7 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
     updateCv({ variables: { cv } });
   });
 
-  if (loading) return <CustomSpinner />;
+  if (loading) return <Spinner />;
 
   return (
     <StyledForm as="form">
