@@ -1,6 +1,7 @@
 import { Icon, MenuItem, MenuRoot, MenuTrigger, Text } from '@chakra-ui/react';
 import { Link } from '@tanstack/react-router';
 import { EllipsisVertical } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import useDeleteCvDialog from './DeleteCvDialog';
 import {
@@ -15,6 +16,7 @@ type MoreButtonProps = {
 };
 
 const MoreButton = ({ id, name }: MoreButtonProps) => {
+  const { t } = useTranslation('CVsTable');
   const [openDeleteCvDialog] = useDeleteCvDialog();
 
   const handleDeleteCvClick = () => {
@@ -39,12 +41,12 @@ const MoreButton = ({ id, name }: MoreButtonProps) => {
             to="/cvs/$cvId/details"
             params={{ cvId: id }}
           >
-            <Text>Details</Text>
+            <Text>{t('moreButton.detailsButtonText')}</Text>
           </StyledMenuButton>
         </MenuItem>
         <MenuItem asChild value="delete-cv">
           <StyledMenuButton onClick={handleDeleteCvClick}>
-            <Text>Delete CV</Text>
+            <Text>{t('moreButton.deleteButtonText')}</Text>
           </StyledMenuButton>
         </MenuItem>
       </StyledMenuContent>

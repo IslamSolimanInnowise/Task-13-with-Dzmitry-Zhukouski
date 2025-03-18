@@ -5,6 +5,7 @@ import { createDialogHook } from '@shared/Dialogs/createDialogHook';
 import { authVar } from '@shared/store/globalAuthState';
 import { Field } from '@shared/ui/field';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import * as z from 'zod';
 
 import {
@@ -20,12 +21,11 @@ import {
 
 const schema = z
   .object({
-    name: z.string().min(1, { message: 'Required field' }),
+    name: z.string().min(1),
     education: z.string().optional(),
-    description: z.string().min(1, { message: 'Required field' }),
+    description: z.string().min(1),
   })
   .refine((data) => Object.values(data).some((value) => value?.trim()), {
-    message: 'At least one field must be filled',
     path: ['name'],
   });
 
@@ -44,6 +44,8 @@ type CV = {
 };
 
 const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
+  const { t } = useTranslation('CVsTable');
+
   const {
     register,
     handleSubmit,
@@ -83,7 +85,7 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
           <ModalContent>
             <ModalHeader>
               <Dialog.Title fontSize="lg" fontWeight="600">
-                Create CV
+                {t('createCvDialog.title')}
               </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <StyledCloseButton />
@@ -92,20 +94,28 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
 
             <Dialog.Body py={4}>
               <VStack as="form" gap={8}>
-                <Field errorText={errors.name?.message} invalid={!!errors.name}>
-                  <StyledInput {...register('name')} placeholder="Name" />
+                <Field
+                  errorText={t('createCvDialog.requiredError')}
+                  invalid={!!errors.name}
+                >
+                  <StyledInput
+                    {...register('name')}
+                    placeholder={t('createCvDialog.nameInputPlaceholder')}
+                  />
                 </Field>
                 <StyledInput
                   {...register('education')}
-                  placeholder="Education"
+                  placeholder={t('createCvDialog.educationInputPlaceholder')}
                 />
                 <Field
-                  errorText={errors.description?.message}
+                  errorText={t('createCvDialog.requiredError')}
                   invalid={!!errors.description}
                 >
                   <StyledTextArea
                     {...register('description')}
-                    placeholder="Description"
+                    placeholder={t(
+                      'createCvDialog.descriptionInputPlaceholder',
+                    )}
                     rows={4}
                     resize="none"
                   />
@@ -114,12 +124,14 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
             </Dialog.Body>
 
             <ModalFooter>
-              <CancelButton onClick={onClose}>Cancel</CancelButton>
+              <CancelButton onClick={onClose}>
+                {t('createCvDialog.cancelButtonText')}
+              </CancelButton>
               <ConfirmButton
                 onClick={onSubmit}
                 disabled={!isValid || isSubmitting || loading}
               >
-                Create
+                {t('createCvDialog.confirmButtonText')}
               </ConfirmButton>
             </ModalFooter>
           </ModalContent>

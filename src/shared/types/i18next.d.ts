@@ -1,6 +1,7 @@
 import 'i18next';
 
 import auth from '@public/locales/en/auth.json';
+import CVsTable from '@public/locales/en/CVsTable.json';
 import languages from '@public/locales/en/languages.json';
 
 declare module 'i18next' {
@@ -9,6 +10,7 @@ declare module 'i18next' {
     resources: {
       auth: typeof auth;
       languages: typeof languages;
+      CVsTable: typeof CVsTable;
     };
   }
 }

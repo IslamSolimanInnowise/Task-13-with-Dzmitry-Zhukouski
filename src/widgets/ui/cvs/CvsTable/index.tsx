@@ -13,6 +13,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual';
 import type { Cv, User } from 'cv-graphql';
 import React, { useMemo, useRef, useState, useTransition } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import AddCvButton from './AddCvButton';
 import {
@@ -32,6 +33,7 @@ import {
 import MoreButton from './MoreButton';
 
 const CvsTable: React.FC = () => {
+  const { t } = useTranslation('CVsTable');
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [, startTransition] = useTransition();
   const { data: cvData, loading: isCvsLoading } = useGetCvs();
@@ -52,9 +54,9 @@ const CvsTable: React.FC = () => {
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
-      { accessorKey: 'name', header: 'Name' },
-      { accessorKey: 'education', header: 'Education' },
-      { accessorKey: 'employee', header: 'Employee' },
+      { accessorKey: 'name', header: t('tableHeaders.name') },
+      { accessorKey: 'education', header: t('tableHeaders.education') },
+      { accessorKey: 'employee', header: t('tableHeaders.employee') },
       {
         id: 'actions',
         header: '',
