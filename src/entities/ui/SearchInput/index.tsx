@@ -8,7 +8,8 @@ import {
   StyledXIconBox,
 } from './searchInput.styles';
 
-interface SearchInputProps {
+interface SearchInputProps
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleClear: () => void;
   value: string[];
@@ -18,6 +19,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   value,
   handleChange,
   handleClear,
+  ...props
 }) => {
   return (
     <StyledInputGroup
@@ -34,7 +36,12 @@ const SearchInput: React.FC<SearchInputProps> = ({
         </StyledEndElementContainer>
       }
     >
-      <StyledInput placeholder="Search" value={value} onChange={handleChange} />
+      <StyledInput
+        {...props}
+        placeholder="Search"
+        value={value}
+        onChange={handleChange}
+      />
     </StyledInputGroup>
   );
 };

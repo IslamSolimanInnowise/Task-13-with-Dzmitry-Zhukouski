@@ -40,10 +40,6 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
       // 'i18next/no-literal-string': ['error', { markupOnly: true }],
