@@ -4,7 +4,7 @@ import { GET_CV_BY_ID } from '@shared/queries/cvs/getCvById';
 import { GET_CV_PROJECTS } from '@shared/queries/cvs/getCvProjects';
 import { UPDATE_CV_PROJECT } from '@shared/queries/cvs/updateCvProject';
 
-const useUpdateCvProject = (onClose: () => void, cvId: string) => {
+const useUpdateCvProject = (onCloseDialog: () => void, cvId: string) => {
   return useMutation(UPDATE_CV_PROJECT, {
     refetchQueries: [
       { query: GET_CV_PROJECTS, variables: { cvId } },
@@ -15,10 +15,10 @@ const useUpdateCvProject = (onClose: () => void, cvId: string) => {
         type: 'success',
         title: 'CV project was updated',
       });
-      onClose();
+      onCloseDialog();
     },
     onError: () => {
-      onClose();
+      onCloseDialog();
     },
   });
 };

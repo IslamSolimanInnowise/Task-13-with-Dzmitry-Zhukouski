@@ -4,6 +4,7 @@ import useGetProjects from '@features/hooks/cvs/useGetProjects';
 import useUpdateCvProject from '@features/hooks/cvs/useUpdateCvProject';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { Cv } from 'cv-graphql';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -21,7 +22,7 @@ import type { FormValues } from './index.d';
 import { schema } from './schema';
 
 type CvProjectDialogProps = {
-  cvId: string;
+  cvId: Cv['id'];
   selectedProjectName?: string | null;
   cvProjects: TableCV[];
   onClose: () => void;
