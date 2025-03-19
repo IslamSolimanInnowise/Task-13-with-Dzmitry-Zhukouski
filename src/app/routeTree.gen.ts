@@ -19,7 +19,6 @@ import { Route as AuthenticatedSkillsImport } from './routes/_authenticated/skil
 import { Route as AuthenticatedSettingsImport } from './routes/_authenticated/settings'
 import { Route as AuthenticatedLanguagesImport } from './routes/_authenticated/languages'
 import { Route as AuthenticatedUsersIndexImport } from './routes/_authenticated/users/index'
-import { Route as AuthenticatedProjectsIndexImport } from './routes/_authenticated/projects/index'
 import { Route as AuthenticatedCvsIndexImport } from './routes/_authenticated/cvs/index'
 import { Route as NotAuthenticatedAuthRegisterImport } from './routes/_notAuthenticated/auth/register'
 import { Route as NotAuthenticatedAuthLoginImport } from './routes/_notAuthenticated/auth/login'
@@ -78,14 +77,6 @@ const AuthenticatedUsersIndexRoute = AuthenticatedUsersIndexImport.update({
   path: '/users/',
   getParentRoute: () => AuthenticatedRoute,
 } as any)
-
-const AuthenticatedProjectsIndexRoute = AuthenticatedProjectsIndexImport.update(
-  {
-    id: '/projects/',
-    path: '/projects/',
-    getParentRoute: () => AuthenticatedRoute,
-  } as any,
-)
 
 const AuthenticatedCvsIndexRoute = AuthenticatedCvsIndexImport.update({
   id: '/cvs/',
@@ -236,13 +227,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedCvsIndexImport
       parentRoute: typeof AuthenticatedImport
     }
-    '/_authenticated/projects/': {
-      id: '/_authenticated/projects/'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof AuthenticatedProjectsIndexImport
-      parentRoute: typeof AuthenticatedImport
-    }
     '/_authenticated/users/': {
       id: '/_authenticated/users/'
       path: '/users'
@@ -290,7 +274,6 @@ interface AuthenticatedRouteChildren {
   AuthenticatedVerifyEmailRoute: typeof AuthenticatedVerifyEmailRoute
   AuthenticatedUsersUserIdRoute: typeof AuthenticatedUsersUserIdRoute
   AuthenticatedCvsIndexRoute: typeof AuthenticatedCvsIndexRoute
-  AuthenticatedProjectsIndexRoute: typeof AuthenticatedProjectsIndexRoute
   AuthenticatedUsersIndexRoute: typeof AuthenticatedUsersIndexRoute
   AuthenticatedCvsCvIdDetailsRoute: typeof AuthenticatedCvsCvIdDetailsRoute
   AuthenticatedCvsCvIdPreviewRoute: typeof AuthenticatedCvsCvIdPreviewRoute
@@ -305,7 +288,6 @@ const AuthenticatedRouteChildren: AuthenticatedRouteChildren = {
   AuthenticatedVerifyEmailRoute: AuthenticatedVerifyEmailRoute,
   AuthenticatedUsersUserIdRoute: AuthenticatedUsersUserIdRoute,
   AuthenticatedCvsIndexRoute: AuthenticatedCvsIndexRoute,
-  AuthenticatedProjectsIndexRoute: AuthenticatedProjectsIndexRoute,
   AuthenticatedUsersIndexRoute: AuthenticatedUsersIndexRoute,
   AuthenticatedCvsCvIdDetailsRoute: AuthenticatedCvsCvIdDetailsRoute,
   AuthenticatedCvsCvIdPreviewRoute: AuthenticatedCvsCvIdPreviewRoute,
@@ -347,7 +329,6 @@ export interface FileRoutesByFullPath {
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
   '/auth/register': typeof NotAuthenticatedAuthRegisterRoute
   '/cvs': typeof AuthenticatedCvsIndexRoute
-  '/projects': typeof AuthenticatedProjectsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/cvs/$cvId/details': typeof AuthenticatedCvsCvIdDetailsRoute
   '/cvs/$cvId/preview': typeof AuthenticatedCvsCvIdPreviewRoute
@@ -367,7 +348,6 @@ export interface FileRoutesByTo {
   '/auth/login': typeof NotAuthenticatedAuthLoginRoute
   '/auth/register': typeof NotAuthenticatedAuthRegisterRoute
   '/cvs': typeof AuthenticatedCvsIndexRoute
-  '/projects': typeof AuthenticatedProjectsIndexRoute
   '/users': typeof AuthenticatedUsersIndexRoute
   '/cvs/$cvId/details': typeof AuthenticatedCvsCvIdDetailsRoute
   '/cvs/$cvId/preview': typeof AuthenticatedCvsCvIdPreviewRoute
@@ -389,7 +369,6 @@ export interface FileRoutesById {
   '/_notAuthenticated/auth/login': typeof NotAuthenticatedAuthLoginRoute
   '/_notAuthenticated/auth/register': typeof NotAuthenticatedAuthRegisterRoute
   '/_authenticated/cvs/': typeof AuthenticatedCvsIndexRoute
-  '/_authenticated/projects/': typeof AuthenticatedProjectsIndexRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexRoute
   '/_authenticated/cvs/$cvId/details': typeof AuthenticatedCvsCvIdDetailsRoute
   '/_authenticated/cvs/$cvId/preview': typeof AuthenticatedCvsCvIdPreviewRoute
@@ -411,7 +390,6 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/cvs'
-    | '/projects'
     | '/users'
     | '/cvs/$cvId/details'
     | '/cvs/$cvId/preview'
@@ -430,7 +408,6 @@ export interface FileRouteTypes {
     | '/auth/login'
     | '/auth/register'
     | '/cvs'
-    | '/projects'
     | '/users'
     | '/cvs/$cvId/details'
     | '/cvs/$cvId/preview'
@@ -450,7 +427,6 @@ export interface FileRouteTypes {
     | '/_notAuthenticated/auth/login'
     | '/_notAuthenticated/auth/register'
     | '/_authenticated/cvs/'
-    | '/_authenticated/projects/'
     | '/_authenticated/users/'
     | '/_authenticated/cvs/$cvId/details'
     | '/_authenticated/cvs/$cvId/preview'
@@ -492,7 +468,6 @@ export const routeTree = rootRoute
         "/_authenticated/verify-email",
         "/_authenticated/users/$userId",
         "/_authenticated/cvs/",
-        "/_authenticated/projects/",
         "/_authenticated/users/",
         "/_authenticated/cvs/$cvId/details",
         "/_authenticated/cvs/$cvId/preview",
@@ -547,10 +522,6 @@ export const routeTree = rootRoute
     },
     "/_authenticated/cvs/": {
       "filePath": "_authenticated/cvs/index.tsx",
-      "parent": "/_authenticated"
-    },
-    "/_authenticated/projects/": {
-      "filePath": "_authenticated/projects/index.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/users/": {

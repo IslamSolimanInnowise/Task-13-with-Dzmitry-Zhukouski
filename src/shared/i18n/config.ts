@@ -24,6 +24,7 @@ i18n
       'CVProjects',
       'cvsNotifications',
       'usersNotifications',
+      'page404',
     ],
     interpolation: {
       escapeValue: false,

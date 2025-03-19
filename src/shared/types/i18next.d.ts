@@ -8,6 +8,7 @@ import CVsHeader from '@public/locales/en/CVsHeader.json';
 import cvsNotifications from '@public/locales/en/cvsNotifications.json';
 import CVsTable from '@public/locales/en/CVsTable.json';
 import languages from '@public/locales/en/languages.json';
+import page404 from '@public/locales/en/page404.json';
 import SearchInput from '@public/locales/en/SearchInput.json';
 import Settings from '@public/locales/en/Settings.json';
 import skills from '@public/locales/en/skills.json';
@@ -31,6 +32,7 @@ declare module 'i18next' {
       CVProjects: typeof CVProjects;
       cvsNotifications: typeof cvsNotifications;
       usersNotifications: typeof usersNotifications;
+      page404: typeof page404;
     };
   }
 }

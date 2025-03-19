@@ -1,9 +1,11 @@
 import { Box, Text } from '@chakra-ui/react';
 import { authVar } from '@shared/store/globalAuthState';
+import { useTranslation } from 'react-i18next';
 
 import { StyledBackButton } from './Page404.styles';
 
 export const Page404 = () => {
+  const { t } = useTranslation('page404');
   const { accessToken, id } = authVar();
   return (
     <Box
@@ -14,12 +16,12 @@ export const Page404 = () => {
       pt={4}
     >
       <Text fontSize="xl" fontWeight="bold" mb={2}>
-        Page not found
+        {t('boldText')}
       </Text>
       {accessToken ? (
-        <StyledBackButton to={`/users/${id}`}>Back</StyledBackButton>
+        <StyledBackButton to={`/users/${id}`}>{t('button')}</StyledBackButton>
       ) : (
-        <StyledBackButton to="/auth/login">Back</StyledBackButton>
+        <StyledBackButton to="/auth/login">{t('button')}</StyledBackButton>
       )}
     </Box>
   );
