@@ -44,7 +44,7 @@ type CV = {
 };
 
 const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
-  const { t } = useTranslation('CVsTable');
+  const { t } = useTranslation('cvsTable');
 
   const {
     register,

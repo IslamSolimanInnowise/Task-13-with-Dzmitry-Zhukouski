@@ -33,7 +33,7 @@ import {
 import MoreButton from './MoreButton';
 
 const CVsTable: React.FC = () => {
-  const { t } = useTranslation('CVsTable');
+  const { t } = useTranslation('cvsTable');
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [, startTransition] = useTransition();
   const { data: cvData, loading: isCvsLoading } = useGetCvs();

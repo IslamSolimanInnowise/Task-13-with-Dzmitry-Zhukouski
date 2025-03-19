@@ -24,7 +24,7 @@ const MoreButton = ({
   cvProjects,
   projectName,
 }: MoreButtonProps) => {
-  const { t } = useTranslation('CVProjects');
+  const { t } = useTranslation('cvProjects');
   const [openUpdatevProjectDialog] = useCvProjectDialog();
   const [openRemoveCvProjectDialog] = useDeleteCvProjectDialog();
 

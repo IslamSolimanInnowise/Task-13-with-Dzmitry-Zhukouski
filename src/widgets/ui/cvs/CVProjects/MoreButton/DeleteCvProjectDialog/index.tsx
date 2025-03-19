@@ -27,7 +27,7 @@ const DeleteCvProjectDialog = ({
   onClose,
   onConfirm,
 }: DeleteCvProjectDialogProps) => {
-  const { t } = useTranslation('CVProjects');
+  const { t } = useTranslation('cvProjects');
 
   const [removeCvProject, { loading }] = useRemoveCvProject(onClose, cvId);
 

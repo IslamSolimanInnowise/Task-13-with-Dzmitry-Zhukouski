@@ -33,7 +33,7 @@ type CVDetailsProps = {
 };
 
 const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
-  const { t } = useTranslation('CVDetails');
+  const { t } = useTranslation('cvDetails');
   const { data: CVdata, loading } = useGetCvById(cvId);
   const [updateCv, { loading: updateLoading }] = useUpdateCv();
 

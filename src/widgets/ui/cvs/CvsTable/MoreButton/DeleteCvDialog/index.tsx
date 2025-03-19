@@ -25,7 +25,7 @@ const DeleteCvDialog = ({
   onClose,
   onConfirm,
 }: DeleteCvDialogProps) => {
-  const { t } = useTranslation('CVsTable');
+  const { t } = useTranslation('cvsTable');
 
   const [deleteCv, { loading }] = useDeleteCv(onClose);
 

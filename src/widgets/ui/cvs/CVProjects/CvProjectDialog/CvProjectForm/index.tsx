@@ -25,7 +25,7 @@ const CvProjectForm = ({
   itemsList,
   loadings,
 }: CvProjectFormProps) => {
-  const { t } = useTranslation('CVProjects');
+  const { t } = useTranslation('cvProjects');
 
   return (
     <VStack as="form" gap={8}>

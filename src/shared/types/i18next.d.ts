@@ -1,16 +1,16 @@
 import 'i18next';
 
-import Aside from '@public/locales/en/Aside.json';
+import aside from '@public/locales/en/Aside.json';
 import auth from '@public/locales/en/auth.json';
-import CVDetails from '@public/locales/en/CVDetails.json';
-import CVProjects from '@public/locales/en/CVProjects.json';
-import CVsHeader from '@public/locales/en/CVsHeader.json';
+import cvDetails from '@public/locales/en/cvDetails.json';
+import cvProjects from '@public/locales/en/cvProjects.json';
+import cvsHeader from '@public/locales/en/cvsHeader.json';
 import cvsNotifications from '@public/locales/en/cvsNotifications.json';
-import CVsTable from '@public/locales/en/CVsTable.json';
+import cvsTable from '@public/locales/en/cvsTable.json';
 import languages from '@public/locales/en/languages.json';
 import page404 from '@public/locales/en/page404.json';
-import SearchInput from '@public/locales/en/SearchInput.json';
-import Settings from '@public/locales/en/Settings.json';
+import searchInput from '@public/locales/en/SearchInput.json';
+import settings from '@public/locales/en/Settings.json';
 import skills from '@public/locales/en/skills.json';
 import users from '@public/locales/en/users.json';
 import usersNotifications from '@public/locales/en/usersNotifications.json';
@@ -20,16 +20,16 @@ declare module 'i18next' {
     defaultNS: 'auth';
     resources: {
       auth: typeof auth;
-      Aside: typeof Aside;
-      Settings: typeof Settings;
-      SearchInput: typeof SearchInput;
+      aside: typeof aside;
+      settings: typeof settings;
+      searchInput: typeof searchInput;
       users: typeof users;
       languages: typeof languages;
       skills: typeof skills;
-      CVsTable: typeof CVsTable;
-      CVsHeader: typeof CVsHeader;
-      CVDetails: typeof CVDetails;
-      CVProjects: typeof CVProjects;
+      cvsTable: typeof cvsTable;
+      cvsHeader: typeof cvsHeader;
+      cvDetails: typeof cvDetails;
+      cvProjects: typeof cvProjects;
       cvsNotifications: typeof cvsNotifications;
       usersNotifications: typeof usersNotifications;
       page404: typeof page404;

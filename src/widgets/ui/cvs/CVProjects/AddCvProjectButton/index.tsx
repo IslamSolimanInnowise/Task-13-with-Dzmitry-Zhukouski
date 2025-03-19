@@ -12,7 +12,7 @@ type AddCvProjectButtonProps = {
 };
 
 const AddCvProjectButton = ({ cvId, cvProjects }: AddCvProjectButtonProps) => {
-  const { t } = useTranslation('CVProjects');
+  const { t } = useTranslation('cvProjects');
   const [openCreateCvProjectDialog] = useCvProjectDialog();
 
   return (

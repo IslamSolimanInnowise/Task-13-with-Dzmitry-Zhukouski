@@ -46,7 +46,7 @@ type CVProjectsProps = {
 };
 
 const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
-  const { t } = useTranslation('CVProjects');
+  const { t } = useTranslation('cvProjects');
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [, startTransition] = useTransition();
   const { data: cvProjectsData, loading: isCvProjectsLoading } =

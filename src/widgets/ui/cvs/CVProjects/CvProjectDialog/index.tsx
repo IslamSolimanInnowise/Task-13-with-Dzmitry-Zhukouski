@@ -48,7 +48,7 @@ const CvProjectDialog = ({
   onClose,
   onConfirm,
 }: CvProjectDialogProps) => {
-  const { t } = useTranslation('CVProjects');
+  const { t } = useTranslation('cvProjects');
   const { data: projects, loading: projectsLoading } = useGetProjects();
   const [addCvProject, { loading: addCvProjectLoading }] = useAddCvProject(
     onClose,

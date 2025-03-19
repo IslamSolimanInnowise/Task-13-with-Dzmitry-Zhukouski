@@ -10,7 +10,7 @@ import {
 } from './settings.styles';
 
 const SettingsPage: React.FC = () => {
-  const { t, i18n } = useTranslation('Settings');
+  const { t, i18n } = useTranslation('settings');
 
   const themesList = [
     { id: 'light', name: t('light') },

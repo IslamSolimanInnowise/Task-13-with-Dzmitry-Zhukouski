@@ -22,7 +22,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   handleClear,
   ...props
 }) => {
-  const { t } = useTranslation('SearchInput');
+  const { t } = useTranslation('searchInput');
 
   return (
     <StyledInputGroup

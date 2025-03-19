@@ -30,7 +30,7 @@ import {
 } from './aside.styles';
 
 const Aside: React.FC = () => {
-  const { t } = useTranslation('Aside');
+  const { t } = useTranslation('aside');
   const [isClosed, setIsClosed] = useState(false);
   const { email } = authVar();
   const navigate = useNavigate();

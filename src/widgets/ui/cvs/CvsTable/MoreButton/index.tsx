@@ -16,7 +16,7 @@ type MoreButtonProps = {
 };
 
 const MoreButton = ({ id, name }: MoreButtonProps) => {
-  const { t } = useTranslation('CVsTable');
+  const { t } = useTranslation('cvsTable');
   const [openDeleteCvDialog] = useDeleteCvDialog();
 
   const handleDeleteCvClick = () => {
