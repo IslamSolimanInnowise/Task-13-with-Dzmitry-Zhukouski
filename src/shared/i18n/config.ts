@@ -13,6 +13,7 @@ i18n
     ns: [
       'auth',
       'Aside',
+      'Settings',
       'SearchInput',
       'languages',
       'skills',

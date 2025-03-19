@@ -9,6 +9,7 @@ import cvsNotifications from '@public/locales/en/cvsNotifications.json';
 import CVsTable from '@public/locales/en/CVsTable.json';
 import languages from '@public/locales/en/languages.json';
 import SearchInput from '@public/locales/en/SearchInput.json';
+import Settings from '@public/locales/en/Settings.json';
 import skills from '@public/locales/en/skills.json';
 
 declare module 'i18next' {
@@ -17,6 +18,7 @@ declare module 'i18next' {
     resources: {
       auth: typeof auth;
       Aside: typeof Aside;
+      Settings: typeof Settings;
       SearchInput: typeof SearchInput;
       languages: typeof languages;
       skills: typeof skills;
