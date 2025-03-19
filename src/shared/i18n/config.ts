@@ -12,6 +12,8 @@ i18n
     fallbackLng: 'en',
     ns: [
       'auth',
+      'Aside',
+      'SearchInput',
       'languages',
       'skills',
       'CVsTable',

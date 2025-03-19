@@ -1,5 +1,6 @@
 import 'i18next';
 
+import Aside from '@public/locales/en/Aside.json';
 import auth from '@public/locales/en/auth.json';
 import CVDetails from '@public/locales/en/CVDetails.json';
 import CVProjects from '@public/locales/en/CVProjects.json';
@@ -8,12 +9,15 @@ import cvsNotifications from '@public/locales/en/cvsNotifications.json';
 import CVsTable from '@public/locales/en/CVsTable.json';
 import languages from '@public/locales/en/languages.json';
 import skills from '@public/locales/en/skills.json';
+import SearchInput from '@public/locales/en/SearchInput.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
     defaultNS: 'auth';
     resources: {
       auth: typeof auth;
+      Aside: typeof Aside;
+      SearchInput: typeof SearchInput;
       languages: typeof languages;
       skills: typeof skills;
       CVsTable: typeof CVsTable;

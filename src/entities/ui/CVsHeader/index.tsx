@@ -1,15 +1,17 @@
-import i18n from '@shared/i18n/config';
+import { useTranslation } from 'react-i18next';
 
 import { StyledCVsHeader, StyledLink } from './cvsHeader.styles';
 
-const links = [
-  { label: i18n.t('CVsHeader:Details'), to: '/cvs/$cvId/details' },
-  { label: i18n.t('CVsHeader:Skills'), to: '/cvs/$cvId/skills' },
-  { label: i18n.t('CVsHeader:Projects'), to: '/cvs/$cvId/projects' },
-  { label: i18n.t('CVsHeader:Preview'), to: '/cvs/$cvId/preview' },
-];
-
 const CVsHeader: React.FC = () => {
+  const { t } = useTranslation('CVsHeader');
+
+  const links = [
+    { label: t('Details'), to: '/cvs/$cvId/details' },
+    { label: t('Skills'), to: '/cvs/$cvId/skills' },
+    { label: t('Projects'), to: '/cvs/$cvId/projects' },
+    { label: t('Preview'), to: '/cvs/$cvId/preview' },
+  ];
+
   return (
     <StyledCVsHeader>
       {links.map(({ label, to }) => (
