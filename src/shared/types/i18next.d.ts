@@ -8,6 +8,7 @@ import CVsHeader from '@public/locales/en/CVsHeader.json';
 import cvsNotifications from '@public/locales/en/cvsNotifications.json';
 import CVsTable from '@public/locales/en/CVsTable.json';
 import languages from '@public/locales/en/languages.json';
+import SearchInput from '@public/locales/en/SearchInput.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -15,6 +16,7 @@ declare module 'i18next' {
     resources: {
       auth: typeof auth;
       Aside: typeof Aside;
+      SearchInput: typeof SearchInput;
       languages: typeof languages;
       CVsTable: typeof CVsTable;
       CVsHeader: typeof CVsHeader;

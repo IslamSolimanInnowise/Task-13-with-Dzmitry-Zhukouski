@@ -1,4 +1,5 @@
 import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import {
   StyledEndElementContainer,
@@ -21,6 +22,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
   handleClear,
   ...props
 }) => {
+  const { t } = useTranslation('SearchInput');
+
   return (
     <StyledInputGroup
       startElement={<StyledSearchIcon size="24" />}
@@ -38,7 +41,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
     >
       <StyledInput
         {...props}
-        placeholder="Search"
+        placeholder={t('searchInputPlaceholder')}
         value={value}
         onChange={handleChange}
       />

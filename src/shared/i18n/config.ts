@@ -13,6 +13,7 @@ i18n
     ns: [
       'auth',
       'Aside',
+      'SearchInput',
       'languages',
       'CVsTable',
       'CVsHeader',
