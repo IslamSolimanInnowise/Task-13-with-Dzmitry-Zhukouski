@@ -23,6 +23,7 @@ i18n
       'CVDetails',
       'CVProjects',
       'cvsNotifications',
+      'usersNotifications',
     ],
     interpolation: {
       escapeValue: false,

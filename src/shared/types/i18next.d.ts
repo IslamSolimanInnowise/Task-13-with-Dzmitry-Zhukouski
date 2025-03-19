@@ -12,6 +12,7 @@ import SearchInput from '@public/locales/en/SearchInput.json';
 import Settings from '@public/locales/en/Settings.json';
 import skills from '@public/locales/en/skills.json';
 import users from '@public/locales/en/users.json';
+import usersNotifications from '@public/locales/en/usersNotifications.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -29,6 +30,7 @@ declare module 'i18next' {
       CVDetails: typeof CVDetails;
       CVProjects: typeof CVProjects;
       cvsNotifications: typeof cvsNotifications;
+      usersNotifications: typeof usersNotifications;
     };
   }
 }
