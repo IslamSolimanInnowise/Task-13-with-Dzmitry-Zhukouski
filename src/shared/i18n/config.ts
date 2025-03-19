@@ -12,6 +12,7 @@ i18n
     fallbackLng: 'en',
     ns: [
       'auth',
+      'Aside',
       'languages',
       'CVsTable',
       'CVsHeader',

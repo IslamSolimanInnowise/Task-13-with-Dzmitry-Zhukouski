@@ -1,5 +1,6 @@
 import 'i18next';
 
+import Aside from '@public/locales/en/Aside.json';
 import auth from '@public/locales/en/auth.json';
 import CVDetails from '@public/locales/en/CVDetails.json';
 import CVProjects from '@public/locales/en/CVProjects.json';
@@ -13,6 +14,7 @@ declare module 'i18next' {
     defaultNS: 'auth';
     resources: {
       auth: typeof auth;
+      Aside: typeof Aside;
       languages: typeof languages;
       CVsTable: typeof CVsTable;
       CVsHeader: typeof CVsHeader;
