@@ -20,6 +20,10 @@
       "skillFieldLabel": "Навык",
       "masteryFieldLabel": "Уровень Навыка",
       "masteryFieldError": "Пожалуйста, добавьте свой уровень навыка"
-    }
+    },
+    "skillCount_one": "У вас есть <b>{{count}} навык</b>",
+    "skillCount_few": "У вас есть <b>{{count}} навыка</b>",
+    "skillCount_many": "У вас есть <b>{{count}} навыков</b>",
+    "skillCount_other": "У вас есть <b>{{count}} навыков</b>"
   }
 }

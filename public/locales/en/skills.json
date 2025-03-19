@@ -20,6 +20,8 @@
       "skillFieldLabel": "Skill",
       "masteryFieldLabel": "Skill Mastery",
       "masteryFieldError": "Please add your skill level"
-    }
+    },
+    "skillCount_one": "You have <b>{{count}} skill</b>",
+    "skillCount_other": "You have <b>{{count}} skills</b>"
   }
 }

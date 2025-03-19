@@ -7,7 +7,7 @@ import { authVar } from '@shared/store/globalAuthState';
 import AddSkillModal from '@widgets/ui/users/AddSkillModal';
 import Skill from '@widgets/ui/users/Skill';
 import { type Skill as SkillInterface } from '@widgets/ui/users/types';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 
 import {
   SkillsContainer,
@@ -15,6 +15,7 @@ import {
   StyledPageContainer,
   StyledPageContent,
 } from './skills.styles';
+import { Text } from '@chakra-ui/react';
 
 interface SkillResponse {
   mastery: string;
@@ -73,6 +74,14 @@ const SkillsPage: React.FC = () => {
           />
           {userSkills?.length !== 0 && (
             <SkillsContainer>
+              <Text>
+                <Trans
+                  i18nKey="skill.skillCount"
+                  count={userSkills?.length}
+                  t={t}
+                  components={{ b: <b /> }}
+                />
+              </Text>
               {userSkills?.map((skill: SkillResponse) => {
                 return (
                   <Skill
