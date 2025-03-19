@@ -1,6 +1,6 @@
 import Aside from '@entities/ui/Aside';
 import Select from '@entities/ui/Select';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -28,14 +28,12 @@ const SettingsPage: React.FC = () => {
     i18n.language || 'en',
   );
 
-  useEffect(() => {
-    setSelectedLanguage(i18n.language || 'en');
-  }, [i18n.language]);
-
   const handleThemeChange = (value: string) => setSelectedTheme(value);
   const handleLanguageChange = (value: string) => {
     setSelectedLanguage(value);
+
     i18n.changeLanguage(value);
+    document.documentElement.dir = i18n.dir(value);
   };
 
   return (
