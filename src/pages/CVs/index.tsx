@@ -1,5 +1,5 @@
 import Aside from '@entities/ui/Aside';
-import CVsTable from '@widgets/ui/cvs/CVsTable';
+import CVsTable from '@widgets/ui/cvs/CvsTable';
 
 import { StyledPageContainer } from './cvs.styles';
 
