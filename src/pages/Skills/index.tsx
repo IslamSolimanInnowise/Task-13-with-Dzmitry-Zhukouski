@@ -1,5 +1,5 @@
 import Aside from '@entities/ui/Aside';
-import { SpinnerContainer } from '@entities/ui/Spinner/spinner.styles';
+import Spinner from '@entities/ui/Spinner';
 import useGetSkillCategories from '@features/hooks/users/useGetSkillCategories';
 import useGetSkills from '@features/hooks/users/useGetSkills';
 import useGetUser from '@features/hooks/users/useGetUser';
@@ -7,6 +7,7 @@ import { authVar } from '@shared/store/globalAuthState';
 import AddSkillModal from '@widgets/ui/users/AddSkillModal';
 import Skill from '@widgets/ui/users/Skill';
 import { type Skill as SkillInterface } from '@widgets/ui/users/types';
+import { useTranslation } from 'react-i18next';
 
 import {
   SkillsContainer,
@@ -29,6 +30,7 @@ const masteryOptions = [
 ];
 
 const SkillsPage: React.FC = () => {
+  const { t } = useTranslation('skills');
   const { id } = authVar();
   const { data } = useGetUser(id!);
   const userSkills = data?.user.profile.skills;
@@ -59,10 +61,10 @@ const SkillsPage: React.FC = () => {
     <StyledPageContainer>
       <Aside />
       {skillLoading || categoryLoading ? (
-        <SpinnerContainer />
+        <Spinner />
       ) : (
         <StyledPageContent>
-          <Styledh2>Skills</Styledh2>
+          <Styledh2>{t('pageHeading')}</Styledh2>
           <AddSkillModal
             userId={id!}
             categories={categories}

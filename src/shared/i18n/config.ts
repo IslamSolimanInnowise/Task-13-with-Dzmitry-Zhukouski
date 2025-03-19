@@ -13,6 +13,7 @@ i18n
     ns: [
       'auth',
       'languages',
+      'skills',
       'CVsTable',
       'CVsHeader',
       'CVDetails',

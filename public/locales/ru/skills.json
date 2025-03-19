@@ -1,0 +1,25 @@
+{
+  "pageHeading": "Навыки",
+  "addSkillModal": {
+    "button": "+ ДОБАВИТЬ НАВЫК",
+    "modalTitle": "Добавить Навык",
+    "modalConfirmText": "Подтвердить",
+    "modalCancelText": "Отменить",
+    "skillFieldLabel": "Навык",
+    "skillFieldError": "Пожалуйста, добавьте новый навык",
+    "masteryFieldLabel": "Уровень Навыка",
+    "masteryFieldError": "Пожалуйста, добавьте свой уровень навыка"
+  },
+  "skill": {
+    "deleteButton": "Удалить",
+    "updateSkillModal": {
+      "button": "Обновить",
+      "modalTitle": "Обновить Навык",
+      "modalConfirmText": "Обновить",
+      "modalCancelText": "Отменить",
+      "skillFieldLabel": "Навык",
+      "masteryFieldLabel": "Уровень Навыка",
+      "masteryFieldError": "Пожалуйста, добавьте свой уровень навыка"
+    }
+  }
+}
