@@ -1,0 +1,36 @@
+{
+  "tableHeaders": {
+    "name": "العنوان",
+    "domain": "اِختِصاص",
+    "startDate": "تاريخ البدء",
+    "endDate": "تاريخ الانتهاء"
+  },
+  "tableBody": {
+    "tillNow": "حتى الآن",
+    "noContent": "لم يتم العثور على نتائج"
+  },
+  "addCvProjectButtonText": "إضافة مشروع",
+  "moreButton": {
+    "updateButtonText": "تحديث المشروع",
+    "deleteButtonText": "حذف المشروع"
+  },
+  "deleteCvProjectDialog": {
+    "title": "حذف المشروع",
+    "subTitle": "هل أنت متأكد أنك تريد حذف المشروع؟",
+    "cancelButtonText": "إلغاء",
+    "confirmButtonText": "حذف"
+  },
+  "cvProjectDialog": {
+    "title": "إضافة مشروع",
+    "title_updatingMode": "تحديث المشروع",
+    "cancelButtonText": "إلغاء",
+    "confirmButtonText": "إنشاء وإضافة",
+    "confirmButtonText_updatingMode": "تحديث",
+    "form": {
+      "inputProjectPlaceholder": "المشروع",
+      "inputDomainPlaceholder": "اِختِصاص",
+      "inputDescriptionPlaceholder": "وصف",
+      "inputResponsibilitiesPlaceholder": "المسؤوليات"
+    }
+  }
+}

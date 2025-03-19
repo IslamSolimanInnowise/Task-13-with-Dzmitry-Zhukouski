@@ -20,6 +20,7 @@ const SettingsPage: React.FC = () => {
   const LanguagesList = [
     { id: 'en', name: t('english') },
     { id: 'ru', name: t('russian') },
+    { id: 'ar', name: t('arabic') },
   ];
 
   const [selectedTheme, setSelectedTheme] = useState(themesList[0].id);
