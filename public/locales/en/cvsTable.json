@@ -1,0 +1,30 @@
+{
+  "tableHeaders": {
+    "name": "Name",
+    "education": "Education",
+    "employee": "Employee"
+  },
+  "tableBody": {
+    "noContent": "No results found"
+  },
+  "createCvButtonText": "Create CV",
+  "createCvDialog": {
+    "title": "Create CV",
+    "nameInputPlaceholder": "Name",
+    "educationInputPlaceholder": "Education",
+    "descriptionInputPlaceholder": "Description",
+    "cancelButtonText": "Cancel",
+    "confirmButtonText": "Create",
+    "requiredError": "Required field"
+  },
+  "moreButton": {
+    "detailsButtonText": "Details",
+    "deleteButtonText": "Delete CV"
+  },
+  "deleteCvDialog": {
+    "title": "Delete CV",
+    "subTitle": "Are you sure you want to delete CV ",
+    "cancelButtonText": "Cancel",
+    "confirmButtonText": "Delete"
+  }
+}

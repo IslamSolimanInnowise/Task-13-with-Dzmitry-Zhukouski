@@ -1,0 +1,20 @@
+{
+  "useCreateCv": {
+    "success": "CV was created"
+  },
+  "useUpdateCv": {
+    "success": "CV was updated"
+  },
+  "useDeleteCv": {
+    "success": "CV was deleted"
+  },
+  "useAddCvProject": {
+    "success": "CV project was added"
+  },
+  "useUpdateCvProject": {
+    "success": "CV project was updated"
+  },
+  "useRemoveCvProject": {
+    "success": "CV project was removed"
+  }
+}

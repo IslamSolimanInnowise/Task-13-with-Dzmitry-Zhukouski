@@ -1,0 +1,20 @@
+{
+  "useCreateCv": {
+    "success": "تم إنشاء السيرة الذاتية"
+  },
+  "useUpdateCv": {
+    "success": "تم تحديث السيرة الذاتية"
+  },
+  "useDeleteCv": {
+    "success": "تم حذف السيرة الذاتية"
+  },
+  "useAddCvProject": {
+    "success": "تمت إضافة مشروع للسيرة الذاتية"
+  },
+  "useUpdateCvProject": {
+    "success": "تم تحديث مشروع بالسيرة الذاتية"
+  },
+  "useRemoveCvProject": {
+    "success": "تم حذف مشروع من السيرة الذاتية"
+  }
+}

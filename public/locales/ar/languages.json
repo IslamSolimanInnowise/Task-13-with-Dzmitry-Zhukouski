@@ -1,0 +1,25 @@
+{
+  "pageHeading": "اللغات",
+  "addLanguageModal": {
+    "button": "+ إضافة لغة",
+    "modalTitle": "إضافة لغة",
+    "modalConfirmText": "تأكيد",
+    "modalCancelText": "إلغاء",
+    "languageFieldLabel": "لغة",
+    "languageFieldError": "يجب عليك اختيار لغة",
+    "proficiencyFieldLabel": "مستوى إتقان اللغة",
+    "proficiencyFieldError": "يجب عليك تحديد مستوى إتقان اللغة"
+  },
+  "language": {
+    "deleteButton": "حذف",
+    "updateLanguageModal": {
+      "button": "تحديث",
+      "modalTitle": "تحديث اللغة",
+      "modalConfirmText": "تحديث",
+      "modalCancelText": "إلغاء",
+      "languageFieldLabel": "لغة",
+      "proficiencyFieldLabel": "مستوى إتقان اللغة",
+      "proficiencyFieldError": "يجب عليك تحديد مستوى إتقان اللغة"
+    }
+  }
+}

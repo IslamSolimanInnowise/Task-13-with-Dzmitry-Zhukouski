@@ -1,0 +1,7 @@
+{
+  "inputNamePlaceholder": "Name",
+  "inputEducationPlaceholder": "Education",
+  "inputDescriptionPlaceholder": "Description",
+  "confirmButtonText": "Update",
+  "requiredError": "Required field"
+}

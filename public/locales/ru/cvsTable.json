@@ -1,0 +1,30 @@
+{
+  "tableHeaders": {
+    "name": "Название",
+    "education": "Образование",
+    "employee": "Сотрудник"
+  },
+  "tableBody": {
+    "noContent": "Результатов не найдено"
+  },
+  "createCvButtonText": "Создать CV",
+  "createCvDialog": {
+    "title": "Создать CV",
+    "nameInputPlaceholder": "Название",
+    "educationInputPlaceholder": "Образование",
+    "descriptionInputPlaceholder": "Описание",
+    "cancelButtonText": "Отмена",
+    "confirmButtonText": "Создать",
+    "requiredError": "Обязательное поле"
+  },
+  "moreButton": {
+    "detailsButtonText": "Подробнее",
+    "deleteButtonText": "Удалить CV"
+  },
+  "deleteCvDialog": {
+    "title": "Удалить CV",
+    "subTitle": "Вы уверены, что хотите удалить CV ",
+    "cancelButtonText": "Отмена",
+    "confirmButtonText": "Удалить"
+  }
+}
