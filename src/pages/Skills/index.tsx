@@ -1,3 +1,4 @@
+import { Text } from '@chakra-ui/react';
 import Aside from '@entities/ui/Aside';
 import Spinner from '@entities/ui/Spinner';
 import useGetSkillCategories from '@features/hooks/users/useGetSkillCategories';
@@ -15,7 +16,6 @@ import {
   StyledPageContainer,
   StyledPageContent,
 } from './skills.styles';
-import { Text } from '@chakra-ui/react';
 
 interface SkillResponse {
   mastery: string;

@@ -2,7 +2,7 @@
   "tableHeaders": {
     "name": "Название",
     "education": "Образование",
-    "employee": "Работник"
+    "employee": "Сотрудник"
   },
   "tableBody": {
     "noContent": "Результатов не найдено"

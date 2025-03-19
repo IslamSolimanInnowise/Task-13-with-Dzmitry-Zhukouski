@@ -2,6 +2,7 @@ import { MenuRoot } from '@shared/ui/menu';
 import { useNavigate } from '@tanstack/react-router';
 import { EllipsisVertical } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { User } from '../types';
 import UpdateUserModal from '../UpdateUserModal';
@@ -10,7 +11,6 @@ import {
   StyledProfileMenuItem,
   StyledProfileMenuTrigger,
 } from './usersMenu.styles';
-import { useTranslation } from 'react-i18next';
 
 interface UsersMenuProps {
   row: {
