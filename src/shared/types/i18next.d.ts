@@ -10,6 +10,7 @@ import CVsTable from '@public/locales/en/CVsTable.json';
 import languages from '@public/locales/en/languages.json';
 import SearchInput from '@public/locales/en/SearchInput.json';
 import skills from '@public/locales/en/skills.json';
+import users from '@public/locales/en/users.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -18,6 +19,7 @@ declare module 'i18next' {
       auth: typeof auth;
       Aside: typeof Aside;
       SearchInput: typeof SearchInput;
+      users: typeof users;
       languages: typeof languages;
       skills: typeof skills;
       CVsTable: typeof CVsTable;

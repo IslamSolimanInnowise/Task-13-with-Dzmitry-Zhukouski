@@ -1,0 +1,27 @@
+{
+  "pageHeading": "Employees",
+  "tableColumn": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "department": "Department",
+    "position": "Position"
+  },
+  "usersMenu": {
+    "profile": "Profile",
+    "update": "Update user",
+    "delete": "Delete user"
+  },
+  "updateUserModal": {
+    "modalTitle": "Update User",
+    "modalConfirmText": "Update",
+    "modalCancelText": "Cancel",
+    "emailFieldLabel": "Email",
+    "passwordFieldLabel": "Password",
+    "firstNameFieldLabel": "First Name",
+    "lastNameFieldLabel": "Last Name",
+    "departmentFieldLabel": "Department",
+    "positionFieldLabel": "Position",
+    "roleFieldLabel": "Role"
+  }
+}

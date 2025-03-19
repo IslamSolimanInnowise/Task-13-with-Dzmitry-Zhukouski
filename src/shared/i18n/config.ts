@@ -14,6 +14,7 @@ i18n
       'auth',
       'Aside',
       'SearchInput',
+      'users',
       'languages',
       'skills',
       'CVsTable',

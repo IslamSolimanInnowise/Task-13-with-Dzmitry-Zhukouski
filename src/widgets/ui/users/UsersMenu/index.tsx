@@ -10,6 +10,7 @@ import {
   StyledProfileMenuItem,
   StyledProfileMenuTrigger,
 } from './usersMenu.styles';
+import { useTranslation } from 'react-i18next';
 
 interface UsersMenuProps {
   row: {
@@ -18,6 +19,7 @@ interface UsersMenuProps {
 }
 
 const UsersMenu: React.FC<UsersMenuProps> = ({ row }) => {
+  const { t } = useTranslation('users');
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -35,19 +37,19 @@ const UsersMenu: React.FC<UsersMenuProps> = ({ row }) => {
         </StyledProfileMenuTrigger>
         <StyledProfileMenuContent>
           <StyledProfileMenuItem value="profile" onClick={handleClick}>
-            Profile
+            {t('usersMenu.profile')}
           </StyledProfileMenuItem>
           <StyledProfileMenuItem
             value="update"
             onClick={() => setIsModalOpen(true)}
           >
-            Update user
+            {t('usersMenu.update')}
           </StyledProfileMenuItem>
           <StyledProfileMenuItem
             value="delete"
             disabled={row.original.role === 'Employee'}
           >
-            Delete user
+            {t('usersMenu.delete')}
           </StyledProfileMenuItem>
         </StyledProfileMenuContent>
       </MenuRoot>
