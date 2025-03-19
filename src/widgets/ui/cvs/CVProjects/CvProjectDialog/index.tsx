@@ -86,7 +86,7 @@ const CvProjectDialog = ({
   );
 
   const itemsList = updatingMode
-    ? [{ id: updatingCvProject?.id, name: updatingCvProject?.name }]
+    ? [{ id: updatingCvProject?.projectId, name: updatingCvProject?.name }]
     : projects?.projects
         ?.filter(
           (p: TableCV) =>
