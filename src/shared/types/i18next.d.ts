@@ -8,8 +8,8 @@ import CVsHeader from '@public/locales/en/CVsHeader.json';
 import cvsNotifications from '@public/locales/en/cvsNotifications.json';
 import CVsTable from '@public/locales/en/CVsTable.json';
 import languages from '@public/locales/en/languages.json';
-import skills from '@public/locales/en/skills.json';
 import SearchInput from '@public/locales/en/SearchInput.json';
+import skills from '@public/locales/en/skills.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {

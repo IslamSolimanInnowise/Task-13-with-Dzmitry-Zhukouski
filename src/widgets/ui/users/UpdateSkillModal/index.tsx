@@ -10,9 +10,9 @@ import {
 } from '@shared/schemas/AddSkillFormSchema';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { StyledButton } from './updateSkillModal.styles';
-import { useTranslation } from 'react-i18next';
 
 interface UpdateSkillModalProps {
   userId: string;
