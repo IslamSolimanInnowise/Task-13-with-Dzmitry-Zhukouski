@@ -7,8 +7,8 @@ import { authVar } from '@shared/store/globalAuthState';
 import { type Skill as SkillInterface } from '@widgets/ui/users/types';
 import { Trans, useTranslation } from 'react-i18next';
 
-import AddSkillModal from '../users/AddSkillModal';
-import Skill from '../users/Skill';
+import AddSkillModal from '../AddSkillModal';
+import Skill from '../Skill';
 import { SkillsContainer } from './skillsWidget.styles';
 
 interface SkillResponse {

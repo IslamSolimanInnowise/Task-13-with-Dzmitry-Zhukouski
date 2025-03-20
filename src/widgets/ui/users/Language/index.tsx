@@ -1,7 +1,7 @@
 import { Button, HStack } from '@chakra-ui/react';
 import { Progress } from '@chakra-ui/react';
 import useDeleteLanguage from '@features/hooks/users/useDeleteLanguage';
-import UpdateLanguageModal from '@widgets/ui/UpdateLanguageModal';
+import UpdateLanguageModal from '@widgets/ui/users/UpdateLanguageModal';
 import { useTranslation } from 'react-i18next';
 
 import { Language as LanguageInterface } from '../types';
