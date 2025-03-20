@@ -1,5 +1,6 @@
 import Aside from '@entities/ui/Aside';
 import CVsHeader from '@entities/ui/CVsHeader';
+import CVSkills from '@widgets/ui/cvs/CVSkills';
 
 import {
   StyledCvSkillsContainer,
@@ -16,7 +17,7 @@ const CVSkillsPage: React.FC<CVSkillsPageProps> = ({ cvId }) => {
       <Aside />
       <StyledCvSkillsContainer>
         <CVsHeader />
-        <span>Skills of cv: {cvId}</span>
+        <CVSkills cvId={cvId} />
       </StyledCvSkillsContainer>
     </StyledPageContainer>
   );

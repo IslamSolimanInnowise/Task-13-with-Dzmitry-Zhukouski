@@ -42,6 +42,30 @@
     "confirmButtonText": "التحديث",
     "requiredError": "حقل مطلوب ملأه"
   },
+  "skills": {
+    "addCVSkillButtonText": "+ إضافة مهارة",
+    "addCVSkillDialog": {
+      "title": "إضافة مهارة",
+      "skillSelectPlaceholder": "المهارة",
+      "masterySelectPlaceholder": "مستوى إتقان المهارة",
+      "cancelButtonText": "إلغاء",
+      "confirmButtonText": "تأكيد"
+    },
+    "updateCVSkillDialog": {
+      "title": "تحديث المهارة",
+      "confirmButtonText": "تحديث"
+    },
+    "CVSkill": {
+      "updateButtonText": "تحديث",
+      "deleteButtonText": "حذف"
+    },
+    "deleteCvSkillDialog": {
+      "title": "حذف مهارة",
+      "subTitle": "هل أنت متأكد أنك تريد حذف المهارة ؟",
+      "cancelButtonText": "إلغاء",
+      "confirmButtonText": "حذف"
+    }
+  },
   "projects": {
     "tableHeaders": {
       "name": "العنوان",
@@ -96,6 +120,15 @@
     },
     "useRemoveCvProject": {
       "success": "تم حذف مشروع من السيرة الذاتية"
+    },
+    "useAddCvSkill": {
+      "success": "تمت إضافة مهارة للسيرة الذاتية"
+    },
+    "useUpdateCvSkill": {
+      "success": "تم تحديث مهارة بالسيرة الذاتية"
+    },
+    "useDeleteCvSkill": {
+      "success": "تم حذف مهارة من السيرة الذاتية"
     }
   }
 }
