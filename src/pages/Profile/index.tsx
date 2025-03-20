@@ -1,8 +1,9 @@
 import Aside from '@entities/ui/Aside';
+import Breadcrumb from '@entities/ui/Breadcrumb';
 import useGetUser from '@features/hooks/users/useGetUser';
+import ProfileHeader from '@widgets/ui/users/profile/ProfileHeader';
 
 import { StyledPageContainer, StyledPageContent } from './profile.styles';
-import Breadcrumb from '@entities/ui/Breadcrumb';
 
 interface ProfilePageProps {
   userId: string;
@@ -10,7 +11,7 @@ interface ProfilePageProps {
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
   const { data: currentUser, loading } = useGetUser(userId);
-  console.log(currentUser);
+
   const profileCurrentLink =
     currentUser?.user?.profile?.first_name || currentUser?.user?.email;
 
@@ -23,6 +24,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
             currentLink={profileCurrentLink}
             breadCrumbItems={[{ name: 'Employees', path: '/users' }]}
           />
+          <ProfileHeader userId={currentUser.user.id} />
         </StyledPageContent>
       )}
     </StyledPageContainer>

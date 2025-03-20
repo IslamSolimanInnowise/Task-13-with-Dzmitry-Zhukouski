@@ -6,8 +6,8 @@ Status of Last Deployment:
 
 todo:
 
-- breadcrumb for the profile pages
-- routes of the profile pages
+- breadcrumb for the profile pages => done
+- routes of the profile pages => done
 - make the skills page
 - make the languages page
 - add profile page with adding avatar and edit profile capabilities
