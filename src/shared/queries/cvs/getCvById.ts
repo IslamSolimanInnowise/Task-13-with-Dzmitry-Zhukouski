@@ -15,6 +15,19 @@ export const GET_CV_BY_ID = gql`
         categoryId
         mastery
       }
+      projects {
+        id
+        name
+        description
+        domain
+        start_date
+        end_date
+        environment
+        responsibilities
+        project {
+          id
+        }
+      }
     }
   }
 `;
