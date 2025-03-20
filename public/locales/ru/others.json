@@ -1,0 +1,14 @@
+{
+  "aside": {
+    "employees": "Сотрудники",
+    "skills": "Навыки",
+    "languages": "Языки",
+    "cvs": "Резюме",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "logout": "Выйти"
+  },
+  "searchInput": {
+    "searchInputPlaceholder": "Поиск"
+  }
+}

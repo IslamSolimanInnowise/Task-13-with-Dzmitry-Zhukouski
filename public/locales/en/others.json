@@ -1,0 +1,14 @@
+{
+  "aside": {
+    "employees": "Employees",
+    "skills": "Skills",
+    "languages": "Languages",
+    "cvs": "CVs",
+    "profile": "Profile",
+    "settings": "Settings",
+    "logout": "Logout"
+  },
+  "searchInput": {
+    "searchInputPlaceholder": "Search"
+  }
+}
