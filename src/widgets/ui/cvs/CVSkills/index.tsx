@@ -30,6 +30,7 @@ const CVSkills: React.FC<CVSkillsProps> = ({ cvId }) => {
       onConfirm: () => {},
     });
   };
+
   return (
     <>
       {isOwner && (
@@ -39,18 +40,18 @@ const CVSkills: React.FC<CVSkillsProps> = ({ cvId }) => {
       )}
       {cvLoading ? (
         <Spinner />
-      ) : (
+      ) : cvdata?.cv?.skills?.length ? (
         <CVSkillsContainer>
           {cvdata?.cv?.skills?.map((skillMastery: SkillMastery) => (
             <CVSkill
-              key={skillMastery.categoryId}
+              key={skillMastery.name}
               cvId={cvId}
               skillMastery={skillMastery}
               isOwner={isOwner}
             />
           ))}
         </CVSkillsContainer>
-      )}
+      ) : null}
     </>
   );
 };

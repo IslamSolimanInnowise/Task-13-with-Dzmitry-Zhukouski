@@ -1,12 +1,11 @@
-import { Dialog, Portal, VStack } from '@chakra-ui/react';
-import Select from '@entities/ui/Select';
+import { Dialog, Portal } from '@chakra-ui/react';
 import useAddCvSkill from '@features/hooks/cvs/useAddCvSkill';
 import useUpdateCvSkill from '@features/hooks/cvs/useUpdateCvSkill';
 import useGetSkills from '@features/hooks/users/useGetSkills';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs';
 import { Cv, Skill, SkillMastery } from 'cv-graphql';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
@@ -18,14 +17,7 @@ import {
   ModalHeader,
   StyledCloseButton,
 } from './cvSkillDialog.styles';
-
-const masteryOptions = [
-  'Novice',
-  'Advanced',
-  'Competent',
-  'Proficient',
-  'Expert',
-];
+import CVSkillDialogForm from './CVSkillDialogForm';
 
 type CVSkillDialogProps = {
   cvId: Cv['id'];
@@ -38,7 +30,13 @@ type CVSkillDialogProps = {
 
 const schema = z.object({
   skillName: z.string().min(1),
-  mastery: z.string().min(1),
+  mastery: z.enum([
+    'Novice',
+    'Advanced',
+    'Competent',
+    'Proficient',
+    'Expert',
+  ]) as z.ZodType<SkillMastery['mastery']>,
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -73,8 +71,8 @@ const CVSkillDialog: React.FC<CVSkillDialogProps> = ({
     resolver: zodResolver(schema),
     mode: 'onChange',
     defaultValues: {
-      skillName: updatingMode ? cvSkills[0].name : '',
-      mastery: updatingMode ? cvSkills[0].mastery : '',
+      skillName: updatingMode ? cvSkills[0].name : undefined,
+      mastery: updatingMode ? cvSkills[0].mastery : undefined,
     },
   });
 
@@ -133,45 +131,12 @@ const CVSkillDialog: React.FC<CVSkillDialogProps> = ({
               </Dialog.CloseTrigger>
             </ModalHeader>
             <Dialog.Body py={4}>
-              <VStack as="form" display="flex" flexDirection={'column'} gap={8}>
-                <Controller
-                  control={control}
-                  name="skillName"
-                  render={({ field }) => (
-                    <Select
-                      placeholderText={t(
-                        'skills.addCVSkillDialog.skillSelectPlaceholder',
-                      )}
-                      itemsList={filteredSkills?.map((skill: Skill) => ({
-                        id: skill.name,
-                        name: skill.name,
-                        group: skill.category_parent_name,
-                      }))}
-                      isReadOnly={skillLoading || updatingMode}
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  )}
-                />
-                <Controller
-                  control={control}
-                  name="mastery"
-                  render={({ field }) => (
-                    <Select
-                      placeholderText={t(
-                        'skills.addCVSkillDialog.masterySelectPlaceholder',
-                      )}
-                      itemsList={masteryOptions.map((name) => ({
-                        id: name,
-                        name,
-                      }))}
-                      isReadOnly={skillLoading}
-                      value={field.value}
-                      onChange={field.onChange}
-                    />
-                  )}
-                />
-              </VStack>
+              <CVSkillDialogForm
+                control={control}
+                filteredSkills={filteredSkills}
+                skillLoading={skillLoading}
+                updatingMode={updatingMode}
+              />
             </Dialog.Body>
             <ModalFooter>
               <CancelButton onClick={onClose}>
