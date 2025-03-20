@@ -1,0 +1,101 @@
+{
+  "table": {
+    "tableHeaders": {
+      "name": "Name",
+      "education": "Education",
+      "employee": "Employee"
+    },
+    "tableBody": {
+      "noContent": "No results found"
+    },
+    "createCvButtonText": "Create CV",
+    "createCvDialog": {
+      "title": "Create CV",
+      "nameInputPlaceholder": "Name",
+      "educationInputPlaceholder": "Education",
+      "descriptionInputPlaceholder": "Description",
+      "cancelButtonText": "Cancel",
+      "confirmButtonText": "Create",
+      "requiredError": "Required field"
+    },
+    "moreButton": {
+      "detailsButtonText": "Details",
+      "deleteButtonText": "Delete CV"
+    },
+    "deleteCvDialog": {
+      "title": "Delete CV",
+      "subTitle": "Are you sure you want to delete CV ",
+      "cancelButtonText": "Cancel",
+      "confirmButtonText": "Delete"
+    }
+  },
+  "header": {
+    "details": "Details",
+    "skills": "Skills",
+    "projects": "Projects",
+    "preview": "Preview"
+  },
+  "details": {
+    "inputNamePlaceholder": "Name",
+    "inputEducationPlaceholder": "Education",
+    "inputDescriptionPlaceholder": "Description",
+    "confirmButtonText": "Update",
+    "requiredError": "Required field"
+  },
+  "projects": {
+    "tableHeaders": {
+      "name": "Name",
+      "domain": "Domain",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    },
+    "tableBody": {
+      "tillNow": "Till now",
+      "noContent": "No results found"
+    },
+    "addCvProjectButtonText": "Add Project",
+    "moreButton": {
+      "updateButtonText": "Update Project",
+      "deleteButtonText": "Remove Project"
+    },
+    "deleteCvProjectDialog": {
+      "title": "Remove Project",
+      "subTitle": "Are you sure you want to remove project ",
+      "cancelButtonText": "Cancel",
+      "confirmButtonText": "Remove"
+    },
+    "cvProjectDialog": {
+      "title": "Add project",
+      "title_updatingMode": "Update project",
+      "cancelButtonText": "Cancel",
+      "confirmButtonText": "Create & Add",
+      "confirmButtonText_updatingMode": "Update",
+      "form": {
+        "inputProjectPlaceholder": "Project",
+        "inputDomainPlaceholder": "Domain",
+        "inputDescriptionPlaceholder": "Description",
+        "inputResponsibilitiesPlaceholder": "Responsibilities"
+      }
+    }
+  },
+  "notifications": {
+    "useCreateCv": {
+      "success": "CV was created"
+    },
+    "useUpdateCv": {
+      "success": "CV was updated"
+    },
+    "useDeleteCv": {
+      "success": "CV was deleted"
+    },
+    "useAddCvProject": {
+      "success": "CV project was added"
+    },
+    "useUpdateCvProject": {
+      "success": "CV project was updated"
+    },
+    "useRemoveCvProject": {
+      "success": "CV project was removed"
+    }
+  }
+}

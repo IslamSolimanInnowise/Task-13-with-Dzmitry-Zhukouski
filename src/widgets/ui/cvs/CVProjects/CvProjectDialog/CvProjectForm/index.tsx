@@ -3,6 +3,7 @@ import Select from '@entities/ui/Select';
 import { Field } from '@shared/ui/field';
 import { Project } from 'cv-graphql';
 import { Control, Controller, FieldErrors } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { StyledInput, StyledTextArea } from '../cvProjectDialog.styled';
 import type { FormValues } from '../index.d';
@@ -24,6 +25,8 @@ const CvProjectForm = ({
   itemsList,
   loadings,
 }: CvProjectFormProps) => {
+  const { t } = useTranslation('cvs');
+
   return (
     <VStack as="form" gap={8}>
       <Container display="flex" gap={8}>
@@ -33,7 +36,9 @@ const CvProjectForm = ({
           defaultValue=""
           render={({ field }) => (
             <Select
-              placeholderText="Project"
+              placeholderText={t(
+                'projects.cvProjectDialog.form.inputProjectPlaceholder',
+              )}
               itemsList={itemsList}
               isReadOnly={loadings || updatingMode}
               value={field.value}
@@ -49,7 +54,9 @@ const CvProjectForm = ({
             <StyledInput
               {...field}
               disabled={updatingMode}
-              placeholder="Domain"
+              placeholder={t(
+                'projects.cvProjectDialog.form.inputDomainPlaceholder',
+              )}
               readOnly
             />
           )}
@@ -99,7 +106,9 @@ const CvProjectForm = ({
           <StyledTextArea
             {...field}
             disabled={updatingMode}
-            placeholder="Description"
+            placeholder={t(
+              'projects.cvProjectDialog.form.inputDescriptionPlaceholder',
+            )}
             rows={4}
             resize="none"
             readOnly
@@ -111,7 +120,12 @@ const CvProjectForm = ({
         name="responsibilities"
         defaultValue=""
         render={({ field }) => (
-          <StyledInput placeholder="Responsibilities" {...field} />
+          <StyledInput
+            placeholder={t(
+              'projects.cvProjectDialog.form.inputResponsibilitiesPlaceholder',
+            )}
+            {...field}
+          />
         )}
       />
       <Container display="flex" flexWrap="wrap" gap={2}>

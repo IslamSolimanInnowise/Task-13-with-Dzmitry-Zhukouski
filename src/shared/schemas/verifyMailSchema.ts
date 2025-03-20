@@ -1,8 +1,6 @@
 import { z } from 'zod';
 
-const verifyEmailFieldSchema = z
-  .string()
-  .length(6, { message: 'The verification code consists of 6 characters' });
+const verifyEmailFieldSchema = z.string().length(6);
 
 const verifyEmailSchema = z.object({
   otp: verifyEmailFieldSchema,

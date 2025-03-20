@@ -1,6 +1,7 @@
 import { Dialog, Portal } from '@chakra-ui/react';
 import useRemoveCvProject from '@features/hooks/cvs/useRemoveCvProject';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { useTranslation } from 'react-i18next';
 
 import {
   CancelButton,
@@ -26,6 +27,8 @@ const DeleteCvProjectDialog = ({
   onClose,
   onConfirm,
 }: DeleteCvProjectDialogProps) => {
+  const { t } = useTranslation('cvs');
+
   const [removeCvProject, { loading }] = useRemoveCvProject(onClose, cvId);
 
   const onSubmit = () => {
@@ -50,7 +53,7 @@ const DeleteCvProjectDialog = ({
           <ModalContent>
             <ModalHeader>
               <Dialog.Title fontSize="lg" fontWeight="600">
-                Remove project
+                {t('projects.deleteCvProjectDialog.title')}
               </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <StyledCloseButton />
@@ -58,14 +61,16 @@ const DeleteCvProjectDialog = ({
             </ModalHeader>
 
             <Dialog.Body py={4}>
-              Are you sure you want to remove project{' '}
+              {t('projects.deleteCvProjectDialog.subTitle')}
               <strong>{projectName}?</strong>
             </Dialog.Body>
 
             <ModalFooter>
-              <CancelButton onClick={onClose}>Cancel</CancelButton>
+              <CancelButton onClick={onClose}>
+                {t('projects.deleteCvProjectDialog.cancelButtonText')}
+              </CancelButton>
               <ConfirmButton onClick={onSubmit} disabled={loading}>
-                Confirm
+                {t('projects.deleteCvProjectDialog.confirmButtonText')}
               </ConfirmButton>
             </ModalFooter>
           </ModalContent>

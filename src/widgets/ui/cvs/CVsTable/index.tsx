@@ -13,6 +13,7 @@ import {
 import { useVirtualizer } from '@tanstack/react-virtual';
 import type { Cv, User } from 'cv-graphql';
 import React, { useMemo, useRef, useState, useTransition } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import AddCvButton from './AddCvButton';
 import {
@@ -31,7 +32,8 @@ import {
 } from './cvsTable.styles';
 import MoreButton from './MoreButton';
 
-const CvsTable: React.FC = () => {
+const CVsTable: React.FC = () => {
+  const { t } = useTranslation('cvs');
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [, startTransition] = useTransition();
   const { data: cvData, loading: isCvsLoading } = useGetCvs();
@@ -52,9 +54,9 @@ const CvsTable: React.FC = () => {
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
-      { accessorKey: 'name', header: 'Name' },
-      { accessorKey: 'education', header: 'Education' },
-      { accessorKey: 'employee', header: 'Employee' },
+      { accessorKey: 'name', header: t('table.tableHeaders.name') },
+      { accessorKey: 'education', header: t('table.tableHeaders.education') },
+      { accessorKey: 'employee', header: t('table.tableHeaders.employee') },
       {
         id: 'actions',
         header: '',
@@ -67,7 +69,7 @@ const CvsTable: React.FC = () => {
         enableSorting: false,
       },
     ],
-    [],
+    [t],
   );
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -177,7 +179,7 @@ const CvsTable: React.FC = () => {
     <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
       <StyledTableBodyRow>
         <StyledTableNoContentCell colSpan={columns.length}>
-          No results found
+          {t('table.tableBody.noContent')}
         </StyledTableNoContentCell>
       </StyledTableBodyRow>
     </Table.Body>
@@ -195,4 +197,4 @@ const CvsTable: React.FC = () => {
   );
 };
 
-export default CvsTable;
+export default CVsTable;

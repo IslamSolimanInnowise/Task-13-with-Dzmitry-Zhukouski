@@ -46,6 +46,7 @@ export const StyledSubmitButton = styled(Button)`
   width: 220px;
   margin: 1rem auto;
   display: block;
+  text-transform: uppercase;
 `;
 
 export const StyledLink = styled(Link)`
@@ -54,4 +55,5 @@ export const StyledLink = styled(Link)`
   line-height: 24.5px;
   letter-spacing: 0.4px;
   text-align: center;
+  text-transform: uppercase;
 `;

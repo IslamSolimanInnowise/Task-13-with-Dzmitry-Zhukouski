@@ -10,6 +10,7 @@ import {
 } from '@shared/schemas/addLanguageSchema';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { StyledButton } from './addLanguageModal.styles';
 
@@ -27,6 +28,8 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
   languages,
   proficiencyLevels,
 }) => {
+  const { t } = useTranslation('users');
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
@@ -59,16 +62,16 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
 
   return (
     <Modal
-      titleText="Add Language"
-      confirmText="Confirm"
-      cancelText="Cancel"
+      titleText={t('languages.addLanguageModal.modalTitle')}
+      confirmText={t('languages.addLanguageModal.modalConfirmText')}
+      cancelText={t('languages.addLanguageModal.modalCancelText')}
       onConfirm={onSubmit}
       trigger={
         <StyledButton
           disabled={languages.length === 0}
           onClick={handleOpenModal}
         >
-          + ADD Language
+          {t('languages.addLanguageModal.button')}
         </StyledButton>
       }
       open={isModalOpen}
@@ -77,7 +80,9 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
       <form onSubmit={onSubmit}>
         <VStack gap="8">
           <Field.Root invalid={!!errors.name}>
-            <Field.Label>Language</Field.Label>
+            <Field.Label>
+              {t('languages.addLanguageModal.languageFieldLabel')}
+            </Field.Label>
             <NativeSelect.Root size="md">
               <NativeSelect.Field {...register('name')} defaultValue="English">
                 {languages.map((language) => (
@@ -88,11 +93,15 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
               </NativeSelect.Field>
               <NativeSelect.Indicator />
             </NativeSelect.Root>
-            <Field.ErrorText>{errors.name?.message}</Field.ErrorText>
+            <Field.ErrorText>
+              {t('languages.addLanguageModal.languageFieldError')}
+            </Field.ErrorText>
           </Field.Root>
 
           <Field.Root invalid={!!errors.proficiency}>
-            <Field.Label>Language Proficiency</Field.Label>
+            <Field.Label>
+              {t('languages.addLanguageModal.proficiencyFieldLabel')}
+            </Field.Label>
             <NativeSelect.Root size="md">
               <NativeSelect.Field
                 {...register('proficiency')}
@@ -106,7 +115,9 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
               </NativeSelect.Field>
               <NativeSelect.Indicator />
             </NativeSelect.Root>
-            <Field.ErrorText>{errors.proficiency?.message}</Field.ErrorText>
+            <Field.ErrorText>
+              {t('languages.addLanguageModal.proficiencyFieldError')}
+            </Field.ErrorText>
           </Field.Root>
         </VStack>
       </form>

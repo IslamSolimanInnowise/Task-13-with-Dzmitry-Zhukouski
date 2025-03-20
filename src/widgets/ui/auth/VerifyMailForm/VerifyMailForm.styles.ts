@@ -44,4 +44,5 @@ export const StyledSubmitButton = styled(Button)`
   width: 220px;
   margin: 1rem auto;
   display: block;
+  text-transform: uppercase;
 `;

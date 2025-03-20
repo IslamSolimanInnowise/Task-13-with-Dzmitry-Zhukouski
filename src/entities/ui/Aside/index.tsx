@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { CircleUserRound, LogOut, Settings } from 'lucide-react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   StyledAsideContainer,
@@ -29,6 +30,7 @@ import {
 } from './aside.styles';
 
 const Aside: React.FC = () => {
+  const { t } = useTranslation('others');
   const [isClosed, setIsClosed] = useState(false);
   const { email } = authVar();
   const navigate = useNavigate();
@@ -56,7 +58,7 @@ const Aside: React.FC = () => {
           }}
         >
           <StyledIcon as={Users} />
-          <Text>Employees</Text>
+          <Text>{t('aside.employees')}</Text>
         </StyledLink>
         <StyledLink
           to="/skills"
@@ -65,7 +67,7 @@ const Aside: React.FC = () => {
           }}
         >
           <StyledIcon as={TrendingUp} />
-          <Text>Skills</Text>
+          <Text>{t('aside.skills')}</Text>
         </StyledLink>
         <StyledLink
           to="/languages"
@@ -74,7 +76,7 @@ const Aside: React.FC = () => {
           }}
         >
           <StyledIcon as={Languages} />
-          <Text>Languages</Text>
+          <Text>{t('aside.languages')}</Text>
         </StyledLink>
         <StyledLink
           to="/cvs"
@@ -83,7 +85,7 @@ const Aside: React.FC = () => {
           }}
         >
           <StyledIcon as={FileUser} />
-          <Text>CVs</Text>
+          <Text>{t('aside.cvs')}</Text>
         </StyledLink>
       </StyledNavContainer>
       <StyledUserContainer>
@@ -104,20 +106,20 @@ const Aside: React.FC = () => {
                 params={{ userId: authVar().id! }}
               >
                 <CircleUserRound />
-                <Text>Profile</Text>
+                <Text>{t('aside.profile')}</Text>
               </StyledMenuButton>
             </MenuItem>
             <MenuItem asChild value="settings">
               <StyledMenuButton as={Link} to="/settings">
                 <Settings />
-                <Text>Settings</Text>
+                <Text>{t('aside.settings')}</Text>
               </StyledMenuButton>
             </MenuItem>
             <StyledHr />
             <MenuItem asChild value="logout">
               <StyledMenuButton as={Link} onClick={handleLogout}>
                 <LogOut />
-                <Text>Logout</Text>
+                <Text>{t('aside.logout')}</Text>
               </StyledMenuButton>
             </MenuItem>
           </StyledMenuContent>

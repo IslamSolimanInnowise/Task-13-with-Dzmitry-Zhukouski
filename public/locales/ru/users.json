@@ -1,0 +1,113 @@
+{
+  "pageHeading": "Сотрудники",
+  "tableColumn": {
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "email": "Почта",
+    "department": "Отдел",
+    "position": "Должность"
+  },
+  "usersMenu": {
+    "profile": "Профиль",
+    "update": "Обновить",
+    "delete": "Удалить"
+  },
+  "updateUserModal": {
+    "modalTitle": "Обновить Пользователя",
+    "modalConfirmText": "Обновить",
+    "modalCancelText": "Отменить",
+    "emailFieldLabel": "Почта",
+    "passwordFieldLabel": "Пароль",
+    "firstNameFieldLabel": "Имя",
+    "lastNameFieldLabel": "Фамилия",
+    "departmentFieldLabel": "Отдел",
+    "positionFieldLabel": "Должность",
+    "roleFieldLabel": "Роль"
+  },
+  "languages": {
+    "pageHeading": "Языки",
+    "addLanguageModal": {
+      "button": "+ ДОБАВИТЬ ЯЗЫК",
+      "modalTitle": "Добавить Язык",
+      "modalConfirmText": "Подтвердить",
+      "modalCancelText": "Отменить",
+      "languageFieldLabel": "Язык",
+      "languageFieldError": "Нужно выбрать язык",
+      "proficiencyFieldLabel": "Владение",
+      "proficiencyFieldError": "Нужно выбрать уровень владения"
+    },
+    "language": {
+      "deleteButton": "Удалить",
+      "updateLanguageModal": {
+        "button": "Обновить",
+        "modalTitle": "Обновить Язык",
+        "modalConfirmText": "Обновить",
+        "modalCancelText": "Отменить",
+        "languageFieldLabel": "Язык",
+        "proficiencyFieldLabel": "Владение",
+        "proficiencyFieldError": "Нужно выбрать уровень владения"
+      }
+    }
+  },
+  "skills": {
+    "pageHeading": "Навыки",
+    "addSkillModal": {
+      "button": "+ ДОБАВИТЬ НАВЫК",
+      "modalTitle": "Добавить Навык",
+      "modalConfirmText": "Подтвердить",
+      "modalCancelText": "Отменить",
+      "skillFieldLabel": "Навык",
+      "skillFieldError": "Пожалуйста, добавьте новый навык",
+      "masteryFieldLabel": "Уровень Навыка",
+      "masteryFieldError": "Пожалуйста, добавьте свой уровень навыка"
+    },
+    "skill": {
+      "deleteButton": "Удалить",
+      "updateSkillModal": {
+        "button": "Обновить",
+        "modalTitle": "Обновить Навык",
+        "modalConfirmText": "Обновить",
+        "modalCancelText": "Отменить",
+        "skillFieldLabel": "Навык",
+        "masteryFieldLabel": "Уровень Навыка",
+        "masteryFieldError": "Пожалуйста, добавьте свой уровень навыка"
+      },
+      "skillCount_one": "У вас есть <b>{{count}} навык</b>",
+      "skillCount_few": "У вас есть <b>{{count}} навыка</b>",
+      "skillCount_many": "У вас есть <b>{{count}} навыков</b>",
+      "skillCount_other": "У вас есть <b>{{count}} навыков</b>"
+    }
+  },
+  "usersNotifications": {
+    "useAddSkill": {
+      "success": "Навык был добавлен!"
+    },
+    "useDeleteSkill": {
+      "success": "Ваш навык был удален!"
+    },
+    "useAddLanguage": {
+      "success": "Язык был добавлен!"
+    },
+    "useDeleteLanguage": {
+      "success": "Ваш язык был удален!"
+    },
+    "useUpdateDepartment": {
+      "success": "Ваш отдел был обновлен!"
+    },
+    "useUpdatePosition": {
+      "success": "Ваша должность была обновлена!"
+    },
+    "useUpdateProfile": {
+      "success": "Ваш профиль был обновлен!"
+    },
+    "useUpdateProfileLanguage": {
+      "success": "Ваш язык профиля был обновлен!"
+    },
+    "useUpdateProfileSkill": {
+      "success": "Ваш навык профиля был обновлен!"
+    },
+    "useUpdateUser": {
+      "success": "Пользователь был обновлен!"
+    }
+  }
+}

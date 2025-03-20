@@ -13,6 +13,7 @@ import {
 
 type SelectProps = {
   placeholderText: string;
+  label?: string;
   itemsList?: { id: string; name: string }[];
   isReadOnly?: boolean;
   value?: string;
@@ -20,8 +21,9 @@ type SelectProps = {
 };
 
 const Select = ({
-  itemsList,
   placeholderText,
+  label,
+  itemsList,
   isReadOnly,
   value,
   onChange,
@@ -42,6 +44,7 @@ const Select = ({
       onValueChange={(e) => onChange?.(e.value[0])}
     >
       <ChakraSelect.HiddenSelect />
+      {label && <ChakraSelect.Label>{label}</ChakraSelect.Label>}
       <ChakraSelect.Control>
         <StyledTrigger>
           <StyledValueText placeholder={placeholderText}>

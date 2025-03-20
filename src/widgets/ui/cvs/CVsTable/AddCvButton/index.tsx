@@ -1,10 +1,12 @@
 import { Icon } from '@chakra-ui/react';
 import { Plus } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { StyledAddCvButton } from './addCvButton.styles';
 import useCreateCvDialog from './CreateCvDialog';
 
 const AddCvButton = () => {
+  const { t } = useTranslation('cvs');
   const [openCreateCvDialog] = useCreateCvDialog();
 
   return (
@@ -17,7 +19,7 @@ const AddCvButton = () => {
       }
     >
       <Icon as={Plus} w={5} h={5} />
-      Create CV
+      {t('table.createCvButtonText')}
     </StyledAddCvButton>
   );
 };

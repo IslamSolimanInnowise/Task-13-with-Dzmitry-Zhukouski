@@ -10,6 +10,7 @@ import { Field } from '@shared/ui/field';
 import { Eye, EyeOff } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import {
   FormBox,
@@ -27,6 +28,8 @@ type ResetPasswordFormProps = {
 };
 
 const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ token }) => {
+  const { t } = useTranslation('auth');
+
   const {
     register,
     handleSubmit,
@@ -48,18 +51,18 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ token }) => {
 
   return (
     <FormBox>
-      <StyledH1>Reset password</StyledH1>
-      <StyledP>Please enter a new Password</StyledP>
+      <StyledH1>{t('resetPassword.title')}</StyledH1>
+      <StyledP>{t('resetPassword.subTitle')}</StyledP>
       <form onSubmit={onSubmit}>
         <Field
-          errorText={errors.newPassword?.message}
+          errorText={t('resetPassword.passwordError')}
           invalid={Boolean(errors.newPassword)}
         >
           <InputGroup>
             <StyledInput
               type={showPassword ? 'text' : 'password'}
               {...register('newPassword')}
-              placeholder="Password"
+              placeholder={t('resetPassword.passwordPlaceholder')}
               autoComplete="on"
             />
             <StyledInputRightElement>
@@ -75,10 +78,10 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ token }) => {
           </InputGroup>
         </Field>
         <StyledSubmitButton type="submit" disabled={loading}>
-          RESET PASSWORD
+          {t('resetPassword.confirmText')}
         </StyledSubmitButton>
       </form>
-      <StyledLink to="/auth/login">Back to Login</StyledLink>
+      <StyledLink to="/auth/login">{t('resetPassword.backLink')}</StyledLink>
     </FormBox>
   );
 };

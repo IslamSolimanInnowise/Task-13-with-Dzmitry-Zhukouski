@@ -7,6 +7,7 @@ import {
 } from '@shared/schemas/verifyMailSchema';
 import { Field } from '@shared/ui/field';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import {
   FormBox,
@@ -17,6 +18,8 @@ import {
 } from './VerifyMailForm.styles';
 
 const VerifyMailForm: React.FC = () => {
+  const { t } = useTranslation('auth');
+
   const {
     register,
     handleSubmit,
@@ -35,20 +38,23 @@ const VerifyMailForm: React.FC = () => {
 
   return (
     <FormBox>
-      <StyledH1>Verify Email</StyledH1>
-      <StyledP>Please enter the verification code</StyledP>
+      <StyledH1>{t('verifyEmail.title')}</StyledH1>
+      <StyledP>{t('verifyEmail.subTitle')}</StyledP>
       <form onSubmit={onSubmit}>
-        <Field errorText={errors.otp?.message} invalid={Boolean(errors.otp)}>
+        <Field
+          errorText={t('verifyEmail.inputError')}
+          invalid={Boolean(errors.otp)}
+        >
           <StyledInput
             type="text"
             maxLength={6}
             {...register('otp')}
-            placeholder="Verification Code"
+            placeholder={t('verifyEmail.inputPlaceholder')}
           />
         </Field>
 
         <StyledSubmitButton type="submit" disabled={loading}>
-          VERIFY EMAIL
+          {t('verifyEmail.confirmText')}
         </StyledSubmitButton>
       </form>
     </FormBox>

@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { GET_CV_PROJECTS } from '@shared/queries/cvs/getCvProjects';
 import { REMOVE_CV_PROJECT } from '@shared/queries/cvs/removeCvProject';
@@ -9,7 +10,7 @@ const useRemoveCvProject = (onCloseDialog: () => void, cvId: string) => {
     onCompleted: () => {
       notify({
         type: 'info',
-        title: 'CV project was removed',
+        title: i18n.t('cvs:notifications.useRemoveCvProject.success'),
       });
       onCloseDialog();
     },

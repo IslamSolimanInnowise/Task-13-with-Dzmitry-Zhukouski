@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { REGISTER_USER } from '@shared/queries/auth/registerUser';
 import { authVar } from '@shared/store/globalAuthState';
@@ -8,7 +9,7 @@ const useRegister = () => {
     onCompleted: (res) => {
       notify({
         type: 'success',
-        title: 'Registration successful',
+        title: i18n.t('register.notifyOnSuccess'),
       });
 
       localStorage.setItem('access-token', res.signup.access_token);

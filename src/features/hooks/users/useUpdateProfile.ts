@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { UPDATE_PROFILE } from '@shared/queries/users/updateProfile';
 import { GET_USERS } from '@shared/queries/users/users';
@@ -8,7 +9,7 @@ const useUpdateProfile = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: 'Your Data has been updated!',
+        title: i18n.t('users:usersNotifications.useUpdateProfile.success'),
       });
     },
     refetchQueries: [{ query: GET_USERS }],

@@ -7,6 +7,7 @@ import { createDialogHook } from '@shared/Dialogs/createDialogHook';
 import { Cv, CvProject } from 'cv-graphql';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { TableCV } from '../index.d';
 import {
@@ -47,6 +48,7 @@ const CvProjectDialog = ({
   onClose,
   onConfirm,
 }: CvProjectDialogProps) => {
+  const { t } = useTranslation('cvs');
   const { data: projects, loading: projectsLoading } = useGetProjects();
   const [addCvProject, { loading: addCvProjectLoading }] = useAddCvProject(
     onClose,
@@ -84,7 +86,7 @@ const CvProjectDialog = ({
   );
 
   const itemsList = updatingMode
-    ? [{ id: updatingCvProject?.id, name: updatingCvProject?.name }]
+    ? [{ id: updatingCvProject?.projectId, name: updatingCvProject?.name }]
     : projects?.projects
         ?.filter(
           (p: TableCV) =>
@@ -176,7 +178,9 @@ const CvProjectDialog = ({
               />
             </Dialog.Body>
             <ModalFooter>
-              <CancelButton onClick={onClose}>Cancel</CancelButton>
+              <CancelButton onClick={onClose}>
+                {t('projects.cvProjectDialog.cancelButtonText')}
+              </CancelButton>
               <ConfirmButton
                 onClick={onSubmit}
                 disabled={

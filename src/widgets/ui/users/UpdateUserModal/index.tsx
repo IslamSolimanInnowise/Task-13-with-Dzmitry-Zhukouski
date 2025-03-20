@@ -11,6 +11,7 @@ import {
   updateUserFormSchema,
 } from '@shared/schemas/updateUserFormSchema';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { User } from '../types';
 import { roles } from './selectInputData';
@@ -32,6 +33,7 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
   setIsModalOpen,
   user,
 }) => {
+  const { t } = useTranslation('users');
   const {
     register,
     handleSubmit,
@@ -86,32 +88,32 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
     <Modal
       open={isModalOpen}
       onOpenChange={(e) => setIsModalOpen(e.open)}
-      titleText="Update User"
-      confirmText="Update"
-      cancelText="Cancel"
+      titleText={t('updateUserModal.modalTitle')}
+      confirmText={t('updateUserModal.modalConfirmText')}
+      cancelText={t('updateUserModal.modalCancelText')}
       onConfirm={onSubmit}
       size="lg"
     >
       <StyledForm onSubmit={onSubmit}>
         <Field.Root>
-          <Field.Label>Email</Field.Label>
+          <Field.Label>{t('updateUserModal.emailFieldLabel')}</Field.Label>
           <StyledInput disabled type="email" value={user.email} />
         </Field.Root>
         <Field.Root>
-          <Field.Label>Password</Field.Label>
+          <Field.Label>{t('updateUserModal.passwordFieldLabel')}</Field.Label>
           <StyledInput disabled type="password" value="******" />
         </Field.Root>
         <Field.Root>
-          <Field.Label>First Name</Field.Label>
+          <Field.Label>{t('updateUserModal.firstNameFieldLabel')}</Field.Label>
           <StyledInput type="text" {...register('firstName')} />
         </Field.Root>
         <Field.Root>
-          <Field.Label>Last Name</Field.Label>
+          <Field.Label>{t('updateUserModal.lastNameFieldLabel')}</Field.Label>
           <StyledInput type="text" {...register('lastName')} />
         </Field.Root>
 
         <Field.Root invalid={!!errors.department}>
-          <Field.Label>Department</Field.Label>
+          <Field.Label>{t('updateUserModal.departmentFieldLabel')}</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               placeholder={user.department_name}
@@ -128,11 +130,10 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.department?.message}</Field.ErrorText>
         </Field.Root>
 
         <Field.Root invalid={!!errors.position}>
-          <Field.Label>Position</Field.Label>
+          <Field.Label>{t('updateUserModal.positionFieldLabel')}</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               placeholder={user.position_name && ''}
@@ -149,11 +150,10 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.position?.message}</Field.ErrorText>
         </Field.Root>
 
         <Field.Root invalid={!!errors.role} disabled>
-          <Field.Label>Role</Field.Label>
+          <Field.Label>{t('updateUserModal.roleFieldLabel')}</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               placeholder={user.role && ''}
@@ -170,7 +170,6 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.role?.message}</Field.ErrorText>
         </Field.Root>
       </StyledForm>
     </Modal>

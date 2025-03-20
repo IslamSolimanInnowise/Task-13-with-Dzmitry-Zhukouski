@@ -6,6 +6,7 @@ import { authVar } from '@shared/store/globalAuthState';
 import { Field } from '@shared/ui/field';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { z } from 'zod';
 
 import {
@@ -17,12 +18,11 @@ import {
 
 const schema = z
   .object({
-    name: z.string().min(1, { message: 'Required field' }),
+    name: z.string().min(1),
     education: z.string().optional(),
-    description: z.string().min(1, { message: 'Required field' }),
+    description: z.string().min(1),
   })
   .refine((data) => Object.values(data).some((value) => value?.trim()), {
-    message: 'At least one field must be filled',
     path: ['name'],
   });
 
@@ -33,6 +33,7 @@ type CVDetailsProps = {
 };
 
 const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
+  const { t } = useTranslation('cvs');
   const { data: CVdata, loading } = useGetCvById(cvId);
   const [updateCv, { loading: updateLoading }] = useUpdateCv();
 
@@ -76,25 +77,22 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
 
   return (
     <StyledForm as="form">
-      <Field errorText={errors.name?.message} invalid={!!errors.name}>
+      <Field errorText={t('details.requiredError')} invalid={!!errors.name}>
         <StyledInput
           {...register('name')}
-          placeholder="Name"
+          placeholder={t('details.inputNamePlaceholder')}
           readOnly={!isOwner}
         />
       </Field>
       <StyledInput
         {...register('education')}
-        placeholder="Education"
+        placeholder={t('details.inputEducationPlaceholder')}
         readOnly={!isOwner}
       />
-      <Field
-        errorText={errors.description?.message}
-        invalid={!!errors.description}
-      >
+      <Field errorText={t('details.requiredError')} invalid={!!errors.description}>
         <StyledTextArea
           {...register('description')}
-          placeholder="Description"
+          placeholder={t('details.inputDescriptionPlaceholder')}
           rows={4}
           resize="none"
           readOnly={!isOwner}
@@ -105,7 +103,7 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
           onClick={onSubmit}
           disabled={!isValid || isSubmitting || !isDirty || updateLoading}
         >
-          Update
+          {t('details.confirmButtonText')}
         </UpdateButton>
       )}
     </StyledForm>

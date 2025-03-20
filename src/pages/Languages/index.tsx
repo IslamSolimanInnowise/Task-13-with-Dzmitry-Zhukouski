@@ -1,11 +1,12 @@
 import Aside from '@entities/ui/Aside';
-import { SpinnerContainer } from '@entities/ui/Spinner/spinner.styles';
+import Spinner from '@entities/ui/Spinner';
 import useGetLanguages from '@features/hooks/users/useGetLanguages';
 import useGetUser from '@features/hooks/users/useGetUser';
 import { authVar } from '@shared/store/globalAuthState';
 import AddLanguageModal from '@widgets/ui/users/AddLanguageModal';
 import Language from '@widgets/ui/users/Language';
 import { Language as LanguageInterface } from '@widgets/ui/users/types';
+import { useTranslation } from 'react-i18next';
 
 import {
   LanguagesContainer,
@@ -17,6 +18,7 @@ import {
 const proficiencyLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Native'];
 
 const LanguagesPage: React.FC = () => {
+  const { t } = useTranslation('users');
   const { id } = authVar();
   const { data, loading: userLoading } = useGetUser(id!);
   const userLanguages = data?.user.profile.languages;
@@ -35,10 +37,10 @@ const LanguagesPage: React.FC = () => {
     <StyledPageContainer>
       <Aside />
       {languageLoading || userLoading ? (
-        <SpinnerContainer />
+        <Spinner />
       ) : (
         <StyledPageContent>
-          <Styledh2>Languages</Styledh2>
+          <Styledh2>{t('languages.pageHeading')}</Styledh2>
           <AddLanguageModal
             languages={filteredLanguages}
             userId={id!}

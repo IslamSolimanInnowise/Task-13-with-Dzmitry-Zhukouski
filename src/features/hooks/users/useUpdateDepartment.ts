@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { UPDATE_DEPARTMENT } from '@shared/queries/users/updateDepartment';
 
@@ -7,7 +8,7 @@ const useUpdateDepartment = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: 'Your Data has been updated!',
+        title: i18n.t('users:usersNotifications.useUpdateDepartment.success'),
       });
     },
   });

@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { UPDATE_POSITION } from '@shared/queries/users/updatePosition';
 
@@ -7,7 +8,7 @@ const useUpdatePosition = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: 'Your Data has been updated!',
+        title: i18n.t('users:usersNotifications.useUpdatePosition.success'),
       });
     },
   });

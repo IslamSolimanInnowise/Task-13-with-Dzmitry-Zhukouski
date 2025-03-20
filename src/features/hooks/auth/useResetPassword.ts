@@ -4,6 +4,7 @@ import {
   InMemoryCache,
   useMutation,
 } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { RESET_PASSWORD } from '@shared/queries/auth/resetPassword';
 
@@ -23,8 +24,8 @@ const useResetPassword = (token: string | null) => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: 'Success',
-        message: 'You changed your password!',
+        title: i18n.t('resetPassword.notifyOnSuccess'),
+        message: i18n.t('resetPassword.notifyOnSuccessMessage'),
       });
     },
   });

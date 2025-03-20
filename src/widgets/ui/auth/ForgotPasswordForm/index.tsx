@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { defaultValues, Email, emailSchema } from '@shared/schemas/emailSchema';
 import { Field } from '@shared/ui/field';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import {
   FormBox,
@@ -14,6 +15,8 @@ import {
 } from './ForgotPasswordForm.styles';
 
 const ForgotPasswordForm: React.FC = () => {
+  const { t } = useTranslation('auth');
+
   const {
     register,
     handleSubmit,
@@ -32,24 +35,24 @@ const ForgotPasswordForm: React.FC = () => {
 
   return (
     <FormBox>
-      <StyledH1>Forgot password</StyledH1>
-      <StyledP>We will send you an email with further instructions</StyledP>
+      <StyledH1>{t('forgotPassword.title')}</StyledH1>
+      <StyledP>{t('forgotPassword.subTitle')}</StyledP>
       <form onSubmit={onSubmit}>
         <Field
-          errorText={errors.email?.message}
+          errorText={t('forgotPassword.emailError')}
           invalid={Boolean(errors.email)}
         >
           <StyledInput
             type="email"
             {...register('email')}
-            placeholder="Email"
+            placeholder={t('forgotPassword.emailPlaceholder')}
           />
         </Field>
         <StyledSubmitButton type="submit" disabled={loading}>
-          RESET PASSWORD
+          {t('forgotPassword.confirmText')}
         </StyledSubmitButton>
       </form>
-      <StyledLink to="/auth/login">CANCEL</StyledLink>
+      <StyledLink to="/auth/login">{t('forgotPassword.cancelLink')}</StyledLink>
     </FormBox>
   );
 };

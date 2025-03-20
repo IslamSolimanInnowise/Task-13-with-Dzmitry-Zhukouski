@@ -6,3 +6,10 @@ export const StyledPageContainer = styled.div`
   display: grid;
   grid-template: 'navigation page' 1fr / max-content 1fr;
 `;
+
+export const StyledCvDetailsContainer = styled.div`
+  grid-area: page;
+  height: 100vh;
+  overflow: auto;
+  padding: 0px 12px;
+`;

@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { GET_CV_BY_ID } from '@shared/queries/cvs/getCvById';
 import { GET_CV_PROJECTS } from '@shared/queries/cvs/getCvProjects';
@@ -13,7 +14,7 @@ const useUpdateCvProject = (onCloseDialog: () => void, cvId: string) => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: 'CV project was updated',
+        title: i18n.t('cvs:notifications.useUpdateCvProject.success'),
       });
       onCloseDialog();
     },

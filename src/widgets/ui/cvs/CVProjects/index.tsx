@@ -19,6 +19,7 @@ import React, {
   useState,
   useTransition,
 } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import AddCvProjectButton from './AddCvProjectButton';
 import {
@@ -45,6 +46,7 @@ type CVProjectsProps = {
 };
 
 const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
+  const { t } = useTranslation('cvs');
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [, startTransition] = useTransition();
   const { data: cvProjectsData, loading: isCvProjectsLoading } =
@@ -59,19 +61,19 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
       name: project.name,
       domain: project.domain,
       start_date: project.start_date,
-      end_date: project.end_date ?? 'Till now',
+      end_date: project.end_date ?? t('projects.tableBody.tillNow'),
       description: project.description,
       responsibilities: project.responsibilities ?? [],
       projectId: project.project.id,
     }));
-  }, [cvProjectsData]);
+  }, [cvProjectsData, t]);
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
-      { accessorKey: 'name', header: 'Name' },
-      { accessorKey: 'domain', header: 'Domain' },
-      { accessorKey: 'start_date', header: 'Start Date' },
-      { accessorKey: 'end_date', header: 'End Date' },
+      { accessorKey: 'name', header: t('projects.tableHeaders.name') },
+      { accessorKey: 'domain', header: t('projects.tableHeaders.domain') },
+      { accessorKey: 'start_date', header: t('projects.tableHeaders.startDate') },
+      { accessorKey: 'end_date', header: t('projects.tableHeaders.endDate') },
       {
         id: 'actions',
         header: '',
@@ -91,7 +93,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
         enableSorting: false,
       },
     ],
-    [cvId, handledCvProjectsData],
+    [cvId, handledCvProjectsData, t],
   );
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -240,7 +242,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
     <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
       <StyledTableBodyRow>
         <StyledTableNoContentCell colSpan={5}>
-          No results found
+          {t('projects.tableBody.noContent')}
         </StyledTableNoContentCell>
       </StyledTableBodyRow>
     </Table.Body>

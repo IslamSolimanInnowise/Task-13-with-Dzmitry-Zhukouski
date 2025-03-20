@@ -10,6 +10,7 @@ import {
 } from '@shared/schemas/AddSkillFormSchema';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { StyledButton } from './updateSkillModal.styles';
 
@@ -28,6 +29,7 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
   categoryId,
   masteryOptions,
 }) => {
+  const { t } = useTranslation('users');
   const {
     register,
     handleSubmit,
@@ -59,17 +61,23 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
 
   return (
     <Modal
-      titleText="Update Skill"
-      confirmText="Update"
-      cancelText="Cancel"
+      titleText={t('skills.skill.updateSkillModal.modalTitle')}
+      confirmText={t('skills.skill.updateSkillModal.modalConfirmText')}
+      cancelText={t('skills.skill.updateSkillModal.modalCancelText')}
       onConfirm={onSubmit}
-      trigger={<StyledButton onClick={handleOpenModal}>Update</StyledButton>}
+      trigger={
+        <StyledButton onClick={handleOpenModal}>
+          {t('skills.skill.updateSkillModal.button')}
+        </StyledButton>
+      }
       open={isModalOpen}
       onOpenChange={(e) => setIsModalOpen(e.open)}
     >
       <form onSubmit={onSubmit}>
         <Field.Root disabled>
-          <Field.Label>Skill</Field.Label>
+          <Field.Label>
+            {t('skills.skill.updateSkillModal.skillFieldLabel')}
+          </Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field>
               <option value={name}>{name}</option>
@@ -79,7 +87,9 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
         </Field.Root>
 
         <Field.Root invalid={!!errors.mastery}>
-          <Field.Label>Skill Mastery</Field.Label>
+          <Field.Label>
+            {t('skills.skill.updateSkillModal.masteryFieldLabel')}
+          </Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               {...register('mastery')}
@@ -93,7 +103,9 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.mastery?.message}</Field.ErrorText>
+          <Field.ErrorText>
+            {t('skills.skill.updateSkillModal.masteryFieldError')}
+          </Field.ErrorText>
         </Field.Root>
       </form>
     </Modal>

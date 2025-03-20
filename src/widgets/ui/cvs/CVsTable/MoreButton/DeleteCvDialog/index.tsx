@@ -1,6 +1,7 @@
 import { Dialog, Portal } from '@chakra-ui/react';
 import useDeleteCv from '@features/hooks/cvs/useDeleteCv';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { useTranslation } from 'react-i18next';
 
 import {
   CancelButton,
@@ -24,6 +25,8 @@ const DeleteCvDialog = ({
   onClose,
   onConfirm,
 }: DeleteCvDialogProps) => {
+  const { t } = useTranslation('cvs');
+
   const [deleteCv, { loading }] = useDeleteCv(onClose);
 
   const onSubmit = () => {
@@ -48,7 +51,7 @@ const DeleteCvDialog = ({
           <ModalContent>
             <ModalHeader>
               <Dialog.Title fontSize="lg" fontWeight="600">
-                Confirm Deletion
+                {t('table.deleteCvDialog.title')}
               </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <StyledCloseButton />
@@ -56,13 +59,16 @@ const DeleteCvDialog = ({
             </ModalHeader>
 
             <Dialog.Body py={4}>
-              Are you sure you want to delete CV <strong>{name}?</strong>
+              {t('table.deleteCvDialog.subTitle')}
+              <strong>{name}?</strong>
             </Dialog.Body>
 
             <ModalFooter>
-              <CancelButton onClick={onClose}>Cancel</CancelButton>
+              <CancelButton onClick={onClose}>
+                {t('table.deleteCvDialog.cancelButtonText')}
+              </CancelButton>
               <ConfirmButton onClick={onSubmit} disabled={loading}>
-                Delete
+                {t('table.deleteCvDialog.confirmButtonText')}
               </ConfirmButton>
             </ModalFooter>
           </ModalContent>

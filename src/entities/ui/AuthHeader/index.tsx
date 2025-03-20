@@ -1,6 +1,10 @@
+import { useTranslation } from 'react-i18next';
+
 import { StyledAuthHeader, StyledLink } from './authHeader.styles';
 
 const AuthHeader: React.FC = () => {
+  const { t } = useTranslation('auth');
+
   return (
     <StyledAuthHeader>
       <StyledLink
@@ -9,7 +13,7 @@ const AuthHeader: React.FC = () => {
           style: { color: '#C63031', borderColor: '#C63031' },
         }}
       >
-        Login
+        {t('header.loginLink')}
       </StyledLink>
       <StyledLink
         to="/auth/register"
@@ -17,7 +21,7 @@ const AuthHeader: React.FC = () => {
           style: { color: '#C63031', borderColor: '#C63031' },
         }}
       >
-        Sign up
+        {t('header.registerLink')}
       </StyledLink>
     </StyledAuthHeader>
   );

@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { CREATE_CV } from '@shared/queries/cvs/createCv';
 import { GET_CVS } from '@shared/queries/cvs/getCvs';
@@ -11,7 +12,7 @@ const useCreateCv = (onCloseDialog: () => void) => {
       if (data.createCv?.id) {
         notify({
           type: 'success',
-          title: 'CV was created',
+          title: i18n.t('cvs:notifications.useCreateCv.success'),
         });
         onCloseDialog();
         router.navigate({

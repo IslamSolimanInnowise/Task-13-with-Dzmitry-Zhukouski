@@ -1,8 +1,6 @@
 import { z } from 'zod';
 
-const passwordFieldSchema = z
-  .string()
-  .min(6, { message: 'Password must be at least 6 characters' });
+const passwordFieldSchema = z.string().min(6);
 
 const passwordSchema = z.object({
   password: passwordFieldSchema,

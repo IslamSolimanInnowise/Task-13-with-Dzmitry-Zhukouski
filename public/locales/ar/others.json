@@ -1,0 +1,14 @@
+{
+  "aside": {
+    "employees": "الموظفين",
+    "skills": "المهارات",
+    "languages": "اللغات",
+    "cvs": "السير الذاتية",
+    "profile": "الملف الشخصي",
+    "settings": "الاعدادات",
+    "logout": "الخروج"
+  },
+  "searchInput": {
+    "searchInputPlaceholder": "البحث"
+  }
+}

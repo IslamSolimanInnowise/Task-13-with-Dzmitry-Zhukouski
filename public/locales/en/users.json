@@ -1,0 +1,111 @@
+{
+  "pageHeading": "Employees",
+  "tableColumn": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "department": "Department",
+    "position": "Position"
+  },
+  "usersMenu": {
+    "profile": "Profile",
+    "update": "Update user",
+    "delete": "Delete user"
+  },
+  "updateUserModal": {
+    "modalTitle": "Update User",
+    "modalConfirmText": "Update",
+    "modalCancelText": "Cancel",
+    "emailFieldLabel": "Email",
+    "passwordFieldLabel": "Password",
+    "firstNameFieldLabel": "First Name",
+    "lastNameFieldLabel": "Last Name",
+    "departmentFieldLabel": "Department",
+    "positionFieldLabel": "Position",
+    "roleFieldLabel": "Role"
+  },
+  "languages": {
+    "pageHeading": "Languages",
+    "addLanguageModal": {
+      "button": "+ ADD Language",
+      "modalTitle": "Add Language",
+      "modalConfirmText": "Confirm",
+      "modalCancelText": "Cancel",
+      "languageFieldLabel": "Language",
+      "languageFieldError": "Language name is required",
+      "proficiencyFieldLabel": "Proficiency",
+      "proficiencyFieldError": "Proficiency level is required"
+    },
+    "language": {
+      "deleteButton": "Delete",
+      "updateLanguageModal": {
+        "button": "Update",
+        "modalTitle": "Update Language",
+        "modalConfirmText": "Update",
+        "modalCancelText": "Cancel",
+        "languageFieldLabel": "Language",
+        "proficiencyFieldLabel": "Proficiency",
+        "proficiencyFieldError": "Proficiency level is required"
+      }
+    }
+  },
+  "skills": {
+    "pageHeading": "Skills",
+    "addSkillModal": {
+      "button": "+ ADD SKILL",
+      "modalTitle": "Add Skill",
+      "modalConfirmText": "Confirm",
+      "modalCancelText": "Cancel",
+      "skillFieldLabel": "Skill",
+      "skillFieldError": "Please add a new skill",
+      "masteryFieldLabel": "Skill Mastery",
+      "masteryFieldError": "Please add your skill level"
+    },
+    "skill": {
+      "deleteButton": "Delete",
+      "updateSkillModal": {
+        "button": "Update",
+        "modalTitle": "Update Skill",
+        "modalConfirmText": "Update",
+        "modalCancelText": "Cancel",
+        "skillFieldLabel": "Skill",
+        "masteryFieldLabel": "Skill Mastery",
+        "masteryFieldError": "Please add your skill level"
+      },
+      "skillCount_one": "You have <b>{{count}} skill</b>",
+      "skillCount_other": "You have <b>{{count}} skills</b>"
+    }
+  },
+  "usersNotifications": {
+    "useAddSkill": {
+      "success": "Skill was added!"
+    },
+    "useDeleteSkill": {
+      "success": "Your Skill was deleted!"
+    },
+    "useAddLanguage": {
+      "success": "Language was added!"
+    },
+    "useDeleteLanguage": {
+      "success": "Your Language was deleted!"
+    },
+    "useUpdateDepartment": {
+      "success": "Your department was updated!"
+    },
+    "useUpdatePosition": {
+      "success": "Your position was updated!"
+    },
+    "useUpdateProfile": {
+      "success": "Your profile was updated!"
+    },
+    "useUpdateProfileLanguage": {
+      "success": "Your profile language was updated!"
+    },
+    "useUpdateProfileSkill": {
+      "success": "Your profile skill was updated!"
+    },
+    "useUpdateUser": {
+      "success": "User was updated!"
+    }
+  }
+}

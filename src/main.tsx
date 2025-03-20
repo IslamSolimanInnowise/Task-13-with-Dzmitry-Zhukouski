@@ -1,3 +1,5 @@
+import '@shared/i18n/config';
+
 import { ApolloProvider } from '@apollo/client';
 import { ChakraProvider, defaultSystem } from '@chakra-ui/react';
 import { DialogsContainer } from '@shared/Dialogs';

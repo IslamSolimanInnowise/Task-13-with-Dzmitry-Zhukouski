@@ -8,6 +8,7 @@ import {
 } from '@shared/schemas/addLanguageSchema';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { Language } from '../users/types';
 import { StyledButton } from './updateLanguageModal.styles';
@@ -23,6 +24,8 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
   proficiencyLevels,
   userId,
 }) => {
+  const { t } = useTranslation('users');
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
@@ -54,17 +57,23 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
 
   return (
     <Modal
-      titleText="Update Language"
-      confirmText="Update"
-      cancelText="Cancel"
+      titleText={t('languages.language.updateLanguageModal.modalTitle')}
+      confirmText={t('languages.language.updateLanguageModal.modalConfirmText')}
+      cancelText={t('languages.language.updateLanguageModal.modalCancelText')}
       onConfirm={onSubmit}
-      trigger={<StyledButton onClick={handleOpenModal}>Update</StyledButton>}
+      trigger={
+        <StyledButton onClick={handleOpenModal}>
+          {t('languages.language.updateLanguageModal.button')}
+        </StyledButton>
+      }
       open={isModalOpen}
       onOpenChange={(e) => setIsModalOpen(e.open)}
     >
       <form onSubmit={onSubmit}>
         <Field.Root disabled>
-          <Field.Label>Language</Field.Label>
+          <Field.Label>
+            {t('languages.language.updateLanguageModal.languageFieldLabel')}
+          </Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field>
               <option value={name}>{name}</option>
@@ -74,7 +83,9 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
         </Field.Root>
 
         <Field.Root invalid={!!errors.proficiency}>
-          <Field.Label>Language Profiency</Field.Label>
+          <Field.Label>
+            {t('languages.language.updateLanguageModal.proficiencyFieldLabel')}
+          </Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
               {...register('proficiency')}
@@ -88,7 +99,9 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
             </NativeSelect.Field>
             <NativeSelect.Indicator />
           </NativeSelect.Root>
-          <Field.ErrorText>{errors.proficiency?.message}</Field.ErrorText>
+          <Field.ErrorText>
+            {t('languages.language.updateLanguageModal.proficiencyFieldError')}
+          </Field.ErrorText>
         </Field.Root>
       </form>
     </Modal>

@@ -28,8 +28,13 @@
       "@widgets/*": ["./src/widgets/*"],
       "@features/*": ["./src/features/*"],
       "@entities/*": ["./src/entities/*"],
-      "@shared/*": ["./src/shared/*"]
+      "@shared/*": ["./src/shared/*"],
+      "@public/*": ["./public/*"]
     }
   },
-  "include": ["src", "src/shared/types/styled.d.ts"]
+  "include": [
+    "src",
+    "src/shared/types/styled.d.ts",
+    "src/shared/types/i18next.d.ts"
+  ]
 }

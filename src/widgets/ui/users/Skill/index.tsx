@@ -1,5 +1,6 @@
 import { Button, HStack, Progress } from '@chakra-ui/react';
 import useDeleteSkill from '@features/hooks/users/useDeleteSkill';
+import { useTranslation } from 'react-i18next';
 
 import { type Skill as SkillInterface } from '../types';
 import UpdateSkillModal from '../UpdateSkillModal';
@@ -21,6 +22,7 @@ const Skill: React.FC<SkillProps> = ({
   masteryOptions,
   categories,
 }) => {
+  const { t } = useTranslation('users');
   const [deleteSkill] = useDeleteSkill();
 
   const masteryIndex = masteryOptions.findIndex((option) => option === mastery);
@@ -66,7 +68,7 @@ const Skill: React.FC<SkillProps> = ({
           categoryId={categoryId!}
         />
         <Button onClick={handleDeleteSkill} px="2">
-          Delete
+          {t('skills.skill.deleteButton')}
         </Button>
       </HStack>
     </Progress.Root>

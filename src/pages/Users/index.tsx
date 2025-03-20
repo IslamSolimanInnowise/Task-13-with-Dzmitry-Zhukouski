@@ -13,12 +13,12 @@ import {
 import UsersTable from '@widgets/ui/users/Table';
 import { useMemo, useState, useTransition } from 'react';
 
-import { columns } from './table';
 import {
   Styledh2,
   StyledPageContainer,
   StyledPageContent,
 } from './users.styles';
+import { useTableColumns } from './useTableColumns';
 
 type SortingFunction = (oldState: SortingState) => SortingState;
 
@@ -28,6 +28,7 @@ const UsersPage: React.FC = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [isPending, startTransition] = useTransition();
   const { email: authEmail } = authVar();
+  const columns = useTableColumns();
 
   const sortedUsers = useMemo(() => {
     if (!data?.users) return [];

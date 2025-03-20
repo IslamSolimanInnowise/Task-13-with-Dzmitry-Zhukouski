@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client';
+import i18n from '@shared/i18n/config';
 import { notify } from '@shared/Notifications/notify';
 import { DELETE_LANGUAGE } from '@shared/queries/users/deleteProfileLanguage';
 import { GET_USER } from '@shared/queries/users/getUser';
@@ -10,8 +11,8 @@ const useDeleteLanguage = () => {
   return useMutation(DELETE_LANGUAGE, {
     onCompleted: () => {
       notify({
-        type: 'success',
-        title: 'Your Language has been deleted!',
+        type: 'info',
+        title: i18n.t('users:usersNotifications.useDeleteLanguage.success'),
       });
     },
     refetchQueries: [{ query: GET_USER, variables: { userId: id } }],
