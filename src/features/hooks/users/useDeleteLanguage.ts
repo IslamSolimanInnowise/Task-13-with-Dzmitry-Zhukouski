@@ -12,7 +12,7 @@ const useDeleteLanguage = () => {
     onCompleted: () => {
       notify({
         type: 'info',
-        title: i18n.t('usersNotifications:useDeleteLanguage.success'),
+        title: i18n.t('users:usersNotifications.useDeleteLanguage.success'),
       });
     },
     refetchQueries: [{ query: GET_USER, variables: { userId: id } }],

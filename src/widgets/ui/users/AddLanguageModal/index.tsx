@@ -28,7 +28,7 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
   languages,
   proficiencyLevels,
 }) => {
-  const { t } = useTranslation('languages');
+  const { t } = useTranslation('users');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -62,16 +62,16 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
 
   return (
     <Modal
-      titleText={t('addLanguageModal.modalTitle')}
-      confirmText={t('addLanguageModal.modalConfirmText')}
-      cancelText={t('addLanguageModal.modalCancelText')}
+      titleText={t('languages.addLanguageModal.modalTitle')}
+      confirmText={t('languages.addLanguageModal.modalConfirmText')}
+      cancelText={t('languages.addLanguageModal.modalCancelText')}
       onConfirm={onSubmit}
       trigger={
         <StyledButton
           disabled={languages.length === 0}
           onClick={handleOpenModal}
         >
-          {t('addLanguageModal.button')}
+          {t('languages.addLanguageModal.button')}
         </StyledButton>
       }
       open={isModalOpen}
@@ -81,7 +81,7 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
         <VStack gap="8">
           <Field.Root invalid={!!errors.name}>
             <Field.Label>
-              {t('addLanguageModal.languageFieldLabel')}
+              {t('languages.addLanguageModal.languageFieldLabel')}
             </Field.Label>
             <NativeSelect.Root size="md">
               <NativeSelect.Field {...register('name')} defaultValue="English">
@@ -94,13 +94,13 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
               <NativeSelect.Indicator />
             </NativeSelect.Root>
             <Field.ErrorText>
-              {t('addLanguageModal.languageFieldError')}
+              {t('languages.addLanguageModal.languageFieldError')}
             </Field.ErrorText>
           </Field.Root>
 
           <Field.Root invalid={!!errors.proficiency}>
             <Field.Label>
-              {t('addLanguageModal.proficiencyFieldLabel')}
+              {t('languages.addLanguageModal.proficiencyFieldLabel')}
             </Field.Label>
             <NativeSelect.Root size="md">
               <NativeSelect.Field
@@ -116,7 +116,7 @@ const AddLanguageModal: React.FC<AddLanguageModalProps> = ({
               <NativeSelect.Indicator />
             </NativeSelect.Root>
             <Field.ErrorText>
-              {t('addLanguageModal.proficiencyFieldError')}
+              {t('languages.addLanguageModal.proficiencyFieldError')}
             </Field.ErrorText>
           </Field.Root>
         </VStack>

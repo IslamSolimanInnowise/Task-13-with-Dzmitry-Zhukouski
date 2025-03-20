@@ -16,10 +16,7 @@ i18n
       'settings',
       'searchInput',
       'users',
-      'languages',
-      'skills',
       'cvs',
-      'usersNotifications',
       'page404',
     ],
     interpolation: {

@@ -12,7 +12,9 @@ const useUpdateProfileLanguage = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('usersNotifications:useUpdateProfileLanguage.success'),
+        title: i18n.t(
+          'users:usersNotifications.useUpdateProfileLanguage.success',
+        ),
       });
     },
     refetchQueries: [{ query: GET_USER, variables: { userId: id } }],

@@ -12,7 +12,7 @@ const useUpdateProfileSkill = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('usersNotifications:useUpdateProfileSkill.success'),
+        title: i18n.t('users:usersNotifications.useUpdateProfileSkill.success'),
       });
     },
     refetchQueries: [{ query: GET_USER, variables: { userId: id } }],

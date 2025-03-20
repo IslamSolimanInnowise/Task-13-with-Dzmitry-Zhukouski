@@ -30,7 +30,7 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
   skillsObj,
   masteryOptions,
 }) => {
-  const { t } = useTranslation('skills');
+  const { t } = useTranslation('users');
 
   const {
     register,
@@ -68,13 +68,13 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
 
   return (
     <Modal
-      titleText={t('addSkillModal.modalTitle')}
-      confirmText={t('addSkillModal.modalConfirmText')}
-      cancelText={t('addSkillModal.modalCancelText')}
+      titleText={t('skills.addSkillModal.modalTitle')}
+      confirmText={t('skills.addSkillModal.modalConfirmText')}
+      cancelText={t('skills.addSkillModal.modalCancelText')}
       onConfirm={onSubmit}
       trigger={
         <StyledButton onClick={handleOpenModal}>
-          {t('addSkillModal.button')}
+          {t('skills.addSkillModal.button')}
         </StyledButton>
       }
       open={isModalOpen}
@@ -83,7 +83,9 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
       <form onSubmit={onSubmit}>
         <VStack gap="8">
           <Field.Root invalid={!!errors.skill}>
-            <Field.Label>{t('addSkillModal.skillFieldLabel')}</Field.Label>
+            <Field.Label>
+              {t('skills.addSkillModal.skillFieldLabel')}
+            </Field.Label>
             <NativeSelect.Root size="md">
               <NativeSelect.Field {...register('skill')}>
                 {Object.entries(skillsObj as Record<string, Skill[]>).map(
@@ -105,12 +107,14 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
               <NativeSelect.Indicator />
             </NativeSelect.Root>
             <Field.ErrorText>
-              {t('addSkillModal.skillFieldError')}
+              {t('skills.addSkillModal.skillFieldError')}
             </Field.ErrorText>
           </Field.Root>
 
           <Field.Root invalid={!!errors.mastery}>
-            <Field.Label>{t('addSkillModal.masteryFieldLabel')}</Field.Label>
+            <Field.Label>
+              {t('skills.addSkillModal.masteryFieldLabel')}
+            </Field.Label>
             <NativeSelect.Root size="md">
               <NativeSelect.Field
                 {...register('mastery')}
@@ -125,7 +129,7 @@ const AddSkillModal: React.FC<AddSkillModalProps> = ({
               <NativeSelect.Indicator />
             </NativeSelect.Root>
             <Field.ErrorText>
-              {t('addSkillModal.masteryFieldError')}
+              {t('skills.addSkillModal.masteryFieldError')}
             </Field.ErrorText>
           </Field.Root>
         </VStack>

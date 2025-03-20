@@ -31,7 +31,7 @@ const masteryOptions = [
 ];
 
 const SkillsPage: React.FC = () => {
-  const { t } = useTranslation('skills');
+  const { t } = useTranslation('users');
   const { id } = authVar();
   const { data } = useGetUser(id!);
   const userSkills = data?.user.profile.skills;
@@ -65,7 +65,7 @@ const SkillsPage: React.FC = () => {
         <Spinner />
       ) : (
         <StyledPageContent>
-          <Styledh2>{t('pageHeading')}</Styledh2>
+          <Styledh2>{t('skills.pageHeading')}</Styledh2>
           <AddSkillModal
             userId={id!}
             categories={categories}
@@ -76,7 +76,7 @@ const SkillsPage: React.FC = () => {
             <SkillsContainer>
               <Text>
                 <Trans
-                  i18nKey="skill.skillCount"
+                  i18nKey="skills.skill.skillCount"
                   count={userSkills?.length}
                   t={t}
                   components={{ b: <b /> }}

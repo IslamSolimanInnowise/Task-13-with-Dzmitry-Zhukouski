@@ -17,7 +17,7 @@ const Language: React.FC<LanguageProps> = ({
   name,
   userId,
 }) => {
-  const { t } = useTranslation('languages');
+  const { t } = useTranslation('users');
 
   const levelIndex = proficiencyLevels.findIndex(
     (option) => option === proficiency,
@@ -63,7 +63,7 @@ const Language: React.FC<LanguageProps> = ({
           proficiencyLevels={proficiencyLevels}
         />
         <Button px="2" onClick={handleDeleteLanguage}>
-          {t('language.deleteButton')}
+          {t('languages.language.deleteButton')}
         </Button>
       </HStack>
     </Progress.Root>

@@ -12,7 +12,7 @@ const useDeleteSkill = () => {
     onCompleted: () => {
       notify({
         type: 'info',
-        title: i18n.t('usersNotifications:useDeleteSkill.success'),
+        title: i18n.t('users:usersNotifications.useDeleteSkill.success'),
       });
     },
     refetchQueries: [{ query: GET_USER, variables: { userId: id } }],

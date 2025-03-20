@@ -3,13 +3,10 @@ import 'i18next';
 import aside from '@public/locales/en/Aside.json';
 import auth from '@public/locales/en/auth.json';
 import cvs from '@public/locales/en/cvs.json';
-import languages from '@public/locales/en/languages.json';
 import page404 from '@public/locales/en/page404.json';
 import searchInput from '@public/locales/en/SearchInput.json';
 import settings from '@public/locales/en/Settings.json';
-import skills from '@public/locales/en/skills.json';
 import users from '@public/locales/en/users.json';
-import usersNotifications from '@public/locales/en/usersNotifications.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -20,10 +17,7 @@ declare module 'i18next' {
       settings: typeof settings;
       searchInput: typeof searchInput;
       users: typeof users;
-      languages: typeof languages;
-      skills: typeof skills;
       cvs: typeof cvs;
-      usersNotifications: typeof usersNotifications;
       page404: typeof page404;
     };
   }

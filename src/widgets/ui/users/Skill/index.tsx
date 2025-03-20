@@ -22,7 +22,7 @@ const Skill: React.FC<SkillProps> = ({
   masteryOptions,
   categories,
 }) => {
-  const { t } = useTranslation('skills');
+  const { t } = useTranslation('users');
   const [deleteSkill] = useDeleteSkill();
 
   const masteryIndex = masteryOptions.findIndex((option) => option === mastery);
@@ -68,7 +68,7 @@ const Skill: React.FC<SkillProps> = ({
           categoryId={categoryId!}
         />
         <Button onClick={handleDeleteSkill} px="2">
-          {t('skill.deleteButton')}
+          {t('skills.skill.deleteButton')}
         </Button>
       </HStack>
     </Progress.Root>
