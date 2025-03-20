@@ -23,5 +23,30 @@
     "departmentFieldLabel": "Department",
     "positionFieldLabel": "Position",
     "roleFieldLabel": "Role"
+  },
+  "languages": {
+    "pageHeading": "Languages",
+    "addLanguageModal": {
+      "button": "+ ADD Language",
+      "modalTitle": "Add Language",
+      "modalConfirmText": "Confirm",
+      "modalCancelText": "Cancel",
+      "languageFieldLabel": "Language",
+      "languageFieldError": "Language name is required",
+      "proficiencyFieldLabel": "Proficiency",
+      "proficiencyFieldError": "Proficiency level is required"
+    },
+    "language": {
+      "deleteButton": "Delete",
+      "updateLanguageModal": {
+        "button": "Update",
+        "modalTitle": "Update Language",
+        "modalConfirmText": "Update",
+        "modalCancelText": "Cancel",
+        "languageFieldLabel": "Language",
+        "proficiencyFieldLabel": "Proficiency",
+        "proficiencyFieldError": "Proficiency level is required"
+      }
+    }
   }
 }

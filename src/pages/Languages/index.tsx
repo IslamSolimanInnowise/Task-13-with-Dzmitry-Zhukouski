@@ -18,7 +18,7 @@ import {
 const proficiencyLevels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'Native'];
 
 const LanguagesPage: React.FC = () => {
-  const { t } = useTranslation('languages');
+  const { t } = useTranslation('users');
   const { id } = authVar();
   const { data, loading: userLoading } = useGetUser(id!);
   const userLanguages = data?.user.profile.languages;
@@ -40,7 +40,7 @@ const LanguagesPage: React.FC = () => {
         <Spinner />
       ) : (
         <StyledPageContent>
-          <Styledh2>{t('pageHeading')}</Styledh2>
+          <Styledh2>{t('languages.pageHeading')}</Styledh2>
           <AddLanguageModal
             languages={filteredLanguages}
             userId={id!}
