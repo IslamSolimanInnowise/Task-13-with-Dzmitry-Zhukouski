@@ -12,14 +12,3 @@ export const StyledPageContent = styled.main`
   height: 100vh;
   overflow: auto;
 `;
-
-export const Styledh2 = styled.h2`
-  color: ${({ theme }) => theme.grey};
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 24px;
-  letter-spacing: 0.15px;
-  text-align: left;
-  text-transform: capitalize;
-  margin-bottom: 0.75rem;
-`;

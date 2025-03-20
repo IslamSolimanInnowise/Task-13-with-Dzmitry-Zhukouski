@@ -13,9 +13,11 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ userId }) => {
         activeProps={{
           style: { color: '#C63031', borderColor: '#C63031' },
         }}
+        activeOptions={{ exact: true }}
       >
         Profile
       </StyledLink>
+
       <StyledLink
         to="/users/$userId/skills"
         params={{ userId }}

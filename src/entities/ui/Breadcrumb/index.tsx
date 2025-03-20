@@ -10,6 +10,7 @@ interface BreadcrumbProps extends BreadcrumbRootProps {
   breadCrumbItems: {
     name: string;
     path: string;
+    params?: Record<string, string>;
   }[];
 }
 
@@ -24,7 +25,9 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
         {breadCrumbItems.map((item) => (
           <HStack key={item.name}>
             <ChakraBreadcrumb.Item>
-              <Link to={item.path}>{item.name}</Link>
+              <Link to={item.path} params={item.params}>
+                {item.name}
+              </Link>
             </ChakraBreadcrumb.Item>
             <ChakraBreadcrumb.Separator />
           </HStack>

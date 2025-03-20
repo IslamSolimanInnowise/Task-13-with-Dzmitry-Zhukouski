@@ -10,10 +10,12 @@ interface ProfilePageProps {
 }
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
-  const { data: currentUser, loading } = useGetUser(userId);
+  const { data, loading } = useGetUser(userId);
+
+  const currentUser = data?.user;
 
   const profileCurrentLink =
-    currentUser?.user?.profile?.first_name || currentUser?.user?.email;
+    currentUser?.profile?.first_name.trim() || currentUser?.email;
 
   return (
     <StyledPageContainer>
@@ -24,7 +26,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
             currentLink={profileCurrentLink}
             breadCrumbItems={[{ name: 'Employees', path: '/users' }]}
           />
-          <ProfileHeader userId={currentUser.user.id} />
+          <ProfileHeader userId={currentUser.id} />
         </StyledPageContent>
       )}
     </StyledPageContainer>
