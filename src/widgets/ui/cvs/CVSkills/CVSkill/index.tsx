@@ -54,7 +54,7 @@ const CVSkill: React.FC<CVSkillProps> = ({
   };
 
   return (
-    <Progress.Root value={masteryValue} colorPalette={colorPalette} mt={4}>
+    <Progress.Root value={masteryValue} colorPalette={colorPalette} my={4}>
       <HStack gap="4">
         <Progress.Label>{skillMastery.name}</Progress.Label>
         <Progress.Track flex="1">

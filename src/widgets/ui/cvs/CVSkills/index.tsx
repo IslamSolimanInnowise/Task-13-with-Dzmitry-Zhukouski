@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import CVSkill from './CVSkill';
 import useCVSkillDialog from './CVSkillDialog';
+import { CVSkillsContainer } from './cvskills.styles';
 
 type CVSkillsProps = {
   cvId: Cv['id'];
@@ -39,14 +40,16 @@ const CVSkills: React.FC<CVSkillsProps> = ({ cvId }) => {
       {cvLoading ? (
         <Spinner />
       ) : (
-        cvdata?.cv?.skills?.map((skillMastery: SkillMastery) => (
-          <CVSkill
-            key={skillMastery.categoryId}
-            cvId={cvId}
-            skillMastery={skillMastery}
-            isOwner={isOwner}
-          />
-        ))
+        <CVSkillsContainer>
+          {cvdata?.cv?.skills?.map((skillMastery: SkillMastery) => (
+            <CVSkill
+              key={skillMastery.categoryId}
+              cvId={cvId}
+              skillMastery={skillMastery}
+              isOwner={isOwner}
+            />
+          ))}
+        </CVSkillsContainer>
       )}
     </>
   );
