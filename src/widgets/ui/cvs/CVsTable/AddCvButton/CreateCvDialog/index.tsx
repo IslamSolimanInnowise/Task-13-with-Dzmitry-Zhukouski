@@ -105,7 +105,9 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
                 </Field>
                 <StyledInput
                   {...register('education')}
-                  placeholder={t('table.createCvDialog.educationInputPlaceholder')}
+                  placeholder={t(
+                    'table.createCvDialog.educationInputPlaceholder',
+                  )}
                 />
                 <Field
                   errorText={t('table.createCvDialog.requiredError')}
@@ -114,7 +116,7 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
                   <StyledTextArea
                     {...register('description')}
                     placeholder={t(
-                      'createCvDialog.descriptionInputPlaceholder',
+                      'table.createCvDialog.descriptionInputPlaceholder',
                     )}
                     rows={4}
                     resize="none"
