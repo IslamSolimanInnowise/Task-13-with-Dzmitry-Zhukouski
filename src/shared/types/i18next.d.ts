@@ -10,7 +10,6 @@ import cvsTable from '@public/locales/en/cvsTable.json';
 import page404 from '@public/locales/en/page404.json';
 import searchInput from '@public/locales/en/SearchInput.json';
 import settings from '@public/locales/en/Settings.json';
-import skills from '@public/locales/en/skills.json';
 import users from '@public/locales/en/users.json';
 import usersNotifications from '@public/locales/en/usersNotifications.json';
 
@@ -23,7 +22,6 @@ declare module 'i18next' {
       settings: typeof settings;
       searchInput: typeof searchInput;
       users: typeof users;
-      skills: typeof skills;
       cvsTable: typeof cvsTable;
       cvsHeader: typeof cvsHeader;
       cvDetails: typeof cvDetails;

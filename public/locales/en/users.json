@@ -48,5 +48,32 @@
         "proficiencyFieldError": "Proficiency level is required"
       }
     }
+  },
+  "skills": {
+    "pageHeading": "Skills",
+    "addSkillModal": {
+      "button": "+ ADD SKILL",
+      "modalTitle": "Add Skill",
+      "modalConfirmText": "Confirm",
+      "modalCancelText": "Cancel",
+      "skillFieldLabel": "Skill",
+      "skillFieldError": "Please add a new skill",
+      "masteryFieldLabel": "Skill Mastery",
+      "masteryFieldError": "Please add your skill level"
+    },
+    "skill": {
+      "deleteButton": "Delete",
+      "updateSkillModal": {
+        "button": "Update",
+        "modalTitle": "Update Skill",
+        "modalConfirmText": "Update",
+        "modalCancelText": "Cancel",
+        "skillFieldLabel": "Skill",
+        "masteryFieldLabel": "Skill Mastery",
+        "masteryFieldError": "Please add your skill level"
+      },
+      "skillCount_one": "You have <b>{{count}} skill</b>",
+      "skillCount_other": "You have <b>{{count}} skills</b>"
+    }
   }
 }

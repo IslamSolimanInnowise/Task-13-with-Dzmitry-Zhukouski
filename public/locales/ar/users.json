@@ -48,5 +48,35 @@
         "proficiencyFieldError": "يجب عليك تحديد مستوى إتقان اللغة"
       }
     }
+  },
+  "skills": {
+    "pageHeading": "المهارات",
+    "addSkillModal": {
+      "button": "+ إضافة مهارة",
+      "modalTitle": "إضافة مهارة",
+      "modalConfirmText": "تأكيد",
+      "modalCancelText": "إلغاء",
+      "skillFieldLabel": "المهارة",
+      "skillFieldError": "الرجاء إضافة مهارة جديدة",
+      "masteryFieldLabel": "مستوى إتقان المهارة",
+      "masteryFieldError": "الرجاء إضافة مستوى مهارتك"
+    },
+    "skill": {
+      "deleteButton": "حذف",
+      "updateSkillModal": {
+        "button": "تحديث",
+        "modalTitle": "تحديث المهارة",
+        "modalConfirmText": "تحديث",
+        "modalCancelText": "إلغاء",
+        "skillFieldLabel": "المهارة",
+        "masteryFieldLabel": "مستوى إتقان المهارة",
+        "masteryFieldError": "الرجاء إضافة مستوى مهارتك"
+      },
+      "skillCount_one": "لديك الآن <b>مهارة واحدة</b>",
+      "skillCount_two": "لديك الآن <b>مهارتان</b>",
+      "skillCount_few": "لديك الآن <b>{{count}}  مهارات</b>",
+      "skillCount_many": "لديك الآن <b>{{count}}  مهارة</b>",
+      "skillCount_other": "لديك الآن <b>{{count}}  مهارة</b>"
+    }
   }
 }

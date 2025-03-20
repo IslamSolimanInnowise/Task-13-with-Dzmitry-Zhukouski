@@ -29,7 +29,7 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
   categoryId,
   masteryOptions,
 }) => {
-  const { t } = useTranslation('skills');
+  const { t } = useTranslation('users');
   const {
     register,
     handleSubmit,
@@ -61,13 +61,13 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
 
   return (
     <Modal
-      titleText={t('skill.updateSkillModal.modalTitle')}
-      confirmText={t('skill.updateSkillModal.modalConfirmText')}
-      cancelText={t('skill.updateSkillModal.modalCancelText')}
+      titleText={t('skills.skill.updateSkillModal.modalTitle')}
+      confirmText={t('skills.skill.updateSkillModal.modalConfirmText')}
+      cancelText={t('skills.skill.updateSkillModal.modalCancelText')}
       onConfirm={onSubmit}
       trigger={
         <StyledButton onClick={handleOpenModal}>
-          {t('skill.updateSkillModal.button')}
+          {t('skills.skill.updateSkillModal.button')}
         </StyledButton>
       }
       open={isModalOpen}
@@ -76,7 +76,7 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
       <form onSubmit={onSubmit}>
         <Field.Root disabled>
           <Field.Label>
-            {t('skill.updateSkillModal.skillFieldLabel')}
+            {t('skills.skill.updateSkillModal.skillFieldLabel')}
           </Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field>
@@ -88,7 +88,7 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
 
         <Field.Root invalid={!!errors.mastery}>
           <Field.Label>
-            {t('skill.updateSkillModal.masteryFieldLabel')}
+            {t('skills.skill.updateSkillModal.masteryFieldLabel')}
           </Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
@@ -104,7 +104,7 @@ const UpdateSkillModal: React.FC<UpdateSkillModalProps> = ({
             <NativeSelect.Indicator />
           </NativeSelect.Root>
           <Field.ErrorText>
-            {t('skill.updateSkillModal.masteryFieldError')}
+            {t('skills.skill.updateSkillModal.masteryFieldError')}
           </Field.ErrorText>
         </Field.Root>
       </form>

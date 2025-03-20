@@ -16,7 +16,6 @@ i18n
       'settings',
       'searchInput',
       'users',
-      'skills',
       'cvsTable',
       'cvsHeader',
       'cvDetails',

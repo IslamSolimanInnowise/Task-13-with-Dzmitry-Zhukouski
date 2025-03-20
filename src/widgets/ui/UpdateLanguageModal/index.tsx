@@ -24,7 +24,7 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
   proficiencyLevels,
   userId,
 }) => {
-  const { t } = useTranslation('languages');
+  const { t } = useTranslation('users');
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -57,13 +57,13 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
 
   return (
     <Modal
-      titleText={t('language.updateLanguageModal.modalTitle')}
-      confirmText={t('language.updateLanguageModal.modalConfirmText')}
-      cancelText={t('language.updateLanguageModal.modalCancelText')}
+      titleText={t('languages.language.updateLanguageModal.modalTitle')}
+      confirmText={t('languages.language.updateLanguageModal.modalConfirmText')}
+      cancelText={t('languages.language.updateLanguageModal.modalCancelText')}
       onConfirm={onSubmit}
       trigger={
         <StyledButton onClick={handleOpenModal}>
-          {t('language.updateLanguageModal.button')}
+          {t('languages.language.updateLanguageModal.button')}
         </StyledButton>
       }
       open={isModalOpen}
@@ -72,7 +72,7 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
       <form onSubmit={onSubmit}>
         <Field.Root disabled>
           <Field.Label>
-            {t('language.updateLanguageModal.languageFieldLabel')}
+            {t('languages.language.updateLanguageModal.languageFieldLabel')}
           </Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field>
@@ -84,7 +84,7 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
 
         <Field.Root invalid={!!errors.proficiency}>
           <Field.Label>
-            {t('language.updateLanguageModal.proficiencyFieldLabel')}
+            {t('languages.language.updateLanguageModal.proficiencyFieldLabel')}
           </Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
@@ -100,7 +100,7 @@ const UpdateLanguageModal: React.FC<UpdateLanguageModalProps> = ({
             <NativeSelect.Indicator />
           </NativeSelect.Root>
           <Field.ErrorText>
-            {t('language.updateLanguageModal.proficiencyFieldError')}
+            {t('languages.language.updateLanguageModal.proficiencyFieldError')}
           </Field.ErrorText>
         </Field.Root>
       </form>
