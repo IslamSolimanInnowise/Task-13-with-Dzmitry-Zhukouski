@@ -1,6 +1,7 @@
 import { Button, HStack } from '@chakra-ui/react';
 import { Progress } from '@chakra-ui/react';
 import useDeleteLanguage from '@features/hooks/users/useDeleteLanguage';
+import { authVar } from '@shared/store/globalAuthState';
 import UpdateLanguageModal from '@widgets/ui/users/UpdateLanguageModal';
 import { useTranslation } from 'react-i18next';
 
@@ -18,6 +19,7 @@ const Language: React.FC<LanguageProps> = ({
   userId,
 }) => {
   const { t } = useTranslation('users');
+  const { id } = authVar();
 
   const levelIndex = proficiencyLevels.findIndex(
     (option) => option === proficiency,
@@ -56,15 +58,19 @@ const Language: React.FC<LanguageProps> = ({
         <Progress.Track flex="1">
           <Progress.Range />
         </Progress.Track>
-        <UpdateLanguageModal
-          name={name}
-          proficiency={proficiency}
-          userId={userId}
-          proficiencyLevels={proficiencyLevels}
-        />
-        <Button px="2" onClick={handleDeleteLanguage}>
-          {t('languages.language.deleteButton')}
-        </Button>
+        {id === userId && (
+          <>
+            <UpdateLanguageModal
+              name={name}
+              proficiency={proficiency}
+              userId={userId}
+              proficiencyLevels={proficiencyLevels}
+            />
+            <Button px="2" onClick={handleDeleteLanguage}>
+              {t('languages.language.deleteButton')}
+            </Button>
+          </>
+        )}
       </HStack>
     </Progress.Root>
   );

@@ -1,8 +1,8 @@
 import Aside from '@entities/ui/Aside';
 import Breadcrumb from '@entities/ui/Breadcrumb';
 import useGetUser from '@features/hooks/users/useGetUser';
-import SkillsWidget from '@widgets/ui/users/SkillsWidget';
 import ProfileHeader from '@widgets/ui/users/profile/ProfileHeader';
+import SkillsWidget from '@widgets/ui/users/SkillsWidget';
 
 import { StyledPageContainer, StyledPageContent } from './profileSkills.styles';
 

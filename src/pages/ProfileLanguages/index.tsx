@@ -1,6 +1,7 @@
 import Aside from '@entities/ui/Aside';
 import Breadcrumb from '@entities/ui/Breadcrumb';
 import useGetUser from '@features/hooks/users/useGetUser';
+import LanguagesWidget from '@widgets/ui/users/LanguagesWidget';
 import ProfileHeader from '@widgets/ui/users/profile/ProfileHeader';
 
 import {
@@ -39,6 +40,7 @@ const ProfileLanguagesPage: React.FC<ProfileLanguagesPageProps> = ({
             ]}
           />
           <ProfileHeader userId={currentUser.id} />
+          <LanguagesWidget userId={userId} />
         </StyledPageContent>
       )}
     </StyledPageContainer>
