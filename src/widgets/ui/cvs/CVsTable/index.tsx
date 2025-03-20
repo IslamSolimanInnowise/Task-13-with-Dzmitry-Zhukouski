@@ -33,7 +33,7 @@ import {
 import MoreButton from './MoreButton';
 
 const CVsTable: React.FC = () => {
-  const { t } = useTranslation('cvsTable');
+  const { t } = useTranslation('cvs');
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [, startTransition] = useTransition();
   const { data: cvData, loading: isCvsLoading } = useGetCvs();
@@ -54,9 +54,9 @@ const CVsTable: React.FC = () => {
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
-      { accessorKey: 'name', header: t('tableHeaders.name') },
-      { accessorKey: 'education', header: t('tableHeaders.education') },
-      { accessorKey: 'employee', header: t('tableHeaders.employee') },
+      { accessorKey: 'name', header: t('table.tableHeaders.name') },
+      { accessorKey: 'education', header: t('table.tableHeaders.education') },
+      { accessorKey: 'employee', header: t('table.tableHeaders.employee') },
       {
         id: 'actions',
         header: '',
@@ -179,7 +179,7 @@ const CVsTable: React.FC = () => {
     <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
       <StyledTableBodyRow>
         <StyledTableNoContentCell colSpan={columns.length}>
-          {t('tableBody.noContent')}
+          {t('table.tableBody.noContent')}
         </StyledTableNoContentCell>
       </StyledTableBodyRow>
     </Table.Body>

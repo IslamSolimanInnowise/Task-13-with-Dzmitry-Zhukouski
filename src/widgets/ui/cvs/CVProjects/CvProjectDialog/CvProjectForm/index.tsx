@@ -25,7 +25,7 @@ const CvProjectForm = ({
   itemsList,
   loadings,
 }: CvProjectFormProps) => {
-  const { t } = useTranslation('cvProjects');
+  const { t } = useTranslation('cvs');
 
   return (
     <VStack as="form" gap={8}>
@@ -37,7 +37,7 @@ const CvProjectForm = ({
           render={({ field }) => (
             <Select
               placeholderText={t(
-                'cvProjectDialog.form.inputProjectPlaceholder',
+                'projects.cvProjectDialog.form.inputProjectPlaceholder',
               )}
               itemsList={itemsList}
               isReadOnly={loadings || updatingMode}
@@ -54,7 +54,9 @@ const CvProjectForm = ({
             <StyledInput
               {...field}
               disabled={updatingMode}
-              placeholder={t('cvProjectDialog.form.inputDomainPlaceholder')}
+              placeholder={t(
+                'projects.cvProjectDialog.form.inputDomainPlaceholder',
+              )}
               readOnly
             />
           )}
@@ -104,7 +106,9 @@ const CvProjectForm = ({
           <StyledTextArea
             {...field}
             disabled={updatingMode}
-            placeholder={t('cvProjectDialog.form.inputDescriptionPlaceholder')}
+            placeholder={t(
+              'projects.cvProjectDialog.form.inputDescriptionPlaceholder',
+            )}
             rows={4}
             resize="none"
             readOnly
@@ -118,7 +122,7 @@ const CvProjectForm = ({
         render={({ field }) => (
           <StyledInput
             placeholder={t(
-              'cvProjectDialog.form.inputResponsibilitiesPlaceholder',
+              'projects.cvProjectDialog.form.inputResponsibilitiesPlaceholder',
             )}
             {...field}
           />

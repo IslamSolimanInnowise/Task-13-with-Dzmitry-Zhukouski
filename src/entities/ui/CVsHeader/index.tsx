@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next';
 import { StyledCVsHeader, StyledLink } from './cvsHeader.styles';
 
 const CVsHeader: React.FC = () => {
-  const { t } = useTranslation('cvsHeader');
+  const { t } = useTranslation('cvs');
 
   const links = [
-    { label: t('Details'), to: '/cvs/$cvId/details' },
-    { label: t('Skills'), to: '/cvs/$cvId/skills' },
-    { label: t('Projects'), to: '/cvs/$cvId/projects' },
-    { label: t('Preview'), to: '/cvs/$cvId/preview' },
+    { label: t("header.details"), to: '/cvs/$cvId/details' },
+    { label: t('header.skills'), to: '/cvs/$cvId/skills' },
+    { label: t('header.projects'), to: '/cvs/$cvId/projects' },
+    { label: t('header.preview'), to: '/cvs/$cvId/preview' },
   ];
 
   return (

@@ -48,7 +48,7 @@ const CvProjectDialog = ({
   onClose,
   onConfirm,
 }: CvProjectDialogProps) => {
-  const { t } = useTranslation('cvProjects');
+  const { t } = useTranslation('cvs');
   const { data: projects, loading: projectsLoading } = useGetProjects();
   const [addCvProject, { loading: addCvProjectLoading }] = useAddCvProject(
     onClose,
@@ -179,7 +179,7 @@ const CvProjectDialog = ({
             </Dialog.Body>
             <ModalFooter>
               <CancelButton onClick={onClose}>
-                {t('cvProjectDialog.cancelButtonText')}
+                {t('projects.cvProjectDialog.cancelButtonText')}
               </CancelButton>
               <ConfirmButton
                 onClick={onSubmit}

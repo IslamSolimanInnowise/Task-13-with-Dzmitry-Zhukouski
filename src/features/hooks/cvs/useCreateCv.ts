@@ -12,7 +12,7 @@ const useCreateCv = (onCloseDialog: () => void) => {
       if (data.createCv?.id) {
         notify({
           type: 'success',
-          title: i18n.t('cvsNotifications:useCreateCv.success'),
+          title: i18n.t('cvs:notifications.useCreateCv.success'),
         });
         onCloseDialog();
         router.navigate({

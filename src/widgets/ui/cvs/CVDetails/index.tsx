@@ -33,7 +33,7 @@ type CVDetailsProps = {
 };
 
 const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
-  const { t } = useTranslation('cvDetails');
+  const { t } = useTranslation('cvs');
   const { data: CVdata, loading } = useGetCvById(cvId);
   const [updateCv, { loading: updateLoading }] = useUpdateCv();
 
@@ -77,22 +77,22 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
 
   return (
     <StyledForm as="form">
-      <Field errorText={t('requiredError')} invalid={!!errors.name}>
+      <Field errorText={t('details.requiredError')} invalid={!!errors.name}>
         <StyledInput
           {...register('name')}
-          placeholder={t('inputNamePlaceholder')}
+          placeholder={t('details.inputNamePlaceholder')}
           readOnly={!isOwner}
         />
       </Field>
       <StyledInput
         {...register('education')}
-        placeholder={t('inputEducationPlaceholder')}
+        placeholder={t('details.inputEducationPlaceholder')}
         readOnly={!isOwner}
       />
-      <Field errorText={t('requiredError')} invalid={!!errors.description}>
+      <Field errorText={t('details.requiredError')} invalid={!!errors.description}>
         <StyledTextArea
           {...register('description')}
-          placeholder={t('inputDescriptionPlaceholder')}
+          placeholder={t('details.inputDescriptionPlaceholder')}
           rows={4}
           resize="none"
           readOnly={!isOwner}
@@ -103,7 +103,7 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
           onClick={onSubmit}
           disabled={!isValid || isSubmitting || !isDirty || updateLoading}
         >
-          {t('confirmButtonText')}
+          {t('details.confirmButtonText')}
         </UpdateButton>
       )}
     </StyledForm>

@@ -11,7 +11,7 @@ const useDeleteCv = (onCloseDialog: () => void) => {
       if (data.deleteCv?.affected) {
         notify({
           type: 'info',
-          title: i18n.t('cvsNotifications:useDeleteCv.success'),
+          title: i18n.t('cvs:notifications.useDeleteCv.success'),
         });
         onCloseDialog();
       }

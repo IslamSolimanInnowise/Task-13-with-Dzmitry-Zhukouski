@@ -12,7 +12,7 @@ type AddCvProjectButtonProps = {
 };
 
 const AddCvProjectButton = ({ cvId, cvProjects }: AddCvProjectButtonProps) => {
-  const { t } = useTranslation('cvProjects');
+  const { t } = useTranslation('cvs');
   const [openCreateCvProjectDialog] = useCvProjectDialog();
 
   return (
@@ -22,14 +22,14 @@ const AddCvProjectButton = ({ cvId, cvProjects }: AddCvProjectButtonProps) => {
         openCreateCvProjectDialog({
           cvId,
           cvProjects,
-          title: t('cvProjectDialog.title'),
-          submitText: t('cvProjectDialog.confirmButtonText'),
+          title: t('projects.cvProjectDialog.title'),
+          submitText: t('projects.cvProjectDialog.confirmButtonText'),
           onConfirm: () => {},
         })
       }
     >
       <Icon as={Plus} w={5} h={5} />
-      {t('addCvProjectButtonText')}
+      {t('projects.addCvProjectButtonText')}
     </StyledAddCvProjectButton>
   );
 };

@@ -44,7 +44,7 @@ type CV = {
 };
 
 const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
-  const { t } = useTranslation('cvsTable');
+  const { t } = useTranslation('cvs');
 
   const {
     register,
@@ -85,7 +85,7 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
           <ModalContent>
             <ModalHeader>
               <Dialog.Title fontSize="lg" fontWeight="600">
-                {t('createCvDialog.title')}
+                {t('table.createCvDialog.title')}
               </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <StyledCloseButton />
@@ -95,20 +95,20 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
             <Dialog.Body py={4}>
               <VStack as="form" gap={8}>
                 <Field
-                  errorText={t('createCvDialog.requiredError')}
+                  errorText={t('table.createCvDialog.requiredError')}
                   invalid={!!errors.name}
                 >
                   <StyledInput
                     {...register('name')}
-                    placeholder={t('createCvDialog.nameInputPlaceholder')}
+                    placeholder={t('table.createCvDialog.nameInputPlaceholder')}
                   />
                 </Field>
                 <StyledInput
                   {...register('education')}
-                  placeholder={t('createCvDialog.educationInputPlaceholder')}
+                  placeholder={t('table.createCvDialog.educationInputPlaceholder')}
                 />
                 <Field
-                  errorText={t('createCvDialog.requiredError')}
+                  errorText={t('table.createCvDialog.requiredError')}
                   invalid={!!errors.description}
                 >
                   <StyledTextArea
@@ -125,13 +125,13 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
 
             <ModalFooter>
               <CancelButton onClick={onClose}>
-                {t('createCvDialog.cancelButtonText')}
+                {t('table.createCvDialog.cancelButtonText')}
               </CancelButton>
               <ConfirmButton
                 onClick={onSubmit}
                 disabled={!isValid || isSubmitting || loading}
               >
-                {t('createCvDialog.confirmButtonText')}
+                {t('table.createCvDialog.confirmButtonText')}
               </ConfirmButton>
             </ModalFooter>
           </ModalContent>

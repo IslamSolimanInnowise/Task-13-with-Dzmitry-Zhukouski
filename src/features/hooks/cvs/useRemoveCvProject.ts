@@ -10,7 +10,7 @@ const useRemoveCvProject = (onCloseDialog: () => void, cvId: string) => {
     onCompleted: () => {
       notify({
         type: 'info',
-        title: i18n.t('cvsNotifications:useRemoveCvProject.success'),
+        title: i18n.t('cvs:notifications.useRemoveCvProject.success'),
       });
       onCloseDialog();
     },

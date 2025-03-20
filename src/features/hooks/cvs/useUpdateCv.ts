@@ -10,7 +10,7 @@ const useUpdateCv = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('cvsNotifications:useUpdateCv.success'),
+        title: i18n.t('cvs:notifications.useUpdateCv.success'),
       });
     },
   });

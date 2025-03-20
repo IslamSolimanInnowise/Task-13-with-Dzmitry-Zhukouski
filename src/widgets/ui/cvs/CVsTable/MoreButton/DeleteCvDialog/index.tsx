@@ -25,7 +25,7 @@ const DeleteCvDialog = ({
   onClose,
   onConfirm,
 }: DeleteCvDialogProps) => {
-  const { t } = useTranslation('cvsTable');
+  const { t } = useTranslation('cvs');
 
   const [deleteCv, { loading }] = useDeleteCv(onClose);
 
@@ -51,7 +51,7 @@ const DeleteCvDialog = ({
           <ModalContent>
             <ModalHeader>
               <Dialog.Title fontSize="lg" fontWeight="600">
-                {t('deleteCvDialog.title')}
+                {t('table.deleteCvDialog.title')}
               </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <StyledCloseButton />
@@ -59,16 +59,16 @@ const DeleteCvDialog = ({
             </ModalHeader>
 
             <Dialog.Body py={4}>
-              {t('deleteCvDialog.subTitle')}
+              {t('table.deleteCvDialog.subTitle')}
               <strong>{name}?</strong>
             </Dialog.Body>
 
             <ModalFooter>
               <CancelButton onClick={onClose}>
-                {t('deleteCvDialog.cancelButtonText')}
+                {t('table.deleteCvDialog.cancelButtonText')}
               </CancelButton>
               <ConfirmButton onClick={onSubmit} disabled={loading}>
-                {t('deleteCvDialog.confirmButtonText')}
+                {t('table.deleteCvDialog.confirmButtonText')}
               </ConfirmButton>
             </ModalFooter>
           </ModalContent>

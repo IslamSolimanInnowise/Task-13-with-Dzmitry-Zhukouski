@@ -1,0 +1,101 @@
+{
+  "table": {
+    "tableHeaders": {
+      "name": "Название",
+      "education": "Образование",
+      "employee": "Сотрудник"
+    },
+    "tableBody": {
+      "noContent": "Результатов не найдено"
+    },
+    "createCvButtonText": "Создать CV",
+    "createCvDialog": {
+      "title": "Создать CV",
+      "nameInputPlaceholder": "Название",
+      "educationInputPlaceholder": "Образование",
+      "descriptionInputPlaceholder": "Описание",
+      "cancelButtonText": "Отмена",
+      "confirmButtonText": "Создать",
+      "requiredError": "Обязательное поле"
+    },
+    "moreButton": {
+      "detailsButtonText": "Подробнее",
+      "deleteButtonText": "Удалить CV"
+    },
+    "deleteCvDialog": {
+      "title": "Удалить CV",
+      "subTitle": "Вы уверены, что хотите удалить CV ",
+      "cancelButtonText": "Отмена",
+      "confirmButtonText": "Удалить"
+    }
+  },
+  "header": {
+    "details": "Подробнее",
+    "skills": "Навыки",
+    "projects": "Проекты",
+    "preview": "Просмотр"
+  },
+  "details": {
+    "inputNamePlaceholder": "Название",
+    "inputEducationPlaceholder": "Образование",
+    "inputDescriptionPlaceholder": "Описание",
+    "confirmButtonText": "Обновить",
+    "requiredError": "Обязательное поле"
+  },
+  "projects": {
+    "tableHeaders": {
+      "name": "Название",
+      "domain": "Область",
+      "startDate": "Дата начала",
+      "endDate": "Дата окончания"
+    },
+    "tableBody": {
+      "tillNow": "До сих пор",
+      "noContent": "Результатов не найдено"
+    },
+    "addCvProjectButtonText": "Добавить проект",
+    "moreButton": {
+      "updateButtonText": "Обновить проект",
+      "deleteButtonText": "Удалить проект"
+    },
+    "deleteCvProjectDialog": {
+      "title": "Удалить проект",
+      "subTitle": "Вы уверены, что хотите удалить проект ",
+      "cancelButtonText": "Отмена",
+      "confirmButtonText": "Удалить"
+    },
+    "cvProjectDialog": {
+      "title": "Добавить проект",
+      "title_updatingMode": "Обновить проект",
+      "cancelButtonText": "Отмена",
+      "confirmButtonText": "Создать и Добавить",
+      "confirmButtonText_updatingMode": "Обновить",
+      "form": {
+        "inputProjectPlaceholder": "Проект",
+        "inputDomainPlaceholder": "Область",
+        "inputDescriptionPlaceholder": "Описание",
+        "inputResponsibilitiesPlaceholder": "Обязанности"
+      }
+    }
+  },
+  "notifications": {
+    "useCreateCv": {
+      "success": "CV был создан"
+    },
+    "useUpdateCv": {
+      "success": "CV был обновлен"
+    },
+    "useDeleteCv": {
+      "success": "CV был удален"
+    },
+    "useAddCvProject": {
+      "success": "CV проект был добавлен"
+    },
+    "useUpdateCvProject": {
+      "success": "CV проект был обновлен"
+    },
+    "useRemoveCvProject": {
+      "success": "CV проект был удален"
+    }
+  }
+}

@@ -2,11 +2,7 @@ import 'i18next';
 
 import aside from '@public/locales/en/Aside.json';
 import auth from '@public/locales/en/auth.json';
-import cvDetails from '@public/locales/en/cvDetails.json';
-import cvProjects from '@public/locales/en/cvProjects.json';
-import cvsHeader from '@public/locales/en/cvsHeader.json';
-import cvsNotifications from '@public/locales/en/cvsNotifications.json';
-import cvsTable from '@public/locales/en/cvsTable.json';
+import cvs from '@public/locales/en/cvs.json';
 import languages from '@public/locales/en/languages.json';
 import page404 from '@public/locales/en/page404.json';
 import searchInput from '@public/locales/en/SearchInput.json';
@@ -26,11 +22,7 @@ declare module 'i18next' {
       users: typeof users;
       languages: typeof languages;
       skills: typeof skills;
-      cvsTable: typeof cvsTable;
-      cvsHeader: typeof cvsHeader;
-      cvDetails: typeof cvDetails;
-      cvProjects: typeof cvProjects;
-      cvsNotifications: typeof cvsNotifications;
+      cvs: typeof cvs;
       usersNotifications: typeof usersNotifications;
       page404: typeof page404;
     };

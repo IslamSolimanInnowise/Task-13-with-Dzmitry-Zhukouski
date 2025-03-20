@@ -24,7 +24,7 @@ const MoreButton = ({
   cvProjects,
   projectName,
 }: MoreButtonProps) => {
-  const { t } = useTranslation('cvProjects');
+  const { t } = useTranslation('cvs');
   const [openUpdatevProjectDialog] = useCvProjectDialog();
   const [openRemoveCvProjectDialog] = useDeleteCvProjectDialog();
 
@@ -47,10 +47,10 @@ const MoreButton = ({
     openUpdatevProjectDialog({
       cvId,
       cvProjects,
-      title: t('cvProjectDialog.title', {
+      title: t('projects.cvProjectDialog.title', {
         context: 'updatingMode',
       }),
-      submitText: t('cvProjectDialog.confirmButtonText', {
+      submitText: t('projects.cvProjectDialog.confirmButtonText', {
         context: 'updatingMode',
       }),
       updatingMode: true,
@@ -79,12 +79,12 @@ const MoreButton = ({
       <StyledMenuContent>
         <MenuItem asChild value="cv">
           <StyledMenuButton onClick={handleUpdateCvClick}>
-            <Text>{t('moreButton.updateButtonText')}</Text>
+            <Text>{t('projects.moreButton.updateButtonText')}</Text>
           </StyledMenuButton>
         </MenuItem>
         <MenuItem asChild value="delete-cv">
           <StyledMenuButton onClick={handleDeleteCvClick}>
-            <Text>{t('moreButton.deleteButtonText')}</Text>
+            <Text>{t('projects.moreButton.deleteButtonText')}</Text>
           </StyledMenuButton>
         </MenuItem>
       </StyledMenuContent>

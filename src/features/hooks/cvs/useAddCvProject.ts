@@ -10,7 +10,7 @@ const useAddCvProject = (onCloseDialog: () => void, cvId: string) => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('cvsNotifications:useAddCvProject.success'),
+        title: i18n.t('cvs:notifications.useAddCvProject.success'),
       });
       onCloseDialog();
     },

@@ -46,7 +46,7 @@ type CVProjectsProps = {
 };
 
 const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
-  const { t } = useTranslation('cvProjects');
+  const { t } = useTranslation('cvs');
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [, startTransition] = useTransition();
   const { data: cvProjectsData, loading: isCvProjectsLoading } =
@@ -61,7 +61,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
       name: project.name,
       domain: project.domain,
       start_date: project.start_date,
-      end_date: project.end_date ?? t('tableBody.tillNow'),
+      end_date: project.end_date ?? t('projects.tableBody.tillNow'),
       description: project.description,
       responsibilities: project.responsibilities ?? [],
       projectId: project.project.id,
@@ -70,10 +70,10 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
 
   const columns = useMemo<ColumnDef<TableCV>[]>(
     () => [
-      { accessorKey: 'name', header: t('tableHeaders.name') },
-      { accessorKey: 'domain', header: t('tableHeaders.domain') },
-      { accessorKey: 'start_date', header: t('tableHeaders.startDate') },
-      { accessorKey: 'end_date', header: t('tableHeaders.endDate') },
+      { accessorKey: 'name', header: t('projects.tableHeaders.name') },
+      { accessorKey: 'domain', header: t('projects.tableHeaders.domain') },
+      { accessorKey: 'start_date', header: t('projects.tableHeaders.startDate') },
+      { accessorKey: 'end_date', header: t('projects.tableHeaders.endDate') },
       {
         id: 'actions',
         header: '',
@@ -242,7 +242,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
     <Table.Body h={`${rowVirtualizer.getTotalSize()}px`} position="relative">
       <StyledTableBodyRow>
         <StyledTableNoContentCell colSpan={5}>
-          {t('tableBody.noContent')}
+          {t('projects.tableBody.noContent')}
         </StyledTableNoContentCell>
       </StyledTableBodyRow>
     </Table.Body>

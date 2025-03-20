@@ -6,7 +6,7 @@ import { StyledAddCvButton } from './addCvButton.styles';
 import useCreateCvDialog from './CreateCvDialog';
 
 const AddCvButton = () => {
-  const { t } = useTranslation('cvsTable');
+  const { t } = useTranslation('cvs');
   const [openCreateCvDialog] = useCreateCvDialog();
 
   return (
@@ -19,7 +19,7 @@ const AddCvButton = () => {
       }
     >
       <Icon as={Plus} w={5} h={5} />
-      {t('createCvButtonText')}
+      {t('table.createCvButtonText')}
     </StyledAddCvButton>
   );
 };

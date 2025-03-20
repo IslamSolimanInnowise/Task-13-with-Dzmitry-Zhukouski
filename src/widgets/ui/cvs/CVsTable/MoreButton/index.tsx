@@ -16,7 +16,7 @@ type MoreButtonProps = {
 };
 
 const MoreButton = ({ id, name }: MoreButtonProps) => {
-  const { t } = useTranslation('cvsTable');
+  const { t } = useTranslation('cvs');
   const [openDeleteCvDialog] = useDeleteCvDialog();
 
   const handleDeleteCvClick = () => {
@@ -41,12 +41,12 @@ const MoreButton = ({ id, name }: MoreButtonProps) => {
             to="/cvs/$cvId/details"
             params={{ cvId: id }}
           >
-            <Text>{t('moreButton.detailsButtonText')}</Text>
+            <Text>{t('table.moreButton.detailsButtonText')}</Text>
           </StyledMenuButton>
         </MenuItem>
         <MenuItem asChild value="delete-cv">
           <StyledMenuButton onClick={handleDeleteCvClick}>
-            <Text>{t('moreButton.deleteButtonText')}</Text>
+            <Text>{t('table.moreButton.deleteButtonText')}</Text>
           </StyledMenuButton>
         </MenuItem>
       </StyledMenuContent>
