@@ -109,5 +109,18 @@
     "useUpdateUser": {
       "success": "Пользователь был обновлен!"
     }
+  },
+  "skillsBreadcrumb": {
+    "currentLink": "Навыки",
+    "employeesItem": "Сотрудники"
+  },
+  "languagesBreadcrumb": {
+    "currentLink": "Языки",
+    "employeesItem": "Сотрудники"
+  },
+  "profileHeader": {
+    "profile": "Профиль",
+    "skills": "Навыки",
+    "languages": "Языки"
   }
 }

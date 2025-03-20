@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { StyledLink, StyledProfileHeader } from './profileHeader.styles';
 
 interface ProfileHeaderProps {
@@ -5,6 +6,8 @@ interface ProfileHeaderProps {
 }
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({ userId }) => {
+  const { t } = useTranslation('users');
+
   return (
     <StyledProfileHeader>
       <StyledLink
@@ -15,7 +18,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ userId }) => {
         }}
         activeOptions={{ exact: true }}
       >
-        Profile
+        {t('profileHeader.profile')}
       </StyledLink>
 
       <StyledLink
@@ -25,7 +28,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ userId }) => {
           style: { color: '#C63031', borderColor: '#C63031' },
         }}
       >
-        Skills
+        {t('profileHeader.skills')}
       </StyledLink>
       <StyledLink
         to="/users/$userId/languages"
@@ -34,7 +37,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({ userId }) => {
           style: { color: '#C63031', borderColor: '#C63031' },
         }}
       >
-        Languages
+        {t('profileHeader.languages')}
       </StyledLink>
     </StyledProfileHeader>
   );

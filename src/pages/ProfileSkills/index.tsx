@@ -3,6 +3,7 @@ import Breadcrumb from '@entities/ui/Breadcrumb';
 import useGetUser from '@features/hooks/users/useGetUser';
 import ProfileHeader from '@widgets/ui/users/profile/ProfileHeader';
 import SkillsWidget from '@widgets/ui/users/SkillsWidget';
+import { useTranslation } from 'react-i18next';
 
 import { StyledPageContainer, StyledPageContent } from './profileSkills.styles';
 
@@ -11,6 +12,8 @@ interface ProfileSkillsPageProps {
 }
 
 const ProfileSkillsPage: React.FC<ProfileSkillsPageProps> = ({ userId }) => {
+  const { t } = useTranslation('users');
+
   const { data, loading } = useGetUser(userId);
 
   const currentUser = data?.user;
@@ -24,9 +27,9 @@ const ProfileSkillsPage: React.FC<ProfileSkillsPageProps> = ({ userId }) => {
       {!loading && (
         <StyledPageContent>
           <Breadcrumb
-            currentLink={'Skills'}
+            currentLink={t('skillsBreadcrumb.currentLink')}
             breadCrumbItems={[
-              { name: 'Employees', path: '/users' },
+              { name: t('skillsBreadcrumb.employeesItem'), path: '/users' },
               {
                 name: userLinkName,
                 path: '/users/$userId',

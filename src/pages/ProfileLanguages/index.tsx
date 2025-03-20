@@ -8,6 +8,7 @@ import {
   StyledPageContainer,
   StyledPageContent,
 } from './profileLanguages.styles';
+import { useTranslation } from 'react-i18next';
 
 interface ProfileLanguagesPageProps {
   userId: string;
@@ -16,6 +17,7 @@ interface ProfileLanguagesPageProps {
 const ProfileLanguagesPage: React.FC<ProfileLanguagesPageProps> = ({
   userId,
 }) => {
+  const { t } = useTranslation('users');
   const { data, loading } = useGetUser(userId);
 
   const currentUser = data?.user;
@@ -29,9 +31,9 @@ const ProfileLanguagesPage: React.FC<ProfileLanguagesPageProps> = ({
       {!loading && (
         <StyledPageContent>
           <Breadcrumb
-            currentLink={'Languages'}
+            currentLink={t('languagesBreadcrumb.currentLink')}
             breadCrumbItems={[
-              { name: 'Employees', path: '/users' },
+              { name: t('languagesBreadcrumb.employeesItem'), path: '/users' },
               {
                 name: userLinkName,
                 path: '/users/$userId',
