@@ -8,7 +8,7 @@ const useUpdatePosition = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('usersNotifications:useUpdatePosition.success'),
+        title: i18n.t('users:usersNotifications.useUpdatePosition.success'),
       });
     },
   });

@@ -75,5 +75,37 @@
       "skillCount_one": "You have <b>{{count}} skill</b>",
       "skillCount_other": "You have <b>{{count}} skills</b>"
     }
+  },
+  "usersNotifications": {
+    "useAddSkill": {
+      "success": "Skill was added!"
+    },
+    "useDeleteSkill": {
+      "success": "Your Skill was deleted!"
+    },
+    "useAddLanguage": {
+      "success": "Language was added!"
+    },
+    "useDeleteLanguage": {
+      "success": "Your Language was deleted!"
+    },
+    "useUpdateDepartment": {
+      "success": "Your department was updated!"
+    },
+    "useUpdatePosition": {
+      "success": "Your position was updated!"
+    },
+    "useUpdateProfile": {
+      "success": "Your profile was updated!"
+    },
+    "useUpdateProfileLanguage": {
+      "success": "Your profile language was updated!"
+    },
+    "useUpdateProfileSkill": {
+      "success": "Your profile skill was updated!"
+    },
+    "useUpdateUser": {
+      "success": "User was updated!"
+    }
   }
 }

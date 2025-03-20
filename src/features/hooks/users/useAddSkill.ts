@@ -12,7 +12,7 @@ const useAddSkill = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('usersNotifications:useAddSkill.success'),
+        title: i18n.t('users:usersNotifications.useAddSkill.success'),
       });
     },
     refetchQueries: [{ query: GET_USER, variables: { userId: id } }],

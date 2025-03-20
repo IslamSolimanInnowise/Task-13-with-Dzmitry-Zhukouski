@@ -21,7 +21,6 @@ i18n
       'cvDetails',
       'cvProjects',
       'cvsNotifications',
-      'usersNotifications',
       'page404',
     ],
     interpolation: {

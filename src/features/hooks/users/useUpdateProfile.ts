@@ -9,7 +9,7 @@ const useUpdateProfile = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('usersNotifications:useUpdateProfile.success'),
+        title: i18n.t('users:usersNotifications.useUpdateProfile.success'),
       });
     },
     refetchQueries: [{ query: GET_USERS }],

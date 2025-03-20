@@ -11,7 +11,6 @@ import page404 from '@public/locales/en/page404.json';
 import searchInput from '@public/locales/en/SearchInput.json';
 import settings from '@public/locales/en/Settings.json';
 import users from '@public/locales/en/users.json';
-import usersNotifications from '@public/locales/en/usersNotifications.json';
 
 declare module 'i18next' {
   interface CustomTypeOptions {
@@ -27,7 +26,6 @@ declare module 'i18next' {
       cvDetails: typeof cvDetails;
       cvProjects: typeof cvProjects;
       cvsNotifications: typeof cvsNotifications;
-      usersNotifications: typeof usersNotifications;
       page404: typeof page404;
     };
   }

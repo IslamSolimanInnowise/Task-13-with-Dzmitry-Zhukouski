@@ -8,7 +8,7 @@ const useUpdateDepartment = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('usersNotifications:useUpdateDepartment.success'),
+        title: i18n.t('users:usersNotifications.useUpdateDepartment.success'),
       });
     },
   });

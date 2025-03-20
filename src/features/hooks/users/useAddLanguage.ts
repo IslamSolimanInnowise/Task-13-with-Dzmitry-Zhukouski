@@ -12,7 +12,7 @@ const useAddLanguage = () => {
     onCompleted: () => {
       notify({
         type: 'success',
-        title: i18n.t('usersNotifications:useAddLanguage.success'),
+        title: i18n.t('users:usersNotifications.useAddLanguage.success'),
       });
     },
     refetchQueries: [{ query: GET_USER, variables: { userId: id } }],
