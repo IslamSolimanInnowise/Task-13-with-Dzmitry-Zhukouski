@@ -2,7 +2,10 @@ import { Skill, SkillMastery } from 'cv-graphql';
 
 type GroupedSkills = {
   category: Skill['category_name'];
-  skills: Skill['category_name'][];
+  skills: {
+    name: Skill['category_name'];
+    mastery: SkillMastery['mastery'];
+  }[];
 };
 
 const groupSkillsByCategory = (
@@ -17,11 +20,19 @@ const groupSkillsByCategory = (
     const existingCategory = acc.find((item) => item.category === categoryName);
 
     if (existingCategory) {
-      existingCategory.skills.push(skill.name);
+      existingCategory.skills.push({
+        name: skill.name,
+        mastery: skill.mastery,
+      });
     } else {
       acc.push({
         category: categoryName,
-        skills: [skill.name],
+        skills: [
+          {
+            name: skill.name,
+            mastery: skill.mastery,
+          },
+        ],
       });
     }
 

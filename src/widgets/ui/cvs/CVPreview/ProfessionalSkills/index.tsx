@@ -1,3 +1,5 @@
+import { Skill, SkillMastery } from 'cv-graphql';
+
 import { TopicTitle, TopicTitleContainer } from '../cvpreview.styles';
 import {
   StyledTable,
@@ -11,44 +13,21 @@ import {
   StyledTableWrapper,
 } from './professionalSkills.styles';
 
-const skillsData = [
-  {
-    category: 'Programming languages',
-    skills: [
-      {
-        name: 'JavaScript',
-        mastery: 'Expert',
-        experienceYears: 1,
-        lastUsed: '2021',
-      },
-      {
-        name: 'TypeScript',
-        mastery: 'Novice',
-        experienceYears: 1,
-        lastUsed: '2021',
-      },
-      {
-        name: 'Python',
-        mastery: 'Novice',
-        experienceYears: null,
-        lastUsed: null,
-      },
-    ],
-  },
-  {
-    category: 'Frontend technologies',
-    skills: [
-      {
-        name: 'React',
-        mastery: 'Expert',
-        experienceYears: 1,
-        lastUsed: '2021',
-      },
-    ],
-  },
-];
+type ProfessionalSkillsProps = {
+  skillsData: {
+    skills: {
+      name: Skill['category_name'];
+      mastery: SkillMastery['mastery'];
+      experienceYears: string | null;
+      lastUsed: string | null;
+    }[];
+    category: Skill['category_name'];
+  }[];
+};
 
-const ProfessionalSkills: React.FC = () => {
+const ProfessionalSkills: React.FC<ProfessionalSkillsProps> = ({
+  skillsData,
+}) => {
   return (
     <>
       <TopicTitleContainer>

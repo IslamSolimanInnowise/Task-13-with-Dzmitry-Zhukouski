@@ -3,6 +3,8 @@ import Spinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import useGetSkills from '@features/hooks/users/useGetSkills';
 import { authVar } from '@shared/store/globalAuthState';
+import calculateSkillExperience from '@shared/utils/calculateSkillExperience';
+import getSkillLastUsedYear from '@shared/utils/getSkillLastUsedYear';
 import groupSkillsByCategory from '@shared/utils/groupSkillsByCaregory';
 import { CvProject } from 'cv-graphql';
 
@@ -24,8 +26,6 @@ const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
   const { data: CVdata, loading: isCvLoading } = useGetCvById(cvId);
   const { data: skills, loading: skillLoading } = useGetSkills();
 
-  console.log(CVdata);
-
   const { id } = useReactiveVar(authVar);
   const isOwner = CVdata?.cv?.user?.id === id;
 
@@ -34,9 +34,23 @@ const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
   );
 
   const structuredSkills = groupSkillsByCategory(
-    CVdata?.cv?.skills || [],
+    CVdata?.cv?.skills ?? [],
     skills?.skills,
   );
+
+  const skillsTableData = structuredClone(structuredSkills).map((category) => ({
+    ...category,
+    skills: category.skills.map((skill) => {
+      const name = skill.name ?? '';
+      const projects = CVdata?.cv?.projects ?? [];
+
+      return {
+        ...skill,
+        experienceYears: calculateSkillExperience(name, projects),
+        lastUsed: getSkillLastUsedYear(name, projects),
+      };
+    }),
+  }));
 
   if (isCvLoading || skillLoading) return <Spinner />;
 
@@ -56,8 +70,11 @@ const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
         cvDescription={CVdata?.cv?.description}
         cvSkills={structuredSkills}
       />
-      <Projects projects={CVdata?.cv?.projects} role={CVdata?.cv?.user?.position?.name} />
-      <ProfessionalSkills />
+      <Projects
+        projects={CVdata?.cv?.projects}
+        role={CVdata?.cv?.user?.position?.name}
+      />
+      <ProfessionalSkills skillsData={skillsTableData} />
     </CVPreviewContainer>
   );
 };

@@ -1,5 +1,11 @@
 import { Text } from '@chakra-ui/react';
-import { Cv, CvProject, LanguageProficiency, Skill } from 'cv-graphql';
+import {
+  Cv,
+  CvProject,
+  LanguageProficiency,
+  Skill,
+  SkillMastery,
+} from 'cv-graphql';
 import React from 'react';
 
 import {
@@ -18,7 +24,10 @@ type OverviewProps = {
   cvDescription: Cv['description'];
   cvSkills: {
     category: Skill['category_name'];
-    skills: Skill['category_name'][];
+    skills: {
+      name: Skill['category_name'];
+      mastery: SkillMastery['mastery'];
+    }[];
   }[];
 };
 
@@ -57,7 +66,7 @@ const Overview: React.FC<OverviewProps> = ({
             <React.Fragment key={index}>
               <TopicSectionTitle>{category.category}</TopicSectionTitle>
               {category.skills.map((skill, index) => (
-                <Text key={index}>{skill}</Text>
+                <Text key={index}>{skill.name}</Text>
               ))}
             </React.Fragment>
           ))}
