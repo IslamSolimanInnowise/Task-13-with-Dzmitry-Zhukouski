@@ -122,5 +122,13 @@
     "profile": "Профиль",
     "skills": "Навыки",
     "languages": "Языки"
-  }
+  },
+  "profileBreadcrumb": {
+    "employeesItem": "Сотрудники"
+  },
+  "profileAvatar": {
+    "uploadAvatar": "Загрузить Аватар",
+    "removeAvatar": "Удалить Аватар"
+  },
+  "profileDetails": "Аккаунт был создан"
 }

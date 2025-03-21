@@ -123,5 +123,13 @@
     "profile": "الملف الشخصي",
     "skills": "المهارات",
     "languages": "اللغات"
-  }
+  },
+  "profileBreadcrumb": {
+    "employeesItem": "الموظفين"
+  },
+  "profileAvatar": {
+    "uploadAvatar": "تحميل صورة",
+    "removeAvatar": "حذف الصورة"
+  },
+  "profileDetails": "تم انشاء الحساب"
 }

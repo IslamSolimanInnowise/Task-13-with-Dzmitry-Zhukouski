@@ -5,6 +5,7 @@ import ProfileAvatar from '@widgets/ui/users/profile/ProfileAvatar';
 import ProfileDetails from '@widgets/ui/users/profile/ProfileDetails';
 import ProfileHeader from '@widgets/ui/users/profile/ProfileHeader';
 import UpdateProfileForm from '@widgets/ui/users/profile/UpdateProfileForm';
+import { useTranslation } from 'react-i18next';
 
 import { StyledPageContainer, StyledPageContent } from './profile.styles';
 
@@ -13,6 +14,7 @@ interface ProfilePageProps {
 }
 
 const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
+  const { t } = useTranslation('users');
   const { data, loading } = useGetUser(userId);
 
   const currentUser = data?.user;
@@ -26,7 +28,9 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
         <StyledPageContent>
           <Breadcrumb
             currentLink={profileCurrentLink}
-            breadCrumbItems={[{ name: 'Employees', path: '/users' }]}
+            breadCrumbItems={[
+              { name: t('profileBreadcrumb.employeesItem'), path: '/users' },
+            ]}
           />
           <ProfileHeader userId={currentUser.id} />
           <ProfileAvatar user={currentUser} />

@@ -120,5 +120,13 @@
     "profile": "Profile",
     "skills": "Skills",
     "languages": "Languages"
-  }
+  },
+  "profileBreadcrumb": {
+    "employeesItem": "Employees"
+  },
+  "profileAvatar": {
+    "uploadAvatar": "Upload Avatar",
+    "removeAvatar": "Remove Avatar"
+  },
+  "profileDetails": "A member since"
 }
