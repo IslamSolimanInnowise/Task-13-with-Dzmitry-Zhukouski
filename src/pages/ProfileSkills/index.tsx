@@ -18,8 +18,7 @@ const ProfileSkillsPage: React.FC<ProfileSkillsPageProps> = ({ userId }) => {
 
   const currentUser = data?.user;
 
-  const userLinkName =
-    currentUser?.profile?.first_name.trim() || currentUser?.email;
+  const userLinkName = currentUser?.profile?.first_name || currentUser?.email;
 
   return (
     <StyledPageContainer>
