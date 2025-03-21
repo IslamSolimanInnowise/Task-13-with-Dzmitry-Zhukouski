@@ -1,7 +1,10 @@
+import { useReactiveVar } from '@apollo/client';
 import { Table } from '@chakra-ui/react';
 import SearchInput from '@entities/ui/SearchInput';
 import Spinner from '@entities/ui/Spinner';
+import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import useGetCvProjects from '@features/hooks/cvs/useGetCvProjects';
+import { authVar } from '@shared/store/globalAuthState';
 import {
   ColumnDef,
   flexRender,
@@ -52,6 +55,10 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
   const { data: cvProjectsData, loading: isCvProjectsLoading } =
     useGetCvProjects(cvId);
 
+  const { data: CVdata, loading: isCvLoading } = useGetCvById(cvId);
+  const { id } = useReactiveVar(authVar);
+  const isOwner = CVdata?.cv?.user?.id === id;
+
   const rowHeights = useRef<{ [key: string]: number }>({});
 
   const handledCvProjectsData: TableCV[] = useMemo(() => {
@@ -72,20 +79,23 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
     () => [
       { accessorKey: 'name', header: t('projects.tableHeaders.name') },
       { accessorKey: 'domain', header: t('projects.tableHeaders.domain') },
-      { accessorKey: 'start_date', header: t('projects.tableHeaders.startDate') },
+      {
+        accessorKey: 'start_date',
+        header: t('projects.tableHeaders.startDate'),
+      },
       { accessorKey: 'end_date', header: t('projects.tableHeaders.endDate') },
       {
         id: 'actions',
         header: '',
         cell: ({ row }) => {
-          return (
+          return isOwner ? (
             <MoreButton
               cvId={cvId}
               projectId={row.original.projectId}
               cvProjects={handledCvProjectsData}
               projectName={row.original.name}
             />
-          );
+          ) : null;
         },
         size: 50,
         minSize: 50,
@@ -93,7 +103,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
         enableSorting: false,
       },
     ],
-    [cvId, handledCvProjectsData, t],
+    [cvId, handledCvProjectsData, isOwner, t],
   );
 
   const tableContainerRef = useRef<HTMLDivElement>(null);
@@ -182,7 +192,12 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
           />
         </StyledTableTopHeaderCell>
         <StyledTableTopHeaderCell>
-          <AddCvProjectButton cvId={cvId} cvProjects={handledCvProjectsData} />
+          {isOwner && (
+            <AddCvProjectButton
+              cvId={cvId}
+              cvProjects={handledCvProjectsData}
+            />
+          )}
         </StyledTableTopHeaderCell>
       </StyledTableHeaderRow>
       <StyledTableHeaderRow>{tableColumns}</StyledTableHeaderRow>
@@ -248,7 +263,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
     </Table.Body>
   );
 
-  if (isCvProjectsLoading) return <Spinner />;
+  if (isCvLoading || isCvProjectsLoading) return <Spinner />;
 
   return (
     <StyledTableContainer ref={tableContainerRef}>

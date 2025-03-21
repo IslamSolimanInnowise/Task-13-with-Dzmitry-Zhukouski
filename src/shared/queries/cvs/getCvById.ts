@@ -10,6 +10,24 @@ export const GET_CV_BY_ID = gql`
       user {
         id
       }
+      skills {
+        name
+        categoryId
+        mastery
+      }
+      projects {
+        id
+        name
+        description
+        domain
+        start_date
+        end_date
+        environment
+        responsibilities
+        project {
+          id
+        }
+      }
     }
   }
 `;

@@ -7,7 +7,7 @@ export const StyledNotificationsBox = styled(Stack)`
   position: fixed;
   bottom: 1rem;
   right: 1rem;
-  z-index: 1300;
+  z-index: 1500;
   display: flex;
   flex-direction: column;
 `;

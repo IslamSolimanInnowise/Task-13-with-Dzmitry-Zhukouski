@@ -42,6 +42,30 @@
     "confirmButtonText": "Обновить",
     "requiredError": "Обязательное поле"
   },
+  "skills": {
+    "addCVSkillButtonText": "+ Добавить навык",
+    "addCVSkillDialog": {
+      "title": "Добавить навык",
+      "skillSelectPlaceholder": "Навык",
+      "masterySelectPlaceholder": "Уровень навыка",
+      "cancelButtonText": "Отмена",
+      "confirmButtonText": "Подтвердить"
+    },
+    "updateCVSkillDialog": {
+      "title": "Обновить навык",
+      "confirmButtonText": "Обновить"
+    },
+    "CVSkill": {
+      "updateButtonText": "Обновить",
+      "deleteButtonText": "Удалить"
+    },
+    "deleteCvSkillDialog": {
+      "title": "Удалить навык",
+      "subTitle": "Вы уверены, что хотите удалить навык ",
+      "cancelButtonText": "Отмена",
+      "confirmButtonText": "Удалить"
+    }
+  },
   "projects": {
     "tableHeaders": {
       "name": "Название",
@@ -96,6 +120,15 @@
     },
     "useRemoveCvProject": {
       "success": "CV проект был удален"
+    },
+    "useAddCvSkill": {
+      "success": "CV навык был добавлен"
+    },
+    "useUpdateCvSkill": {
+      "success": "CV навык был обновлен"
+    },
+    "useDeleteCvSkill": {
+      "success": "CV навык был удален"
     }
   }
 }

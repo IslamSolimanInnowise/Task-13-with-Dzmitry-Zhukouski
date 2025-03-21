@@ -1,6 +1,7 @@
 import { Dialog, Portal } from '@chakra-ui/react';
 import useDeleteCv from '@features/hooks/cvs/useDeleteCv';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { notify } from '@shared/Notifications/notify';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -27,10 +28,19 @@ const DeleteCvDialog = ({
 }: DeleteCvDialogProps) => {
   const { t } = useTranslation('cvs');
 
-  const [deleteCv, { loading }] = useDeleteCv(onClose);
+  const [deleteCv, { loading }] = useDeleteCv();
 
   const onSubmit = () => {
-    deleteCv({ variables: { cv: { cvId: id } } });
+    deleteCv({
+      variables: { cv: { cvId: id } },
+      onCompleted: () => {
+        notify({
+          type: 'info',
+          title: t('notifications.useDeleteCv.success'),
+        });
+        onClose();
+      },
+    });
     onConfirm();
   };
 

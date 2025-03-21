@@ -1,7 +1,8 @@
 import { Dialog, Portal } from '@chakra-ui/react';
-import useRemoveCvProject from '@features/hooks/cvs/useRemoveCvProject';
+import useDeleteCvSkill from '@features/hooks/cvs/useDeleteCvSkill';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
 import { notify } from '@shared/Notifications/notify';
+import { Cv, SkillMastery } from 'cv-graphql';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -11,34 +12,32 @@ import {
   ModalFooter,
   ModalHeader,
   StyledCloseButton,
-} from './deleteCvProjectDialog.styled';
+} from './deleteCvSkillDialog.styled';
 
-type DeleteCvProjectDialogProps = {
-  cvId: string;
-  projectId: string;
-  projectName: string;
+type DeleteCvSkillDialogProps = {
+  cvId: Cv['id'];
+  skillName: SkillMastery['name'];
   onClose: () => void;
   onConfirm: () => void;
 };
 
-const DeleteCvProjectDialog = ({
+const DeleteCvSkillDialog = ({
   cvId,
-  projectId,
-  projectName,
+  skillName,
   onClose,
   onConfirm,
-}: DeleteCvProjectDialogProps) => {
+}: DeleteCvSkillDialogProps) => {
   const { t } = useTranslation('cvs');
 
-  const [removeCvProject, { loading }] = useRemoveCvProject(cvId);
+  const [deleteCv, { loading }] = useDeleteCvSkill(cvId);
 
   const onSubmit = () => {
-    removeCvProject({
-      variables: { project: { cvId, projectId } },
+    deleteCv({
+      variables: { skill: { cvId, name: skillName } },
       onCompleted: () => {
         notify({
           type: 'info',
-          title: t('notifications.useRemoveCvProject.success'),
+          title: t('notifications.useDeleteCvSkill.success'),
         });
         onClose();
       },
@@ -63,7 +62,7 @@ const DeleteCvProjectDialog = ({
           <ModalContent>
             <ModalHeader>
               <Dialog.Title fontSize="lg" fontWeight="600">
-                {t('projects.deleteCvProjectDialog.title')}
+                {t('skills.deleteCvSkillDialog.title')}
               </Dialog.Title>
               <Dialog.CloseTrigger asChild>
                 <StyledCloseButton />
@@ -71,16 +70,16 @@ const DeleteCvProjectDialog = ({
             </ModalHeader>
 
             <Dialog.Body py={4}>
-              {t('projects.deleteCvProjectDialog.subTitle')}
-              <strong>{projectName}?</strong>
+              {t('skills.deleteCvSkillDialog.subTitle')}
+              <strong>{skillName}?</strong>
             </Dialog.Body>
 
             <ModalFooter>
               <CancelButton onClick={onClose}>
-                {t('projects.deleteCvProjectDialog.cancelButtonText')}
+                {t('skills.deleteCvSkillDialog.cancelButtonText')}
               </CancelButton>
               <ConfirmButton onClick={onSubmit} disabled={loading}>
-                {t('projects.deleteCvProjectDialog.confirmButtonText')}
+                {t('skills.deleteCvSkillDialog.confirmButtonText')}
               </ConfirmButton>
             </ModalFooter>
           </ModalContent>
@@ -90,8 +89,8 @@ const DeleteCvProjectDialog = ({
   );
 };
 
-const useDeleteCvProjectDialog = createDialogHook<DeleteCvProjectDialogProps>(
-  (props) => <DeleteCvProjectDialog {...props} />,
+const useDeleteCvSkillDialog = createDialogHook<DeleteCvSkillDialogProps>(
+  (props) => <DeleteCvSkillDialog {...props} />,
 );
 
-export default useDeleteCvProjectDialog;
+export default useDeleteCvSkillDialog;

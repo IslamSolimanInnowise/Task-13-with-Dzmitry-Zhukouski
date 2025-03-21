@@ -42,6 +42,30 @@
     "confirmButtonText": "Update",
     "requiredError": "Required field"
   },
+  "skills": {
+    "addCVSkillButtonText": "+ Add Skill",
+    "addCVSkillDialog": {
+      "title": "Add Skill",
+      "skillSelectPlaceholder": "Skill",
+      "masterySelectPlaceholder": "Skill Mastery",
+      "cancelButtonText": "Cancel",
+      "confirmButtonText": "Confirm"
+    },
+    "updateCVSkillDialog": {
+      "title": "Update skill",
+      "confirmButtonText": "Update"
+    },
+    "CVSkill": {
+      "updateButtonText": "Update",
+      "deleteButtonText": "Delete"
+    },
+    "deleteCvSkillDialog": {
+      "title": "Delete skill",
+      "subTitle": "Are you sure you want to delete skill ",
+      "cancelButtonText": "Cancel",
+      "confirmButtonText": "Delete"
+    }
+  },
   "projects": {
     "tableHeaders": {
       "name": "Name",
@@ -96,6 +120,15 @@
     },
     "useRemoveCvProject": {
       "success": "CV project was removed"
+    },
+    "useAddCvSkill": {
+      "success": "CV skill was added"
+    },
+    "useUpdateCvSkill": {
+      "success": "CV skill was updated"
+    },
+    "useDeleteCvSkill": {
+      "success": "CV skill was deleted"
     }
   }
 }
