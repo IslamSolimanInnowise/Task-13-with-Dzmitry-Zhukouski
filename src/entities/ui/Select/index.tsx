@@ -3,6 +3,7 @@ import {
   Portal,
   Select as ChakraSelect,
 } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
 import {
   StyledIndicator,
@@ -30,6 +31,8 @@ const Select = ({
   value,
   onChange,
 }: SelectProps) => {
+  const { t } = useTranslation('others');
+
   const list = createListCollection({
     items: itemsList
       ? itemsList.map((item) => ({
@@ -106,7 +109,9 @@ const Select = ({
             ))}
             {othersItems.length > 0 && (
               <StyledItemGroup>
-                <StyledItemGroupLabel>Others</StyledItemGroupLabel>
+                <StyledItemGroupLabel>
+                  {t('select.others')}
+                </StyledItemGroupLabel>
                 {othersItems.map((item) => (
                   <StyledItem item={item} key={item.value}>
                     {item.label}

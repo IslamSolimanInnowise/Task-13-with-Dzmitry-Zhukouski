@@ -1,7 +1,11 @@
 import Aside from '@entities/ui/Aside';
 import CVsHeader from '@entities/ui/CVsHeader';
+import CVPreview from '@widgets/ui/cvs/CVPreview';
 
-import { StyledCvPreviewContainer, StyledPageContainer } from './cvpreview.styles';
+import {
+  StyledCvPreviewContainer,
+  StyledPageContainer,
+} from './cvpreview.styles';
 
 type CVPreviewPageProps = {
   cvId: string;
@@ -13,7 +17,7 @@ const CVPreviewPage: React.FC<CVPreviewPageProps> = ({ cvId }) => {
       <Aside />
       <StyledCvPreviewContainer>
         <CVsHeader />
-        <span>Preview of cv: {cvId}</span>
+        <CVPreview cvId={cvId} />
       </StyledCvPreviewContainer>
     </StyledPageContainer>
   );

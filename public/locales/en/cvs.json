@@ -102,6 +102,24 @@
       }
     }
   },
+  "preview": {
+    "exportPdfButtonText": "Export pdf",
+    "education": "Education",
+    "noEducation": "No education",
+    "languageProficiency": "Language proficiency",
+    "domains": "Domains",
+    "projects": "Projects",
+    "projectRoles": "Project roles",
+    "period": "Period",
+    "responsibilities": "Responsibilities",
+    "environment": "Environment",
+    "professionalSkills": "Professional skills",
+    "skills": "Skills",
+    "mastery": "Mastery",
+    "experienceInYears": "Experience in years",
+    "lastUsed": "Last used",
+    "notSpecified": "Not specified"
+  },
   "notifications": {
     "useCreateCv": {
       "success": "CV was created"
@@ -129,6 +147,10 @@
     },
     "useDeleteCvSkill": {
       "success": "CV skill was deleted"
+    },
+    "genereatePdf": {
+      "error": "Error generating PDF",
+      "defaultErrorMessage": "An unexpected error occurred"
     }
   }
 }
