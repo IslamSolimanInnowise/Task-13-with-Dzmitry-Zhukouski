@@ -10,11 +10,13 @@ import getSkillLastUsedYear from '@shared/utils/getSkillLastUsedYear';
 import groupSkillsByCategory from '@shared/utils/groupSkillsByCaregory';
 import { CvProject } from 'cv-graphql';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import CVPdfDocument from './CVPdfDocument';
 import {
   CVPreviewContainer,
   ExportPdfButton,
+  TopicSubTitle,
   TopicTitle,
   TopicTitleContainer,
 } from './cvpreview.styles';
@@ -27,6 +29,8 @@ type CVPreviewProps = {
 };
 
 const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
+  const { t } = useTranslation('cvs');
+
   const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
 
   const { data: CVdata, loading: isCvLoading } = useGetCvById(cvId);
@@ -83,11 +87,11 @@ const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
     } catch (error: unknown) {
       notify({
         type: 'error',
-        title: 'Error generating PDF',
+        title: t('notifications.genereatePdf.error'),
         message:
           error instanceof Error
             ? error.message
-            : 'An unexpected error occurred',
+            : t('notifications.genereatePdf.defaultErrorMessage'),
       });
     } finally {
       setIsGeneratingPdf(false);
@@ -106,10 +110,11 @@ const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
             onClick={handleExportPdf}
             disabled={isGeneratingPdf}
           >
-            Export pdf
+            {t('preview.exportPdfButtonText')}
           </ExportPdfButton>
         )}
       </TopicTitleContainer>
+      <TopicSubTitle>{CVdata?.cv?.user?.position?.name}</TopicSubTitle>
       <Overview
         education={CVdata?.cv?.education}
         languageProficiency={CVdata?.cv?.languages}

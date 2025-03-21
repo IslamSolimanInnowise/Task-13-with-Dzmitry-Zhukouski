@@ -3,6 +3,7 @@ import formatCvDate from '@shared/utils/formCvDate';
 import sortProjectsByEndDate from '@shared/utils/sortProjectsByEndDate';
 import { CvProject, Position } from 'cv-graphql';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   LeftTopicSection,
@@ -21,10 +22,12 @@ type ProjectsProps = {
 };
 
 const Projects: React.FC<ProjectsProps> = ({ projects, role }) => {
+  const { t } = useTranslation('cvs');
+
   return (
     <>
       <TopicTitleContainer>
-        <TopicTitle>Projects</TopicTitle>
+        <TopicTitle>{t('preview.projects')}</TopicTitle>
       </TopicTitleContainer>
       {sortProjectsByEndDate(projects)?.map((project, index) => (
         <React.Fragment key={index}>
@@ -36,20 +39,25 @@ const Projects: React.FC<ProjectsProps> = ({ projects, role }) => {
               <Text>{project.description}</Text>
             </LeftTopicSection>
             <RightTopicSection>
-              <TopicSectionTitle>Project roles</TopicSectionTitle>
-              <Text>{role || 'Not specified'}</Text>
-              <TopicSectionTitle>Period</TopicSectionTitle>
+              <TopicSectionTitle>{t('preview.projectRoles')}</TopicSectionTitle>
+              <Text>{role || t('preview.notSpecified')}</Text>
+              <TopicSectionTitle>{t('preview.period')}</TopicSectionTitle>
               <Text>
                 {formatCvDate(project.start_date)}
                 {' – '}
                 {formatCvDate(project.end_date)}
               </Text>
-              <TopicSectionTitle>Responsibilities</TopicSectionTitle>
+              <TopicSectionTitle>
+                {t('preview.responsibilities')}
+              </TopicSectionTitle>
               <Text>
-                {project.responsibilities?.join(', ') || 'Not specified'}
+                {project.responsibilities?.join(', ') ||
+                  t('preview.notSpecified')}
               </Text>
-              <TopicSectionTitle>Environment</TopicSectionTitle>
-              <Text>{project.environment?.join(', ') || 'Not specified'}</Text>
+              <TopicSectionTitle>{t('preview.environment')}</TopicSectionTitle>
+              <Text>
+                {project.environment?.join(', ') || t('preview.notSpecified')}
+              </Text>
             </RightTopicSection>
           </TopicContentContainer>
           <TopicsDivider />

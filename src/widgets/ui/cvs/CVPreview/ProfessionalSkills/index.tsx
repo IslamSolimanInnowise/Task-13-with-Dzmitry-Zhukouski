@@ -1,4 +1,5 @@
 import { Skill, SkillMastery } from 'cv-graphql';
+import { useTranslation } from 'react-i18next';
 
 import { TopicTitle, TopicTitleContainer } from '../cvpreview.styles';
 import {
@@ -28,19 +29,29 @@ type ProfessionalSkillsProps = {
 const ProfessionalSkills: React.FC<ProfessionalSkillsProps> = ({
   skillsData,
 }) => {
+  const { t } = useTranslation('cvs');
+
   return (
     <>
       <TopicTitleContainer>
-        <TopicTitle>Professional skills</TopicTitle>
+        <TopicTitle>{t('preview.professionalSkills')}</TopicTitle>
       </TopicTitleContainer>
       <StyledTableWrapper>
         <StyledTable>
           <StyledTableHeader>
             <StyledTableHeaderRow>
-              <StyledTableHeaderCell colSpan={2}>Skills</StyledTableHeaderCell>
-              <StyledTableHeaderCell>Mastery</StyledTableHeaderCell>
-              <StyledTableHeaderCell>Experience in years</StyledTableHeaderCell>
-              <StyledTableHeaderCell>Last used</StyledTableHeaderCell>
+              <StyledTableHeaderCell colSpan={2}>
+                {t('preview.skills')}
+              </StyledTableHeaderCell>
+              <StyledTableHeaderCell>
+                {t('preview.mastery')}
+              </StyledTableHeaderCell>
+              <StyledTableHeaderCell>
+                {t('preview.experienceInYears')}
+              </StyledTableHeaderCell>
+              <StyledTableHeaderCell>
+                {t('preview.lastUsed')}
+              </StyledTableHeaderCell>
             </StyledTableHeaderRow>
           </StyledTableHeader>
           <StyledTableBody>

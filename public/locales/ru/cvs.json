@@ -102,6 +102,24 @@
       }
     }
   },
+  "preview": {
+    "exportPdfButtonText": "Экспортировать pdf",
+    "education": "Образование",
+    "noEducation": "Нет образования",
+    "languageProficiency": "Владение языками",
+    "domains": "Области",
+    "projects": "Проекты",
+    "projectRoles": "Роли в проекте",
+    "period": "Период",
+    "responsibilities": "Обязанности",
+    "environment": "Окружение",
+    "professionalSkills": "Профессиональные навыки",
+    "skills": "Навыки",
+    "mastery": "Уровень владения",
+    "experienceInYears": "Опыт в годах",
+    "lastUsed": "Последнее использование",
+    "notSpecified": "Не указано"
+  },
   "notifications": {
     "useCreateCv": {
       "success": "CV был создан"
@@ -129,6 +147,10 @@
     },
     "useDeleteCvSkill": {
       "success": "CV навык был удален"
+    },
+    "genereatePdf": {
+      "error": "Ошибка при генерации PDF",
+      "defaultErrorMessage": "Произошла непредвиденная ошибка"
     }
   }
 }

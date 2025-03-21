@@ -12,6 +12,10 @@ export const TopicTitleContainer = styled.section`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+
+  &:first-child {
+    margin-bottom: 0;
+  }
 `;
 
 export const TopicTitle = styled.h4`
@@ -19,6 +23,16 @@ export const TopicTitle = styled.h4`
   font-size: 2.125rem;
   line-height: 1.235;
   letter-spacing: 0.00735em;
+`;
+
+export const TopicSubTitle = styled.p`
+  margin: 0px;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.00938em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
 `;
 
 export const ExportPdfButton = styled(Button)`

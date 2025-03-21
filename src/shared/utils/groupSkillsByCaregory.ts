@@ -1,3 +1,4 @@
+import i18n from '@shared/i18n/config';
 import { Skill, SkillMastery } from 'cv-graphql';
 
 type GroupedSkills = {
@@ -15,7 +16,9 @@ const groupSkillsByCategory = (
   return skills.reduce((acc, skill) => {
     const skillData = allSkills?.find((s) => s.name === skill.name);
     const categoryName =
-      skillData?.category_parent_name || skillData?.category_name || 'Other';
+      skillData?.category_parent_name ||
+      skillData?.category_name ||
+      i18n.t('others:select.others');
 
     const existingCategory = acc.find((item) => item.category === categoryName);
 

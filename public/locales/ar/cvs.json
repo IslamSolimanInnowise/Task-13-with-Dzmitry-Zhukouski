@@ -102,6 +102,24 @@
       }
     }
   },
+  "preview": {
+    "exportPdfButtonText": "تصدير ملف PDF",
+    "education": "التعليم",
+    "noEducation": "لا يوجد تعليم",
+    "languageProficiency": "إجادة اللغة",
+    "domains": "مجالات",
+    "projects": "المشاريع",
+    "projectRoles": "أدوار المشروع",
+    "period": "الفترة",
+    "responsibilities": "المسؤوليات",
+    "environment": "البيئة",
+    "professionalSkills": "المهارات المهنية",
+    "skills": "المهارات",
+    "mastery": "مستوى إتقان",
+    "experienceInYears": " الخبرة في السنين",
+    "lastUsed": "آخر استخدام",
+    "notSpecified": "غير محدد"
+  },
   "notifications": {
     "useCreateCv": {
       "success": "تم إنشاء السيرة الذاتية"
@@ -129,6 +147,10 @@
     },
     "useDeleteCvSkill": {
       "success": "تم حذف مهارة من السيرة الذاتية"
+    },
+    "genereatePdf": {
+      "error": "حصلت مشكلة أثناء إنشاء ملف PDF",
+      "defaultErrorMessage": "حدث خطأ غير متوقع"
     }
   }
 }

@@ -7,6 +7,7 @@ import {
   SkillMastery,
 } from 'cv-graphql';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   LeftTopicSection,
@@ -39,19 +40,23 @@ const Overview: React.FC<OverviewProps> = ({
   cvDescription,
   cvSkills,
 }) => {
+  const { t } = useTranslation('cvs');
+
   return (
     <>
       <TopicContentContainer>
         <LeftTopicSection>
-          <TopicSectionTitle>Education</TopicSectionTitle>
-          <Text>{education || 'No education'}</Text>
-          <TopicSectionTitle>Language proficiency</TopicSectionTitle>
+          <TopicSectionTitle>{t('preview.education')}</TopicSectionTitle>
+          <Text>{education || t('preview.noEducation')}</Text>
+          <TopicSectionTitle>
+            {t('preview.languageProficiency')}
+          </TopicSectionTitle>
           {languageProficiency?.map((language, index) => (
             <Text key={index}>
               {language.name} &mdash; {language.proficiency}
             </Text>
           ))}
-          <TopicSectionTitle>Domains</TopicSectionTitle>
+          <TopicSectionTitle>{t('preview.domains')}</TopicSectionTitle>
           {domains.map((domain, index) => (
             <Text key={index}>
               {domain}
