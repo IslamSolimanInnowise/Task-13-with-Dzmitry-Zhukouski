@@ -4,6 +4,7 @@ import useUpdateCvSkill from '@features/hooks/cvs/useUpdateCvSkill';
 import useGetSkills from '@features/hooks/users/useGetSkills';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs';
+import { notify } from '@shared/Notifications/notify';
 import { Cv, Skill, SkillMastery } from 'cv-graphql';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -52,8 +53,11 @@ const CVSkillDialog: React.FC<CVSkillDialogProps> = ({
 
   const { data: skills, loading: skillLoading } = useGetSkills();
 
-  const [addCvSkill] = useAddCvSkill(onClose, cvId);
-  const [updateCvSkill] = useUpdateCvSkill(onClose, cvId);
+  const [addCvSkill, { loading: addCvSkillLoading }] = useAddCvSkill(cvId);
+  const [updateCvSkill, { loading: updateCvSkillLoading }] =
+    useUpdateCvSkill(cvId);
+
+  const loadings = skillLoading || addCvSkillLoading || updateCvSkillLoading;
 
   const filteredSkills = updatingMode
     ? skills?.skills?.filter((skill: Skill) => skill.name === cvSkills[0].name)
@@ -91,6 +95,13 @@ const CVSkillDialog: React.FC<CVSkillDialogProps> = ({
             mastery: data.mastery,
           },
         },
+        onCompleted: () => {
+          notify({
+            type: 'success',
+            title: t('notifications.useUpdateCvSkill.success'),
+          });
+          onClose();
+        },
       });
     } else {
       addCvSkill({
@@ -101,6 +112,13 @@ const CVSkillDialog: React.FC<CVSkillDialogProps> = ({
             categoryId,
             mastery: data.mastery,
           },
+        },
+        onCompleted: () => {
+          notify({
+            type: 'success',
+            title: t('notifications.useAddCvSkill.success'),
+          });
+          onClose();
         },
       });
     }
@@ -134,7 +152,7 @@ const CVSkillDialog: React.FC<CVSkillDialogProps> = ({
               <CVSkillDialogForm
                 control={control}
                 filteredSkills={filteredSkills}
-                skillLoading={skillLoading}
+                loadings={loadings}
                 updatingMode={updatingMode}
               />
             </Dialog.Body>
@@ -142,10 +160,7 @@ const CVSkillDialog: React.FC<CVSkillDialogProps> = ({
               <CancelButton onClick={onClose}>
                 {t('skills.addCVSkillDialog.cancelButtonText')}
               </CancelButton>
-              <ConfirmButton
-                onClick={onSubmit}
-                disabled={!isValid || skillLoading}
-              >
+              <ConfirmButton onClick={onSubmit} disabled={!isValid || loadings}>
                 {updatingMode
                   ? t('skills.updateCVSkillDialog.confirmButtonText')
                   : t('skills.addCVSkillDialog.confirmButtonText')}

@@ -3,6 +3,7 @@ import Spinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import useUpdateCv from '@features/hooks/cvs/useUpdateCv';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { notify } from '@shared/Notifications/notify';
 import { authVar } from '@shared/store/globalAuthState';
 import { Field } from '@shared/ui/field';
 import { useEffect } from 'react';
@@ -71,7 +72,15 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
       cvId,
       ...data,
     };
-    updateCv({ variables: { cv } });
+    updateCv({
+      variables: { cv },
+      onCompleted: () => {
+        notify({
+          type: 'success',
+          title: t('notifications.useUpdateCv.success'),
+        });
+      },
+    });
   });
 
   if (loading) return <Spinner />;
@@ -90,7 +99,10 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
         placeholder={t('details.inputEducationPlaceholder')}
         readOnly={!isOwner}
       />
-      <Field errorText={t('details.requiredError')} invalid={!!errors.description}>
+      <Field
+        errorText={t('details.requiredError')}
+        invalid={!!errors.description}
+      >
         <StyledTextArea
           {...register('description')}
           placeholder={t('details.inputDescriptionPlaceholder')}

@@ -1,6 +1,7 @@
 import { Dialog, Portal } from '@chakra-ui/react';
 import useRemoveCvProject from '@features/hooks/cvs/useRemoveCvProject';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { notify } from '@shared/Notifications/notify';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -29,10 +30,19 @@ const DeleteCvProjectDialog = ({
 }: DeleteCvProjectDialogProps) => {
   const { t } = useTranslation('cvs');
 
-  const [removeCvProject, { loading }] = useRemoveCvProject(onClose, cvId);
+  const [removeCvProject, { loading }] = useRemoveCvProject(cvId);
 
   const onSubmit = () => {
-    removeCvProject({ variables: { project: { cvId, projectId } } });
+    removeCvProject({
+      variables: { project: { cvId, projectId } },
+      onCompleted: () => {
+        notify({
+          type: 'info',
+          title: t('notifications.useRemoveCvProject.success'),
+        });
+        onClose();
+      },
+    });
     onConfirm();
   };
 

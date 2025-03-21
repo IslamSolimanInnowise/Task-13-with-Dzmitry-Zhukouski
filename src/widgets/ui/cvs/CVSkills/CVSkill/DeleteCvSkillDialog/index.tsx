@@ -1,6 +1,7 @@
 import { Dialog, Portal } from '@chakra-ui/react';
 import useDeleteCvSkill from '@features/hooks/cvs/useDeleteCvSkill';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { notify } from '@shared/Notifications/notify';
 import { Cv, SkillMastery } from 'cv-graphql';
 import { useTranslation } from 'react-i18next';
 
@@ -28,10 +29,19 @@ const DeleteCvSkillDialog = ({
 }: DeleteCvSkillDialogProps) => {
   const { t } = useTranslation('cvs');
 
-  const [deleteCv, { loading }] = useDeleteCvSkill(onClose, cvId);
+  const [deleteCv, { loading }] = useDeleteCvSkill(cvId);
 
   const onSubmit = () => {
-    deleteCv({ variables: { skill: { cvId, name: skillName } } });
+    deleteCv({
+      variables: { skill: { cvId, name: skillName } },
+      onCompleted: () => {
+        notify({
+          type: 'info',
+          title: t('notifications.useDeleteCvSkill.success'),
+        });
+        onClose();
+      },
+    });
     onConfirm();
   };
 

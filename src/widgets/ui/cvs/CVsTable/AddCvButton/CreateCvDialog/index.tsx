@@ -3,6 +3,8 @@ import { Dialog, Portal, VStack } from '@chakra-ui/react';
 import useCreateCv from '@features/hooks/cvs/useCreateCv';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { notify } from '@shared/Notifications/notify';
+import { router } from '@shared/router';
 import { authVar } from '@shared/store/globalAuthState';
 import { Field } from '@shared/ui/field';
 import { useForm } from 'react-hook-form';
@@ -47,6 +49,10 @@ type CV = {
 const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
   const { t } = useTranslation('cvs');
 
+  const [createCv, { loading }] = useCreateCv();
+
+  const { id } = useReactiveVar(authVar);
+
   const {
     register,
     handleSubmit,
@@ -56,16 +62,25 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
     mode: 'onChange',
   });
 
-  const [createCv, { loading }] = useCreateCv(onClose);
-
-  const { id } = useReactiveVar(authVar);
-
   const onSubmit = handleSubmit((data) => {
     const cvData: CV = {
       ...data,
       userId: id,
     };
-    createCv({ variables: { cv: cvData } });
+    createCv({
+      variables: { cv: cvData },
+      onCompleted: (data) => {
+        notify({
+          type: 'success',
+          title: t('notifications.useCreateCv.success'),
+        });
+        onClose();
+        router.navigate({
+          to: '/cvs/$cvId/details',
+          params: { cvId: data.createCv.id },
+        });
+      },
+    });
     onConfirm();
   });
 

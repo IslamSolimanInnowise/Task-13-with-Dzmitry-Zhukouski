@@ -15,7 +15,7 @@ const masteryOptions = [
 type CVSkillFormProps = {
   control: Control<FormValues>;
   filteredSkills: Skill[] | undefined;
-  skillLoading: boolean;
+  loadings: boolean;
   updatingMode: boolean;
 };
 
@@ -27,7 +27,7 @@ type FormValues = {
 const CVSkillDialogForm = ({
   control,
   filteredSkills,
-  skillLoading,
+  loadings,
   updatingMode,
 }: CVSkillFormProps) => {
   const { t } = useTranslation('cvs');
@@ -47,7 +47,7 @@ const CVSkillDialogForm = ({
               name: skill.name,
               group: skill.category_parent_name,
             }))}
-            isReadOnly={skillLoading || updatingMode}
+            isReadOnly={loadings || updatingMode}
             value={field.value}
             onChange={field.onChange}
           />
@@ -65,7 +65,7 @@ const CVSkillDialogForm = ({
               id: name,
               name,
             }))}
-            isReadOnly={skillLoading}
+            isReadOnly={loadings}
             value={field.value}
             onChange={field.onChange}
           />

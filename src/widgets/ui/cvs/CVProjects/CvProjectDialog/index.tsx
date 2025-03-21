@@ -4,6 +4,7 @@ import useGetProjects from '@features/hooks/cvs/useGetProjects';
 import useUpdateCvProject from '@features/hooks/cvs/useUpdateCvProject';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { createDialogHook } from '@shared/Dialogs/createDialogHook';
+import { notify } from '@shared/Notifications/notify';
 import { Cv, CvProject } from 'cv-graphql';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -50,12 +51,10 @@ const CvProjectDialog = ({
 }: CvProjectDialogProps) => {
   const { t } = useTranslation('cvs');
   const { data: projects, loading: projectsLoading } = useGetProjects();
-  const [addCvProject, { loading: addCvProjectLoading }] = useAddCvProject(
-    onClose,
-    cvId,
-  );
+  const [addCvProject, { loading: addCvProjectLoading }] =
+    useAddCvProject(cvId);
   const [updateCvProject, { loading: updateCvProjectLoading }] =
-    useUpdateCvProject(onClose, cvId);
+    useUpdateCvProject(cvId);
 
   const loadings =
     projectsLoading || addCvProjectLoading || updateCvProjectLoading;
@@ -139,9 +138,27 @@ const CvProjectDialog = ({
     };
 
     if (updatingMode) {
-      updateCvProject({ variables: { project: cvProjectData } });
+      updateCvProject({
+        variables: { project: cvProjectData },
+        onCompleted: () => {
+          notify({
+            type: 'success',
+            title: t('notifications.useUpdateCvProject.success'),
+          });
+          onClose();
+        },
+      });
     } else {
-      addCvProject({ variables: { project: cvProjectData } });
+      addCvProject({
+        variables: { project: cvProjectData },
+        onCompleted: () => {
+          notify({
+            type: 'success',
+            title: t('notifications.useAddCvProject.success'),
+          });
+          onClose();
+        },
+      });
     }
     onConfirm();
   });
