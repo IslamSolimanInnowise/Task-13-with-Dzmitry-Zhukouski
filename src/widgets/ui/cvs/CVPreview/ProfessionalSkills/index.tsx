@@ -8,6 +8,7 @@ import {
   StyledTableHeader,
   StyledTableHeaderCell,
   StyledTableHeaderRow,
+  StyledTableWrapper,
 } from './professionalSkills.styles';
 
 const skillsData = [
@@ -53,40 +54,44 @@ const ProfessionalSkills: React.FC = () => {
       <TopicTitleContainer>
         <TopicTitle>Professional skills</TopicTitle>
       </TopicTitleContainer>
-      <StyledTable>
-        <StyledTableHeader>
-          <StyledTableHeaderRow>
-            <StyledTableHeaderCell colSpan={2}>Skills</StyledTableHeaderCell>
-            <StyledTableHeaderCell>Mastery</StyledTableHeaderCell>
-            <StyledTableHeaderCell>Experience in years</StyledTableHeaderCell>
-            <StyledTableHeaderCell>Last used</StyledTableHeaderCell>
-          </StyledTableHeaderRow>
-        </StyledTableHeader>
-        <StyledTableBody>
-          {skillsData.map((category) =>
-            category.skills.map((skill, index) => (
-              <StyledTableBodyRow
-                key={`${category.category}-${skill.name}`}
-                $isLast={index === category.skills.length - 1}
-              >
-                {index === 0 && (
-                  <StyledTableBodyCategoryCell rowSpan={category.skills.length}>
-                    {category.category}
-                  </StyledTableBodyCategoryCell>
-                )}
-                <StyledTableBodyCell $isLeft={true}>
-                  {skill.name}
-                </StyledTableBodyCell>
-                <StyledTableBodyCell>{skill.mastery}</StyledTableBodyCell>
-                <StyledTableBodyCell>
-                  {skill.experienceYears}
-                </StyledTableBodyCell>
-                <StyledTableBodyCell>{skill.lastUsed}</StyledTableBodyCell>
-              </StyledTableBodyRow>
-            )),
-          )}
-        </StyledTableBody>
-      </StyledTable>
+      <StyledTableWrapper>
+        <StyledTable>
+          <StyledTableHeader>
+            <StyledTableHeaderRow>
+              <StyledTableHeaderCell colSpan={2}>Skills</StyledTableHeaderCell>
+              <StyledTableHeaderCell>Mastery</StyledTableHeaderCell>
+              <StyledTableHeaderCell>Experience in years</StyledTableHeaderCell>
+              <StyledTableHeaderCell>Last used</StyledTableHeaderCell>
+            </StyledTableHeaderRow>
+          </StyledTableHeader>
+          <StyledTableBody>
+            {skillsData.map((category) =>
+              category.skills.map((skill, index) => (
+                <StyledTableBodyRow
+                  key={`${category.category}-${skill.name}`}
+                  $isLast={index === category.skills.length - 1}
+                >
+                  {index === 0 && (
+                    <StyledTableBodyCategoryCell
+                      rowSpan={category.skills.length}
+                    >
+                      {category.category}
+                    </StyledTableBodyCategoryCell>
+                  )}
+                  <StyledTableBodyCell $isLeft={true}>
+                    {skill.name}
+                  </StyledTableBodyCell>
+                  <StyledTableBodyCell>{skill.mastery}</StyledTableBodyCell>
+                  <StyledTableBodyCell>
+                    {skill.experienceYears}
+                  </StyledTableBodyCell>
+                  <StyledTableBodyCell>{skill.lastUsed}</StyledTableBodyCell>
+                </StyledTableBodyRow>
+              )),
+            )}
+          </StyledTableBody>
+        </StyledTable>
+      </StyledTableWrapper>
     </>
   );
 };

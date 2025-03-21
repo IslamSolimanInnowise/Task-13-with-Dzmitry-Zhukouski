@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const StyledTableWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+`;
+
 export const StyledTable = styled.table`
   width: 100%;
   border-spacing: 0px;

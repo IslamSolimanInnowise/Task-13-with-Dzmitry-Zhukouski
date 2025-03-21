@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 export const CVPreviewContainer = styled(Container)`
   padding: 2rem 1.5rem;
+  max-width: 900px;
+  margin: 0 auto;
 `;
 
 export const TopicTitleContainer = styled.section`
