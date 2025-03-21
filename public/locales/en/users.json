@@ -107,5 +107,26 @@
     "useUpdateUser": {
       "success": "User was updated!"
     }
-  }
+  },
+  "skillsBreadcrumb": {
+    "currentLink": "Skills",
+    "employeesItem": "Employees"
+  },
+  "languagesBreadcrumb": {
+    "currentLink": "Languages",
+    "employeesItem": "Employees"
+  },
+  "profileHeader": {
+    "profile": "Profile",
+    "skills": "Skills",
+    "languages": "Languages"
+  },
+  "profileBreadcrumb": {
+    "employeesItem": "Employees"
+  },
+  "profileAvatar": {
+    "uploadAvatar": "Upload Avatar",
+    "removeAvatar": "Remove Avatar"
+  },
+  "profileDetails": "A member since"
 }

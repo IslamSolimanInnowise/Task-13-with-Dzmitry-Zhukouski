@@ -1,5 +1,6 @@
 import { Button, HStack, Progress } from '@chakra-ui/react';
 import useDeleteSkill from '@features/hooks/users/useDeleteSkill';
+import { authVar } from '@shared/store/globalAuthState';
 import { useTranslation } from 'react-i18next';
 
 import { type Skill as SkillInterface } from '../types';
@@ -24,6 +25,7 @@ const Skill: React.FC<SkillProps> = ({
 }) => {
   const { t } = useTranslation('users');
   const [deleteSkill] = useDeleteSkill();
+  const { id } = authVar();
 
   const masteryIndex = masteryOptions.findIndex((option) => option === mastery);
   const masteryValue = (masteryIndex + 1) * 20;
@@ -60,16 +62,20 @@ const Skill: React.FC<SkillProps> = ({
         <Progress.Track flex="1">
           <Progress.Range />
         </Progress.Track>
-        <UpdateSkillModal
-          userId={userId}
-          masteryOptions={masteryOptions}
-          name={name}
-          oldMastery={mastery}
-          categoryId={categoryId!}
-        />
-        <Button onClick={handleDeleteSkill} px="2">
-          {t('skills.skill.deleteButton')}
-        </Button>
+        {id === userId && (
+          <>
+            <UpdateSkillModal
+              userId={userId}
+              masteryOptions={masteryOptions}
+              name={name}
+              oldMastery={mastery}
+              categoryId={categoryId!}
+            />
+            <Button onClick={handleDeleteSkill} px="2">
+              {t('skills.skill.deleteButton')}
+            </Button>
+          </>
+        )}
       </HStack>
     </Progress.Root>
   );
