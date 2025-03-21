@@ -14,7 +14,11 @@ import { authVar } from '@shared/store/globalAuthState';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { StyledForm, StyledInput } from './updateProfileForm.styles';
+import {
+  StyledForm,
+  StyledInput,
+  StyledSelect,
+} from './updateProfileForm.styles';
 
 interface GetData {
   id: string;
@@ -105,7 +109,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ userId }) => {
       <Field.Root invalid={!!errors.department} disabled={userId !== id}>
         <Field.Label>{t('updateUserModal.departmentFieldLabel')}</Field.Label>
         <NativeSelect.Root size="md">
-          <NativeSelect.Field
+          <StyledSelect
             placeholder={user.department_name}
             {...register('department')}
             defaultValue={user.department_name}
@@ -117,7 +121,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ userId }) => {
                 </option>
               );
             })}
-          </NativeSelect.Field>
+          </StyledSelect>
           <NativeSelect.Indicator />
         </NativeSelect.Root>
       </Field.Root>
@@ -125,7 +129,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ userId }) => {
       <Field.Root invalid={!!errors.position} disabled={userId !== id}>
         <Field.Label>{t('updateUserModal.positionFieldLabel')}</Field.Label>
         <NativeSelect.Root size="md">
-          <NativeSelect.Field
+          <StyledSelect
             placeholder={user.position_name}
             {...register('position')}
             defaultValue={user.position_name}
@@ -137,7 +141,7 @@ const UpdateProfileForm: React.FC<UpdateProfileFormProps> = ({ userId }) => {
                 </option>
               );
             })}
-          </NativeSelect.Field>
+          </StyledSelect>
           <NativeSelect.Indicator />
         </NativeSelect.Root>
       </Field.Root>
