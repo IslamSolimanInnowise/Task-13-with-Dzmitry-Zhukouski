@@ -45,7 +45,7 @@ const CVSkillDialogForm = ({
             itemsList={filteredSkills?.map((skill: Skill) => ({
               id: skill.name,
               name: skill.name,
-              group: skill.category_parent_name,
+              group: skill.category_parent_name ?? skill.category_name,
             }))}
             isReadOnly={loadings || updatingMode}
             value={field.value}
