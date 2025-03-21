@@ -3,12 +3,12 @@ import Breadcrumb from '@entities/ui/Breadcrumb';
 import useGetUser from '@features/hooks/users/useGetUser';
 import LanguagesWidget from '@widgets/ui/users/LanguagesWidget';
 import ProfileHeader from '@widgets/ui/users/profile/ProfileHeader';
+import { useTranslation } from 'react-i18next';
 
 import {
   StyledPageContainer,
   StyledPageContent,
 } from './profileLanguages.styles';
-import { useTranslation } from 'react-i18next';
 
 interface ProfileLanguagesPageProps {
   userId: string;
