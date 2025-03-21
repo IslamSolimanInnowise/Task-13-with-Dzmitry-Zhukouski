@@ -14,9 +14,6 @@ const useRemoveCvProject = (onCloseDialog: () => void, cvId: string) => {
       });
       onCloseDialog();
     },
-    onError: () => {
-      onCloseDialog();
-    },
   });
 };
 

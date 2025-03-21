@@ -14,9 +14,6 @@ const useAddCvSkill = (onCloseDialog: () => void, cvId: string) => {
       });
       onCloseDialog();
     },
-    onError: () => {
-      onCloseDialog();
-    },
   });
 };
 

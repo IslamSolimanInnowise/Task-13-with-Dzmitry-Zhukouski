@@ -14,9 +14,6 @@ const useAddCvProject = (onCloseDialog: () => void, cvId: string) => {
       });
       onCloseDialog();
     },
-    onError: () => {
-      onCloseDialog();
-    },
   });
 };
 

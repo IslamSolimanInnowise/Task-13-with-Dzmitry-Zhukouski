@@ -16,9 +16,6 @@ const useDeleteCv = (onCloseDialog: () => void) => {
         onCloseDialog();
       }
     },
-    onError: () => {
-      onCloseDialog();
-    },
   });
 };
 

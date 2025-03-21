@@ -14,9 +14,6 @@ const useDeleteCvSkill = (onCloseDialog: () => void, cvId: string) => {
       });
       onCloseDialog();
     },
-    onError: () => {
-      onCloseDialog();
-    },
   });
 };
 

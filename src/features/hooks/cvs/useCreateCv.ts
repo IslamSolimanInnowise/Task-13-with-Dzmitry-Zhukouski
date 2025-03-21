@@ -21,9 +21,6 @@ const useCreateCv = (onCloseDialog: () => void) => {
         });
       }
     },
-    onError: () => {
-      onCloseDialog();
-    },
   });
 };
 
