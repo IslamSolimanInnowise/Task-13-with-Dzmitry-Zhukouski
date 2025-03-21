@@ -7,6 +7,7 @@ export interface Profile {
 
 export interface User {
   id: string;
+  created_at: string;
   email: string;
   department_name: string;
   position_name: string;
