@@ -1,3 +1,4 @@
+import { useReactiveVar } from '@apollo/client';
 import { Dialog, Portal, VStack } from '@chakra-ui/react';
 import useCreateCv from '@features/hooks/cvs/useCreateCv';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -57,7 +58,7 @@ const CreateCvDialog = ({ onClose, onConfirm }: CreateCvDialogProps) => {
 
   const [createCv, { loading }] = useCreateCv(onClose);
 
-  const { id } = authVar();
+  const { id } = useReactiveVar(authVar);
 
   const onSubmit = handleSubmit((data) => {
     const cvData: CV = {

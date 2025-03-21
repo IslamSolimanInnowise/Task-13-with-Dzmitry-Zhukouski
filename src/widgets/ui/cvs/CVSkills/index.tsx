@@ -1,3 +1,4 @@
+import { useReactiveVar } from '@apollo/client';
 import { Button } from '@chakra-ui/react';
 import Spinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
@@ -20,7 +21,7 @@ const CVSkills: React.FC<CVSkillsProps> = ({ cvId }) => {
 
   const { data: cvdata, loading: cvLoading } = useGetCvById(cvId);
 
-  const { id } = authVar();
+  const { id } = useReactiveVar(authVar);
   const isOwner = cvdata?.cv?.user?.id === id;
 
   const handleAddCVSkillClick = () => {

@@ -1,3 +1,4 @@
+import { useReactiveVar } from '@apollo/client';
 import { Table } from '@chakra-ui/react';
 import SearchInput from '@entities/ui/SearchInput';
 import Spinner from '@entities/ui/Spinner';
@@ -55,7 +56,7 @@ const CVProjects: React.FC<CVProjectsProps> = ({ cvId }) => {
     useGetCvProjects(cvId);
 
   const { data: CVdata, loading: isCvLoading } = useGetCvById(cvId);
-  const { id } = authVar();
+  const { id } = useReactiveVar(authVar);
   const isOwner = CVdata?.cv?.user?.id === id;
 
   const rowHeights = useRef<{ [key: string]: number }>({});

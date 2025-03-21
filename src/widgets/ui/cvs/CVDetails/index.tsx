@@ -1,3 +1,4 @@
+import { useReactiveVar } from '@apollo/client';
 import Spinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import useUpdateCv from '@features/hooks/cvs/useUpdateCv';
@@ -37,7 +38,7 @@ const CVDetails: React.FC<CVDetailsProps> = ({ cvId }) => {
   const { data: CVdata, loading } = useGetCvById(cvId);
   const [updateCv, { loading: updateLoading }] = useUpdateCv();
 
-  const { id } = authVar();
+  const { id } = useReactiveVar(authVar);
   const isOwner = CVdata?.cv?.user?.id === id;
 
   const {
