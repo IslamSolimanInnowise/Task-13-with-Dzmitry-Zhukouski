@@ -46,7 +46,7 @@ const Overview: React.FC<OverviewProps> = ({
           <TopicSectionTitle>Education</TopicSectionTitle>
           <Text>{education || 'No education'}</Text>
           <TopicSectionTitle>Language proficiency</TopicSectionTitle>
-          {languageProficiency.map((language, index) => (
+          {languageProficiency?.map((language, index) => (
             <Text key={index}>
               {language.name} &mdash; {language.proficiency}
             </Text>

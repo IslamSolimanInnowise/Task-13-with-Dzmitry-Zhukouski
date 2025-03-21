@@ -2,12 +2,16 @@ import { useReactiveVar } from '@apollo/client';
 import Spinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import useGetSkills from '@features/hooks/users/useGetSkills';
+import { pdf } from '@react-pdf/renderer';
+import { notify } from '@shared/Notifications/notify';
 import { authVar } from '@shared/store/globalAuthState';
 import calculateSkillExperience from '@shared/utils/calculateSkillExperience';
 import getSkillLastUsedYear from '@shared/utils/getSkillLastUsedYear';
 import groupSkillsByCategory from '@shared/utils/groupSkillsByCaregory';
 import { CvProject } from 'cv-graphql';
+import { useState } from 'react';
 
+import CVPdfDocument from './CVPdfDocument';
 import {
   CVPreviewContainer,
   ExportPdfButton,
@@ -23,6 +27,8 @@ type CVPreviewProps = {
 };
 
 const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
+  const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+
   const { data: CVdata, loading: isCvLoading } = useGetCvById(cvId);
   const { data: skills, loading: skillLoading } = useGetSkills();
 
@@ -52,6 +58,42 @@ const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
     }),
   }));
 
+  const handleExportPdf = async () => {
+    if (!CVdata?.cv) return;
+
+    try {
+      setIsGeneratingPdf(true);
+      const pdfData = {
+        ...CVdata.cv,
+        domains: cvDomains,
+        structuredSkills: structuredSkills,
+        skillsTableData: skillsTableData,
+      };
+
+      const blob = await pdf(<CVPdfDocument cvData={pdfData} />).toBlob();
+
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `${CVdata.cv.name || 'cv'}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    } catch (error: unknown) {
+      notify({
+        type: 'error',
+        title: 'Error generating PDF',
+        message:
+          error instanceof Error
+            ? error.message
+            : 'An unexpected error occurred',
+      });
+    } finally {
+      setIsGeneratingPdf(false);
+    }
+  };
+
   if (isCvLoading || skillLoading) return <Spinner />;
 
   return (
@@ -59,7 +101,13 @@ const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
       <TopicTitleContainer>
         <TopicTitle></TopicTitle>
         {isOwner && (
-          <ExportPdfButton variant="ghost">Export pdf</ExportPdfButton>
+          <ExportPdfButton
+            variant="ghost"
+            onClick={handleExportPdf}
+            disabled={isGeneratingPdf}
+          >
+            Export pdf
+          </ExportPdfButton>
         )}
       </TopicTitleContainer>
       <Overview
