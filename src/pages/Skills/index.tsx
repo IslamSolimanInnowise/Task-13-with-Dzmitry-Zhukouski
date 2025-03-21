@@ -1,6 +1,6 @@
 import Aside from '@entities/ui/Aside';
 import { authVar } from '@shared/store/globalAuthState';
-import SkillsWidget from '@widgets/ui/users/SkillsWidget';
+import SkillsWidget from '@widgets/ui/users/profile/SkillsWidget';
 import { useTranslation } from 'react-i18next';
 
 import {

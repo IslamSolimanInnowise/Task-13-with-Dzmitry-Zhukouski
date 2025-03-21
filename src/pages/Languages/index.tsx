@@ -1,6 +1,6 @@
 import Aside from '@entities/ui/Aside';
 import { authVar } from '@shared/store/globalAuthState';
-import LanguagesWidget from '@widgets/ui/users/LanguagesWidget';
+import LanguagesWidget from '@widgets/ui/users/profile/LanguagesWidget';
 import { useTranslation } from 'react-i18next';
 
 import {

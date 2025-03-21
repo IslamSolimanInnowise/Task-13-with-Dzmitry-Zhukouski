@@ -2,6 +2,7 @@ import Aside from '@entities/ui/Aside';
 import Breadcrumb from '@entities/ui/Breadcrumb';
 import useGetUser from '@features/hooks/users/useGetUser';
 import ProfileHeader from '@widgets/ui/users/profile/ProfileHeader';
+import UpdateProfileForm from '@widgets/ui/users/profile/UpdateProfileForm';
 
 import { StyledPageContainer, StyledPageContent } from './profile.styles';
 
@@ -27,6 +28,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
             breadCrumbItems={[{ name: 'Employees', path: '/users' }]}
           />
           <ProfileHeader userId={currentUser.id} />
+          <UpdateProfileForm userId={userId} />
         </StyledPageContent>
       )}
     </StyledPageContainer>

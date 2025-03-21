@@ -4,8 +4,8 @@ import useGetUser from '@features/hooks/users/useGetUser';
 import { authVar } from '@shared/store/globalAuthState';
 import { Language as LanguageInterface } from '@widgets/ui/users/types';
 
-import AddLanguageModal from '../AddLanguageModal';
-import Language from '../Language';
+import AddLanguageModal from '../../AddLanguageModal';
+import Language from '../../Language';
 import { LanguagesContainer } from './languagesWidget.styles';
 
 interface LanguagesWidgetProps {
