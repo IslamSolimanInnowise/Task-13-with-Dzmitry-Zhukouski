@@ -56,7 +56,7 @@ const CVPreview: React.FC<CVPreviewProps> = ({ cvId }) => {
         cvDescription={CVdata?.cv?.description}
         cvSkills={structuredSkills}
       />
-      <Projects />
+      <Projects projects={CVdata?.cv?.projects} role={CVdata?.cv?.user?.position?.name} />
       <ProfessionalSkills />
     </CVPreviewContainer>
   );

@@ -9,6 +9,9 @@ export const GET_CV_BY_ID = gql`
       description
       user {
         id
+        position {
+          name
+        }
       }
       skills {
         name
@@ -24,6 +27,7 @@ export const GET_CV_BY_ID = gql`
         end_date
         environment
         responsibilities
+        roles
         project {
           id
         }

@@ -1,3 +1,7 @@
+import { Text } from '@chakra-ui/react';
+import formatCvDate from '@shared/utils/formCvDate';
+import sortProjectsByEndDate from '@shared/utils/sortProjectsByEndDate';
+import { CvProject, Position } from 'cv-graphql';
 import React from 'react';
 
 import {
@@ -11,52 +15,41 @@ import {
   TopicTitleContainer,
 } from '../cvpreview.styles';
 
-const someData = [
-  {
-    title: 'Some Project name',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, perferendis.',
-  },
-  {
-    title: 'Some Other Project name',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, perferendis.',
-  },
-  {
-    title: 'Another Project name',
-    description:
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus, perferendis.',
-  },
-];
+type ProjectsProps = {
+  projects: CvProject[];
+  role: Position['name'];
+};
 
-const Projects: React.FC = () => {
+const Projects: React.FC<ProjectsProps> = ({ projects, role }) => {
   return (
     <>
       <TopicTitleContainer>
         <TopicTitle>Projects</TopicTitle>
       </TopicTitleContainer>
-      {someData.map((project, index) => (
+      {sortProjectsByEndDate(projects)?.map((project, index) => (
         <React.Fragment key={index}>
           <TopicContentContainer>
             <LeftTopicSection>
               <TopicSectionProjectTitle>
-                {project.title}
+                {project.name}
               </TopicSectionProjectTitle>
-              <p>{project.description}</p>
+              <Text>{project.description}</Text>
             </LeftTopicSection>
             <RightTopicSection>
               <TopicSectionTitle>Project roles</TopicSectionTitle>
-              <p>some roles</p>
+              <Text>{role || 'Not specified'}</Text>
               <TopicSectionTitle>Period</TopicSectionTitle>
-              <p>06.2020 – 06.2021</p>
+              <Text>
+                {formatCvDate(project.start_date)}
+                {' – '}
+                {formatCvDate(project.end_date)}
+              </Text>
               <TopicSectionTitle>Responsibilities</TopicSectionTitle>
-              <p>resp 1, resp 2, resp 3</p>
+              <Text>
+                {project.responsibilities?.join(', ') || 'Not specified'}
+              </Text>
               <TopicSectionTitle>Environment</TopicSectionTitle>
-              <p>
-                HTML5, CSS3, JavaScript, TypeScript, React, React Native, React
-                Query, Tailwind, Jest, Storybook, Next.js, Node.js, NestJS,
-                Redis, MongoDB, Docker, GitHub Actions.
-              </p>
+              <Text>{project.environment?.join(', ') || 'Not specified'}</Text>
             </RightTopicSection>
           </TopicContentContainer>
           <TopicsDivider />
