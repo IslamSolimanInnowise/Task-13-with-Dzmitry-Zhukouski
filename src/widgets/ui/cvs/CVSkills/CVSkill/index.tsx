@@ -3,12 +3,27 @@ import { Cv, SkillMastery } from 'cv-graphql';
 import { useTranslation } from 'react-i18next';
 
 import useCVSkillDialog from '../CVSkillDialog';
-import DeleteCvSkillDialog from './DeleteCvSkillDialog';
-
+import useDeleteCvSkillDialog from './DeleteCvSkillDialog';
 type CVSkillProps = {
   cvId: Cv['id'];
   skillMastery: SkillMastery;
   isOwner?: boolean;
+};
+
+enum Mastery {
+  Novice,
+  Advanced,
+  Competent,
+  Proficient,
+  Expert,
+}
+
+const masteryMapping: Record<Mastery, { index: number; color: string }> = {
+  [Mastery.Novice]: { index: 0, color: 'gray' },
+  [Mastery.Advanced]: { index: 1, color: 'blue' },
+  [Mastery.Competent]: { index: 2, color: 'green' },
+  [Mastery.Proficient]: { index: 3, color: 'yellow' },
+  [Mastery.Expert]: { index: 4, color: 'red' },
 };
 
 const CVSkill: React.FC<CVSkillProps> = ({
@@ -20,18 +35,10 @@ const CVSkill: React.FC<CVSkillProps> = ({
 
   const [openUpdateCVSkillDialog] = useCVSkillDialog();
 
-  const [openDeleteCvSkillDialog] = DeleteCvSkillDialog();
-
-  const masteryMapping: Record<string, { index: number; color: string }> = {
-    Novice: { index: 0, color: 'gray' },
-    Advanced: { index: 1, color: 'blue' },
-    Competent: { index: 2, color: 'green' },
-    Proficient: { index: 3, color: 'yellow' },
-    Expert: { index: 4, color: 'red' },
-  };
+  const [openDeleteCvSkillDialog] = useDeleteCvSkillDialog();
 
   const { index: masteryIndex, color: colorPalette } = masteryMapping[
-    skillMastery.mastery
+    Mastery[skillMastery.mastery as keyof typeof Mastery]
   ] || { index: 0, color: 'gray' };
 
   const masteryValue = (masteryIndex + 1) * 20;
