@@ -33,7 +33,6 @@ export const StyledTableHeaderCell = styled.th`
   text-transform: uppercase;
   font-weight: 500;
   font-size: 14px;
-  color: rgb(46, 46, 46);
   text-align: center;
 
   &:first-child {
@@ -53,8 +52,7 @@ export const StyledTableBodyRow = styled.tr<{ $isLast: boolean }>`
   vertical-align: inherit;
   unicode-bidi: isolate;
   border-color: inherit;
-  border-bottom: ${({ $isLast }) =>
-    $isLast ? '1px solid rgb(189, 189, 189)' : 'none'};
+  border-bottom: ${({ $isLast }) => ($isLast ? '1px solid lightgrey' : 'none')};
 `;
 
 export const StyledTableBodyCategoryCell = styled.td`
@@ -64,7 +62,7 @@ export const StyledTableBodyCategoryCell = styled.td`
   text-align: left;
   font-weight: 500;
   width: 240px;
-  color: rgb(198, 48, 49);
+  color: ${({ theme }) => theme.primaryColor};
 `;
 
 export const StyledTableBodyCell = styled.td<{ $isLeft?: boolean }>`
