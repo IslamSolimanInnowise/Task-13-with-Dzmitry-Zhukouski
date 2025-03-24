@@ -1,6 +1,9 @@
+import { useReactiveVar } from '@apollo/client';
 import Aside from '@entities/ui/Aside';
 import Select from '@entities/ui/Select';
-import { useState } from 'react';
+import { setTheme, themeVar } from '@shared/store/globalAuthState';
+import { useColorMode } from '@shared/ui/color-mode';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -11,6 +14,14 @@ import {
 
 const SettingsPage: React.FC = () => {
   const { t, i18n } = useTranslation('settings');
+  const { colorMode, setColorMode } = useColorMode();
+  const currentTheme = useReactiveVar(themeVar);
+
+  useEffect(() => {
+    if (colorMode !== currentTheme) {
+      setTheme(colorMode);
+    }
+  }, [colorMode, currentTheme]);
 
   const themesList = [
     { id: 'light', name: t('light') },
@@ -23,15 +34,13 @@ const SettingsPage: React.FC = () => {
     { id: 'ar', name: t('arabic') },
   ];
 
-  const [selectedTheme, setSelectedTheme] = useState(themesList[0].id);
-  const [selectedLanguage, setSelectedLanguage] = useState(
-    i18n.language || 'en',
-  );
+  const handleThemeChange = (value: string) => {
+    const newTheme = value as 'light' | 'dark';
+    setTheme(newTheme);
+    setColorMode(newTheme);
+  };
 
-  const handleThemeChange = (value: string) => setSelectedTheme(value);
   const handleLanguageChange = (value: string) => {
-    setSelectedLanguage(value);
-
     i18n.changeLanguage(value);
     document.documentElement.dir = i18n.dir(value);
   };
@@ -45,14 +54,14 @@ const SettingsPage: React.FC = () => {
             label={t('appearance')}
             placeholderText={t('appearance')}
             itemsList={themesList}
-            value={selectedTheme}
+            value={currentTheme}
             onChange={handleThemeChange}
           />
           <Select
             label={t('language')}
             placeholderText={t('language')}
             itemsList={LanguagesList}
-            value={selectedLanguage}
+            value={i18n.language || 'en'}
             onChange={handleLanguageChange}
           />
         </SelectsContainer>
@@ -60,4 +69,5 @@ const SettingsPage: React.FC = () => {
     </StyledPageContainer>
   );
 };
+
 export default SettingsPage;

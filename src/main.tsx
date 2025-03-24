@@ -7,11 +7,26 @@ import { Notifications } from '@shared/Notifications';
 import { router } from '@shared/router';
 import client from '@shared/services/apollo-client';
 import { GlobalStyles } from '@shared/styles/globalStyles';
-import { lightTheme } from '@shared/styles/theme';
+import { darkTheme, lightTheme } from '@shared/styles/theme';
+import { ColorModeProvider, useColorMode } from '@shared/ui/color-mode';
 import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+
+function ThemedApp() {
+  const { colorMode } = useColorMode();
+  const theme = colorMode === 'dark' ? darkTheme : lightTheme;
+
+  return (
+    <StyledThemeProvider theme={theme}>
+      <GlobalStyles />
+      <RouterProvider router={router} />
+      <DialogsContainer />
+      <Notifications />
+    </StyledThemeProvider>
+  );
+}
 
 const rootElement = document.getElementById('root')!;
 
@@ -22,12 +37,9 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <ApolloProvider client={client}>
         <ChakraProvider value={defaultSystem}>
-          <ThemeProvider theme={lightTheme}>
-            <GlobalStyles />
-            <RouterProvider router={router} />
-            <DialogsContainer />
-            <Notifications />
-          </ThemeProvider>
+          <ColorModeProvider>
+            <ThemedApp />
+          </ColorModeProvider>
         </ChakraProvider>
       </ApolloProvider>
     </StrictMode>,

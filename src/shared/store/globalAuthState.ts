@@ -1,5 +1,16 @@
 import { makeVar } from '@apollo/client';
 
+export type ThemeMode = 'light' | 'dark';
+
+export const themeVar = makeVar<ThemeMode>(
+  (localStorage.getItem('theme') as ThemeMode) || 'light',
+);
+
+export const setTheme = (theme: ThemeMode) => {
+  localStorage.setItem('theme', theme);
+  themeVar(theme);
+};
+
 export interface AuthState {
   accessToken: string | null;
   refreshToken: string | null;
