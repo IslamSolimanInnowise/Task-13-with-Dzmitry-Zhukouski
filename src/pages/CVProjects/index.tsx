@@ -5,6 +5,7 @@ import CVsHeader from '@entities/ui/CVsHeader';
 import Spinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import CVProjects from '@widgets/ui/cvs/CVProjects';
+import { useTranslation } from 'react-i18next';
 
 import {
   StyledCvProjectsContainer,
@@ -16,6 +17,7 @@ type CVProjectsPageProps = {
 };
 
 const CVProjectsPage: React.FC<CVProjectsPageProps> = ({ cvId }) => {
+  const { t } = useTranslation('cvs');
   const { data: cvData, loading } = useGetCvById(cvId);
 
   if (loading)
@@ -34,9 +36,9 @@ const CVProjectsPage: React.FC<CVProjectsPageProps> = ({ cvId }) => {
       <StyledCvProjectsContainer>
         <Container p="16px 0 0 20px">
           <Breadcrumb
-            currentLink="Projects"
+            currentLink={t('cvsBreadcrumb.Projects')}
             breadCrumbItems={[
-              { name: 'CVs', path: '/cvs' },
+              { name: t('cvsBreadcrumb.CVs'), path: '/cvs' },
               {
                 name: cvData.cv.name,
                 path: '/cvs/$cvId/details',

@@ -42,7 +42,7 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       'simple-import-sort/imports': 'warn',
       'simple-import-sort/exports': 'warn',
-      // 'i18next/no-literal-string': ['error', { markupOnly: true }],
+      'i18next/no-literal-string': ['error', { markupOnly: true }],
       'import/no-cycle': ['error', { maxDepth: Infinity }],
       'no-console': 'error',
       'no-debugger': 'error',

@@ -1,4 +1,5 @@
 {
+  "pageHeading": "السير الذاتية",
   "table": {
     "tableHeaders": {
       "name": "العنوان",
@@ -152,5 +153,11 @@
       "error": "حصلت مشكلة أثناء إنشاء ملف PDF",
       "defaultErrorMessage": "حدث خطأ غير متوقع"
     }
+  },
+  "cvsBreadcrumb": {
+    "CVs": "السير الذاتية",
+    "Skills": "المهارات",
+    "Projects": "المشاريع",
+    "Preview": "المعاينة"
   }
 }

@@ -1,4 +1,5 @@
 {
+  "pageHeading": "Резюме",
   "table": {
     "tableHeaders": {
       "name": "Название",
@@ -152,5 +153,11 @@
       "error": "Ошибка при генерации PDF",
       "defaultErrorMessage": "Произошла непредвиденная ошибка"
     }
+  },
+  "cvsBreadcrumb": {
+    "CVs": "Резюме",
+    "Skills": "Навыки",
+    "Projects": "Проекты",
+    "Preview": "Просмотр"
   }
 }

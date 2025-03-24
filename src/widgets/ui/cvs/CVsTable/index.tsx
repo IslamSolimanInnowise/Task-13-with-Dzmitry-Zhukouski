@@ -191,7 +191,7 @@ const CVsTable: React.FC = () => {
   return (
     <>
       <StyledTableContainer ref={tableContainerRef}>
-        <Styledh2>CVs</Styledh2>
+        <Styledh2>{t('pageHeading')}</Styledh2>
         <Table.Root>
           {tableHeader}
           {tableBody}

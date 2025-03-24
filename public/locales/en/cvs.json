@@ -1,4 +1,5 @@
 {
+  "pageHeading": "CVs",
   "table": {
     "tableHeaders": {
       "name": "Name",
@@ -152,5 +153,11 @@
       "error": "Error generating PDF",
       "defaultErrorMessage": "An unexpected error occurred"
     }
+  },
+  "cvsBreadcrumb": {
+    "CVs": "CVs",
+    "Skills": "Skills",
+    "Projects": "Projects",
+    "Preview": "Preview"
   }
 }

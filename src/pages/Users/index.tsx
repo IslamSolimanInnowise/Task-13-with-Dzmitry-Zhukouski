@@ -12,6 +12,7 @@ import {
 } from '@tanstack/react-table';
 import UsersTable from '@widgets/ui/users/Table';
 import { useMemo, useState, useTransition } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Styledh2,
@@ -23,6 +24,7 @@ import { useTableColumns } from './useTableColumns';
 type SortingFunction = (oldState: SortingState) => SortingState;
 
 const UsersPage: React.FC = () => {
+  const { t } = useTranslation('users');
   const { data, loading } = useGetUsers();
   const [globalFilter, setGlobalFilter] = useState<string[]>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -83,7 +85,7 @@ const UsersPage: React.FC = () => {
     <StyledPageContainer>
       <Aside />
       <StyledPageContent>
-        <Styledh2>Employees</Styledh2>
+        <Styledh2>{t('pageHeading')}</Styledh2>
         <SearchInput
           value={globalFilter}
           handleChange={handleInputChange}

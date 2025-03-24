@@ -5,6 +5,7 @@ import CVsHeader from '@entities/ui/CVsHeader';
 import Spinner from '@entities/ui/Spinner';
 import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import CVPreview from '@widgets/ui/cvs/CVPreview';
+import { useTranslation } from 'react-i18next';
 
 import {
   StyledCvPreviewContainer,
@@ -16,6 +17,7 @@ type CVPreviewPageProps = {
 };
 
 const CVPreviewPage: React.FC<CVPreviewPageProps> = ({ cvId }) => {
+  const { t } = useTranslation('cvs');
   const { data: cvData, loading } = useGetCvById(cvId);
 
   if (loading)
@@ -34,9 +36,9 @@ const CVPreviewPage: React.FC<CVPreviewPageProps> = ({ cvId }) => {
       <StyledCvPreviewContainer>
         <Container p="16px 0 0 20px">
           <Breadcrumb
-            currentLink="Preview"
+            currentLink={t('cvsBreadcrumb.Preview')}
             breadCrumbItems={[
-              { name: 'CVs', path: '/cvs' },
+              { name: t('cvsBreadcrumb.CVs'), path: '/cvs' },
               {
                 name: cvData.cv.name,
                 path: '/cvs/$cvId/details',
