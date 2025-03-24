@@ -137,5 +137,10 @@
     "uploadAvatar": "تحميل صورة",
     "removeAvatar": "حذف الصورة"
   },
-  "profileDetails": "تم انشاء الحساب"
+  "profileDetails": "تم انشاء الحساب",
+  "avatarSchema": {
+    "required": "الملف مطلوب",
+    "max_size": "حجم الملف المسموح به {{size}}ميغابايت",
+    "invalid_type": "يمكن تحميل ملف بصيغة jpeg أو jpg أو gif أو png فقط"
+  }
 }

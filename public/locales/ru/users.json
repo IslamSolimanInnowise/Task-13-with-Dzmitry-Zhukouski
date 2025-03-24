@@ -136,5 +136,10 @@
     "uploadAvatar": "Загрузить Аватар",
     "removeAvatar": "Удалить Аватар"
   },
-  "profileDetails": "Аккаунт был создан"
+  "profileDetails": "Аккаунт был создан",
+  "avatarSchema": {
+    "required": "Файл обязательен",
+    "max_size": "Максимальный размер файла {{size}}МБ",
+    "invalid_type": "Только .png, .jpg, .jpeg и .gif форматы поддерживаются"
+  }
 }

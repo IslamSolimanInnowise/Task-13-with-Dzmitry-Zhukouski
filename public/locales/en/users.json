@@ -134,5 +134,10 @@
     "uploadAvatar": "Upload Avatar",
     "removeAvatar": "Remove Avatar"
   },
-  "profileDetails": "A member since"
+  "profileDetails": "A member since",
+  "avatarSchema": {
+    "required": "File is required",
+    "max_size": "Max file size is {{size}}MB",
+    "invalid_type": "Only .png, .jpg, .jpeg, and .gif formats are supported"
+  }
 }
