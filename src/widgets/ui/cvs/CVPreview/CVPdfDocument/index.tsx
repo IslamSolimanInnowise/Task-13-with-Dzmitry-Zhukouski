@@ -11,7 +11,8 @@ import NotoSansBold from '@shared/styles/fonts/NotoSans-Bold.ttf';
 import NotoSansRegular from '@shared/styles/fonts/NotoSans-Regular.ttf';
 import NotoSansArabicBold from '@shared/styles/fonts/NotoSansArabic-Bold.ttf';
 import NotoSansArabicRegular from '@shared/styles/fonts/NotoSansArabic-Regular.ttf';
-import formatCvDate from '@shared/utils/formCvDate';
+import type { LocaleMap } from '@shared/utils/formCvDate';
+import { formatCvDate, getFullLocale } from '@shared/utils/formCvDate';
 import sortProjectsByEndDate from '@shared/utils/sortProjectsByEndDate';
 import {
   Cv,
@@ -242,8 +243,15 @@ const CVPdfDocument = ({ cvData }: CVPdfDocumentProps) => {
 
               <Text style={styles.sectionTitle}>{t('preview.period')}</Text>
               <Text style={styles.text}>
-                {formatCvDate(project.start_date)} –{' '}
-                {formatCvDate(project.end_date)}
+                {formatCvDate(
+                  project.start_date,
+                  getFullLocale(i18n.language as keyof LocaleMap),
+                )}
+                {' – '}
+                {formatCvDate(
+                  project.end_date,
+                  getFullLocale(i18n.language as keyof LocaleMap),
+                )}
               </Text>
 
               <Text style={styles.sectionTitle}>

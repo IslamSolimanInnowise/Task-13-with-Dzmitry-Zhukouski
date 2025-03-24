@@ -1,5 +1,7 @@
 import { Text } from '@chakra-ui/react';
-import formatCvDate from '@shared/utils/formCvDate';
+import i18n from '@shared/i18n/config';
+import type { LocaleMap } from '@shared/utils/formCvDate';
+import { formatCvDate, getFullLocale } from '@shared/utils/formCvDate';
 import sortProjectsByEndDate from '@shared/utils/sortProjectsByEndDate';
 import { CvProject, Position } from 'cv-graphql';
 import React from 'react';
@@ -43,9 +45,15 @@ const Projects: React.FC<ProjectsProps> = ({ projects, role }) => {
               <Text>{role || t('preview.notSpecified')}</Text>
               <TopicSectionTitle>{t('preview.period')}</TopicSectionTitle>
               <Text>
-                {formatCvDate(project.start_date)}
+                {formatCvDate(
+                  project.start_date,
+                  getFullLocale(i18n.language as keyof LocaleMap),
+                )}
                 {' – '}
-                {formatCvDate(project.end_date)}
+                {formatCvDate(
+                  project.end_date,
+                  getFullLocale(i18n.language as keyof LocaleMap),
+                )}
               </Text>
               <TopicSectionTitle>
                 {t('preview.responsibilities')}
