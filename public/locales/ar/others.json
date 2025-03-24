@@ -10,5 +10,8 @@
   },
   "searchInput": {
     "searchInputPlaceholder": "البحث"
+  },
+  "select": {
+    "others": "أخرى"
   }
 }
