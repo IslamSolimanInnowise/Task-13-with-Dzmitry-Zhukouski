@@ -17,6 +17,7 @@ import { useTranslation } from 'react-i18next';
 
 import AddCvButton from './AddCvButton';
 import {
+  Styledh2,
   StyledSortButton,
   StyledSortIcon,
   StyledTableBodyRow,
@@ -188,12 +189,15 @@ const CVsTable: React.FC = () => {
   if (isCvsLoading) return <Spinner />;
 
   return (
-    <StyledTableContainer ref={tableContainerRef}>
-      <Table.Root>
-        {tableHeader}
-        {tableBody}
-      </Table.Root>
-    </StyledTableContainer>
+    <>
+      <StyledTableContainer ref={tableContainerRef}>
+        <Styledh2>CVs</Styledh2>
+        <Table.Root>
+          {tableHeader}
+          {tableBody}
+        </Table.Root>
+      </StyledTableContainer>
+    </>
   );
 };
 

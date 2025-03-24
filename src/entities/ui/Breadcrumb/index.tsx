@@ -3,6 +3,7 @@ import {
   BreadcrumbRootProps,
   HStack,
 } from '@chakra-ui/react';
+import { lightTheme } from '@shared/styles/theme';
 import { Link } from '@tanstack/react-router';
 
 interface BreadcrumbProps extends BreadcrumbRootProps {
@@ -22,10 +23,16 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
   return (
     <ChakraBreadcrumb.Root size={size || 'lg'}>
       <ChakraBreadcrumb.List>
-        {breadCrumbItems.map((item) => (
+        {breadCrumbItems.map((item, i) => (
           <HStack key={item.name}>
             <ChakraBreadcrumb.Item>
-              <Link to={item.path} params={item.params}>
+              <Link
+                to={item.path}
+                params={item.params}
+                style={{
+                  color: i === 1 ? lightTheme.primaryColor : 'inherit',
+                }}
+              >
                 {item.name}
               </Link>
             </ChakraBreadcrumb.Item>
@@ -33,7 +40,14 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
           </HStack>
         ))}
         <ChakraBreadcrumb.Item>
-          <ChakraBreadcrumb.CurrentLink>
+          <ChakraBreadcrumb.CurrentLink
+            style={{
+              color:
+                breadCrumbItems.length === 1
+                  ? lightTheme.primaryColor
+                  : 'inherit',
+            }}
+          >
             {currentLink}
           </ChakraBreadcrumb.CurrentLink>
         </ChakraBreadcrumb.Item>

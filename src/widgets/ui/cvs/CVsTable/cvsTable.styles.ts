@@ -2,6 +2,22 @@ import { Button, Table, Text } from '@chakra-ui/react';
 import { ArrowUp } from 'lucide-react';
 import styled from 'styled-components';
 
+export const Styledh2 = styled.h2`
+  color: ${({ theme }) => theme.grey};
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0.15px;
+  text-align: left;
+  text-transform: capitalize;
+  padding-top: 1rem;
+  padding-bottom: 0.75rem;
+  z-index: 5;
+  position: sticky;
+  top: 0px;
+  background-color: ${({ theme }) => theme.backgroundColor};
+`;
+
 export const StyledTableContainer = styled(Table.ScrollArea)`
   grid-area: page;
   height: 100vh;
@@ -12,7 +28,7 @@ export const StyledTableContainer = styled(Table.ScrollArea)`
 export const StyledTableHeader = styled(Table.Header)`
   z-index: 5;
   position: sticky;
-  top: 0;
+  top: 52px;
 `;
 
 export const StyledTableHeaderRow = styled(Table.Row)`

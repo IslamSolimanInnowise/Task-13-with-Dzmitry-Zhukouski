@@ -1,5 +1,8 @@
+import { Container, Spinner } from '@chakra-ui/react';
 import Aside from '@entities/ui/Aside';
+import Breadcrumb from '@entities/ui/Breadcrumb';
 import CVsHeader from '@entities/ui/CVsHeader';
+import useGetCvById from '@features/hooks/cvs/useGetCvById';
 import CVSkills from '@widgets/ui/cvs/CVSkills';
 
 import {
@@ -12,10 +15,35 @@ type CVSkillsPageProps = {
 };
 
 const CVSkillsPage: React.FC<CVSkillsPageProps> = ({ cvId }) => {
+  const { data: cvData, loading } = useGetCvById(cvId);
+
+  if (loading)
+    return (
+      <StyledPageContainer>
+        <Aside />
+        <StyledCvSkillsContainer>
+          <Spinner />
+        </StyledCvSkillsContainer>
+      </StyledPageContainer>
+    );
+
   return (
     <StyledPageContainer>
       <Aside />
       <StyledCvSkillsContainer>
+        <Container p="16px 0 0 20px">
+          <Breadcrumb
+            currentLink="Skills"
+            breadCrumbItems={[
+              { name: 'CVs', path: '/cvs' },
+              {
+                name: cvData.cv.name,
+                path: '/cvs/$cvId/details',
+                params: { cvId },
+              },
+            ]}
+          />
+        </Container>
         <CVsHeader />
         <CVSkills cvId={cvId} />
       </StyledCvSkillsContainer>
