@@ -109,6 +109,38 @@
     },
     "useUpdateUser": {
       "success": "تم تحديث المستخدم بنجاح!"
+    },
+    "useDeleteAvatar": {
+      "success": "تم حذف الصورة بنجاح!"
+    },
+    "useUploadAvatar": {
+      "success": "تم تحميل الصورة بنجاح!"
     }
+  },
+  "skillsBreadcrumb": {
+    "currentLink": "المهارات",
+    "employeesItem": "الموظفين"
+  },
+  "languagesBreadcrumb": {
+    "currentLink": "اللغات",
+    "employeesItem": "الموظفين"
+  },
+  "profileHeader": {
+    "profile": "الملف الشخصي",
+    "skills": "المهارات",
+    "languages": "اللغات"
+  },
+  "profileBreadcrumb": {
+    "employeesItem": "الموظفين"
+  },
+  "profileAvatar": {
+    "uploadAvatar": "تحميل صورة",
+    "removeAvatar": "حذف الصورة"
+  },
+  "profileDetails": "تم انشاء الحساب",
+  "avatarSchema": {
+    "required": "الملف مطلوب",
+    "max_size": "حجم الملف المسموح به {{size}}ميغابايت",
+    "invalid_type": "يمكن تحميل ملف بصيغة jpeg أو jpg أو gif أو png فقط"
   }
 }

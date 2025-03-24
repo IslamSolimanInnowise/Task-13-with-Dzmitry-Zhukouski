@@ -4,6 +4,7 @@ export const GET_USER = gql`
   query GetUser($userId: ID!) {
     user(userId: $userId) {
       id
+      created_at
       email
       department_name
       position_name

@@ -105,11 +105,19 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
         </Field.Root>
         <Field.Root>
           <Field.Label>{t('updateUserModal.firstNameFieldLabel')}</Field.Label>
-          <StyledInput type="text" {...register('firstName')} />
+          <StyledInput
+            type="text"
+            {...register('firstName')}
+            placeholder={user.profile.first_name}
+          />
         </Field.Root>
         <Field.Root>
           <Field.Label>{t('updateUserModal.lastNameFieldLabel')}</Field.Label>
-          <StyledInput type="text" {...register('lastName')} />
+          <StyledInput
+            type="text"
+            {...register('lastName')}
+            placeholder={user.profile.last_name}
+          />
         </Field.Root>
 
         <Field.Root invalid={!!errors.department}>
@@ -136,7 +144,7 @@ const UpdateUserModal: React.FC<UpdateUserModalProps> = ({
           <Field.Label>{t('updateUserModal.positionFieldLabel')}</Field.Label>
           <NativeSelect.Root size="md">
             <NativeSelect.Field
-              placeholder={user.position_name && ''}
+              placeholder={user.position_name}
               {...register('position')}
               defaultValue={user.position_name}
             >

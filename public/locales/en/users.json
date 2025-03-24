@@ -106,6 +106,38 @@
     },
     "useUpdateUser": {
       "success": "User was updated!"
+    },
+    "useDeleteAvatar": {
+      "success": "Your avatar was deleted!"
+    },
+    "useUploadAvatar": {
+      "success": "Your avatar was updated!"
     }
+  },
+  "skillsBreadcrumb": {
+    "currentLink": "Skills",
+    "employeesItem": "Employees"
+  },
+  "languagesBreadcrumb": {
+    "currentLink": "Languages",
+    "employeesItem": "Employees"
+  },
+  "profileHeader": {
+    "profile": "Profile",
+    "skills": "Skills",
+    "languages": "Languages"
+  },
+  "profileBreadcrumb": {
+    "employeesItem": "Employees"
+  },
+  "profileAvatar": {
+    "uploadAvatar": "Upload Avatar",
+    "removeAvatar": "Remove Avatar"
+  },
+  "profileDetails": "A member since",
+  "avatarSchema": {
+    "required": "File is required",
+    "max_size": "Max file size is {{size}}MB",
+    "invalid_type": "Only .png, .jpg, .jpeg, and .gif formats are supported"
   }
 }

@@ -10,7 +10,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { Language } from '../users/types';
+import { Language } from '../types';
 import { StyledButton } from './updateLanguageModal.styles';
 
 interface UpdateLanguageModalProps extends Language {
