@@ -106,6 +106,12 @@
     },
     "useUpdateUser": {
       "success": "User was updated!"
+    },
+    "useDeleteAvatar": {
+      "success": "Your avatar was deleted!"
+    },
+    "useUploadAvatar": {
+      "success": "Your avatar was updated!"
     }
   },
   "skillsBreadcrumb": {

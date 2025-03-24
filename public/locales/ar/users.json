@@ -109,6 +109,12 @@
     },
     "useUpdateUser": {
       "success": "تم تحديث المستخدم بنجاح!"
+    },
+    "useDeleteAvatar": {
+      "success": "تم حذف الصورة بنجاح!"
+    },
+    "useUploadAvatar": {
+      "success": "تم تحميل الصورة بنجاح!"
     }
   },
   "skillsBreadcrumb": {

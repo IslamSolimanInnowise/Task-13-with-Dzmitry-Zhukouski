@@ -108,6 +108,12 @@
     },
     "useUpdateUser": {
       "success": "Пользователь был обновлен!"
+    },
+    "useDeleteAvatar": {
+      "success": "Аватар был удален!"
+    },
+    "useUploadAvatar": {
+      "success": "Аватар был обновлен!"
     }
   },
   "skillsBreadcrumb": {
